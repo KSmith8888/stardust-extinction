@@ -2,6 +2,7 @@
     "name": "stardust-extinction",
     "version": "1.0.0",
     "description": "A mobile/browser game made with TypeScript",
+    "type": "module",
     "author": "Kevyn Smith",
     "license": "Apache-2.0",
     "main": "index.html",

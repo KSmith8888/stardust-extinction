@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: rgb(3, 25, 32);
+    /*
+    background-image: url('../Images/Background/title-background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    */
+    font-family: "Courier New", Courier, monospace;
+    color: black;
+}
+
+button {
+    font-family: inherit;
+}
