@@ -1,3 +1,8 @@
+import spaceBackgroundUrl from "../src/assets/images/SpaceBg.png";
+import { myTestString } from "../src/logic/test";
+
+console.log(myTestString);
+
 const canvas = <HTMLCanvasElement>document.getElementById("canvas");
 const ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
 function sizeCanvas() {
@@ -126,7 +131,7 @@ class Background {
     y: number;
     constructor() {
         this.image = new Image();
-        this.image.src = "../../assets/images/SpaceBg.png";
+        this.image.src = spaceBackgroundUrl;
         this.#width = canvas.width;
         this.#height = canvas.height;
         this.x = 0;
