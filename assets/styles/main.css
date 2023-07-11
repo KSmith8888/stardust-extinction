@@ -14,3 +14,8 @@ body {
 #canvas {
     background-color: black;
 }
+
+#menu-button {
+    width: 30px;
+    height: 30px;
+}

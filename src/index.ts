@@ -17,21 +17,18 @@
  * @license Apache-2.0
  */
 
-import "./assets/styles/title-screen.css";
-import beepAudioUrl from "./assets/audio/beep.wav";
-
 const startButton = <HTMLAnchorElement>document.getElementById("start-button");
-const container = <HTMLDivElement>document.getElementById("container");
-const beepAudio = new Audio();
-beepAudio.src = beepAudioUrl;
+const beepAudio = new Audio("./assets/audio/beep.wav");
 
-function startLevel1() {
-    beepAudio.play();
-    container.replaceChildren();
-    const canvasElement = document.createElement("canvas");
-    canvasElement.id = "canvas";
-    container.append(canvasElement);
-    import("./logic/level-1-logic");
+async function startLevel1() {
+    try {
+        await beepAudio.play();
+        setTimeout(() => {
+            location.assign("./assets/pages/level-1.html");
+        }, 1000);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 startButton.addEventListener("click", startLevel1);

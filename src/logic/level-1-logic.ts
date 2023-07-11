@@ -1,15 +1,16 @@
-import "../assets/styles/main.css";
-import spaceBackgroundUrl from "../assets/images/SpaceBg.png";
-
 const canvas = <HTMLCanvasElement>document.getElementById("canvas");
 const ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
-if (window.innerWidth < 500) {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-} else {
-    canvas.width = 500;
-    canvas.height = 600;
+function sizeCanvas() {
+    if (window.innerWidth < 900) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    } else {
+        canvas.width = 900;
+        canvas.height = 600;
+    }
 }
+sizeCanvas();
+document.addEventListener("resize", sizeCanvas);
 
 class Player {
     readonly width: number;
@@ -125,7 +126,7 @@ class Background {
     y: number;
     constructor() {
         this.image = new Image();
-        this.image.src = spaceBackgroundUrl;
+        this.image.src = "../../assets/images/SpaceBg.png";
         this.#width = canvas.width;
         this.#height = canvas.height;
         this.x = 0;
