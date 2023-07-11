@@ -1,21 +1,15 @@
-import spaceBackgroundUrl from "../src/assets/images/SpaceBg.png";
-import { myTestString } from "../src/logic/test";
+import { Background } from "../../src/backgrounds/space-background";
 
-console.log(myTestString);
+import spaceBackgroundUrl from "../../assets/images/SpaceBg.png";
+import { sizeCanvas } from "../../src/utils/sizeCanvas";
 
 const canvas = <HTMLCanvasElement>document.getElementById("canvas");
 const ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
-function sizeCanvas() {
-    if (window.innerWidth < 900) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    } else {
-        canvas.width = 900;
-        canvas.height = 600;
-    }
-}
-sizeCanvas();
-document.addEventListener("resize", sizeCanvas);
+
+sizeCanvas(canvas);
+document.addEventListener("resize", () => {
+    sizeCanvas(canvas);
+});
 
 class Player {
     readonly width: number;
@@ -123,39 +117,6 @@ class EventListeners {
     }
 }
 
-class Background {
-    image: HTMLImageElement;
-    #width: number;
-    #height: number;
-    x: number;
-    y: number;
-    constructor() {
-        this.image = new Image();
-        this.image.src = spaceBackgroundUrl;
-        this.#width = canvas.width;
-        this.#height = canvas.height;
-        this.x = 0;
-        this.y = 0;
-    }
-    render() {
-        ctx.drawImage(this.image, this.x, this.y, this.#width, this.#height);
-        ctx.drawImage(
-            this.image,
-            this.x,
-            this.y - this.#height,
-            this.#width,
-            this.#height
-        );
-    }
-    updatePosition() {
-        if (this.y < canvas.height) {
-            this.y += 0.75;
-        } else {
-            this.y = 0;
-        }
-    }
-}
-
 class Game {
     player: Player;
     events: EventListeners;
@@ -163,7 +124,7 @@ class Game {
     constructor() {
         this.player = new Player();
         this.events = new EventListeners(this.player);
-        this.background = new Background();
+        this.background = new Background(canvas, ctx, spaceBackgroundUrl);
     }
 }
 
