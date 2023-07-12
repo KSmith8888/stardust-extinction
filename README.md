@@ -8,10 +8,14 @@ A mobile/browser game made with TypeScript
 
 typescript:  
 https://github.com/Microsoft/TypeScript  
+vite:  
+https://github.com/vitejs/vite
 eslint:  
 https://github.com/eslint/eslint  
 @typescript-eslint/eslint-plugin and @typescript-eslint/parser:  
-https://github.com/typescript-eslint/typescript-eslint
+https://github.com/typescript-eslint/typescript-eslint  
+@types/node:  
+https://github.com/DefinitelyTyped/DefinitelyTyped
 
 ### Images
 

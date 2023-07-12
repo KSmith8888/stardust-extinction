@@ -1,129 +1,23 @@
+//Modules
+import Player from "../../src/player";
+import EventListeners from "../../src/event-listeners";
 import { Background } from "../../src/backgrounds/space-background";
-
-import spaceBackgroundUrl from "../../assets/images/SpaceBg.png";
+//Utils
 import { sizeCanvas } from "../../src/utils/sizeCanvas";
+//Assets
+import spaceBackgroundUrl from "../../assets/images/space-background.png";
 
 const canvas = <HTMLCanvasElement>document.getElementById("canvas");
 const ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
-
 sizeCanvas(canvas);
-document.addEventListener("resize", () => {
-    sizeCanvas(canvas);
-});
-
-class Player {
-    readonly width: number;
-    readonly height: number;
-    x: number;
-    y: number;
-    constructor() {
-        this.width = 50;
-        this.height = 50;
-        this.x = canvas.width / 2;
-        this.y = canvas.height - this.height;
-    }
-    render() {
-        ctx.fillStyle = "red";
-        ctx.fillRect(this.x, this.y, this.width, this.height);
-    }
-}
-
-class EventListeners {
-    player: Player;
-    isPlayerMoving: boolean;
-    mousedown: void;
-    mouseup: void;
-    mousemove: void;
-    touchstart: void;
-    touchend: void;
-    touchmove: void;
-    constructor(player: Player) {
-        this.player = player;
-        this.isPlayerMoving = false;
-        this.mousedown = canvas.addEventListener("mousedown", (e): void => {
-            if (
-                e.offsetX >= this.player.x &&
-                e.offsetX <= this.player.x + this.player.width &&
-                e.offsetY >= this.player.y &&
-                e.offsetY <= this.player.y + this.player.height
-            ) {
-                this.isPlayerMoving = true;
-            }
-        });
-        this.mouseup = canvas.addEventListener("mouseup", (): void => {
-            if (this.isPlayerMoving) {
-                this.isPlayerMoving = false;
-            }
-        });
-        this.mousemove = canvas.addEventListener("mousemove", (e): void => {
-            if (this.isPlayerMoving) {
-                if (e.offsetX + this.player.width / 2 > canvas.width) {
-                    this.player.x = canvas.width - this.player.width;
-                } else if (e.offsetX - this.player.width / 2 < 0) {
-                    this.player.x = 0;
-                } else {
-                    this.player.x = e.offsetX - this.player.width / 2;
-                }
-                if (e.offsetY + this.player.height / 2 > canvas.height) {
-                    this.player.y = canvas.height - this.player.height;
-                } else if (e.offsetY - this.player.height / 2 < 0) {
-                    this.player.y = 0;
-                } else {
-                    this.player.y = e.offsetY - this.player.height / 2;
-                }
-            }
-        });
-        this.touchstart = canvas.addEventListener("touchstart", (e): void => {
-            if (
-                e.touches[0].clientX >= this.player.x &&
-                e.touches[0].clientX <= this.player.x + this.player.width &&
-                e.touches[0].clientY >= this.player.y &&
-                e.touches[0].clientY <= this.player.y + this.player.height
-            ) {
-                this.isPlayerMoving = true;
-            }
-        });
-        this.touchend = canvas.addEventListener("touchend", (): void => {
-            if (this.isPlayerMoving) {
-                this.isPlayerMoving = false;
-            }
-        });
-        this.touchmove = canvas.addEventListener("touchmove", (e): void => {
-            if (this.isPlayerMoving) {
-                if (
-                    e.touches[0].clientX + this.player.width / 2 >
-                    canvas.width
-                ) {
-                    this.player.x = canvas.width - this.player.width;
-                } else if (e.touches[0].clientX - this.player.width / 2 < 0) {
-                    this.player.x = 0;
-                } else {
-                    this.player.x =
-                        e.touches[0].clientX - this.player.width / 2;
-                }
-                if (
-                    e.touches[0].clientY + this.player.height / 2 >
-                    canvas.height
-                ) {
-                    this.player.y = canvas.height - this.player.height;
-                } else if (e.touches[0].clientY - this.player.height / 2 < 0) {
-                    this.player.y = 0;
-                } else {
-                    this.player.y =
-                        e.touches[0].clientY - this.player.height / 2;
-                }
-            }
-        });
-    }
-}
 
 class Game {
     player: Player;
     events: EventListeners;
     background: Background;
     constructor() {
-        this.player = new Player();
-        this.events = new EventListeners(this.player);
+        this.player = new Player(canvas, ctx);
+        this.events = new EventListeners(this.player, canvas);
         this.background = new Background(canvas, ctx, spaceBackgroundUrl);
     }
 }
