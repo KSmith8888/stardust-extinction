@@ -1,3 +1,13 @@
+/**
+ *
+ * Stardust Extinction
+ * Copyright 2023 Kevyn Smith
+ *
+ * Licensed under the Apache License, Version 2.0
+ * @license SPDX-License-Identifier: Apache-2.0
+ *
+ */
+
 //Modules
 import Player from "../../src/player";
 import EventListeners from "../../src/event-listeners";
