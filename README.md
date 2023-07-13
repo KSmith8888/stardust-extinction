@@ -9,7 +9,7 @@ A mobile/browser game made with TypeScript
 typescript:  
 https://github.com/Microsoft/TypeScript  
 vite:  
-https://github.com/vitejs/vite
+https://github.com/vitejs/vite  
 eslint:  
 https://github.com/eslint/eslint  
 @typescript-eslint/eslint-plugin and @typescript-eslint/parser:  
@@ -21,6 +21,12 @@ https://github.com/DefinitelyTyped/DefinitelyTyped
 
 "Space Background" by CarzyMoose licensed CC0:  
 https://opengameart.org/content/space-background-8
+
+"Ship Sprites" by rickomax licensed CC0:  
+https://opengameart.org/content/ship-sprites
+
+"Asteroids Game Sprites Atlas" by CDmir licensed CC0:  
+https://opengameart.org/content/asteroids-game-sprites-atlas
 
 ### Audio
 
