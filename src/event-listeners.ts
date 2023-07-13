@@ -1,3 +1,12 @@
+/**
+ * Stardust Extinction
+ * Copyright 2023 Kevyn Smith
+ *
+ * Licensed under the Apache License, Version 2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
+ * @license Apache-2.0
+ */
+
 import Player from "./player";
 import { sizeCanvas } from "./utils/sizeCanvas";
 
@@ -11,6 +20,7 @@ export default class EventListeners {
     touchstart: void;
     touchend: void;
     touchmove: void;
+    keyEvent: void;
     constructor(player: Player, canvas: HTMLCanvasElement) {
         this.player = player;
         this.isPlayerMoving = false;
@@ -25,11 +35,13 @@ export default class EventListeners {
                 e.offsetY <= this.player.y + this.player.height
             ) {
                 this.isPlayerMoving = true;
+                player.isMoving = true;
             }
         });
         this.mouseup = canvas.addEventListener("mouseup", (): void => {
             if (this.isPlayerMoving) {
                 this.isPlayerMoving = false;
+                player.isMoving = false;
             }
         });
         this.mousemove = canvas.addEventListener("mousemove", (e): void => {
@@ -58,11 +70,13 @@ export default class EventListeners {
                 e.touches[0].clientY <= this.player.y + this.player.height
             ) {
                 this.isPlayerMoving = true;
+                player.isMoving = true;
             }
         });
         this.touchend = canvas.addEventListener("touchend", (): void => {
             if (this.isPlayerMoving) {
                 this.isPlayerMoving = false;
+                player.isMoving = false;
             }
         });
         this.touchmove = canvas.addEventListener("touchmove", (e): void => {
@@ -88,6 +102,36 @@ export default class EventListeners {
                 } else {
                     this.player.y =
                         e.touches[0].clientY - this.player.height / 2;
+                }
+            }
+        });
+        this.keyEvent = document.addEventListener("keydown", (event) => {
+            switch (event.code) {
+                case "ArrowLeft": {
+                    if (this.player.x >= 5) {
+                        this.player.x -= 5;
+                    } else {
+                        this.player.x = 0;
+                    }
+                    break;
+                }
+                case "ArrowRight": {
+                    if (
+                        this.player.x <=
+                        canvas.width - (this.player.width + 5)
+                    ) {
+                        this.player.x += 5;
+                    } else {
+                        this.player.x = canvas.width - this.player.width;
+                    }
+                    break;
+                }
+                case "KeyM": {
+                    console.log("Menu opened");
+                    break;
+                }
+                default: {
+                    console.log("No action for that key");
                 }
             }
         });

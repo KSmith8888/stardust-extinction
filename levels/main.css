@@ -42,6 +42,11 @@ body {
     border: 2px solid rgb(14, 14, 82);
 }
 
+#active-ship-image,
+#idle-ship-image {
+    display: none;
+}
+
 @media (min-width: 900px) {
     #container {
         width: 900px;

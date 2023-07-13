@@ -1,3 +1,12 @@
+/**
+ * Stardust Extinction
+ * Copyright 2023 Kevyn Smith
+ *
+ * Licensed under the Apache License, Version 2.0
+ * https://www.apache.org/licenses/LICENSE-2.0
+ * @license Apache-2.0
+ */
+
 export default class Player {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
@@ -5,16 +14,34 @@ export default class Player {
     readonly height: number;
     x: number;
     y: number;
+    isMoving: boolean;
+    idleShipImage: HTMLImageElement;
+    activeShipImage: HTMLImageElement;
     constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
         this.canvas = canvas;
         this.ctx = ctx;
-        this.width = 50;
-        this.height = 50;
+        this.width = 28;
+        this.height = 28;
         this.x = canvas.width / 2;
         this.y = canvas.height - this.height;
+        this.isMoving = false;
+        this.idleShipImage = <HTMLImageElement>(
+            document.getElementById("idle-ship-image")
+        );
+        this.activeShipImage = <HTMLImageElement>(
+            document.getElementById("active-ship-image")
+        );
     }
     render() {
-        this.ctx.fillStyle = "red";
-        this.ctx.fillRect(this.x, this.y, this.width, this.height);
+        const currentShipImage = this.isMoving
+            ? this.activeShipImage
+            : this.idleShipImage;
+        this.ctx.drawImage(
+            currentShipImage,
+            this.x,
+            this.y,
+            this.width,
+            this.height
+        );
     }
 }
