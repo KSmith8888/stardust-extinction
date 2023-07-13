@@ -25,8 +25,8 @@ https://opengameart.org/content/space-background-8
 "Ship Sprites" by rickomax licensed CC0:  
 https://opengameart.org/content/ship-sprites
 
-"Asteroids Game Sprites Atlas" by CDmir licensed CC0:  
-https://opengameart.org/content/asteroids-game-sprites-atlas
+"Lasers and Beams" by Rawdanitsu licensed CC0:  
+https://opengameart.org/content/lasers-and-beams
 
 ### Audio
 
@@ -38,5 +38,5 @@ https://opengameart.org/content/beep-tone-sound-sfx
 Licensed under Apache-2.0:  
 https://github.com/KSmith8888/stardust-extinction/blob/main/LICENSE
 
-Stardust Extinction
+Stardust Extinction  
 Copyright 2023 Kevyn Smith

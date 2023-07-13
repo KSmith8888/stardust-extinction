@@ -11,7 +11,6 @@ import { sizeCanvas } from "./utils/sizeCanvas";
 
 export default class EventListeners {
     player: Player;
-    isPlayerMoving: boolean;
     sizeCanvas: void;
     mousedown: void;
     mouseup: void;
@@ -22,7 +21,6 @@ export default class EventListeners {
     keyEvent: void;
     constructor(player: Player, canvas: HTMLCanvasElement) {
         this.player = player;
-        this.isPlayerMoving = false;
         this.sizeCanvas = window.addEventListener("resize", () => {
             sizeCanvas(canvas);
         });
@@ -33,18 +31,16 @@ export default class EventListeners {
                 e.offsetY >= this.player.y &&
                 e.offsetY <= this.player.y + this.player.height
             ) {
-                this.isPlayerMoving = true;
                 player.isMoving = true;
             }
         });
         this.mouseup = canvas.addEventListener("mouseup", (): void => {
-            if (this.isPlayerMoving) {
-                this.isPlayerMoving = false;
+            if (player.isMoving) {
                 player.isMoving = false;
             }
         });
         this.mousemove = canvas.addEventListener("mousemove", (e): void => {
-            if (this.isPlayerMoving) {
+            if (player.isMoving) {
                 if (e.offsetX + this.player.width / 2 > canvas.width) {
                     this.player.x = canvas.width - this.player.width;
                 } else if (e.offsetX - this.player.width / 2 < 0) {
@@ -68,18 +64,16 @@ export default class EventListeners {
                 e.touches[0].clientY >= this.player.y &&
                 e.touches[0].clientY <= this.player.y + this.player.height
             ) {
-                this.isPlayerMoving = true;
                 player.isMoving = true;
             }
         });
         this.touchend = canvas.addEventListener("touchend", (): void => {
-            if (this.isPlayerMoving) {
-                this.isPlayerMoving = false;
+            if (player.isMoving) {
                 player.isMoving = false;
             }
         });
         this.touchmove = canvas.addEventListener("touchmove", (e): void => {
-            if (this.isPlayerMoving) {
+            if (player.isMoving) {
                 if (
                     e.touches[0].clientX + this.player.width / 2 >
                     canvas.width

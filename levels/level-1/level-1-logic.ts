@@ -39,6 +39,7 @@ function animate() {
     game.background.render();
     game.background.updatePosition();
     game.player.render();
+    game.player.handleProjectiles();
     requestAnimationFrame(animate);
 }
 
