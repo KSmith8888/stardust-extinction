@@ -40,6 +40,7 @@ function animate() {
     game.background.updatePosition();
     game.player.render();
     game.player.handleProjectiles();
+    game.player.healthBar.render();
     requestAnimationFrame(animate);
 }
 

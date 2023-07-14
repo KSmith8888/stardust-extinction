@@ -7,6 +7,7 @@
  */
 
 import { LaserSmall } from "./projectiles/lasers";
+import { HealthBar } from "./healthbar";
 
 export default class Player {
     canvas: HTMLCanvasElement;
@@ -22,6 +23,9 @@ export default class Player {
     frameCount: number;
     laserOffsetX: number;
     laserOffsetY: number;
+    healthBar: HealthBar;
+    health: number;
+    healthStat: number;
     constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
         this.canvas = canvas;
         this.ctx = ctx;
@@ -40,6 +44,9 @@ export default class Player {
         this.frameCount = 0;
         this.laserOffsetX = this.width * 0.2;
         this.laserOffsetY = this.height * 0.35;
+        this.healthBar = new HealthBar(this, this.ctx, 45, 10);
+        this.health = 50;
+        this.healthStat = 100;
     }
     render() {
         const currentShipImage = this.isMoving

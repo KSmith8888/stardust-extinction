@@ -47,8 +47,23 @@ body {
     border: 1px solid black;
 }
 
-#active-ship-image,
-#idle-ship-image {
+.button {
+    font-family: "Courier New", Courier, monospace;
+    cursor: pointer;
+    border: 1px solid black;
+    color: #1c1c1c;
+    background-color: rgb(218, 214, 214);
+    margin: 0.5em;
+    padding: 0.2em 0.5em;
+    border-radius: 5px;
+}
+
+.button:hover,
+.button:focus {
+    background-color: rgb(199, 192, 192);
+}
+
+.no-display {
     display: none;
 }
 

@@ -21,6 +21,7 @@ export default class EventListeners {
     keyEvent: void;
     menuButton: HTMLButtonElement;
     mainMenu: HTMLDialogElement;
+    isMenuOpen: boolean;
     closeButton: HTMLButtonElement;
     quitButton: HTMLButtonElement;
     openMenu: void;
@@ -127,7 +128,13 @@ export default class EventListeners {
                     break;
                 }
                 case "KeyM": {
-                    console.log("Menu opened");
+                    if (!this.isMenuOpen) {
+                        this.mainMenu.showModal();
+                        this.isMenuOpen = true;
+                    } else {
+                        this.mainMenu.close();
+                        this.isMenuOpen = false;
+                    }
                     break;
                 }
                 default: {
@@ -145,11 +152,14 @@ export default class EventListeners {
             document.getElementById("close-button")
         );
         this.mainMenu = <HTMLDialogElement>document.getElementById("main-menu");
+        this.isMenuOpen = false;
         this.openMenu = this.menuButton.addEventListener("click", () => {
             this.mainMenu.showModal();
+            this.isMenuOpen = true;
         });
         this.closeMenu = this.closeButton.addEventListener("click", () => {
             this.mainMenu.close();
+            this.isMenuOpen = false;
         });
         this.quitGame = this.quitButton.addEventListener("click", () => {
             location.assign("/");

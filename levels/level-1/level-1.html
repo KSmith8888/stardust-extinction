@@ -3,27 +3,35 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Kevyn Smith" />
+        <meta
+            name="description"
+            content="The first level of Stardust: Extinction"
+        />
         <link rel="stylesheet" href="../main.css" />
+        <script type="module" src="level-1-logic.ts"></script>
         <title>Level 1</title>
     </head>
     <body>
         <div id="container">
             <button id="menu-button" title="Open Menu" type="button"></button>
             <dialog id="main-menu">
-                <button id="quit-button" class="menu-button" type="button">
+                <button id="quit-button" class="button" type="button">
                     Quit
                 </button>
-                <button id="close-button" class="menu-button" type="button">
+                <button id="close-button" class="button" type="button">
                     Close
                 </button>
             </dialog>
             <img
                 id="idle-ship-image"
+                class="no-display"
                 src="../../assets/images/player-ship-idle.png"
                 alt="A small grey spaceship idling"
             />
             <img
                 id="active-ship-image"
+                class="no-display"
                 src="../../assets/images/player-ship-active.png"
                 alt="A small grey spaceship with thrusters firing"
             />
@@ -32,6 +40,5 @@
                 JavaScirpt</canvas
             >
         </div>
-        <script type="module" src="level-1-logic.ts"></script>
     </body>
 </html>
