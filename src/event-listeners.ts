@@ -19,6 +19,13 @@ export default class EventListeners {
     touchend: void;
     touchmove: void;
     keyEvent: void;
+    menuButton: HTMLButtonElement;
+    mainMenu: HTMLDialogElement;
+    closeButton: HTMLButtonElement;
+    quitButton: HTMLButtonElement;
+    openMenu: void;
+    closeMenu: void;
+    quitGame: void;
     constructor(player: Player, canvas: HTMLCanvasElement) {
         this.player = player;
         this.sizeCanvas = window.addEventListener("resize", () => {
@@ -127,6 +134,25 @@ export default class EventListeners {
                     console.log("No action for that key");
                 }
             }
+        });
+        this.menuButton = <HTMLButtonElement>(
+            document.getElementById("menu-button")
+        );
+        this.quitButton = <HTMLButtonElement>(
+            document.getElementById("quit-button")
+        );
+        this.closeButton = <HTMLButtonElement>(
+            document.getElementById("close-button")
+        );
+        this.mainMenu = <HTMLDialogElement>document.getElementById("main-menu");
+        this.openMenu = this.menuButton.addEventListener("click", () => {
+            this.mainMenu.showModal();
+        });
+        this.closeMenu = this.closeButton.addEventListener("click", () => {
+            this.mainMenu.close();
+        });
+        this.quitGame = this.quitButton.addEventListener("click", () => {
+            location.assign("/");
         });
     }
 }

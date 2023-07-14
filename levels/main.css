@@ -42,6 +42,11 @@ body {
     border: 2px solid rgb(14, 14, 82);
 }
 
+#main-menu[open] {
+    width: 90%;
+    border: 1px solid black;
+}
+
 #active-ship-image,
 #idle-ship-image {
     display: none;
@@ -51,5 +56,8 @@ body {
     #container {
         width: 900px;
         height: 600px;
+    }
+    #main-menu[open] {
+        width: 40%;
     }
 }

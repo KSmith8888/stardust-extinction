@@ -15,7 +15,7 @@ import { Background } from "../../src/backgrounds/space-background";
 //Utils
 import { sizeCanvas } from "../../src/utils/sizeCanvas";
 //Assets
-import spaceBackgroundUrl from "../../assets/images/space-background.png";
+import spaceBackgroundUrl from "../../assets/images/backgrounds/space-background.png";
 
 const canvas = <HTMLCanvasElement>document.getElementById("canvas");
 const ctx = <CanvasRenderingContext2D>canvas.getContext("2d");

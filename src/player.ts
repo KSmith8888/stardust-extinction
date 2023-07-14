@@ -58,7 +58,7 @@ export default class Player {
             return !laser.isOffScreen;
         });
         if (this.isMoving && this.projectiles.length < 50) {
-            if (this.frameCount === 20) {
+            if (this.frameCount === 10) {
                 this.projectiles.push(
                     new LaserSmall(
                         this.canvas,
