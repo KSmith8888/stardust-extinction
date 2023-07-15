@@ -37,7 +37,8 @@ export default class EventListeners {
                 e.offsetX >= this.player.x &&
                 e.offsetX <= this.player.x + this.player.width &&
                 e.offsetY >= this.player.y &&
-                e.offsetY <= this.player.y + this.player.height
+                e.offsetY <= this.player.y + this.player.height &&
+                e.offsetY > 75
             ) {
                 player.isMoving = true;
             }
@@ -70,7 +71,8 @@ export default class EventListeners {
                 e.touches[0].clientX >= this.player.x &&
                 e.touches[0].clientX <= this.player.x + this.player.width &&
                 e.touches[0].clientY >= this.player.y &&
-                e.touches[0].clientY <= this.player.y + this.player.height
+                e.touches[0].clientY <= this.player.y + this.player.height &&
+                e.touches[0].clientY > 75
             ) {
                 player.isMoving = true;
             }
