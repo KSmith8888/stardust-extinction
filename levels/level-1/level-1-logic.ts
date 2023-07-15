@@ -12,8 +12,10 @@
 import Player from "../../src/player";
 import EventListeners from "../../src/event-listeners";
 import { Background } from "../../src/backgrounds/space-background";
+import { RedMine, BlueMine } from "../../src/enemies/mines";
 //Utils
 import { sizeCanvas } from "../../src/utils/sizeCanvas";
+import { areObjectsColliding } from "../../src/utils/collision";
 //Assets
 import spaceBackgroundUrl from "../../assets/images/backgrounds/space-background.png";
 
@@ -25,10 +27,33 @@ class Game {
     player: Player;
     events: EventListeners;
     background: Background;
+    enemies: Array<RedMine | BlueMine>;
+    frameCount: number;
     constructor() {
         this.player = new Player(canvas, ctx);
         this.events = new EventListeners(this.player, canvas);
         this.background = new Background(canvas, ctx, spaceBackgroundUrl);
+        this.enemies = [];
+        this.frameCount = 0;
+    }
+    handleEnemies() {
+        this.enemies = this.enemies.filter((enemy) => {
+            return !enemy.isOffScreen && !enemy.isDestroyed;
+        });
+        if (this.enemies.length < 20 && this.frameCount >= 100) {
+            this.enemies.push(new RedMine(canvas, ctx));
+            this.enemies.push(new BlueMine(canvas, ctx));
+            this.frameCount = 0;
+        } else {
+            this.frameCount += 1;
+        }
+        this.enemies.forEach((enemy) => {
+            enemy.render();
+            const didEnemyCollide = areObjectsColliding(this.player, enemy);
+            if (didEnemyCollide) {
+                enemy.isDestroyed = true;
+            }
+        });
     }
 }
 
@@ -41,6 +66,7 @@ function animate() {
     game.player.render();
     game.player.handleProjectiles();
     game.player.healthBar.render();
+    game.handleEnemies();
     requestAnimationFrame(animate);
 }
 

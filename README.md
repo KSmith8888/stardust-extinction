@@ -28,6 +28,9 @@ https://opengameart.org/content/ship-sprites
 "Lasers and Beams" by Rawdanitsu licensed CC0:  
 https://opengameart.org/content/lasers-and-beams
 
+"Shmup Enemies" by Buch licensed CC0:  
+https://opengameart.org/users/buch
+
 ### Audio
 
 "Beep Tone Sound SFX" by qubodup licensed CC0:  
