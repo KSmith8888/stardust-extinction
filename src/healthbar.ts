@@ -20,12 +20,12 @@ export class HealthBar {
         this.y = y;
         this.height = 15;
         this.width = this.user.healthStat * 1.8 - 5;
-        this.fill = this.user.health * 2 - 5;
+        this.fill = this.user.health * 1.8 - 5;
     }
     render() {
         //In case healthStat increased mid-level, possibly remove
         this.width = this.user.healthStat * 1.8 - 5;
-        this.fill = this.user.health * 2 - 5;
+        this.fill = this.user.health * 1.8 - 5;
         this.ctx.strokeStyle = "gold";
         this.ctx.fillStyle = "black";
         this.ctx.beginPath();

@@ -1,4 +1,6 @@
 import smallLaserUrl from "../../assets/images/laser-small.png";
+import { areObjectsColliding } from "../utils/collision";
+import { RedMine, BlueMine } from "../enemies/mines";
 
 export class Projectile {
     x: number;
@@ -20,11 +22,13 @@ export class Projectile {
 export class LaserSmall extends Projectile {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
+    enemies: Array<RedMine | BlueMine>;
     constructor(
         canvas: HTMLCanvasElement,
         ctx: CanvasRenderingContext2D,
         x: number,
-        y: number
+        y: number,
+        enemies: Array<RedMine | BlueMine>
     ) {
         super();
         this.canvas = canvas;
@@ -34,8 +38,14 @@ export class LaserSmall extends Projectile {
         this.width = 8;
         this.height = 14;
         this.image.src = smallLaserUrl;
+        this.enemies = enemies;
     }
     render() {
+        this.enemies.forEach((enemy) => {
+            if (areObjectsColliding(this, enemy)) {
+                enemy.health -= 10;
+            }
+        });
         if (this.y > 0) {
             this.y -= 1;
         } else {

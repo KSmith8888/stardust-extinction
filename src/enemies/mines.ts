@@ -6,6 +6,7 @@ export class Enemy {
     height: number;
     x: number;
     y: number;
+    health: number;
     isDestroyed: boolean;
     isOffScreen: boolean;
     frameCount: number;
@@ -14,6 +15,7 @@ export class Enemy {
         this.height = 0;
         this.x = 0;
         this.y = 0;
+        this.health = 40;
         this.isDestroyed = false;
         this.isOffScreen = false;
         this.frameCount = 0;
@@ -42,6 +44,9 @@ export class RedMine extends Enemy {
         );
     }
     render() {
+        if (this.health <= 0) {
+            this.isDestroyed = true;
+        }
         if (this.y < this.canvas.height) {
             this.y += this.speed;
         } else {
@@ -86,6 +91,9 @@ export class BlueMine extends Enemy {
         );
     }
     render() {
+        if (this.health <= 0) {
+            this.isDestroyed = true;
+        }
         if (this.y < this.canvas.height) {
             this.y += this.speed;
         } else {

@@ -8,6 +8,7 @@
 
 import { LaserSmall } from "./projectiles/lasers";
 import { HealthBar } from "./healthbar";
+import { RedMine, BlueMine } from "./enemies/mines";
 
 export default class Player {
     canvas: HTMLCanvasElement;
@@ -19,6 +20,7 @@ export default class Player {
     isMoving: boolean;
     idleShipImage: HTMLImageElement;
     activeShipImage: HTMLImageElement;
+    enemies: Array<RedMine | BlueMine>;
     projectiles: Array<LaserSmall>;
     frameCount: number;
     laserOffsetX: number;
@@ -26,7 +28,13 @@ export default class Player {
     healthBar: HealthBar;
     health: number;
     healthStat: number;
-    constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+    isShipDisabled: boolean;
+    shipDisabledFrames: number;
+    constructor(
+        canvas: HTMLCanvasElement,
+        ctx: CanvasRenderingContext2D,
+        enemies: Array<RedMine | BlueMine>
+    ) {
         this.canvas = canvas;
         this.ctx = ctx;
         this.width = 45;
@@ -40,15 +48,26 @@ export default class Player {
         this.activeShipImage = <HTMLImageElement>(
             document.getElementById("active-ship-image")
         );
+        this.enemies = enemies;
         this.projectiles = [];
         this.frameCount = 0;
         this.laserOffsetX = this.width * 0.2;
         this.laserOffsetY = this.height * 0.35;
         this.healthBar = new HealthBar(this, this.ctx, 45, 10);
-        this.health = 50;
+        this.health = 100;
         this.healthStat = 100;
+        this.isShipDisabled = false;
+        this.shipDisabledFrames = 0;
     }
     render() {
+        if (this.isShipDisabled) {
+            if (this.shipDisabledFrames < 100) {
+                this.shipDisabledFrames += 1;
+            } else {
+                this.shipDisabledFrames = 0;
+                this.isShipDisabled = false;
+            }
+        }
         const currentShipImage = this.isMoving
             ? this.activeShipImage
             : this.idleShipImage;
@@ -64,14 +83,15 @@ export default class Player {
         this.projectiles = this.projectiles.filter((laser) => {
             return !laser.isOffScreen;
         });
-        if (this.isMoving && this.projectiles.length < 50) {
+        if (this.isMoving && this.projectiles.length < 60) {
             if (this.frameCount >= 10) {
                 this.projectiles.push(
                     new LaserSmall(
                         this.canvas,
                         this.ctx,
                         this.x,
-                        this.y + this.laserOffsetY
+                        this.y + this.laserOffsetY,
+                        this.enemies
                     )
                 );
                 this.projectiles.push(
@@ -79,7 +99,8 @@ export default class Player {
                         this.canvas,
                         this.ctx,
                         this.x + (this.width - this.laserOffsetX),
-                        this.y + this.laserOffsetY
+                        this.y + this.laserOffsetY,
+                        this.enemies
                     )
                 );
                 this.frameCount = 0;

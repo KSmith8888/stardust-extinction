@@ -30,10 +30,10 @@ class Game {
     enemies: Array<RedMine | BlueMine>;
     frameCount: number;
     constructor() {
-        this.player = new Player(canvas, ctx);
+        this.enemies = [];
+        this.player = new Player(canvas, ctx, this.enemies);
         this.events = new EventListeners(this.player, canvas);
         this.background = new Background(canvas, ctx, spaceBackgroundUrl);
-        this.enemies = [];
         this.frameCount = 0;
     }
     handleEnemies() {
@@ -44,6 +44,7 @@ class Game {
             this.enemies.push(new RedMine(canvas, ctx));
             this.enemies.push(new BlueMine(canvas, ctx));
             this.frameCount = 0;
+            this.player.enemies = this.enemies;
         } else {
             this.frameCount += 1;
         }
@@ -52,6 +53,11 @@ class Game {
             const didEnemyCollide = areObjectsColliding(this.player, enemy);
             if (didEnemyCollide) {
                 enemy.isDestroyed = true;
+                if (enemy instanceof RedMine && this.player.health > 0) {
+                    this.player.health -= 20;
+                } else if (enemy instanceof BlueMine) {
+                    this.player.isShipDisabled = true;
+                }
             }
         });
     }

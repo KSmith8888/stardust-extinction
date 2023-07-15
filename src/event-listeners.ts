@@ -38,7 +38,8 @@ export default class EventListeners {
                 e.offsetX <= this.player.x + this.player.width &&
                 e.offsetY >= this.player.y &&
                 e.offsetY <= this.player.y + this.player.height &&
-                e.offsetY > 75
+                e.offsetY > 75 &&
+                !this.player.isShipDisabled
             ) {
                 player.isMoving = true;
             }
@@ -49,7 +50,7 @@ export default class EventListeners {
             }
         });
         this.mousemove = canvas.addEventListener("mousemove", (e): void => {
-            if (player.isMoving) {
+            if (player.isMoving && !this.player.isShipDisabled) {
                 if (e.offsetX + this.player.width / 2 > canvas.width) {
                     this.player.x = canvas.width - this.player.width;
                 } else if (e.offsetX - this.player.width / 2 < 0) {
@@ -72,7 +73,8 @@ export default class EventListeners {
                 e.touches[0].clientX <= this.player.x + this.player.width &&
                 e.touches[0].clientY >= this.player.y &&
                 e.touches[0].clientY <= this.player.y + this.player.height &&
-                e.touches[0].clientY > 75
+                e.touches[0].clientY > 75 &&
+                !this.player.isShipDisabled
             ) {
                 player.isMoving = true;
             }
@@ -83,7 +85,7 @@ export default class EventListeners {
             }
         });
         this.touchmove = canvas.addEventListener("touchmove", (e): void => {
-            if (player.isMoving) {
+            if (player.isMoving && !this.player.isShipDisabled) {
                 if (
                     e.touches[0].clientX + this.player.width / 2 >
                     canvas.width
@@ -111,21 +113,48 @@ export default class EventListeners {
         this.keyEvent = document.addEventListener("keydown", (event) => {
             switch (event.code) {
                 case "ArrowLeft": {
-                    if (this.player.x >= 5) {
+                    if (this.player.x >= 5 && !this.player.isShipDisabled) {
+                        this.player.isMoving = true;
                         this.player.x -= 5;
-                    } else {
+                    } else if (
+                        this.player.x < 5 &&
+                        !this.player.isShipDisabled
+                    ) {
                         this.player.x = 0;
+                        this.player.isMoving = false;
                     }
                     break;
                 }
                 case "ArrowRight": {
                     if (
                         this.player.x <=
-                        canvas.width - (this.player.width + 5)
+                            canvas.width - (this.player.width + 5) &&
+                        !this.player.isShipDisabled
                     ) {
+                        this.player.isMoving = true;
                         this.player.x += 5;
-                    } else {
+                    } else if (
+                        this.player.x >
+                            canvas.width - (this.player.width + 5) &&
+                        !this.player.isShipDisabled
+                    ) {
                         this.player.x = canvas.width - this.player.width;
+                        this.player.isMoving = false;
+                    }
+                    break;
+                }
+                case "ArrowUp": {
+                    if (this.player.y > 75 && !this.player.isShipDisabled) {
+                        this.player.y -= 5;
+                    }
+                    break;
+                }
+                case "ArrowDown": {
+                    if (
+                        this.player.y < canvas.height - 5 &&
+                        !this.player.isShipDisabled
+                    ) {
+                        this.player.y += 5;
                     }
                     break;
                 }
