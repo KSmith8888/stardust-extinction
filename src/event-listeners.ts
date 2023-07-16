@@ -120,7 +120,9 @@ export default class EventListeners {
                         this.player.x < 5 &&
                         !this.player.isShipDisabled
                     ) {
+                        this.player.isMoving = true;
                         this.player.x = 0;
+                    } else {
                         this.player.isMoving = false;
                     }
                     break;
@@ -138,14 +140,19 @@ export default class EventListeners {
                             canvas.width - (this.player.width + 5) &&
                         !this.player.isShipDisabled
                     ) {
+                        this.player.isMoving = true;
                         this.player.x = canvas.width - this.player.width;
+                    } else {
                         this.player.isMoving = false;
                     }
                     break;
                 }
                 case "ArrowUp": {
                     if (this.player.y > 75 && !this.player.isShipDisabled) {
+                        this.player.isMoving = true;
                         this.player.y -= 5;
+                    } else {
+                        this.player.isMoving = false;
                     }
                     break;
                 }
@@ -154,7 +161,10 @@ export default class EventListeners {
                         this.player.y < canvas.height - 5 &&
                         !this.player.isShipDisabled
                     ) {
+                        this.player.isMoving = true;
                         this.player.y += 5;
+                    } else {
+                        this.player.isMoving = false;
                     }
                     break;
                 }

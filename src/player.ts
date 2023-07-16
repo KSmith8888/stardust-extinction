@@ -30,11 +30,7 @@ export default class Player {
     healthStat: number;
     isShipDisabled: boolean;
     shipDisabledFrames: number;
-    constructor(
-        canvas: HTMLCanvasElement,
-        ctx: CanvasRenderingContext2D,
-        enemies: Array<RedMine | BlueMine>
-    ) {
+    constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
         this.canvas = canvas;
         this.ctx = ctx;
         this.width = 45;
@@ -48,7 +44,7 @@ export default class Player {
         this.activeShipImage = <HTMLImageElement>(
             document.getElementById("active-ship-image")
         );
-        this.enemies = enemies;
+        this.enemies = [];
         this.projectiles = [];
         this.frameCount = 0;
         this.laserOffsetX = this.width * 0.2;

@@ -19,19 +19,15 @@ import { areObjectsColliding } from "../../src/utils/collision";
 //Assets
 import spaceBackgroundUrl from "../../assets/images/backgrounds/space-background.png";
 
-const canvas = <HTMLCanvasElement>document.getElementById("canvas");
-const ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
-sizeCanvas(canvas);
-
 class Game {
+    enemies: Array<RedMine | BlueMine>;
     player: Player;
     events: EventListeners;
     background: Background;
-    enemies: Array<RedMine | BlueMine>;
     frameCount: number;
-    constructor() {
+    constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
         this.enemies = [];
-        this.player = new Player(canvas, ctx, this.enemies);
+        this.player = new Player(canvas, ctx);
         this.events = new EventListeners(this.player, canvas);
         this.background = new Background(canvas, ctx, spaceBackgroundUrl);
         this.frameCount = 0;
@@ -61,19 +57,20 @@ class Game {
             }
         });
     }
+    animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        game.background.render();
+        game.background.updatePosition();
+        game.player.render();
+        game.player.handleProjectiles();
+        game.player.healthBar.render();
+        game.handleEnemies();
+        requestAnimationFrame(this.animate.bind(this));
+    }
 }
 
-const game = new Game();
-
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    game.background.render();
-    game.background.updatePosition();
-    game.player.render();
-    game.player.handleProjectiles();
-    game.player.healthBar.render();
-    game.handleEnemies();
-    requestAnimationFrame(animate);
-}
-
-animate();
+const canvas = <HTMLCanvasElement>document.getElementById("canvas");
+const ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
+sizeCanvas(canvas);
+const game = new Game(canvas, ctx);
+game.animate();
