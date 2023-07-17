@@ -11,6 +11,7 @@ import { sizeCanvas } from "./utils/sizeCanvas";
 
 export default class EventListeners {
     player: Player;
+    hasBeenResized: boolean;
     sizeCanvas: void;
     mousedown: void;
     mouseup: void;
@@ -29,8 +30,12 @@ export default class EventListeners {
     quitGame: void;
     constructor(player: Player, canvas: HTMLCanvasElement) {
         this.player = player;
+        this.hasBeenResized = false;
         this.sizeCanvas = window.addEventListener("resize", () => {
             sizeCanvas(canvas);
+            this.player.x = canvas.width / 2;
+            this.player.y = canvas.height - this.player.height;
+            this.hasBeenResized = true;
         });
         this.mousedown = canvas.addEventListener("mousedown", (e): void => {
             if (

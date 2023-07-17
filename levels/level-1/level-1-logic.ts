@@ -20,16 +20,25 @@ import { areObjectsColliding } from "../../src/utils/collision";
 import spaceBackgroundUrl from "../../assets/images/backgrounds/space-background.png";
 
 class Game {
+    canvas: HTMLCanvasElement;
+    ctx: CanvasRenderingContext2D;
     enemies: Array<RedMine | BlueMine>;
     player: Player;
     events: EventListeners;
     background: Background;
     frameCount: number;
-    constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+    constructor() {
+        this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
+        this.ctx = <CanvasRenderingContext2D>this.canvas.getContext("2d");
+        sizeCanvas(this.canvas);
         this.enemies = [];
-        this.player = new Player(canvas, ctx);
-        this.events = new EventListeners(this.player, canvas);
-        this.background = new Background(canvas, ctx, spaceBackgroundUrl);
+        this.player = new Player(this.canvas, this.ctx);
+        this.background = new Background(
+            this.canvas,
+            this.ctx,
+            spaceBackgroundUrl
+        );
+        this.events = new EventListeners(this.player, this.canvas);
         this.frameCount = 0;
     }
     handleEnemies() {
@@ -37,8 +46,8 @@ class Game {
             return !enemy.isOffScreen && !enemy.isDestroyed;
         });
         if (this.enemies.length < 20 && this.frameCount >= 100) {
-            this.enemies.push(new RedMine(canvas, ctx));
-            this.enemies.push(new BlueMine(canvas, ctx));
+            this.enemies.push(new RedMine(this.canvas, this.ctx));
+            this.enemies.push(new BlueMine(this.canvas, this.ctx));
             this.frameCount = 0;
             this.player.enemies = this.enemies;
         } else {
@@ -58,19 +67,24 @@ class Game {
         });
     }
     animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        game.background.render();
-        game.background.updatePosition();
-        game.player.render();
-        game.player.handleProjectiles();
-        game.player.healthBar.render();
-        game.handleEnemies();
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.background.render();
+        this.background.updatePosition();
+        if (this.events.hasBeenResized) {
+            this.background = new Background(
+                this.canvas,
+                this.ctx,
+                spaceBackgroundUrl
+            );
+            this.events.hasBeenResized = false;
+        }
+        this.player.render();
+        this.player.handleProjectiles();
+        this.player.healthBar.render();
+        this.handleEnemies();
         requestAnimationFrame(this.animate.bind(this));
     }
 }
 
-const canvas = <HTMLCanvasElement>document.getElementById("canvas");
-const ctx = <CanvasRenderingContext2D>canvas.getContext("2d");
-sizeCanvas(canvas);
-const game = new Game(canvas, ctx);
+const game = new Game();
 game.animate();
