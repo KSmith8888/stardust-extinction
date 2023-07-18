@@ -7,40 +7,66 @@ body {
     min-height: 100vh;
     background-color: #1c1c1c;
     font-family: "Courier New", Courier, monospace;
+    background: linear-gradient(rgba(1, 0, 7, 0.7), rgba(2, 0, 10, 0.4)),
+        url("../images/backgrounds/title-background-mobile.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-#container,
-#header,
-#main,
-#footer {
+#container {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
-#header,
-#footer {
+#header {
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
     text-align: center;
-    height: 20vh;
     color: #fff;
 }
 
-#main {
-    height: 60vh;
-}
-
 #title-heading {
+    margin: 0;
     text-shadow: 2px 2px 2px black;
 }
 
+.block {
+    display: block;
+}
+
+#main {
+    height: 45vh;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#footer {
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.5em;
+    text-align: center;
+    color: #fff;
+}
+
 .button {
+    width: 10em;
     font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
     cursor: pointer;
     border: 1px solid black;
     color: #1c1c1c;
-    background-color: rgb(218, 214, 214);
+    background-color: rgb(189, 183, 183);
     margin: 0.5em;
     padding: 0.2em 0.5em;
     border-radius: 5px;
@@ -48,5 +74,24 @@ body {
 
 .button:hover,
 .button:focus {
-    background-color: rgb(199, 192, 192);
+    background-color: rgb(119, 114, 114);
+}
+
+@media (min-width: 701px) {
+    body {
+        background: linear-gradient(rgba(1, 0, 7, 0.8), rgba(2, 0, 10, 0.6)),
+            url("../images/backgrounds/title-background-desktop.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    #main {
+        justify-content: center;
+    }
+    #title-heading {
+        font-size: 2.3rem;
+    }
+
+    .block {
+        display: inline;
+    }
 }
