@@ -48,7 +48,7 @@ export class Background {
     }
     updatePosition(): void {
         if (this.y < this.canvas.height) {
-            this.y += 0.75;
+            this.y += 1.75;
         } else {
             this.y = 0;
         }

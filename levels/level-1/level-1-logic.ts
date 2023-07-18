@@ -13,26 +13,33 @@ import Player from "../../src/player";
 import EventListeners from "../../src/event-listeners";
 import { Background } from "../../src/backgrounds/space-background";
 import { RedMine, BlueMine } from "../../src/enemies/mines";
+import { SmallExplosion } from "../../src/explosions/small-explosion";
 //Utils
 import { sizeCanvas } from "../../src/utils/sizeCanvas";
 import { areObjectsColliding } from "../../src/utils/collision";
 //Assets
 import spaceBackgroundUrl from "../../assets/images/backgrounds/space-background.png";
+import spaceBgDesktopUrl from "../../assets/images/backgrounds/space-background-desktop.png";
 
-class Game {
+export default class Game {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
     enemies: Array<RedMine | BlueMine>;
+    explosions: Array<SmallExplosion>;
     player: Player;
     events: EventListeners;
     background: Background;
     frameCount: number;
+    lastTime: number;
+    interval: number;
+    timer: number;
     constructor() {
         this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
         this.ctx = <CanvasRenderingContext2D>this.canvas.getContext("2d");
         sizeCanvas(this.canvas);
         this.enemies = [];
-        this.player = new Player(this.canvas, this.ctx);
+        this.explosions = [];
+        this.player = new Player(this, this.canvas, this.ctx);
         this.background = new Background(
             this.canvas,
             this.ctx,
@@ -40,6 +47,9 @@ class Game {
         );
         this.events = new EventListeners(this.player, this.canvas);
         this.frameCount = 0;
+        this.lastTime = 0;
+        this.interval = 1000 / 60;
+        this.timer = 0;
     }
     handleEnemies() {
         this.enemies = this.enemies.filter((enemy) => {
@@ -49,7 +59,6 @@ class Game {
             this.enemies.push(new RedMine(this.canvas, this.ctx));
             this.enemies.push(new BlueMine(this.canvas, this.ctx));
             this.frameCount = 0;
-            this.player.enemies = this.enemies;
         } else {
             this.frameCount += 1;
         }
@@ -57,6 +66,9 @@ class Game {
             enemy.render();
             const didEnemyCollide = areObjectsColliding(this.player, enemy);
             if (didEnemyCollide) {
+                this.explosions.push(
+                    new SmallExplosion(this.ctx, enemy.x, enemy.y)
+                );
                 enemy.isDestroyed = true;
                 if (enemy instanceof RedMine && this.player.health > 0) {
                     this.player.health -= 20;
@@ -66,25 +78,46 @@ class Game {
             }
         });
     }
-    animate() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.background.render();
-        this.background.updatePosition();
-        if (this.events.hasBeenResized) {
-            this.background = new Background(
-                this.canvas,
-                this.ctx,
-                spaceBackgroundUrl
-            );
-            this.events.hasBeenResized = false;
+    handleExplosions() {
+        this.explosions = this.explosions.filter((explosion) => {
+            return explosion.frameCount < 5;
+        });
+        this.explosions.forEach((exp) => {
+            exp.frameCount += 1;
+            exp.render();
+        });
+    }
+    animate(timeStamp: number) {
+        const deltaTime = timeStamp - this.lastTime;
+        this.lastTime = timeStamp;
+        if (this.timer > this.interval) {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.background.render();
+            this.background.updatePosition();
+            if (this.events.hasBeenResized) {
+                const newBgImage =
+                    this.canvas.width < 900
+                        ? spaceBackgroundUrl
+                        : spaceBgDesktopUrl;
+                this.background = new Background(
+                    this.canvas,
+                    this.ctx,
+                    newBgImage
+                );
+                this.events.hasBeenResized = false;
+            }
+            this.player.render();
+            this.player.handleProjectiles();
+            this.player.healthBar.render();
+            this.handleEnemies();
+            this.handleExplosions();
+            this.timer -= deltaTime;
+        } else {
+            this.timer += deltaTime;
         }
-        this.player.render();
-        this.player.handleProjectiles();
-        this.player.healthBar.render();
-        this.handleEnemies();
         requestAnimationFrame(this.animate.bind(this));
     }
 }
 
 const game = new Game();
-game.animate();
+game.animate(0);

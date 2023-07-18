@@ -121,12 +121,6 @@ export default class EventListeners {
                     if (this.player.x >= 5 && !this.player.isShipDisabled) {
                         this.player.isMoving = true;
                         this.player.x -= 5;
-                    } else if (
-                        this.player.x < 5 &&
-                        !this.player.isShipDisabled
-                    ) {
-                        this.player.isMoving = true;
-                        this.player.x = 0;
                     } else {
                         this.player.isMoving = false;
                     }
@@ -140,13 +134,6 @@ export default class EventListeners {
                     ) {
                         this.player.isMoving = true;
                         this.player.x += 5;
-                    } else if (
-                        this.player.x >
-                            canvas.width - (this.player.width + 5) &&
-                        !this.player.isShipDisabled
-                    ) {
-                        this.player.isMoving = true;
-                        this.player.x = canvas.width - this.player.width;
                     } else {
                         this.player.isMoving = false;
                     }
@@ -163,7 +150,8 @@ export default class EventListeners {
                 }
                 case "ArrowDown": {
                     if (
-                        this.player.y < canvas.height - 5 &&
+                        this.player.y <
+                            canvas.height - (5 + this.player.height) &&
                         !this.player.isShipDisabled
                     ) {
                         this.player.isMoving = true;

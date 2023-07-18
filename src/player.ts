@@ -6,11 +6,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import Game from "../levels/level-1/level-1-logic";
 import { LaserSmall } from "./projectiles/lasers";
 import { HealthBar } from "./healthbar";
 import { RedMine, BlueMine } from "./enemies/mines";
+import { SmallExplosion } from "./explosions/small-explosion";
 
 export default class Player {
+    game: Game;
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
     readonly width: number;
@@ -21,6 +24,7 @@ export default class Player {
     idleShipImage: HTMLImageElement;
     activeShipImage: HTMLImageElement;
     enemies: Array<RedMine | BlueMine>;
+    explosions: Array<SmallExplosion>;
     projectiles: Array<LaserSmall>;
     frameCount: number;
     laserOffsetX: number;
@@ -30,7 +34,12 @@ export default class Player {
     healthStat: number;
     isShipDisabled: boolean;
     shipDisabledFrames: number;
-    constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+    constructor(
+        game: Game,
+        canvas: HTMLCanvasElement,
+        ctx: CanvasRenderingContext2D
+    ) {
+        this.game = game;
         this.canvas = canvas;
         this.ctx = ctx;
         this.width = 45;
@@ -45,6 +54,7 @@ export default class Player {
             document.getElementById("active-ship-image")
         );
         this.enemies = [];
+        this.explosions = [];
         this.projectiles = [];
         this.frameCount = 0;
         this.laserOffsetX = this.width * 0.2;
@@ -79,15 +89,15 @@ export default class Player {
         this.projectiles = this.projectiles.filter((laser) => {
             return !laser.isOffScreen;
         });
-        if (this.isMoving && this.projectiles.length < 60) {
-            if (this.frameCount >= 10) {
+        if (!this.isShipDisabled) {
+            if (this.frameCount >= 15) {
                 this.projectiles.push(
                     new LaserSmall(
                         this.canvas,
                         this.ctx,
                         this.x,
                         this.y + this.laserOffsetY,
-                        this.enemies
+                        this.game
                     )
                 );
                 this.projectiles.push(
@@ -96,7 +106,7 @@ export default class Player {
                         this.ctx,
                         this.x + (this.width - this.laserOffsetX),
                         this.y + this.laserOffsetY,
-                        this.enemies
+                        this.game
                     )
                 );
                 this.frameCount = 0;

@@ -31,6 +31,9 @@ https://opengameart.org/content/lasers-and-beams
 "Shmup Enemies" by Buch licensed CC0:  
 https://opengameart.org/users/buch
 
+"Asteroids Game Sprites Atlas" by CDmir licensed CC0:  
+https://opengameart.org/content/asteroids-game-sprites-atlas
+
 ### Audio
 
 "Beep Tone Sound SFX" by qubodup licensed CC0:  

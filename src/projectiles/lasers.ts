@@ -1,6 +1,7 @@
+import Game from "../../levels/level-1/level-1-logic";
 import smallLaserUrl from "../../assets/images/laser-small.png";
 import { areObjectsColliding } from "../utils/collision";
-import { RedMine, BlueMine } from "../enemies/mines";
+import { SmallExplosion } from "../explosions/small-explosion";
 
 export class Projectile {
     x: number;
@@ -8,6 +9,7 @@ export class Projectile {
     width: number;
     height: number;
     isOffScreen: boolean;
+    hasHitTarget: boolean;
     image: HTMLImageElement;
     constructor() {
         this.x = 0;
@@ -15,6 +17,7 @@ export class Projectile {
         this.width = 0;
         this.height = 0;
         this.isOffScreen = false;
+        this.hasHitTarget = false;
         this.image = new Image();
     }
 }
@@ -22,13 +25,13 @@ export class Projectile {
 export class LaserSmall extends Projectile {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
-    enemies: Array<RedMine | BlueMine>;
+    game: Game;
     constructor(
         canvas: HTMLCanvasElement,
         ctx: CanvasRenderingContext2D,
         x: number,
         y: number,
-        enemies: Array<RedMine | BlueMine>
+        game: Game
     ) {
         super();
         this.canvas = canvas;
@@ -38,16 +41,24 @@ export class LaserSmall extends Projectile {
         this.width = 8;
         this.height = 14;
         this.image.src = smallLaserUrl;
-        this.enemies = enemies;
+        this.game = game;
     }
     render() {
-        this.enemies.forEach((enemy) => {
-            if (areObjectsColliding(this, enemy)) {
+        this.game.enemies.forEach((enemy) => {
+            if (
+                !this.hasHitTarget &&
+                !enemy.isDestroyed &&
+                areObjectsColliding(this, enemy)
+            ) {
+                this.game.explosions.push(
+                    new SmallExplosion(this.ctx, enemy.x, enemy.y)
+                );
                 enemy.health -= 10;
+                this.hasHitTarget = true;
             }
         });
         if (this.y > 0) {
-            this.y -= 1;
+            this.y -= 2.25;
         } else {
             this.isOffScreen = true;
         }

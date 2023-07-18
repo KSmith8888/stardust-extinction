@@ -57,7 +57,7 @@ export class RedMine extends Enemy {
         } else {
             this.x += 2;
         }
-        if (this.frameCount >= 30) {
+        if (this.frameCount >= 10) {
             this.randomTargetX = Math.floor(
                 Math.random() * (this.canvas.width - this.width)
             );
@@ -104,7 +104,7 @@ export class BlueMine extends Enemy {
         } else {
             this.x += 2;
         }
-        if (this.frameCount >= 30) {
+        if (this.frameCount >= 10) {
             this.randomTargetX = Math.floor(
                 Math.random() * (this.canvas.width - this.width)
             );
