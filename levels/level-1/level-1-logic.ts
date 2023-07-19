@@ -11,6 +11,7 @@
 //Modules
 import Player from "../../src/player";
 import EventListeners from "../../src/event-listeners";
+import { HealthBar } from "../../src/healthbar";
 import { Background } from "../../src/backgrounds/space-background";
 import { RedMine, BlueMine } from "../../src/enemies/mines";
 import { SmallExplosion } from "../../src/explosions/small-explosion";
@@ -103,6 +104,12 @@ export default class Game {
                     this.canvas,
                     this.ctx,
                     newBgImage
+                );
+                this.player.healthBar = new HealthBar(
+                    this.player,
+                    this.ctx,
+                    10,
+                    this.canvas.height - 25
                 );
                 this.events.hasBeenResized = false;
             }

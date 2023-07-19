@@ -45,7 +45,7 @@ export default class Player {
         this.width = 45;
         this.height = 45;
         this.x = canvas.width / 2;
-        this.y = canvas.height - this.height;
+        this.y = canvas.height - (this.height + 35);
         this.isMoving = false;
         this.idleShipImage = <HTMLImageElement>(
             document.getElementById("idle-ship-image")
@@ -59,7 +59,12 @@ export default class Player {
         this.frameCount = 0;
         this.laserOffsetX = this.width * 0.2;
         this.laserOffsetY = this.height * 0.35;
-        this.healthBar = new HealthBar(this, this.ctx, 45, 10);
+        this.healthBar = new HealthBar(
+            this,
+            this.ctx,
+            10,
+            this.canvas.height - 25
+        );
         this.health = 100;
         this.healthStat = 100;
         this.isShipDisabled = false;
