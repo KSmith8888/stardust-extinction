@@ -1,5 +1,6 @@
 import redMineUrl from "../../assets/images/enemies/red-mine.png";
 import blueMineUrl from "../../assets/images/enemies/blue-mine.png";
+import Player from "../player";
 
 export class Enemy {
     width: number;
@@ -25,23 +26,27 @@ export class Enemy {
 export class RedMine extends Enemy {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
+    player: Player;
     speed: number;
     image: HTMLImageElement;
-    randomTargetX: number;
-    constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+    playerX: number;
+    constructor(
+        canvas: HTMLCanvasElement,
+        ctx: CanvasRenderingContext2D,
+        player: Player
+    ) {
         super();
         this.canvas = canvas;
         this.ctx = ctx;
+        this.player = player;
         this.width = 24;
         this.height = 20;
         this.x = Math.floor(Math.random() * (this.canvas.width - this.width));
         this.y = 0 - this.height;
-        this.speed = Math.floor(Math.random() * 3) + 1;
+        this.speed = Math.floor(Math.random() * 5) + 1;
         this.image = new Image();
         this.image.src = redMineUrl;
-        this.randomTargetX = Math.floor(
-            Math.random() * (this.canvas.width - this.width)
-        );
+        this.playerX = this.player.x;
     }
     render() {
         if (this.health <= 0) {
@@ -52,19 +57,12 @@ export class RedMine extends Enemy {
         } else {
             this.isOffScreen = true;
         }
-        if (this.x >= this.randomTargetX) {
-            this.x -= 2;
+        if (this.x > this.playerX) {
+            this.x -= 1.5;
         } else {
-            this.x += 2;
+            this.x += 1.5;
         }
-        if (this.frameCount >= 10) {
-            this.randomTargetX = Math.floor(
-                Math.random() * (this.canvas.width - this.width)
-            );
-            this.frameCount = 0;
-        } else {
-            this.frameCount += 1;
-        }
+        this.playerX = this.player.x;
         this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 }
@@ -83,7 +81,7 @@ export class BlueMine extends Enemy {
         this.height = 24;
         this.x = Math.floor(Math.random() * (this.canvas.width - this.width));
         this.y = 0 - this.height;
-        this.speed = Math.floor(Math.random() * 2) + 1;
+        this.speed = Math.floor(Math.random() * 3) + 1;
         this.image = new Image();
         this.image.src = blueMineUrl;
         this.randomTargetX = Math.floor(

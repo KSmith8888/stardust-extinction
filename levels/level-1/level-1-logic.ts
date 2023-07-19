@@ -57,7 +57,7 @@ export default class Game {
             return !enemy.isOffScreen && !enemy.isDestroyed;
         });
         if (this.enemies.length < 20 && this.frameCount >= 100) {
-            this.enemies.push(new RedMine(this.canvas, this.ctx));
+            this.enemies.push(new RedMine(this.canvas, this.ctx, this.player));
             this.enemies.push(new BlueMine(this.canvas, this.ctx));
             this.frameCount = 0;
         } else {
