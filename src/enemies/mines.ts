@@ -1,27 +1,7 @@
+import Enemy from "./enemy";
 import redMineUrl from "../../assets/images/enemies/red-mine.png";
 import blueMineUrl from "../../assets/images/enemies/blue-mine.png";
 import Player from "../player";
-
-export class Enemy {
-    width: number;
-    height: number;
-    x: number;
-    y: number;
-    health: number;
-    isDestroyed: boolean;
-    isOffScreen: boolean;
-    frameCount: number;
-    constructor() {
-        this.width = 0;
-        this.height = 0;
-        this.x = 0;
-        this.y = 0;
-        this.health = 40;
-        this.isDestroyed = false;
-        this.isOffScreen = false;
-        this.frameCount = 0;
-    }
-}
 
 export class RedMine extends Enemy {
     canvas: HTMLCanvasElement;

@@ -1,26 +1,10 @@
+import Projectile from "./projectile";
 import Game from "../../levels/level-1/level-1-logic";
-import smallLaserUrl from "../../assets/images/laser-small.png";
+import Player from "../player";
+import smallLaserUrl from "../../assets/images/projectiles/laser-small.png";
+import enemySmallLaserUrl from "../../assets/images/projectiles/enemy-laser-small.png";
 import { areObjectsColliding } from "../utils/collision";
 import { SmallExplosion } from "../explosions/small-explosion";
-
-export class Projectile {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-    isOffScreen: boolean;
-    hasHitTarget: boolean;
-    image: HTMLImageElement;
-    constructor() {
-        this.x = 0;
-        this.y = 0;
-        this.width = 0;
-        this.height = 0;
-        this.isOffScreen = false;
-        this.hasHitTarget = false;
-        this.image = new Image();
-    }
-}
 
 export class LaserSmall extends Projectile {
     canvas: HTMLCanvasElement;
@@ -59,6 +43,41 @@ export class LaserSmall extends Projectile {
         });
         if (this.y > 0) {
             this.y -= 2.25;
+        } else {
+            this.isOffScreen = true;
+        }
+        this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+    }
+}
+
+export class EnemyLaserSmall extends Projectile {
+    canvas: HTMLCanvasElement;
+    ctx: CanvasRenderingContext2D;
+    player: Player;
+    constructor(
+        canvas: HTMLCanvasElement,
+        ctx: CanvasRenderingContext2D,
+        player: Player,
+        x: number,
+        y: number
+    ) {
+        super();
+        this.canvas = canvas;
+        this.ctx = ctx;
+        this.player = player;
+        this.x = x;
+        this.y = y;
+        this.width = 5;
+        this.height = 12;
+        this.image.src = enemySmallLaserUrl;
+    }
+    render() {
+        if (!this.hasHitTarget && areObjectsColliding(this, this.player)) {
+            this.player.health -= 10;
+            this.hasHitTarget = true;
+        }
+        if (this.y < this.canvas.height) {
+            this.y += 2.75;
         } else {
             this.isOffScreen = true;
         }

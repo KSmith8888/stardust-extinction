@@ -1,6 +1,6 @@
 import Player from "../player";
-import { Enemy } from "../enemies/mines";
-import { Projectile } from "../projectiles/lasers";
+import Enemy from "../enemies/enemy";
+import Projectile from "../projectiles/projectile";
 
 type CollisionEnabled = Player | Enemy | Projectile;
 

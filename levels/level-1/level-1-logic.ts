@@ -14,6 +14,7 @@ import EventListeners from "../../src/event-listeners";
 import { HealthBar } from "../../src/healthbar";
 import { Background } from "../../src/backgrounds/space-background";
 import { RedMine, BlueMine } from "../../src/enemies/mines";
+import { SmallFighter } from "../../src/enemies/fighters";
 import { SmallExplosion } from "../../src/explosions/small-explosion";
 //Utils
 import { sizeCanvas } from "../../src/utils/sizeCanvas";
@@ -25,7 +26,7 @@ import spaceBgDesktopUrl from "../../assets/images/backgrounds/space-background-
 export default class Game {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
-    enemies: Array<RedMine | BlueMine>;
+    enemies: Array<RedMine | BlueMine | SmallFighter>;
     explosions: Array<SmallExplosion>;
     player: Player;
     events: EventListeners;
@@ -58,7 +59,11 @@ export default class Game {
         });
         if (this.enemies.length < 20 && this.frameCount >= 100) {
             this.enemies.push(new RedMine(this.canvas, this.ctx, this.player));
+
             this.enemies.push(new BlueMine(this.canvas, this.ctx));
+            this.enemies.push(
+                new SmallFighter(this.canvas, this.ctx, this.player)
+            );
             this.frameCount = 0;
         } else {
             this.frameCount += 1;
@@ -79,6 +84,13 @@ export default class Game {
             }
         });
     }
+    handleEnemyProjectiles() {
+        this.enemies.forEach((enemy) => {
+            if (enemy instanceof SmallFighter) {
+                enemy.handleProjectiles();
+            }
+        });
+    }
     handleExplosions() {
         this.explosions = this.explosions.filter((explosion) => {
             return explosion.frameCount < 5;
@@ -88,6 +100,18 @@ export default class Game {
             exp.render();
         });
     }
+    resizeObjects() {
+        const newBgImage =
+            this.canvas.width < 900 ? spaceBackgroundUrl : spaceBgDesktopUrl;
+        this.background = new Background(this.canvas, this.ctx, newBgImage);
+        this.player.healthBar = new HealthBar(
+            this.player,
+            this.ctx,
+            10,
+            this.canvas.height - 25
+        );
+        this.events.hasBeenResized = false;
+    }
     animate(timeStamp: number) {
         const deltaTime = timeStamp - this.lastTime;
         this.lastTime = timeStamp;
@@ -96,27 +120,13 @@ export default class Game {
             this.background.render();
             this.background.updatePosition();
             if (this.events.hasBeenResized) {
-                const newBgImage =
-                    this.canvas.width < 900
-                        ? spaceBackgroundUrl
-                        : spaceBgDesktopUrl;
-                this.background = new Background(
-                    this.canvas,
-                    this.ctx,
-                    newBgImage
-                );
-                this.player.healthBar = new HealthBar(
-                    this.player,
-                    this.ctx,
-                    10,
-                    this.canvas.height - 25
-                );
-                this.events.hasBeenResized = false;
+                this.resizeObjects();
             }
             this.player.render();
             this.player.handleProjectiles();
             this.player.healthBar.render();
             this.handleEnemies();
+            this.handleEnemyProjectiles();
             this.handleExplosions();
             this.timer -= deltaTime;
         } else {
