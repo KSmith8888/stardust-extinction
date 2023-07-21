@@ -14,6 +14,7 @@ import EventListeners from "../../src/event-listeners";
 import { HealthBar } from "../../src/healthbar";
 import { Background } from "../../src/backgrounds/space-background";
 import { RedMine, BlueMine } from "../../src/enemies/mines";
+import { EnemyLaserSmall } from "../../src/projectiles/lasers";
 import { SmallFighter } from "../../src/enemies/fighters";
 import { SmallExplosion } from "../../src/explosions/small-explosion";
 //Utils
@@ -27,6 +28,7 @@ export default class Game {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
     enemies: Array<RedMine | BlueMine | SmallFighter>;
+    enemyProjectiles: Array<EnemyLaserSmall>;
     explosions: Array<SmallExplosion>;
     player: Player;
     events: EventListeners;
@@ -40,6 +42,7 @@ export default class Game {
         this.ctx = <CanvasRenderingContext2D>this.canvas.getContext("2d");
         sizeCanvas(this.canvas);
         this.enemies = [];
+        this.enemyProjectiles = [];
         this.explosions = [];
         this.player = new Player(this, this.canvas, this.ctx);
         this.background = new Background(
@@ -58,12 +61,11 @@ export default class Game {
             return !enemy.isOffScreen && !enemy.isDestroyed;
         });
         if (this.enemies.length < 20 && this.frameCount >= 100) {
+            console.log(this.enemyProjectiles.length);
             this.enemies.push(new RedMine(this.canvas, this.ctx, this.player));
 
             this.enemies.push(new BlueMine(this.canvas, this.ctx));
-            this.enemies.push(
-                new SmallFighter(this.canvas, this.ctx, this.player)
-            );
+            this.enemies.push(new SmallFighter(this.canvas, this.ctx, this));
             this.frameCount = 0;
         } else {
             this.frameCount += 1;
@@ -85,10 +87,11 @@ export default class Game {
         });
     }
     handleEnemyProjectiles() {
-        this.enemies.forEach((enemy) => {
-            if (enemy instanceof SmallFighter) {
-                enemy.handleProjectiles();
-            }
+        this.enemyProjectiles = this.enemyProjectiles.filter((laser) => {
+            return !laser.isOffScreen;
+        });
+        this.enemyProjectiles.forEach((laser) => {
+            laser.render();
         });
     }
     handleExplosions() {

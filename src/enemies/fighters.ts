@@ -1,12 +1,12 @@
 import Enemy from "./enemy";
-import Player from "../player";
+import Game from "../../levels/level-1/level-1-logic";
 import { EnemyLaserSmall } from "../projectiles/lasers";
 import smallFighterUrl from "../../assets/images/enemies/small-fighter.png";
 
 export class SmallFighter extends Enemy {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
-    player: Player;
+    game: Game;
     projectiles: Array<EnemyLaserSmall>;
     speed: number;
     image: HTMLImageElement;
@@ -16,12 +16,12 @@ export class SmallFighter extends Enemy {
     constructor(
         canvas: HTMLCanvasElement,
         ctx: CanvasRenderingContext2D,
-        player: Player
+        game: Game
     ) {
         super();
         this.canvas = canvas;
         this.ctx = ctx;
-        this.player = player;
+        this.game = game;
         this.firesProjectiles = true;
         this.projectiles = [];
         this.width = 24;
@@ -52,26 +52,24 @@ export class SmallFighter extends Enemy {
             this.x += 2;
         }
         this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        this.handleProjectiles();
     }
     handleProjectiles() {
-        this.projectiles = this.projectiles.filter((laser) => {
-            return !laser.isOffScreen;
-        });
         if (this.frameCount >= 25) {
-            this.projectiles.push(
+            this.game.enemyProjectiles.push(
                 new EnemyLaserSmall(
                     this.canvas,
                     this.ctx,
-                    this.player,
+                    this.game.player,
                     this.x,
                     this.y + this.laserOffsetY
                 )
             );
-            this.projectiles.push(
+            this.game.enemyProjectiles.push(
                 new EnemyLaserSmall(
                     this.canvas,
                     this.ctx,
-                    this.player,
+                    this.game.player,
                     this.x + (this.width - this.laserOffsetX),
                     this.y + this.laserOffsetY
                 )
@@ -83,7 +81,5 @@ export class SmallFighter extends Enemy {
         } else {
             this.frameCount += 1;
         }
-
-        this.projectiles.forEach((laser) => laser.render());
     }
 }
