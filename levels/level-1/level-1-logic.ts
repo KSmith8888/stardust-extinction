@@ -17,6 +17,7 @@ import { RedMine, BlueMine } from "../../src/enemies/mines";
 import { EnemyLaserSmall } from "../../src/projectiles/lasers";
 import { SmallFighter } from "../../src/enemies/fighters";
 import { SmallExplosion } from "../../src/explosions/small-explosion";
+import { LargeEmp } from "../../src/explosions/emp";
 //Utils
 import { sizeCanvas } from "../../src/utils/sizeCanvas";
 import { areObjectsColliding } from "../../src/utils/collision";
@@ -29,7 +30,7 @@ export default class Game {
     ctx: CanvasRenderingContext2D;
     enemies: Array<RedMine | BlueMine | SmallFighter>;
     enemyProjectiles: Array<EnemyLaserSmall>;
-    explosions: Array<SmallExplosion>;
+    explosions: Array<SmallExplosion | LargeEmp>;
     player: Player;
     events: EventListeners;
     background: Background;
@@ -41,6 +42,7 @@ export default class Game {
         this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
         this.ctx = <CanvasRenderingContext2D>this.canvas.getContext("2d");
         sizeCanvas(this.canvas);
+        this.ctx.strokeStyle = "gold";
         this.enemies = [];
         this.enemyProjectiles = [];
         this.explosions = [];
@@ -61,10 +63,8 @@ export default class Game {
             return !enemy.isOffScreen && !enemy.isDestroyed;
         });
         if (this.enemies.length < 20 && this.frameCount >= 100) {
-            console.log(this.enemyProjectiles.length);
-            this.enemies.push(new RedMine(this.canvas, this.ctx, this.player));
-
-            this.enemies.push(new BlueMine(this.canvas, this.ctx));
+            this.enemies.push(new RedMine(this.canvas, this.ctx, this));
+            this.enemies.push(new BlueMine(this.canvas, this.ctx, this));
             this.enemies.push(new SmallFighter(this.canvas, this.ctx, this));
             this.frameCount = 0;
         } else {
@@ -74,14 +74,18 @@ export default class Game {
             enemy.render();
             const didEnemyCollide = areObjectsColliding(this.player, enemy);
             if (didEnemyCollide) {
-                this.explosions.push(
-                    new SmallExplosion(this.ctx, enemy.x, enemy.y)
-                );
                 enemy.isDestroyed = true;
-                if (enemy instanceof RedMine && this.player.health > 0) {
-                    this.player.health -= 20;
+                if (enemy instanceof RedMine) {
+                    this.player.health -= 10;
                 } else if (enemy instanceof BlueMine) {
+                    this.explosions.push(
+                        new LargeEmp(this.ctx, enemy.x, enemy.y)
+                    );
                     this.player.isShipDisabled = true;
+                } else {
+                    this.explosions.push(
+                        new SmallExplosion(this.ctx, enemy.x, enemy.y)
+                    );
                 }
             }
         });

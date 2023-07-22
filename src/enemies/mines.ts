@@ -1,24 +1,25 @@
 import Enemy from "./enemy";
 import redMineUrl from "../../assets/images/enemies/red-mine.png";
 import blueMineUrl from "../../assets/images/enemies/blue-mine.png";
-import Player from "../player";
+import Game from "../../levels/level-1/level-1-logic";
+import { LargeEmp } from "../explosions/emp";
 
 export class RedMine extends Enemy {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
-    player: Player;
+    game: Game;
     speed: number;
     image: HTMLImageElement;
     playerX: number;
     constructor(
         canvas: HTMLCanvasElement,
         ctx: CanvasRenderingContext2D,
-        player: Player
+        game: Game
     ) {
         super();
         this.canvas = canvas;
         this.ctx = ctx;
-        this.player = player;
+        this.game = game;
         this.width = 24;
         this.height = 20;
         this.x = Math.floor(Math.random() * (this.canvas.width - this.width));
@@ -26,7 +27,7 @@ export class RedMine extends Enemy {
         this.speed = Math.floor(Math.random() * 5) + 1;
         this.image = new Image();
         this.image.src = redMineUrl;
-        this.playerX = this.player.x;
+        this.playerX = this.game.player.x;
     }
     render() {
         if (this.health <= 0) {
@@ -42,7 +43,7 @@ export class RedMine extends Enemy {
         } else {
             this.x += 1.5;
         }
-        this.playerX = this.player.x;
+        this.playerX = this.game.player.x;
         this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 }
@@ -50,13 +51,19 @@ export class RedMine extends Enemy {
 export class BlueMine extends Enemy {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
+    game: Game;
     speed: number;
     image: HTMLImageElement;
     randomTargetX: number;
-    constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+    constructor(
+        canvas: HTMLCanvasElement,
+        ctx: CanvasRenderingContext2D,
+        game: Game
+    ) {
         super();
         this.canvas = canvas;
         this.ctx = ctx;
+        this.game = game;
         this.width = 36;
         this.height = 24;
         this.x = Math.floor(Math.random() * (this.canvas.width - this.width));
@@ -71,6 +78,7 @@ export class BlueMine extends Enemy {
     render() {
         if (this.health <= 0) {
             this.isDestroyed = true;
+            this.game.explosions.push(new LargeEmp(this.ctx, this.x, this.y));
         }
         if (this.y < this.canvas.height) {
             this.y += this.speed;
