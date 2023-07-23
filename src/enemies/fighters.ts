@@ -55,7 +55,7 @@ export class SmallFighter extends Enemy {
         this.handleProjectiles();
     }
     handleProjectiles() {
-        if (this.frameCount >= 25) {
+        if (this.frameCount >= 35) {
             this.game.enemyProjectiles.push(
                 new EnemyLaserSmall(
                     this.canvas,

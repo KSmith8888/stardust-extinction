@@ -3,6 +3,7 @@ import redMineUrl from "../../assets/images/enemies/red-mine.png";
 import blueMineUrl from "../../assets/images/enemies/blue-mine.png";
 import Game from "../../levels/level-1/level-1-logic";
 import { LargeEmp } from "../explosions/emp";
+import { LargeExplosion } from "../explosions/large-explosion";
 
 export class RedMine extends Enemy {
     canvas: HTMLCanvasElement;
@@ -32,6 +33,9 @@ export class RedMine extends Enemy {
     render() {
         if (this.health <= 0) {
             this.isDestroyed = true;
+            this.game.explosions.push(
+                new LargeExplosion(this.game, this.ctx, this.x, this.y)
+            );
         }
         if (this.y < this.canvas.height) {
             this.y += this.speed;

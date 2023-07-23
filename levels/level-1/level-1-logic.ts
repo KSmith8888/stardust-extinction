@@ -17,6 +17,7 @@ import { RedMine, BlueMine } from "../../src/enemies/mines";
 import { EnemyLaserSmall } from "../../src/projectiles/lasers";
 import { SmallFighter } from "../../src/enemies/fighters";
 import { SmallExplosion } from "../../src/explosions/small-explosion";
+import { LargeExplosion } from "../../src/explosions/large-explosion";
 import { LargeEmp } from "../../src/explosions/emp";
 //Utils
 import { sizeCanvas } from "../../src/utils/sizeCanvas";
@@ -62,12 +63,17 @@ export default class Game {
         this.enemies = this.enemies.filter((enemy) => {
             return !enemy.isOffScreen && !enemy.isDestroyed;
         });
-        if (this.enemies.length < 20 && this.frameCount >= 100) {
-            this.enemies.push(new RedMine(this.canvas, this.ctx, this));
-            this.enemies.push(new BlueMine(this.canvas, this.ctx, this));
-            this.enemies.push(new SmallFighter(this.canvas, this.ctx, this));
-            this.frameCount = 0;
-        } else {
+        if (this.enemies.length < 20) {
+            if (this.frameCount === 1) {
+                this.enemies.push(new RedMine(this.canvas, this.ctx, this));
+            } else if (this.frameCount === 50) {
+                this.enemies.push(
+                    new SmallFighter(this.canvas, this.ctx, this)
+                );
+            } else if (this.frameCount === 100) {
+                this.enemies.push(new BlueMine(this.canvas, this.ctx, this));
+                this.frameCount = 0;
+            }
             this.frameCount += 1;
         }
         this.enemies.forEach((enemy) => {
@@ -76,6 +82,9 @@ export default class Game {
             if (didEnemyCollide) {
                 enemy.isDestroyed = true;
                 if (enemy instanceof RedMine) {
+                    this.explosions.push(
+                        new LargeExplosion(this, this.ctx, enemy.x, enemy.y)
+                    );
                     this.player.health -= 10;
                 } else if (enemy instanceof BlueMine) {
                     this.explosions.push(
