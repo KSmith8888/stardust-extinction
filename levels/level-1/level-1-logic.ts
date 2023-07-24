@@ -10,7 +10,7 @@
 
 //Modules
 import Player from "../../src/player";
-import EventListeners from "../../src/event-listeners";
+import EventListeners from "../../src/events/event-listeners";
 import { HealthBar } from "../../src/healthbar";
 import { Background } from "../../src/backgrounds/space-background";
 import { RedMine, BlueMine } from "../../src/enemies/mines";

@@ -34,7 +34,12 @@ export class RedMine extends Enemy {
         if (this.health <= 0) {
             this.isDestroyed = true;
             this.game.explosions.push(
-                new LargeExplosion(this.game, this.ctx, this.x, this.y)
+                new LargeExplosion(
+                    this.game,
+                    this.ctx,
+                    this.x - this.width / 2,
+                    this.y - this.height / 2
+                )
             );
         }
         if (this.y < this.canvas.height) {
@@ -82,7 +87,13 @@ export class BlueMine extends Enemy {
     render() {
         if (this.health <= 0) {
             this.isDestroyed = true;
-            this.game.explosions.push(new LargeEmp(this.ctx, this.x, this.y));
+            this.game.explosions.push(
+                new LargeEmp(
+                    this.ctx,
+                    this.x - this.width / 2,
+                    this.y - this.height / 2
+                )
+            );
         }
         if (this.y < this.canvas.height) {
             this.y += this.speed;

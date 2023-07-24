@@ -6,8 +6,9 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import Player from "./player";
-import { sizeCanvas } from "./utils/sizeCanvas";
+import Player from "../player";
+import MenuEvents from "./menu-events";
+import { sizeCanvas } from "../utils/sizeCanvas";
 
 export default class EventListeners {
     player: Player;
@@ -21,14 +22,7 @@ export default class EventListeners {
     touchend: void;
     touchmove: void;
     keyEvent: void;
-    menuButton: HTMLButtonElement;
-    mainMenu: HTMLDialogElement;
-    isMenuOpen: boolean;
-    closeButton: HTMLButtonElement;
-    quitButton: HTMLButtonElement;
-    openMenu: void;
-    closeMenu: void;
-    quitGame: void;
+    menuEvents: MenuEvents;
     constructor(player: Player, canvas: HTMLCanvasElement) {
         this.player = player;
         this.canvas = canvas;
@@ -167,12 +161,13 @@ export default class EventListeners {
                     break;
                 }
                 case "KeyM": {
-                    if (!this.isMenuOpen) {
-                        this.mainMenu.showModal();
-                        this.isMenuOpen = true;
+                    this.menuEvents.beepAudio.play();
+                    if (!this.menuEvents.isMenuOpen) {
+                        this.menuEvents.mainMenu.showModal();
+                        this.menuEvents.isMenuOpen = true;
                     } else {
-                        this.mainMenu.close();
-                        this.isMenuOpen = false;
+                        this.menuEvents.mainMenu.close();
+                        this.menuEvents.isMenuOpen = false;
                     }
                     break;
                 }
@@ -181,27 +176,6 @@ export default class EventListeners {
                 }
             }
         });
-        this.menuButton = <HTMLButtonElement>(
-            document.getElementById("menu-button")
-        );
-        this.quitButton = <HTMLButtonElement>(
-            document.getElementById("quit-button")
-        );
-        this.closeButton = <HTMLButtonElement>(
-            document.getElementById("close-button")
-        );
-        this.mainMenu = <HTMLDialogElement>document.getElementById("main-menu");
-        this.isMenuOpen = false;
-        this.openMenu = this.menuButton.addEventListener("click", () => {
-            this.mainMenu.showModal();
-            this.isMenuOpen = true;
-        });
-        this.closeMenu = this.closeButton.addEventListener("click", () => {
-            this.mainMenu.close();
-            this.isMenuOpen = false;
-        });
-        this.quitGame = this.quitButton.addEventListener("click", () => {
-            location.assign("/");
-        });
+        this.menuEvents = new MenuEvents();
     }
 }
