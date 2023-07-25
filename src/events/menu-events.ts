@@ -6,9 +6,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import Game from "../../levels/level-1/level-1-logic";
 import beepAudioUrl from "../../assets/audio/beep.wav";
 
 export default class MenuEvents {
+    game: Game;
     menuButton: HTMLButtonElement;
     mainMenu: HTMLDialogElement;
     isMenuOpen: boolean;
@@ -18,7 +20,8 @@ export default class MenuEvents {
     closeMenu: void;
     quitGame: void;
     beepAudio: HTMLAudioElement;
-    constructor() {
+    constructor(game: Game) {
+        this.game = game;
         this.menuButton = <HTMLButtonElement>(
             document.getElementById("menu-button")
         );
@@ -34,10 +37,12 @@ export default class MenuEvents {
             this.beepAudio.play();
             this.mainMenu.showModal();
             this.isMenuOpen = true;
+            this.game.isGamePaused = true;
         });
         this.closeMenu = this.closeButton.addEventListener("click", () => {
             this.mainMenu.close();
             this.isMenuOpen = false;
+            this.game.isGamePaused = false;
         });
         this.quitGame = this.quitButton.addEventListener("click", () => {
             location.assign("/");

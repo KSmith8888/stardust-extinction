@@ -34,6 +34,7 @@ export default class Game {
     explosions: Array<SmallExplosion | LargeEmp>;
     player: Player;
     events: EventListeners;
+    isGamePaused: boolean;
     background: Background;
     frameCount: number;
     lastTime: number;
@@ -53,7 +54,8 @@ export default class Game {
             this.ctx,
             spaceBackgroundUrl
         );
-        this.events = new EventListeners(this.player, this.canvas);
+        this.events = new EventListeners(this, this.canvas);
+        this.isGamePaused = false;
         this.frameCount = 0;
         this.lastTime = 0;
         this.interval = 1000 / 60;
@@ -66,11 +68,11 @@ export default class Game {
         if (this.enemies.length < 20) {
             if (this.frameCount === 1) {
                 this.enemies.push(new RedMine(this.canvas, this.ctx, this));
-            } else if (this.frameCount === 50) {
+            } else if (this.frameCount === 75) {
                 this.enemies.push(
                     new SmallFighter(this.canvas, this.ctx, this)
                 );
-            } else if (this.frameCount === 100) {
+            } else if (this.frameCount === 150) {
                 this.enemies.push(new BlueMine(this.canvas, this.ctx, this));
                 this.frameCount = 0;
             }
@@ -128,10 +130,15 @@ export default class Game {
         );
         this.events.hasBeenResized = false;
     }
+    checkForGameOver() {
+        if (this.player.health <= 0) {
+            this.events.gameOverModal.showModal();
+        }
+    }
     animate(timeStamp: number) {
         const deltaTime = timeStamp - this.lastTime;
         this.lastTime = timeStamp;
-        if (this.timer > this.interval) {
+        if (this.timer > this.interval && !this.isGamePaused) {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             this.background.render();
             this.background.updatePosition();
@@ -144,9 +151,12 @@ export default class Game {
             this.handleEnemies();
             this.handleEnemyProjectiles();
             this.handleExplosions();
+            this.checkForGameOver();
             this.timer -= deltaTime;
         } else {
-            this.timer += deltaTime;
+            if (!this.isGamePaused) {
+                this.timer += deltaTime;
+            }
         }
         requestAnimationFrame(this.animate.bind(this));
     }

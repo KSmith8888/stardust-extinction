@@ -26,8 +26,12 @@ export class LargeExplosion extends Explosion {
         this.damagedPlayer = false;
     }
     checkForCollision() {
-        if (areObjectsColliding(this, this.game.player)) {
+        if (
+            areObjectsColliding(this, this.game.player) &&
+            !this.damagedPlayer
+        ) {
             this.game.player.health -= 20;
+            this.damagedPlayer = true;
         }
         this.game.enemies.forEach((enemy) => {
             if (areObjectsColliding(this, enemy)) {

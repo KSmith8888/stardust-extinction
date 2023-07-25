@@ -6,11 +6,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import Game from "../../levels/level-1/level-1-logic";
 import Player from "../player";
 import MenuEvents from "./menu-events";
 import { sizeCanvas } from "../utils/sizeCanvas";
 
 export default class EventListeners {
+    game: Game;
     player: Player;
     canvas: HTMLCanvasElement;
     hasBeenResized: boolean;
@@ -23,8 +25,12 @@ export default class EventListeners {
     touchmove: void;
     keyEvent: void;
     menuEvents: MenuEvents;
-    constructor(player: Player, canvas: HTMLCanvasElement) {
-        this.player = player;
+    gameOverModal: HTMLDialogElement;
+    gameOverCloseBtn: HTMLButtonElement;
+    exitOnGameOver: void;
+    constructor(game: Game, canvas: HTMLCanvasElement) {
+        this.game = game;
+        this.player = this.game.player;
         this.canvas = canvas;
         this.hasBeenResized = false;
         this.sizeCanvas = window.addEventListener("resize", () => {
@@ -42,16 +48,16 @@ export default class EventListeners {
                 e.offsetY < this.canvas.height - 35 &&
                 !this.player.isShipDisabled
             ) {
-                player.isMoving = true;
+                this.player.isMoving = true;
             }
         });
         this.mouseup = canvas.addEventListener("mouseup", (): void => {
-            if (player.isMoving) {
-                player.isMoving = false;
+            if (this.player.isMoving) {
+                this.player.isMoving = false;
             }
         });
         this.mousemove = canvas.addEventListener("mousemove", (e): void => {
-            if (player.isMoving && !this.player.isShipDisabled) {
+            if (this.player.isMoving && !this.player.isShipDisabled) {
                 if (e.offsetX + this.player.width / 2 > canvas.width) {
                     this.player.x = canvas.width - this.player.width;
                 } else if (e.offsetX - this.player.width / 2 < 0) {
@@ -80,16 +86,16 @@ export default class EventListeners {
                 e.touches[0].clientY < canvas.height - 35 &&
                 !this.player.isShipDisabled
             ) {
-                player.isMoving = true;
+                this.player.isMoving = true;
             }
         });
         this.touchend = canvas.addEventListener("touchend", (): void => {
-            if (player.isMoving) {
-                player.isMoving = false;
+            if (this.player.isMoving) {
+                this.player.isMoving = false;
             }
         });
         this.touchmove = canvas.addEventListener("touchmove", (e): void => {
-            if (player.isMoving && !this.player.isShipDisabled) {
+            if (this.player.isMoving && !this.player.isShipDisabled) {
                 if (
                     e.touches[0].clientX + this.player.width / 2 >
                     canvas.width
@@ -165,9 +171,11 @@ export default class EventListeners {
                     if (!this.menuEvents.isMenuOpen) {
                         this.menuEvents.mainMenu.showModal();
                         this.menuEvents.isMenuOpen = true;
+                        this.game.isGamePaused = true;
                     } else {
                         this.menuEvents.mainMenu.close();
                         this.menuEvents.isMenuOpen = false;
+                        this.game.isGamePaused = false;
                     }
                     break;
                 }
@@ -176,6 +184,18 @@ export default class EventListeners {
                 }
             }
         });
-        this.menuEvents = new MenuEvents();
+        this.menuEvents = new MenuEvents(this.game);
+        this.gameOverModal = <HTMLDialogElement>(
+            document.getElementById("game-over-modal")
+        );
+        this.gameOverCloseBtn = <HTMLButtonElement>(
+            document.getElementById("game-over-close-button")
+        );
+        this.exitOnGameOver = this.gameOverCloseBtn.addEventListener(
+            "click",
+            () => {
+                location.assign("/");
+            }
+        );
     }
 }

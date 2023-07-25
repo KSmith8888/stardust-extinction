@@ -67,6 +67,25 @@ body {
     display: none;
 }
 
+#game-over-modal[open] {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+}
+
+.game-over-main-text {
+    margin: 0.5em;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.game-over-text {
+    margin: 0.5em;
+    font-size: 1.1rem;
+}
+
 @media (min-width: 900px) {
     #container {
         width: 900px;
