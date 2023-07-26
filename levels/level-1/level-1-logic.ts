@@ -31,6 +31,8 @@ export default class Game {
     enemies: Array<RedMine | BlueMine | SmallFighter>;
     enemyPoolSize: number;
     enemyProjectiles: Array<EnemyLaserSmall>;
+    destroyedEnemies: number;
+    hasReachedBoss: boolean;
     explosions: Array<SmallExplosion | LargeEmp>;
     player: Player;
     events: EventListeners;
@@ -48,6 +50,8 @@ export default class Game {
         this.enemies = [];
         this.enemyPoolSize = 15;
         this.enemyProjectiles = [];
+        this.destroyedEnemies = 0;
+        this.hasReachedBoss = false;
         this.explosions = [];
         this.player = new Player(this, this.canvas, this.ctx);
         this.background = new Background(
@@ -76,8 +80,13 @@ export default class Game {
             }
         }
     }
-    handleEnemies() {
-        if (this.frameCount === 1) {
+    activateNewEnemies() {
+        if (!this.hasReachedBoss) {
+            this.frameCount += 1;
+        } else if (this.frameCount !== 0) {
+            this.frameCount = 0;
+        }
+        if (this.frameCount === 5) {
             const freeRedMine = this.enemies.find((enemy) => {
                 return enemy instanceof RedMine && enemy.isFree;
             });
@@ -100,7 +109,9 @@ export default class Game {
             }
             this.frameCount = 0;
         }
-        this.frameCount += 1;
+    }
+    handleEnemies() {
+        this.activateNewEnemies();
         const activeEnemies = this.enemies.filter((enemy) => {
             return !enemy.isFree;
         });
@@ -109,7 +120,7 @@ export default class Game {
             const didEnemyCollide = areObjectsColliding(this.player, enemy);
             if (didEnemyCollide) {
                 enemy.collidedWithPlayer();
-                enemy.isFree = true;
+                enemy.reset();
             }
         });
     }
@@ -144,7 +155,14 @@ export default class Game {
     }
     checkForGameOver() {
         if (this.player.health <= 0) {
+            this.isGamePaused = true;
             this.events.gameOverModal.showModal();
+        }
+    }
+    checkForBossEvent() {
+        if (!this.hasReachedBoss && this.destroyedEnemies >= 20) {
+            this.hasReachedBoss = true;
+            console.log("Boss condition met", this.frameCount);
         }
     }
     animate(timeStamp: number) {
@@ -163,6 +181,7 @@ export default class Game {
             this.handleEnemies();
             this.handleEnemyProjectiles();
             this.handleExplosions();
+            this.checkForBossEvent();
             this.checkForGameOver();
             this.timer -= deltaTime;
         } else {

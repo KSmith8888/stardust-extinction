@@ -22,6 +22,13 @@ export class RedMine extends Enemy {
         this.image.src = redMineUrl;
         this.playerX = this.game.player.x;
     }
+    resetTargetX() {
+        if (this.x > this.playerX) {
+            this.x -= 1.5;
+        } else {
+            this.x += 1.5;
+        }
+    }
     render() {
         if (this.health <= 0) {
             this.game.explosions.push(
@@ -32,18 +39,14 @@ export class RedMine extends Enemy {
                     this.y - this.height / 2
                 )
             );
-            this.reset();
+            this.destroyedByPlayer();
         }
         if (this.y < this.canvas.height) {
             this.y += this.speed;
         } else {
             this.reset();
         }
-        if (this.x > this.playerX) {
-            this.x -= 1.5;
-        } else {
-            this.x += 1.5;
-        }
+        this.resetTargetX();
         this.playerX = this.game.player.x;
         this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
@@ -74,6 +77,13 @@ export class BlueMine extends Enemy {
             Math.random() * (this.canvas.width - this.width)
         );
     }
+    resetTargetX() {
+        if (this.x >= this.randomTargetX) {
+            this.x -= 2;
+        } else {
+            this.x += 2;
+        }
+    }
     render() {
         if (this.health <= 0) {
             this.game.explosions.push(
@@ -83,18 +93,14 @@ export class BlueMine extends Enemy {
                     this.y - this.height / 2
                 )
             );
-            this.reset();
+            this.destroyedByPlayer();
         }
         if (this.y < this.canvas.height) {
             this.y += this.speed;
         } else {
             this.reset();
         }
-        if (this.x >= this.randomTargetX) {
-            this.x -= 2;
-        } else {
-            this.x += 2;
-        }
+        this.resetTargetX();
         if (this.frameCount >= 10) {
             this.randomTargetX = Math.floor(
                 Math.random() * (this.canvas.width - this.width)

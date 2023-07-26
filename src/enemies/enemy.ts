@@ -11,8 +11,6 @@ export default class Enemy {
     health: number;
     maxHealth: number;
     isFree: boolean;
-    isDestroyed: boolean;
-    isOffScreen: boolean;
     firesProjectiles: boolean;
     frameCount: number;
     constructor(
@@ -30,10 +28,12 @@ export default class Enemy {
         this.health = 40;
         this.maxHealth = 40;
         this.isFree = true;
-        this.isDestroyed = false;
-        this.isOffScreen = false;
         this.firesProjectiles = false;
         this.frameCount = 0;
+    }
+    destroyedByPlayer() {
+        this.game.destroyedEnemies += 1;
+        this.reset();
     }
     reset() {
         this.isFree = true;

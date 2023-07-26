@@ -30,20 +30,23 @@ export class SmallFighter extends Enemy {
         this.laserOffsetX = this.width * 0.2;
         this.laserOffsetY = this.height * 0.35;
     }
+    resetTargetX() {
+        if (this.x >= this.randomTargetX) {
+            this.x -= 2;
+        } else {
+            this.x += 2;
+        }
+    }
     render() {
         if (this.health <= 0) {
-            this.reset();
+            this.destroyedByPlayer();
         }
         if (this.y < this.canvas.height) {
             this.y += this.speed;
         } else {
             this.reset();
         }
-        if (this.x >= this.randomTargetX) {
-            this.x -= 2;
-        } else {
-            this.x += 2;
-        }
+        this.resetTargetX();
         this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         this.handleProjectiles();
     }
