@@ -31,7 +31,7 @@ export class LaserSmall extends Projectile {
         this.game.enemies.forEach((enemy) => {
             if (
                 !this.hasHitTarget &&
-                !enemy.isDestroyed &&
+                !enemy.isFree &&
                 areObjectsColliding(this, enemy)
             ) {
                 this.game.explosions.push(

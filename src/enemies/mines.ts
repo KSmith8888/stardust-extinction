@@ -6,25 +6,17 @@ import { LargeEmp } from "../explosions/emp";
 import { LargeExplosion } from "../explosions/large-explosion";
 
 export class RedMine extends Enemy {
-    canvas: HTMLCanvasElement;
-    ctx: CanvasRenderingContext2D;
-    game: Game;
     speed: number;
     image: HTMLImageElement;
     playerX: number;
     constructor(
+        game: Game,
         canvas: HTMLCanvasElement,
-        ctx: CanvasRenderingContext2D,
-        game: Game
+        ctx: CanvasRenderingContext2D
     ) {
-        super();
-        this.canvas = canvas;
-        this.ctx = ctx;
-        this.game = game;
+        super(game, canvas, ctx);
         this.width = 24;
         this.height = 20;
-        this.x = Math.floor(Math.random() * (this.canvas.width - this.width));
-        this.y = 0 - this.height;
         this.speed = Math.floor(Math.random() * 5) + 1;
         this.image = new Image();
         this.image.src = redMineUrl;
@@ -32,7 +24,6 @@ export class RedMine extends Enemy {
     }
     render() {
         if (this.health <= 0) {
-            this.isDestroyed = true;
             this.game.explosions.push(
                 new LargeExplosion(
                     this.game,
@@ -41,11 +32,12 @@ export class RedMine extends Enemy {
                     this.y - this.height / 2
                 )
             );
+            this.reset();
         }
         if (this.y < this.canvas.height) {
             this.y += this.speed;
         } else {
-            this.isOffScreen = true;
+            this.reset();
         }
         if (this.x > this.playerX) {
             this.x -= 1.5;
@@ -55,28 +47,26 @@ export class RedMine extends Enemy {
         this.playerX = this.game.player.x;
         this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
+    collidedWithPlayer() {
+        this.game.explosions.push(
+            new LargeExplosion(this.game, this.ctx, this.x, this.y)
+        );
+        this.game.player.health -= 10;
+    }
 }
 
 export class BlueMine extends Enemy {
-    canvas: HTMLCanvasElement;
-    ctx: CanvasRenderingContext2D;
-    game: Game;
     speed: number;
     image: HTMLImageElement;
     randomTargetX: number;
     constructor(
+        game: Game,
         canvas: HTMLCanvasElement,
-        ctx: CanvasRenderingContext2D,
-        game: Game
+        ctx: CanvasRenderingContext2D
     ) {
-        super();
-        this.canvas = canvas;
-        this.ctx = ctx;
-        this.game = game;
+        super(game, canvas, ctx);
         this.width = 36;
         this.height = 24;
-        this.x = Math.floor(Math.random() * (this.canvas.width - this.width));
-        this.y = 0 - this.height;
         this.speed = Math.floor(Math.random() * 3) + 1;
         this.image = new Image();
         this.image.src = blueMineUrl;
@@ -86,7 +76,6 @@ export class BlueMine extends Enemy {
     }
     render() {
         if (this.health <= 0) {
-            this.isDestroyed = true;
             this.game.explosions.push(
                 new LargeEmp(
                     this.ctx,
@@ -94,11 +83,12 @@ export class BlueMine extends Enemy {
                     this.y - this.height / 2
                 )
             );
+            this.reset();
         }
         if (this.y < this.canvas.height) {
             this.y += this.speed;
         } else {
-            this.isOffScreen = true;
+            this.reset();
         }
         if (this.x >= this.randomTargetX) {
             this.x -= 2;
@@ -114,5 +104,9 @@ export class BlueMine extends Enemy {
             this.frameCount += 1;
         }
         this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+    }
+    collidedWithPlayer() {
+        this.game.explosions.push(new LargeEmp(this.ctx, this.x, this.y));
+        this.game.player.isShipDisabled = true;
     }
 }

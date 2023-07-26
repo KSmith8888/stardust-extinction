@@ -2,11 +2,9 @@ import Enemy from "./enemy";
 import Game from "../../levels/level-1/level-1-logic";
 import { EnemyLaserSmall } from "../projectiles/lasers";
 import smallFighterUrl from "../../assets/images/enemies/small-fighter.png";
+import { SmallExplosion } from "../explosions/small-explosion";
 
 export class SmallFighter extends Enemy {
-    canvas: HTMLCanvasElement;
-    ctx: CanvasRenderingContext2D;
-    game: Game;
     projectiles: Array<EnemyLaserSmall>;
     speed: number;
     image: HTMLImageElement;
@@ -14,20 +12,15 @@ export class SmallFighter extends Enemy {
     laserOffsetX: number;
     laserOffsetY: number;
     constructor(
+        game: Game,
         canvas: HTMLCanvasElement,
-        ctx: CanvasRenderingContext2D,
-        game: Game
+        ctx: CanvasRenderingContext2D
     ) {
-        super();
-        this.canvas = canvas;
-        this.ctx = ctx;
-        this.game = game;
+        super(game, canvas, ctx);
         this.firesProjectiles = true;
         this.projectiles = [];
         this.width = 24;
         this.height = 24;
-        this.x = Math.floor(Math.random() * (this.canvas.width - this.width));
-        this.y = 0 - this.height;
         this.speed = Math.floor(Math.random() * 2) + 1;
         this.image = new Image();
         this.image.src = smallFighterUrl;
@@ -39,12 +32,12 @@ export class SmallFighter extends Enemy {
     }
     render() {
         if (this.health <= 0) {
-            this.isDestroyed = true;
+            this.reset();
         }
         if (this.y < this.canvas.height) {
             this.y += this.speed;
         } else {
-            this.isOffScreen = true;
+            this.reset();
         }
         if (this.x >= this.randomTargetX) {
             this.x -= 2;
@@ -81,5 +74,8 @@ export class SmallFighter extends Enemy {
         } else {
             this.frameCount += 1;
         }
+    }
+    collidedWithPlayer() {
+        this.game.explosions.push(new SmallExplosion(this.ctx, this.x, this.y));
     }
 }

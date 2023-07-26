@@ -17,7 +17,6 @@ import { RedMine, BlueMine } from "../../src/enemies/mines";
 import { EnemyLaserSmall } from "../../src/projectiles/lasers";
 import { SmallFighter } from "../../src/enemies/fighters";
 import { SmallExplosion } from "../../src/explosions/small-explosion";
-import { LargeExplosion } from "../../src/explosions/large-explosion";
 import { LargeEmp } from "../../src/explosions/emp";
 //Utils
 import { sizeCanvas } from "../../src/utils/sizeCanvas";
@@ -30,6 +29,7 @@ export default class Game {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
     enemies: Array<RedMine | BlueMine | SmallFighter>;
+    enemyPoolSize: number;
     enemyProjectiles: Array<EnemyLaserSmall>;
     explosions: Array<SmallExplosion | LargeEmp>;
     player: Player;
@@ -46,6 +46,7 @@ export default class Game {
         sizeCanvas(this.canvas);
         this.ctx.strokeStyle = "gold";
         this.enemies = [];
+        this.enemyPoolSize = 15;
         this.enemyProjectiles = [];
         this.explosions = [];
         this.player = new Player(this, this.canvas, this.ctx);
@@ -60,44 +61,55 @@ export default class Game {
         this.lastTime = 0;
         this.interval = 1000 / 60;
         this.timer = 0;
+        this.initializeEnemies();
+    }
+    initializeEnemies() {
+        for (let i = 0; i < this.enemyPoolSize; i++) {
+            if (i < 5) {
+                this.enemies.push(new RedMine(this, this.canvas, this.ctx));
+            } else if (i >= 5 && i < 10) {
+                this.enemies.push(new BlueMine(this, this.canvas, this.ctx));
+            } else {
+                this.enemies.push(
+                    new SmallFighter(this, this.canvas, this.ctx)
+                );
+            }
+        }
     }
     handleEnemies() {
-        this.enemies = this.enemies.filter((enemy) => {
-            return !enemy.isOffScreen && !enemy.isDestroyed;
-        });
-        if (this.enemies.length < 20) {
-            if (this.frameCount === 1) {
-                this.enemies.push(new RedMine(this.canvas, this.ctx, this));
-            } else if (this.frameCount === 75) {
-                this.enemies.push(
-                    new SmallFighter(this.canvas, this.ctx, this)
-                );
-            } else if (this.frameCount === 150) {
-                this.enemies.push(new BlueMine(this.canvas, this.ctx, this));
-                this.frameCount = 0;
+        if (this.frameCount === 1) {
+            const freeRedMine = this.enemies.find((enemy) => {
+                return enemy instanceof RedMine && enemy.isFree;
+            });
+            if (freeRedMine) {
+                freeRedMine.isFree = false;
             }
-            this.frameCount += 1;
+        } else if (this.frameCount === 75) {
+            const freeBlueMine = this.enemies.find((enemy) => {
+                return enemy instanceof BlueMine && enemy.isFree;
+            });
+            if (freeBlueMine) {
+                freeBlueMine.isFree = false;
+            }
+        } else if (this.frameCount === 150) {
+            const freeFighter = this.enemies.find((enemy) => {
+                return enemy instanceof SmallFighter && enemy.isFree;
+            });
+            if (freeFighter) {
+                freeFighter.isFree = false;
+            }
+            this.frameCount = 0;
         }
-        this.enemies.forEach((enemy) => {
+        this.frameCount += 1;
+        const activeEnemies = this.enemies.filter((enemy) => {
+            return !enemy.isFree;
+        });
+        activeEnemies.forEach((enemy) => {
             enemy.render();
             const didEnemyCollide = areObjectsColliding(this.player, enemy);
             if (didEnemyCollide) {
-                enemy.isDestroyed = true;
-                if (enemy instanceof RedMine) {
-                    this.explosions.push(
-                        new LargeExplosion(this, this.ctx, enemy.x, enemy.y)
-                    );
-                    this.player.health -= 10;
-                } else if (enemy instanceof BlueMine) {
-                    this.explosions.push(
-                        new LargeEmp(this.ctx, enemy.x, enemy.y)
-                    );
-                    this.player.isShipDisabled = true;
-                } else {
-                    this.explosions.push(
-                        new SmallExplosion(this.ctx, enemy.x, enemy.y)
-                    );
-                }
+                enemy.collidedWithPlayer();
+                enemy.isFree = true;
             }
         });
     }
