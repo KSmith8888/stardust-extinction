@@ -43,24 +43,41 @@ body {
 }
 
 #main-menu[open] {
-    width: 90%;
-    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: radial-gradient(rgba(87, 10, 77, 0.9), rgba(92, 9, 81, 0.5));
+    border: 1px solid rgb(226, 49, 203);
+    padding: 1em 2.5em 1.5em 2.5em;
+}
+
+.main-menu-text {
+    margin: 0.75em 0;
+    text-align: center;
+    font-size: 1.6rem;
+    color: rgb(233, 82, 213);
+}
+
+.button-row {
+    display: flex;
+    justify-content: flex-start;
 }
 
 .button {
     font-family: "Courier New", Courier, monospace;
+    font-weight: 600;
     cursor: pointer;
-    border: 1px solid black;
-    color: #1c1c1c;
-    background-color: rgb(218, 214, 214);
-    margin: 0.5em;
+    border: 1px solid rgb(226, 49, 203);
+    color: #f3c4e3;
+    background-color: rgb(92, 9, 81);
+    margin: 0.5em 1em;
     padding: 0.2em 0.5em;
     border-radius: 5px;
 }
 
 .button:hover,
 .button:focus {
-    background-color: rgb(199, 192, 192);
+    background-color: rgb(160, 25, 142);
 }
 
 .no-display {
@@ -90,8 +107,5 @@ body {
     #container {
         width: 900px;
         height: 600px;
-    }
-    #main-menu[open] {
-        width: 40%;
     }
 }

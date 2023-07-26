@@ -145,6 +145,7 @@ export default class Game {
         const newBgImage =
             this.canvas.width < 900 ? spaceBackgroundUrl : spaceBgDesktopUrl;
         this.background = new Background(this.canvas, this.ctx, newBgImage);
+        this.ctx.strokeStyle = "gold";
         this.player.healthBar = new HealthBar(
             this.player,
             this.ctx,
@@ -168,13 +169,13 @@ export default class Game {
     animate(timeStamp: number) {
         const deltaTime = timeStamp - this.lastTime;
         this.lastTime = timeStamp;
+        if (this.events.hasBeenResized) {
+            this.resizeObjects();
+        }
         if (this.timer > this.interval && !this.isGamePaused) {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             this.background.render();
             this.background.updatePosition();
-            if (this.events.hasBeenResized) {
-                this.resizeObjects();
-            }
             this.player.render();
             this.player.handleProjectiles();
             this.player.healthBar.render();
