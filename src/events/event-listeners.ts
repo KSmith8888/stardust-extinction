@@ -170,6 +170,7 @@ export default class EventListeners {
                     this.menuEvents.beepAudio.play();
                     if (!this.menuEvents.isMenuOpen) {
                         this.menuEvents.mainMenu.showModal();
+                        this.menuEvents.closeButton.focus();
                         this.menuEvents.isMenuOpen = true;
                         this.game.isGamePaused = true;
                     } else {

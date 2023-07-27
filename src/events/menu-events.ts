@@ -36,6 +36,7 @@ export default class MenuEvents {
         this.openMenu = this.menuButton.addEventListener("click", () => {
             this.beepAudio.play();
             this.mainMenu.showModal();
+            this.closeButton.focus();
             this.isMenuOpen = true;
             this.game.isGamePaused = true;
         });

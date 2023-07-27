@@ -47,6 +47,7 @@ export default class Game {
         this.ctx = <CanvasRenderingContext2D>this.canvas.getContext("2d");
         sizeCanvas(this.canvas);
         this.ctx.strokeStyle = "gold";
+        this.ctx.lineWidth = 0.5;
         this.enemies = [];
         this.enemyPoolSize = 15;
         this.enemyProjectiles = [];
@@ -146,6 +147,7 @@ export default class Game {
             this.canvas.width < 900 ? spaceBackgroundUrl : spaceBgDesktopUrl;
         this.background = new Background(this.canvas, this.ctx, newBgImage);
         this.ctx.strokeStyle = "gold";
+        this.ctx.lineWidth = 0.5;
         this.player.healthBar = new HealthBar(
             this.player,
             this.ctx,
@@ -163,7 +165,6 @@ export default class Game {
     checkForBossEvent() {
         if (!this.hasReachedBoss && this.destroyedEnemies >= 20) {
             this.hasReachedBoss = true;
-            console.log("Boss condition met", this.frameCount);
         }
     }
     animate(timeStamp: number) {
