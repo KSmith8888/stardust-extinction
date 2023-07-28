@@ -127,7 +127,7 @@ export default class Game {
     }
     handleEnemyProjectiles() {
         this.enemyProjectiles = this.enemyProjectiles.filter((laser) => {
-            return !laser.isOffScreen;
+            return !laser.isOffScreen && !laser.hasHitTarget;
         });
         this.enemyProjectiles.forEach((laser) => {
             laser.render();
@@ -185,7 +185,7 @@ export default class Game {
             this.handleExplosions();
             this.checkForBossEvent();
             this.checkForGameOver();
-            this.timer -= deltaTime;
+            this.timer = 0;
         } else {
             if (!this.isGamePaused) {
                 this.timer += deltaTime;

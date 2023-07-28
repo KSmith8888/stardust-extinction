@@ -96,7 +96,7 @@ export default class Player {
     }
     handleProjectiles() {
         this.projectiles = this.projectiles.filter((laser) => {
-            return !laser.isOffScreen;
+            return !laser.isOffScreen && !laser.hasHitTarget;
         });
         if (!this.isShipDisabled) {
             if (this.frameCount >= this.projectileInterval) {
