@@ -37,7 +37,7 @@ export class LaserSmall extends Projectile {
                 this.game.explosions.push(
                     new SmallExplosion(this.ctx, enemy.x, enemy.y)
                 );
-                enemy.health -= 10;
+                enemy.health -= this.game.player.damageStat;
                 this.hasHitTarget = true;
             }
         });
@@ -54,12 +54,14 @@ export class EnemyLaserSmall extends Projectile {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
     player: Player;
+    damage: number;
     constructor(
         canvas: HTMLCanvasElement,
         ctx: CanvasRenderingContext2D,
         player: Player,
         x: number,
-        y: number
+        y: number,
+        damage: number
     ) {
         super();
         this.canvas = canvas;
@@ -67,13 +69,14 @@ export class EnemyLaserSmall extends Projectile {
         this.player = player;
         this.x = x;
         this.y = y;
+        this.damage = damage;
         this.width = 5;
         this.height = 12;
         this.image.src = enemySmallLaserUrl;
     }
     render() {
         if (!this.hasHitTarget && areObjectsColliding(this, this.player)) {
-            this.player.health -= 10;
+            this.player.health -= this.damage;
             this.hasHitTarget = true;
         }
         if (this.y < this.canvas.height) {

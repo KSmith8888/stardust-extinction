@@ -26,12 +26,14 @@ export default class Player {
     enemies: Array<RedMine | BlueMine>;
     explosions: Array<SmallExplosion>;
     projectiles: Array<LaserSmall>;
+    projectileInterval: number;
     frameCount: number;
     laserOffsetX: number;
     laserOffsetY: number;
     healthBar: HealthBar;
     health: number;
     healthStat: number;
+    damageStat: number;
     isShipDisabled: boolean;
     shipDisabledFrames: number;
     constructor(
@@ -56,6 +58,7 @@ export default class Player {
         this.enemies = [];
         this.explosions = [];
         this.projectiles = [];
+        this.projectileInterval = 15;
         this.frameCount = 0;
         this.laserOffsetX = this.width * 0.2;
         this.laserOffsetY = this.height * 0.35;
@@ -67,6 +70,7 @@ export default class Player {
         );
         this.health = 100;
         this.healthStat = 100;
+        this.damageStat = 10;
         this.isShipDisabled = false;
         this.shipDisabledFrames = 0;
     }
@@ -95,7 +99,7 @@ export default class Player {
             return !laser.isOffScreen;
         });
         if (!this.isShipDisabled) {
-            if (this.frameCount >= 15) {
+            if (this.frameCount >= this.projectileInterval) {
                 this.projectiles.push(
                     new LaserSmall(
                         this.canvas,

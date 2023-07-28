@@ -9,7 +9,8 @@ export default class Enemy {
     x: number;
     y: number;
     health: number;
-    maxHealth: number;
+    healthStat: number;
+    damageStat: number;
     isFree: boolean;
     firesProjectiles: boolean;
     frameCount: number;
@@ -26,7 +27,8 @@ export default class Enemy {
         this.x = Math.floor(Math.random() * (this.canvas.width - this.width));
         this.y = 0 - this.height;
         this.health = 40;
-        this.maxHealth = 40;
+        this.healthStat = 40;
+        this.damageStat = 10;
         this.isFree = true;
         this.firesProjectiles = false;
         this.frameCount = 0;
@@ -37,7 +39,7 @@ export default class Enemy {
     }
     reset() {
         this.isFree = true;
-        this.health = this.maxHealth;
+        this.health = this.healthStat;
         this.x = Math.floor(Math.random() * (this.canvas.width - this.width));
         this.y = 0 - this.height;
     }

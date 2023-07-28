@@ -11,6 +11,7 @@ export class SmallFighter extends Enemy {
     randomTargetX: number;
     laserOffsetX: number;
     laserOffsetY: number;
+    projectileInterval: number;
     constructor(
         game: Game,
         canvas: HTMLCanvasElement,
@@ -29,6 +30,7 @@ export class SmallFighter extends Enemy {
         );
         this.laserOffsetX = this.width * 0.2;
         this.laserOffsetY = this.height * 0.35;
+        this.projectileInterval = 35;
     }
     resetTargetX() {
         if (this.x >= this.randomTargetX) {
@@ -51,14 +53,15 @@ export class SmallFighter extends Enemy {
         this.handleProjectiles();
     }
     handleProjectiles() {
-        if (this.frameCount >= 35) {
+        if (this.frameCount >= this.projectileInterval) {
             this.game.enemyProjectiles.push(
                 new EnemyLaserSmall(
                     this.canvas,
                     this.ctx,
                     this.game.player,
                     this.x,
-                    this.y + this.laserOffsetY
+                    this.y + this.laserOffsetY,
+                    this.damageStat
                 )
             );
             this.game.enemyProjectiles.push(
@@ -67,7 +70,8 @@ export class SmallFighter extends Enemy {
                     this.ctx,
                     this.game.player,
                     this.x + (this.width - this.laserOffsetX),
-                    this.y + this.laserOffsetY
+                    this.y + this.laserOffsetY,
+                    this.damageStat
                 )
             );
             this.randomTargetX = Math.floor(
