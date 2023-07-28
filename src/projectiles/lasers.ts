@@ -1,8 +1,7 @@
 import Projectile from "./projectile";
 import Game from "../../levels/level-1/level-1-logic";
-import Player from "../player";
 import smallLaserUrl from "../../assets/images/projectiles/laser-small.png";
-import enemySmallLaserUrl from "../../assets/images/projectiles/enemy-laser-small.png";
+import medLaserPurpleUrl from "../../assets/images/projectiles/laser-medium-purple.png";
 import { areObjectsColliding } from "../utils/collision";
 import { SmallExplosion } from "../explosions/small-explosion";
 
@@ -46,44 +45,50 @@ export class LaserSmall extends Projectile {
         } else {
             this.isOffScreen = true;
         }
-        this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        this.ctx.drawImage(this.image, this.x, this.y);
     }
 }
 
-export class EnemyLaserSmall extends Projectile {
+export class LaserMediumTwo extends Projectile {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
-    player: Player;
-    damage: number;
+    game: Game;
     constructor(
         canvas: HTMLCanvasElement,
         ctx: CanvasRenderingContext2D,
-        player: Player,
         x: number,
         y: number,
-        damage: number
+        game: Game
     ) {
         super();
         this.canvas = canvas;
         this.ctx = ctx;
-        this.player = player;
         this.x = x;
         this.y = y;
-        this.damage = damage;
-        this.width = 5;
-        this.height = 12;
-        this.image.src = enemySmallLaserUrl;
+        this.width = 9;
+        this.height = 20;
+        this.image.src = medLaserPurpleUrl;
+        this.game = game;
     }
     render() {
-        if (!this.hasHitTarget && areObjectsColliding(this, this.player)) {
-            this.player.health -= this.damage;
-            this.hasHitTarget = true;
-        }
-        if (this.y < this.canvas.height) {
-            this.y += 2.75;
+        this.game.enemies.forEach((enemy) => {
+            if (
+                !this.hasHitTarget &&
+                !enemy.isFree &&
+                areObjectsColliding(this, enemy)
+            ) {
+                this.game.explosions.push(
+                    new SmallExplosion(this.ctx, enemy.x, enemy.y)
+                );
+                enemy.health -= this.game.player.damageStat * 2;
+                this.hasHitTarget = true;
+            }
+        });
+        if (this.y > 0) {
+            this.y -= 2.25;
         } else {
             this.isOffScreen = true;
         }
-        this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        this.ctx.drawImage(this.image, this.x, this.y);
     }
 }

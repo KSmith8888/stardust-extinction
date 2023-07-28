@@ -7,7 +7,7 @@
  */
 
 import Game from "../levels/level-1/level-1-logic";
-import { LaserSmall } from "./projectiles/lasers";
+import { LaserSmall, LaserMediumTwo } from "./projectiles/lasers";
 import { HealthBar } from "./healthbar";
 import { RedMine, BlueMine } from "./enemies/mines";
 import { SmallExplosion } from "./explosions/small-explosion";
@@ -27,6 +27,7 @@ export default class Player {
     explosions: Array<SmallExplosion>;
     projectiles: Array<LaserSmall>;
     projectileInterval: number;
+    projectileStrength: number;
     frameCount: number;
     laserOffsetX: number;
     laserOffsetY: number;
@@ -59,6 +60,7 @@ export default class Player {
         this.explosions = [];
         this.projectiles = [];
         this.projectileInterval = 15;
+        this.projectileStrength = 2;
         this.frameCount = 0;
         this.laserOffsetX = this.width * 0.2;
         this.laserOffsetY = this.height * 0.35;
@@ -94,12 +96,34 @@ export default class Player {
             this.height
         );
     }
-    handleProjectiles() {
-        this.projectiles = this.projectiles.filter((laser) => {
-            return !laser.isOffScreen && !laser.hasHitTarget;
-        });
-        if (!this.isShipDisabled) {
-            if (this.frameCount >= this.projectileInterval) {
+    addNewProjectiles() {
+        switch (this.projectileStrength) {
+            case 3: {
+                console.log("strength 3");
+                break;
+            }
+            case 2: {
+                this.projectiles.push(
+                    new LaserMediumTwo(
+                        this.canvas,
+                        this.ctx,
+                        this.x,
+                        this.y + this.laserOffsetY,
+                        this.game
+                    )
+                );
+                this.projectiles.push(
+                    new LaserMediumTwo(
+                        this.canvas,
+                        this.ctx,
+                        this.x + (this.width - this.laserOffsetX),
+                        this.y + this.laserOffsetY,
+                        this.game
+                    )
+                );
+                break;
+            }
+            default: {
                 this.projectiles.push(
                     new LaserSmall(
                         this.canvas,
@@ -118,6 +142,16 @@ export default class Player {
                         this.game
                     )
                 );
+            }
+        }
+    }
+    handleProjectiles() {
+        this.projectiles = this.projectiles.filter((laser) => {
+            return !laser.isOffScreen && !laser.hasHitTarget;
+        });
+        if (!this.isShipDisabled) {
+            if (this.frameCount >= this.projectileInterval) {
+                this.addNewProjectiles();
                 this.frameCount = 0;
             } else {
                 this.frameCount += 1;

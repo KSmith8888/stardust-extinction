@@ -14,7 +14,7 @@ import EventListeners from "../../src/events/event-listeners";
 import { HealthBar } from "../../src/healthbar";
 import { Background } from "../../src/backgrounds/space-background";
 import { RedMine, BlueMine } from "../../src/enemies/mines";
-import { EnemyLaserSmall } from "../../src/projectiles/lasers";
+import { EnemyLaserSmall } from "../../src/projectiles/enemy-lasers";
 import { SmallFighter } from "../../src/enemies/fighters";
 import { SmallExplosion } from "../../src/explosions/small-explosion";
 import { LargeEmp } from "../../src/explosions/emp";
@@ -185,7 +185,7 @@ export default class Game {
             this.handleExplosions();
             this.checkForBossEvent();
             this.checkForGameOver();
-            this.timer = 0;
+            this.timer -= deltaTime;
         } else {
             if (!this.isGamePaused) {
                 this.timer += deltaTime;

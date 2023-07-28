@@ -1,6 +1,6 @@
 import Enemy from "./enemy";
 import Game from "../../levels/level-1/level-1-logic";
-import { EnemyLaserSmall } from "../projectiles/lasers";
+import { EnemyLaserSmall } from "../projectiles/enemy-lasers";
 import smallFighterUrl from "../../assets/images/enemies/small-fighter.png";
 import { SmallExplosion } from "../explosions/small-explosion";
 
@@ -84,5 +84,6 @@ export class SmallFighter extends Enemy {
     }
     collidedWithPlayer() {
         this.game.explosions.push(new SmallExplosion(this.ctx, this.x, this.y));
+        this.game.player.health -= 10;
     }
 }
