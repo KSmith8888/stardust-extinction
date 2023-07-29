@@ -8,7 +8,6 @@ export class SmallFighter extends Enemy {
     projectiles: Array<EnemyLaserSmall>;
     speed: number;
     image: HTMLImageElement;
-    randomTargetX: number;
     laserOffsetX: number;
     laserOffsetY: number;
     projectileInterval: number;
@@ -25,19 +24,9 @@ export class SmallFighter extends Enemy {
         this.speed = Math.floor(Math.random() * 2) + 1;
         this.image = new Image();
         this.image.src = smallFighterUrl;
-        this.randomTargetX = Math.floor(
-            Math.random() * (this.canvas.width - this.width)
-        );
         this.laserOffsetX = this.width * 0.2;
         this.laserOffsetY = this.height * 0.35;
         this.projectileInterval = 35;
-    }
-    resetTargetX() {
-        if (this.x >= this.randomTargetX) {
-            this.x -= 2;
-        } else {
-            this.x += 2;
-        }
     }
     render() {
         if (this.health <= 0) {
@@ -49,7 +38,7 @@ export class SmallFighter extends Enemy {
             this.reset();
         }
         this.resetTargetX();
-        this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        this.ctx.drawImage(this.image, this.x, this.y);
         this.handleProjectiles();
     }
     handleProjectiles() {
@@ -74,7 +63,7 @@ export class SmallFighter extends Enemy {
                     this.damageStat
                 )
             );
-            this.randomTargetX = Math.floor(
+            this.targetX = Math.floor(
                 Math.random() * (this.canvas.width - this.width)
             );
             this.frameCount = 0;

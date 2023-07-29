@@ -8,6 +8,8 @@ export default class Enemy {
     height: number;
     x: number;
     y: number;
+    targetX: number;
+    speed: number;
     health: number;
     healthStat: number;
     damageStat: number;
@@ -26,12 +28,23 @@ export default class Enemy {
         this.height = 0;
         this.x = Math.floor(Math.random() * (this.canvas.width - this.width));
         this.y = 0 - this.height;
+        this.targetX = Math.floor(
+            Math.random() * (this.canvas.width - this.width)
+        );
+        this.speed = Math.floor(Math.random() * 3) + 1;
         this.health = 40;
         this.healthStat = 40;
         this.damageStat = 10;
         this.isFree = true;
         this.firesProjectiles = false;
         this.frameCount = 0;
+    }
+    resetTargetX() {
+        if (this.x >= this.targetX) {
+            this.x -= this.speed;
+        } else {
+            this.x += this.speed;
+        }
     }
     destroyedByPlayer() {
         this.game.destroyedEnemies += 1;

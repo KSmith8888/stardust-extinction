@@ -8,7 +8,6 @@ import { LargeExplosion } from "../explosions/large-explosion";
 export class RedMine extends Enemy {
     speed: number;
     image: HTMLImageElement;
-    playerX: number;
     constructor(
         game: Game,
         canvas: HTMLCanvasElement,
@@ -20,14 +19,7 @@ export class RedMine extends Enemy {
         this.speed = Math.floor(Math.random() * 5) + 1;
         this.image = new Image();
         this.image.src = redMineUrl;
-        this.playerX = this.game.player.x;
-    }
-    resetTargetX() {
-        if (this.x > this.playerX) {
-            this.x -= 1.5;
-        } else {
-            this.x += 1.5;
-        }
+        this.targetX = this.game.player.x;
     }
     render() {
         if (this.health <= 0) {
@@ -47,8 +39,8 @@ export class RedMine extends Enemy {
             this.reset();
         }
         this.resetTargetX();
-        this.playerX = this.game.player.x;
-        this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        this.targetX = this.game.player.x;
+        this.ctx.drawImage(this.image, this.x, this.y);
     }
     collidedWithPlayer() {
         this.game.explosions.push(
@@ -61,7 +53,6 @@ export class RedMine extends Enemy {
 export class BlueMine extends Enemy {
     speed: number;
     image: HTMLImageElement;
-    randomTargetX: number;
     constructor(
         game: Game,
         canvas: HTMLCanvasElement,
@@ -73,16 +64,6 @@ export class BlueMine extends Enemy {
         this.speed = Math.floor(Math.random() * 3) + 1;
         this.image = new Image();
         this.image.src = blueMineUrl;
-        this.randomTargetX = Math.floor(
-            Math.random() * (this.canvas.width - this.width)
-        );
-    }
-    resetTargetX() {
-        if (this.x >= this.randomTargetX) {
-            this.x -= 2;
-        } else {
-            this.x += 2;
-        }
     }
     render() {
         if (this.health <= 0) {
@@ -102,14 +83,14 @@ export class BlueMine extends Enemy {
         }
         this.resetTargetX();
         if (this.frameCount >= 10) {
-            this.randomTargetX = Math.floor(
+            this.targetX = Math.floor(
                 Math.random() * (this.canvas.width - this.width)
             );
             this.frameCount = 0;
         } else {
             this.frameCount += 1;
         }
-        this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        this.ctx.drawImage(this.image, this.x, this.y);
     }
     collidedWithPlayer() {
         this.game.explosions.push(new LargeEmp(this.ctx, this.x, this.y));
