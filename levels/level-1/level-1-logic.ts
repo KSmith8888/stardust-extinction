@@ -16,6 +16,7 @@ import { Background } from "../../src/backgrounds/space-background";
 import { RedMine, BlueMine } from "../../src/enemies/mines";
 import { EnemyLaserSmall } from "../../src/projectiles/enemy-lasers";
 import { SmallFighter } from "../../src/enemies/fighters";
+import { SmallRacer } from "../../src/enemies/small-racer";
 import { SmallExplosion } from "../../src/explosions/small-explosion";
 import { LargeEmp } from "../../src/explosions/emp";
 //Utils
@@ -28,7 +29,7 @@ import spaceBgDesktopUrl from "../../assets/images/backgrounds/space-background-
 export default class Game {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
-    enemies: Array<RedMine | BlueMine | SmallFighter>;
+    enemies: Array<RedMine | BlueMine | SmallFighter | SmallRacer>;
     enemyPoolSize: number;
     enemyProjectiles: Array<EnemyLaserSmall>;
     destroyedEnemies: number;
@@ -108,7 +109,16 @@ export default class Game {
             if (freeFighter) {
                 freeFighter.isFree = false;
             }
+            this.rollToCreateRacer();
             this.frameCount = 0;
+        }
+    }
+    rollToCreateRacer() {
+        const randomNum = Math.random();
+        if (randomNum > 0.7) {
+            const newRacer = new SmallRacer(this, this.canvas, this.ctx);
+            newRacer.isFree = false;
+            this.enemies.push(newRacer);
         }
     }
     handleEnemies() {

@@ -40,9 +40,9 @@ export default class Enemy {
         this.frameCount = 0;
     }
     resetTargetX() {
-        if (this.x >= this.targetX) {
+        if (this.x >= this.targetX + 5) {
             this.x -= this.speed;
-        } else {
+        } else if (this.x <= this.targetX - 5) {
             this.x += this.speed;
         }
     }

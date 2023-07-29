@@ -60,7 +60,7 @@ export default class Player {
         this.explosions = [];
         this.projectiles = [];
         this.projectileInterval = 15;
-        this.projectileStrength = 2;
+        this.projectileStrength = 1;
         this.frameCount = 0;
         this.laserOffsetX = this.width * 0.2;
         this.laserOffsetY = this.height * 0.35;
@@ -99,7 +99,24 @@ export default class Player {
     addNewProjectiles() {
         switch (this.projectileStrength) {
             case 3: {
-                console.log("strength 3");
+                this.projectiles.push(
+                    new LaserSmall(
+                        this.canvas,
+                        this.ctx,
+                        this.x,
+                        this.y + this.laserOffsetY,
+                        this.game
+                    )
+                );
+                this.projectiles.push(
+                    new LaserSmall(
+                        this.canvas,
+                        this.ctx,
+                        this.x + (this.width - this.laserOffsetX),
+                        this.y + this.laserOffsetY,
+                        this.game
+                    )
+                );
                 break;
             }
             case 2: {
