@@ -1,5 +1,7 @@
 # Stardust Extinction
 
+https://stardust-extinction.netlify.app/
+
 A mobile/browser game made with TypeScript
 
 ## Attribution
