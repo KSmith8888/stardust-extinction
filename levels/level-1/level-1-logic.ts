@@ -19,6 +19,7 @@ import { SmallFighter } from "../../src/enemies/fighters";
 import { SmallRacer } from "../../src/enemies/small-racer";
 import { SmallExplosion } from "../../src/explosions/small-explosion";
 import { LargeEmp } from "../../src/explosions/emp";
+import { LargeBattleship } from "../../src/bosses/large-battleship";
 //Utils
 import { sizeCanvas } from "../../src/utils/sizeCanvas";
 import { areObjectsColliding } from "../../src/utils/collision";
@@ -35,6 +36,7 @@ export default class Game {
     destroyedEnemies: number;
     hasReachedBoss: boolean;
     explosions: Array<SmallExplosion | LargeEmp>;
+    bosses: Array<LargeBattleship>;
     player: Player;
     events: EventListeners;
     isGamePaused: boolean;
@@ -55,6 +57,7 @@ export default class Game {
         this.destroyedEnemies = 0;
         this.hasReachedBoss = false;
         this.explosions = [];
+        this.bosses = [];
         this.player = new Player(this, this.canvas, this.ctx);
         this.background = new Background(
             this.canvas,
@@ -175,6 +178,15 @@ export default class Game {
     checkForBossEvent() {
         if (!this.hasReachedBoss && this.destroyedEnemies >= 20) {
             this.hasReachedBoss = true;
+            this.bosses.push(new LargeBattleship(this, this.canvas, this.ctx));
+        }
+    }
+    handleBosses() {
+        this.bosses = this.bosses.filter((boss) => boss.health > 0);
+        if (this.hasReachedBoss) {
+            this.bosses.forEach((boss) => {
+                boss.render();
+            });
         }
     }
     animate(timeStamp: number) {
@@ -193,6 +205,7 @@ export default class Game {
             this.handleEnemies();
             this.handleEnemyProjectiles();
             this.handleExplosions();
+            this.handleBosses();
             this.checkForBossEvent();
             this.checkForGameOver();
             this.timer -= deltaTime;

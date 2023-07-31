@@ -101,20 +101,20 @@ export default class Player {
             case 3: {
                 this.projectiles.push(
                     new LaserSmall(
+                        this.game,
                         this.canvas,
                         this.ctx,
                         this.x,
-                        this.y + this.laserOffsetY,
-                        this.game
+                        this.y + this.laserOffsetY
                     )
                 );
                 this.projectiles.push(
                     new LaserSmall(
+                        this.game,
                         this.canvas,
                         this.ctx,
                         this.x + (this.width - this.laserOffsetX),
-                        this.y + this.laserOffsetY,
-                        this.game
+                        this.y + this.laserOffsetY
                     )
                 );
                 break;
@@ -122,20 +122,20 @@ export default class Player {
             case 2: {
                 this.projectiles.push(
                     new LaserMediumTwo(
+                        this.game,
                         this.canvas,
                         this.ctx,
                         this.x,
-                        this.y + this.laserOffsetY,
-                        this.game
+                        this.y + this.laserOffsetY
                     )
                 );
                 this.projectiles.push(
                     new LaserMediumTwo(
+                        this.game,
                         this.canvas,
                         this.ctx,
                         this.x + (this.width - this.laserOffsetX),
-                        this.y + this.laserOffsetY,
-                        this.game
+                        this.y + this.laserOffsetY
                     )
                 );
                 break;
@@ -143,20 +143,20 @@ export default class Player {
             default: {
                 this.projectiles.push(
                     new LaserSmall(
+                        this.game,
                         this.canvas,
                         this.ctx,
                         this.x,
-                        this.y + this.laserOffsetY,
-                        this.game
+                        this.y + this.laserOffsetY
                     )
                 );
                 this.projectiles.push(
                     new LaserSmall(
+                        this.game,
                         this.canvas,
                         this.ctx,
                         this.x + (this.width - this.laserOffsetX),
-                        this.y + this.laserOffsetY,
-                        this.game
+                        this.y + this.laserOffsetY
                     )
                 );
             }

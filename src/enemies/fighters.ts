@@ -45,9 +45,9 @@ export class SmallFighter extends Enemy {
         if (this.frameCount >= this.projectileInterval) {
             this.game.enemyProjectiles.push(
                 new EnemyLaserSmall(
+                    this.game,
                     this.canvas,
                     this.ctx,
-                    this.game.player,
                     this.x,
                     this.y + this.laserOffsetY,
                     this.damageStat
@@ -55,9 +55,9 @@ export class SmallFighter extends Enemy {
             );
             this.game.enemyProjectiles.push(
                 new EnemyLaserSmall(
+                    this.game,
                     this.canvas,
                     this.ctx,
-                    this.game.player,
                     this.x + (this.width - this.laserOffsetX),
                     this.y + this.laserOffsetY,
                     this.damageStat
