@@ -48,6 +48,7 @@ export default class Game {
     racerInterval: number;
     mobileBackground: string;
     desktopBackground: string;
+    nextLevelUrl: string;
     constructor() {
         this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
         this.ctx = <CanvasRenderingContext2D>this.canvas.getContext("2d");
@@ -76,6 +77,7 @@ export default class Game {
         this.racerInterval = 0.7;
         this.mobileBackground = spaceBackgroundUrl;
         this.desktopBackground = spaceBgDesktopUrl;
+        this.nextLevelUrl = "/";
     }
     rollToCreateRacer() {
         const randomNum = Math.random();
@@ -130,5 +132,25 @@ export default class Game {
             this.canvas.height - 25
         );
         this.events.hasBeenResized = false;
+    }
+    checkForGameOver() {
+        if (this.player.health <= 0) {
+            this.isGamePaused = true;
+            this.events.gameOverModal.showModal();
+        }
+    }
+    handleBosses() {
+        if (this.hasReachedBoss) {
+            this.bosses = this.bosses.filter((boss) => boss.health > 0);
+            if (this.bosses.length > 0) {
+                this.bosses.forEach((boss) => {
+                    boss.render();
+                });
+            } else {
+                setTimeout(() => {
+                    location.assign(this.nextLevelUrl);
+                }, 800);
+            }
+        }
     }
 }

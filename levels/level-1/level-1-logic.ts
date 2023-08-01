@@ -16,6 +16,7 @@ import { LargeBattleship } from "../../src/bosses/large-battleship";
 export default class Level1Game extends Game {
     constructor() {
         super();
+        this.nextLevelUrl = "/levels/level-2/level-2.html";
         this.initializeEnemies();
     }
     initializeEnemies() {
@@ -62,30 +63,10 @@ export default class Level1Game extends Game {
             this.frameCount = 0;
         }
     }
-    checkForGameOver() {
-        if (this.player.health <= 0) {
-            this.isGamePaused = true;
-            this.events.gameOverModal.showModal();
-        }
-    }
     checkForBossEvent() {
         if (!this.hasReachedBoss && this.destroyedEnemies >= 20) {
             this.hasReachedBoss = true;
             this.bosses.push(new LargeBattleship(this, this.canvas, this.ctx));
-        }
-    }
-    handleBosses() {
-        this.bosses = this.bosses.filter((boss) => boss.health > 0);
-        if (this.hasReachedBoss) {
-            if (this.bosses.length > 0) {
-                this.bosses.forEach((boss) => {
-                    boss.render();
-                });
-            } else {
-                setTimeout(() => {
-                    location.assign("/levels/level-2/level-2.html");
-                }, 800);
-            }
         }
     }
     animate(timeStamp: number) {

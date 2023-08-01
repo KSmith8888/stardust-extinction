@@ -70,32 +70,10 @@ export default class Level2Game extends Game {
             this.frameCount = 0;
         }
     }
-    checkForGameOver() {
-        if (this.player.health <= 0) {
-            this.isGamePaused = true;
-            this.events.gameOverModal.showModal();
-        }
-    }
     checkForBossEvent() {
         if (!this.hasReachedBoss && this.destroyedEnemies >= 20) {
             this.hasReachedBoss = true;
             this.bosses.push(new LargeBattleship(this, this.canvas, this.ctx));
-        }
-    }
-    handleBosses() {
-        this.bosses = this.bosses.filter((boss) => boss.health > 0);
-        if (this.hasReachedBoss) {
-            if (this.bosses.length > 0) {
-                this.bosses.forEach((boss) => {
-                    boss.render();
-                });
-            } else {
-                /*
-                setTimeout(() => {
-                    location.assign("/levels/level-2/level-2.html");
-                }, 800);
-                */
-            }
         }
     }
     animate(timeStamp: number) {
