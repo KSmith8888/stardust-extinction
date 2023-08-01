@@ -9,55 +9,29 @@
  */
 
 //Modules
+import Game from "../game-logic";
 import Player from "../../src/player";
 import EventListeners from "../../src/events/event-listeners";
 import { HealthBar } from "../../src/healthbar";
 import { Background } from "../../src/backgrounds/space-background";
 import { RedMine, BlueMine } from "../../src/enemies/mines";
-import { EnemyLaserSmall } from "../../src/projectiles/enemy-lasers";
 import { SmallFighter } from "../../src/enemies/fighters";
 import { SmallRacer } from "../../src/enemies/small-racer";
-import { SmallExplosion } from "../../src/explosions/small-explosion";
-import { LargeEmp } from "../../src/explosions/emp";
 import { LargeBattleship } from "../../src/bosses/large-battleship";
 //Utils
-import { sizeCanvas } from "../../src/utils/sizeCanvas";
 import { areObjectsColliding } from "../../src/utils/collision";
+import { sizeCanvas } from "../../src/utils/sizeCanvas";
 //Assets
 import spaceBackgroundUrl from "../../assets/images/backgrounds/space-background.png";
 import spaceBgDesktopUrl from "../../assets/images/backgrounds/space-background-desktop.png";
 
-export default class Game {
-    canvas: HTMLCanvasElement;
-    ctx: CanvasRenderingContext2D;
-    enemies: Array<RedMine | BlueMine | SmallFighter | SmallRacer>;
-    enemyPoolSize: number;
-    enemyProjectiles: Array<EnemyLaserSmall>;
-    destroyedEnemies: number;
-    hasReachedBoss: boolean;
-    explosions: Array<SmallExplosion | LargeEmp>;
-    bosses: Array<LargeBattleship>;
+export default class Level1Game extends Game {
     player: Player;
-    events: EventListeners;
-    isGamePaused: boolean;
     background: Background;
-    frameCount: number;
-    lastTime: number;
-    interval: number;
-    timer: number;
+    events: EventListeners;
     constructor() {
-        this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
-        this.ctx = <CanvasRenderingContext2D>this.canvas.getContext("2d");
+        super();
         sizeCanvas(this.canvas);
-        this.ctx.strokeStyle = "gold";
-        this.ctx.lineWidth = 0.5;
-        this.enemies = [];
-        this.enemyPoolSize = 15;
-        this.enemyProjectiles = [];
-        this.destroyedEnemies = 0;
-        this.hasReachedBoss = false;
-        this.explosions = [];
-        this.bosses = [];
         this.player = new Player(this, this.canvas, this.ctx);
         this.background = new Background(
             this.canvas,
@@ -65,11 +39,6 @@ export default class Game {
             spaceBackgroundUrl
         );
         this.events = new EventListeners(this, this.canvas);
-        this.isGamePaused = false;
-        this.frameCount = 0;
-        this.lastTime = 0;
-        this.interval = 1000 / 60;
-        this.timer = 0;
         this.initializeEnemies();
     }
     initializeEnemies() {
@@ -184,9 +153,15 @@ export default class Game {
     handleBosses() {
         this.bosses = this.bosses.filter((boss) => boss.health > 0);
         if (this.hasReachedBoss) {
-            this.bosses.forEach((boss) => {
-                boss.render();
-            });
+            if (this.bosses.length > 0) {
+                this.bosses.forEach((boss) => {
+                    boss.render();
+                });
+            } else {
+                setTimeout(() => {
+                    location.assign("/levels/level-2/level-2.html");
+                }, 800);
+            }
         }
     }
     animate(timeStamp: number) {
@@ -218,5 +193,5 @@ export default class Game {
     }
 }
 
-const game = new Game();
+const game = new Level1Game();
 game.animate(0);

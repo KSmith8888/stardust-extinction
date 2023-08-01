@@ -20,6 +20,6 @@
         "types": ["vite/client"],
         "allowImportingTsExtensions": true
     },
-    "include": ["src", "levels", "assets"],
+    "include": ["src", "levels", "assets", "levels/level-1", "levels/level-2"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

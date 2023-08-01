@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Kevyn Smith" />
+        <meta
+            name="description"
+            content="The second level of Stardust: Extinction"
+        />
+        <link rel="stylesheet" href="../main.css" />
+        <script type="module" src="level-2-logic.ts"></script>
+        <title>Level 2</title>
+    </head>
+    <body>
+        <div id="container">
+            <button id="menu-button" type="button">
+                <span class="menu-button-text">Game</span>
+                <span class="menu-button-text">Menu</span>
+            </button>
+            <dialog id="main-menu">
+                <p class="main-menu-text">Main Menu</p>
+                <div class="button-row">
+                    <button class="button" type="button">Test</button>
+                    <button class="button" type="button">Test</button>
+                </div>
+                <div class="button-row">
+                    <button class="button" type="button">Test</button>
+                    <button class="button" type="button">Test</button>
+                </div>
+                <div class="button-row">
+                    <button class="button" type="button">Test</button>
+                    <button class="button" type="button">Test</button>
+                </div>
+                <div class="button-row">
+                    <button id="quit-button" class="button" type="button">
+                        Quit
+                    </button>
+                    <button id="close-button" class="button" type="button">
+                        Close
+                    </button>
+                </div>
+            </dialog>
+            <dialog id="game-over-modal">
+                <p class="game-over-main-text">Game Over</p>
+                <p class="game-over-text">Better luck next time</p>
+                <button
+                    id="game-over-close-button"
+                    type="button"
+                    class="button"
+                >
+                    Close
+                </button>
+            </dialog>
+            <img
+                id="idle-ship-image"
+                class="no-display"
+                src="../../assets/images/player-ship-idle.png"
+                alt="A small grey spaceship idling"
+            />
+            <img
+                id="active-ship-image"
+                class="no-display"
+                src="../../assets/images/player-ship-active.png"
+                alt="A small grey spaceship with thrusters firing"
+            />
+            <p>You have reached level 2!</p>
+            <canvas id="canvas"
+                >JavaScript is required to use this app, please enable
+                JavaScirpt</canvas
+            >
+        </div>
+    </body>
+</html>
