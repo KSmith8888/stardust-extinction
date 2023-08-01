@@ -1,4 +1,4 @@
-import Game from "../../levels/level-1/level-1-logic";
+import Game from "../../levels/game-logic";
 import Projectile from "./projectile";
 import Player from "../player";
 import enemySmallLaserUrl from "../../assets/images/projectiles/enemy-laser-small.png";

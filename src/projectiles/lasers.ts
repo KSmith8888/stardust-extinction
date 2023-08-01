@@ -1,5 +1,5 @@
 import Projectile from "./projectile";
-import Game from "../../levels/level-1/level-1-logic";
+import Game from "../../levels/game-logic";
 import smallLaserUrl from "../../assets/images/projectiles/laser-small.png";
 import medLaserPurpleUrl from "../../assets/images/projectiles/laser-medium-purple.png";
 

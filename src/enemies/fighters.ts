@@ -1,5 +1,5 @@
 import Enemy from "./enemy";
-import Game from "../../levels/level-1/level-1-logic";
+import Game from "../../levels/game-logic";
 import { EnemyLaserSmall } from "../projectiles/enemy-lasers";
 import smallFighterUrl from "../../assets/images/enemies/small-fighter.png";
 import { SmallExplosion } from "../explosions/small-explosion";

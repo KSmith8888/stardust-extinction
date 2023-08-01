@@ -6,7 +6,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import Game from "../levels/level-1/level-1-logic";
+import Game from "../levels/game-logic";
 import { LaserSmall, LaserMediumTwo } from "./projectiles/lasers";
 import { HealthBar } from "./healthbar";
 import { RedMine, BlueMine } from "./enemies/mines";
