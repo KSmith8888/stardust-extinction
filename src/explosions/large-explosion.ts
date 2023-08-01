@@ -1,5 +1,5 @@
 import Explosion from "./explosion";
-import Game from "../../levels/level-1/level-1-logic";
+import Game from "../../levels/game-logic";
 import largeExplosionUrl from "../../assets/images/explosions/large-explosion.png";
 import { areObjectsColliding } from "../utils/collision";
 

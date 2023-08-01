@@ -1,4 +1,4 @@
-import Game from "../../levels/level-1/level-1-logic";
+import Game from "../../levels/game-logic";
 
 export default class Boss {
     game: Game;

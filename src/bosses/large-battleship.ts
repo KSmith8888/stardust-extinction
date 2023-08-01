@@ -1,4 +1,4 @@
-import Game from "../../levels/level-1/level-1-logic";
+import Game from "../../levels/game-logic";
 import Boss from "./boss";
 import largeBattleshipUrl from "../../assets/images/bosses/large-battleship.png";
 
@@ -10,9 +10,6 @@ export class LargeBattleship extends Boss {
         ctx: CanvasRenderingContext2D
     ) {
         super(game, canvas, ctx);
-        this.game = game;
-        this.canvas = canvas;
-        this.ctx = ctx;
         this.width = 48;
         this.height = 58;
         this.speed = Math.floor(Math.random() * 3) + 1;

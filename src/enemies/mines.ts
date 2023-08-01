@@ -1,7 +1,7 @@
 import Enemy from "./enemy";
 import redMineUrl from "../../assets/images/enemies/red-mine.png";
 import blueMineUrl from "../../assets/images/enemies/blue-mine.png";
-import Game from "../../levels/level-1/level-1-logic";
+import Game from "../../levels/game-logic";
 import { LargeEmp } from "../explosions/emp";
 import { LargeExplosion } from "../explosions/large-explosion";
 

@@ -16,7 +16,6 @@ import { LargeBattleship } from "../../src/bosses/large-battleship";
 export default class Level1Game extends Game {
     constructor() {
         super();
-
         this.initializeEnemies();
     }
     initializeEnemies() {

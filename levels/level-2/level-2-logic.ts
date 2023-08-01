@@ -13,8 +13,6 @@ import Game from "../game-logic";
 import { RedMine, BlueMine } from "../../src/enemies/mines";
 import { SmallFighter } from "../../src/enemies/fighters";
 import { LargeBattleship } from "../../src/bosses/large-battleship";
-//Utils
-import { sizeCanvas } from "../../src/utils/sizeCanvas";
 //Assets
 import spaceBackgroundUrl from "../../assets/images/backgrounds/space-background.png";
 import spaceBgDesktopUrl from "../../assets/images/backgrounds/space-background-desktop.png";
@@ -22,8 +20,8 @@ import spaceBgDesktopUrl from "../../assets/images/backgrounds/space-background-
 export default class Level2Game extends Game {
     constructor() {
         super();
-        sizeCanvas(this.canvas);
         this.enemyPoolSize = 24;
+        this.racerInterval = 0.9;
         this.mobileBackground = spaceBackgroundUrl;
         this.desktopBackground = spaceBgDesktopUrl;
         this.initializeEnemies();
