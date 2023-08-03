@@ -13,8 +13,6 @@ export class LargeBattleship extends Boss {
         this.width = 48;
         this.height = 58;
         this.speed = Math.floor(Math.random() * 3) + 1;
-        this.health = 40;
-        this.healthStat = 40;
         this.damageStat = 10;
         this.frameCount = 0;
         this.image = new Image();

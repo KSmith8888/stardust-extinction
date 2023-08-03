@@ -141,7 +141,7 @@ export default class Game {
     }
     handleBosses() {
         if (this.hasReachedBoss) {
-            this.bosses = this.bosses.filter((boss) => boss.health > 0);
+            this.bosses = this.bosses.filter((boss) => !boss.isDestroyed);
             if (this.bosses.length > 0) {
                 this.bosses.forEach((boss) => {
                     boss.render();

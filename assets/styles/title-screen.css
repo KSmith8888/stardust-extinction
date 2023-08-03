@@ -50,11 +50,7 @@ body {
 }
 
 #footer {
-    height: 15%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    max-height: 15%;
     padding: 0.5em;
     text-align: center;
     color: #f5eaea;

@@ -1,4 +1,5 @@
 import Game from "../../levels/game-logic";
+import { LargeExplosion } from "../explosions/large-explosion";
 
 export default class Boss {
     game: Game;
@@ -14,6 +15,7 @@ export default class Boss {
     healthStat: number;
     damageStat: number;
     frameCount: number;
+    isDestroyed: boolean;
     constructor(
         game: Game,
         canvas: HTMLCanvasElement,
@@ -34,6 +36,7 @@ export default class Boss {
         this.healthStat = 200;
         this.damageStat = 20;
         this.frameCount = 0;
+        this.isDestroyed = false;
     }
     followTargetX() {
         if (this.x >= this.targetX + 5) {
@@ -51,6 +54,10 @@ export default class Boss {
         }
     }
     destroyedByPlayer() {
+        this.game.explosions.push(
+            new LargeExplosion(this.game, this.ctx, this.x, this.y)
+        );
         this.game.destroyedEnemies += 1;
+        this.isDestroyed = true;
     }
 }
