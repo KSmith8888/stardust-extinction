@@ -30,8 +30,8 @@ export default class Boss {
             Math.random() * (this.canvas.width - this.width)
         );
         this.speed = 5;
-        this.health = 100;
-        this.healthStat = 100;
+        this.health = 200;
+        this.healthStat = 200;
         this.damageStat = 20;
         this.frameCount = 0;
     }

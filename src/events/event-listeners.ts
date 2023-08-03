@@ -27,7 +27,12 @@ export default class EventListeners {
     menuEvents: MenuEvents;
     gameOverModal: HTMLDialogElement;
     gameOverCloseBtn: HTMLButtonElement;
+    levelCompleteModal: HTMLDialogElement;
     exitOnGameOver: void;
+    startNextLevel: void;
+    nextLevelButton: HTMLButtonElement;
+    statsTextEnemies: HTMLParagraphElement;
+    statsTextHealth: HTMLParagraphElement;
     constructor(game: Game, canvas: HTMLCanvasElement) {
         this.game = game;
         this.player = this.game.player;
@@ -192,10 +197,28 @@ export default class EventListeners {
         this.gameOverCloseBtn = <HTMLButtonElement>(
             document.getElementById("game-over-close-button")
         );
+        this.levelCompleteModal = <HTMLDialogElement>(
+            document.getElementById("level-complete-modal")
+        );
         this.exitOnGameOver = this.gameOverCloseBtn.addEventListener(
             "click",
             () => {
                 location.assign("/");
+            }
+        );
+        this.nextLevelButton = <HTMLButtonElement>(
+            document.getElementById("next-level-button")
+        );
+        this.statsTextEnemies = <HTMLParagraphElement>(
+            document.getElementById("stats-text-enemies")
+        );
+        this.statsTextHealth = <HTMLParagraphElement>(
+            document.getElementById("stats-text-health")
+        );
+        this.startNextLevel = this.nextLevelButton.addEventListener(
+            "click",
+            () => {
+                location.assign(this.game.nextLevelUrl);
             }
         );
     }

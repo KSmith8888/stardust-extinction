@@ -148,8 +148,13 @@ export default class Game {
                 });
             } else {
                 setTimeout(() => {
-                    location.assign(this.nextLevelUrl);
-                }, 800);
+                    this.isGamePaused = true;
+                    this.events.statsTextEnemies.textContent = `Enemies Destroyed: ${this.destroyedEnemies}`;
+                    const healthRemaining =
+                        (this.player.health / this.player.healthStat) * 100;
+                    this.events.statsTextHealth.textContent = `Health Remaining: ${healthRemaining}%`;
+                    this.events.levelCompleteModal.showModal();
+                }, 1000);
             }
         }
     }

@@ -49,7 +49,8 @@ body {
 }
 
 #main-menu[open],
-#game-over-modal[open] {
+#game-over-modal[open],
+#level-complete-modal[open] {
     display: flex;
     flex-direction: column;
     align-items: center;
