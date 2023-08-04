@@ -9,10 +9,10 @@
  */
 
 //Modules
-import Player from "../src/player";
+import Player from "../src/player/player";
 import EventListeners from "../src/events/event-listeners";
 import { Background } from "../src/backgrounds/space-background";
-import { HealthBar } from "../src/healthbar";
+import { HealthBar } from "../src/player/healthbar";
 import { RedMine, BlueMine } from "../src/enemies/mines";
 import {
     EnemyLaserSmall,

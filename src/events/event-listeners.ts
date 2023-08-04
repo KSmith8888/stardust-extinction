@@ -1,13 +1,5 @@
-/*
- * Stardust Extinction
- * Copyright 2023 Kevyn Smith
- *
- * Licensed under the Apache License, Version 2.0
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import Game from "../../levels/game-logic";
-import Player from "../player";
+import Player from "../player/player";
 import MenuEvents from "./menu-events";
 import { sizeCanvas } from "../utils/sizeCanvas";
 

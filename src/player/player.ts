@@ -1,16 +1,8 @@
-/*
- * Stardust Extinction
- * Copyright 2023 Kevyn Smith
- *
- * Licensed under the Apache License, Version 2.0
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import Game from "../levels/game-logic";
-import { LaserSmall, LaserMediumTwo } from "./projectiles/lasers";
+import Game from "../../levels/game-logic";
+import { LaserSmall, LaserMediumTwo } from "../projectiles/lasers";
 import { HealthBar } from "./healthbar";
-import { RedMine, BlueMine } from "./enemies/mines";
-import { SmallExplosion } from "./explosions/small-explosion";
+import { RedMine, BlueMine } from "../enemies/mines";
+import { SmallExplosion } from "../explosions/small-explosion";
 
 export default class Player {
     game: Game;

@@ -1,4 +1,4 @@
-import Player from "../player";
+import Player from "../player/player";
 import Enemy from "../enemies/enemy";
 import Projectile from "../projectiles/projectile";
 import EnemyProjectile from "../projectiles/enemy-projectile";
