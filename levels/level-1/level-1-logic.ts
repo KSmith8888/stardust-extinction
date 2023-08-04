@@ -87,6 +87,7 @@ export default class Level1Game extends Game {
             this.handleEnemyProjectiles();
             this.handleExplosions();
             this.handleBosses();
+            this.handleBossProjectiles();
             this.checkForBossEvent();
             this.checkForGameOver();
             this.timer -= deltaTime;

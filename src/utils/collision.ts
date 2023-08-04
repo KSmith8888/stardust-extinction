@@ -1,9 +1,15 @@
 import Player from "../player";
 import Enemy from "../enemies/enemy";
 import Projectile from "../projectiles/projectile";
+import EnemyProjectile from "../projectiles/enemy-projectile";
 import Explosion from "../explosions/explosion";
 
-type CollisionEnabled = Player | Enemy | Projectile | Explosion;
+type CollisionEnabled =
+    | Player
+    | Enemy
+    | Projectile
+    | EnemyProjectile
+    | Explosion;
 
 export function areObjectsColliding(
     firstObj: CollisionEnabled,

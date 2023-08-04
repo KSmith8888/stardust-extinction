@@ -14,7 +14,10 @@ import EventListeners from "../src/events/event-listeners";
 import { Background } from "../src/backgrounds/space-background";
 import { HealthBar } from "../src/healthbar";
 import { RedMine, BlueMine } from "../src/enemies/mines";
-import { EnemyLaserSmall } from "../src/projectiles/enemy-lasers";
+import {
+    EnemyLaserSmall,
+    EnemyLaserLarge,
+} from "../src/projectiles/enemy-lasers";
 import { SmallFighter } from "../src/enemies/fighters";
 import { SmallRacer } from "../src/enemies/small-racer";
 import { SmallExplosion } from "../src/explosions/small-explosion";
@@ -40,6 +43,7 @@ export default class Game {
     hasReachedBoss: boolean;
     explosions: Array<SmallExplosion | LargeEmp>;
     bosses: Array<LargeBattleship>;
+    bossProjectiles: Array<EnemyLaserLarge>;
     isGamePaused: boolean;
     frameCount: number;
     lastTime: number;
@@ -69,6 +73,7 @@ export default class Game {
         this.hasReachedBoss = false;
         this.explosions = [];
         this.bosses = [];
+        this.bossProjectiles = [];
         this.isGamePaused = false;
         this.frameCount = 0;
         this.lastTime = 0;
@@ -157,5 +162,13 @@ export default class Game {
                 }, 1000);
             }
         }
+    }
+    handleBossProjectiles() {
+        this.bossProjectiles = this.bossProjectiles.filter((laser) => {
+            return !laser.isOffScreen && !laser.hasHitTarget;
+        });
+        this.bossProjectiles.forEach((laser) => {
+            laser.render();
+        });
     }
 }

@@ -15,6 +15,8 @@ export default class Boss {
     healthStat: number;
     damageStat: number;
     frameCount: number;
+    projectileInterval: number;
+    isFiring: boolean;
     isDestroyed: boolean;
     constructor(
         game: Game,
@@ -36,6 +38,8 @@ export default class Boss {
         this.healthStat = 200;
         this.damageStat = 20;
         this.frameCount = 0;
+        this.projectileInterval = 40;
+        this.isFiring = false;
         this.isDestroyed = false;
     }
     followTargetX() {
@@ -47,6 +51,7 @@ export default class Boss {
         if (this.frameCount < 100) {
             this.frameCount += 1;
         } else {
+            this.isFiring = true;
             this.targetX = Math.floor(
                 Math.random() * (this.canvas.width - this.width)
             );
