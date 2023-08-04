@@ -48,7 +48,7 @@ export default class Boss {
         } else if (this.x <= this.targetX - 5) {
             this.x += this.speed;
         }
-        if (this.frameCount < 100) {
+        if (this.frameCount < 60) {
             this.frameCount += 1;
         } else {
             this.isFiring = true;

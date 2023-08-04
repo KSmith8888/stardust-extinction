@@ -16,7 +16,7 @@ export class RedMine extends Enemy {
         super(game, canvas, ctx);
         this.width = 24;
         this.height = 20;
-        this.speed = Math.floor(Math.random() * 5) + 1;
+        this.speed = Math.floor(Math.random() * 4) + 3;
         this.image = new Image();
         this.image.src = redMineUrl;
         this.targetX = this.game.player.x;
@@ -38,7 +38,7 @@ export class RedMine extends Enemy {
         } else {
             this.reset();
         }
-        this.resetTargetX();
+        this.followTargetX();
         this.targetX = this.game.player.x;
         this.ctx.drawImage(this.image, this.x, this.y);
     }
@@ -81,7 +81,7 @@ export class BlueMine extends Enemy {
         } else {
             this.reset();
         }
-        this.resetTargetX();
+        this.followTargetX();
         if (this.frameCount >= 10) {
             this.targetX = Math.floor(
                 Math.random() * (this.canvas.width - this.width)

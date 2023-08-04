@@ -15,6 +15,7 @@ export class LargeBattleship extends Boss {
         super(game, canvas, ctx);
         this.width = 48;
         this.height = 58;
+        this.y = 0 - this.height;
         this.speed = Math.floor(Math.random() * 3) + 1;
         this.damageStat = 30;
         this.frameCount = 0;
@@ -28,7 +29,7 @@ export class LargeBattleship extends Boss {
             this.destroyedByPlayer();
         }
         if (this.y < this.height * 2) {
-            this.y += 1.5;
+            this.y += 1;
         }
         this.followTargetX();
         this.ctx.drawImage(this.image, this.x, this.y);

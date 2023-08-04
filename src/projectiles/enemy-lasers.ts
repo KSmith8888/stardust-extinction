@@ -32,7 +32,7 @@ export class EnemyLaserLarge extends EnemyProjectile {
         super(game, canvas, ctx, x, y, damage);
         this.width = 13;
         this.height = 26;
-        this.speed = 3.75;
+        this.speed = 5.75;
         this.image.src = enemyLargeLaserUrl;
     }
 }

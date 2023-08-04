@@ -40,7 +40,7 @@ export class SmallRacer extends Enemy {
         } else {
             this.reset();
         }
-        this.resetTargetX();
+        this.followTargetX();
         this.ctx.drawImage(this.image, this.x, this.y);
     }
     collidedWithPlayer() {

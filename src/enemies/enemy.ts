@@ -39,7 +39,7 @@ export default class Enemy {
         this.firesProjectiles = false;
         this.frameCount = 0;
     }
-    resetTargetX() {
+    followTargetX() {
         if (this.x >= this.targetX + 5) {
             this.x -= this.speed;
         } else if (this.x <= this.targetX - 5) {
