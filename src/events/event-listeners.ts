@@ -2,6 +2,7 @@ import Game from "../../levels/game-logic";
 import Player from "../player/player";
 import MenuEvents from "./menu-events";
 import { sizeCanvas } from "../utils/sizeCanvas";
+import explosionSoundUrl from "../../assets/audio/explosion.wav";
 
 export default class EventListeners {
     game: Game;
@@ -25,6 +26,7 @@ export default class EventListeners {
     nextLevelButton: HTMLButtonElement;
     statsTextEnemies: HTMLParagraphElement;
     statsTextHealth: HTMLParagraphElement;
+    explosionSound: HTMLAudioElement;
     constructor(game: Game, canvas: HTMLCanvasElement) {
         this.game = game;
         this.player = this.game.player;
@@ -213,5 +215,11 @@ export default class EventListeners {
                 location.assign(this.game.nextLevelUrl);
             }
         );
+        this.explosionSound = new Audio(explosionSoundUrl);
+        this.explosionSound.volume = 0.1;
+    }
+    playExplosionSound() {
+        this.explosionSound.currentTime = 0;
+        this.explosionSound.play();
     }
 }

@@ -44,6 +44,9 @@ https://opengameart.org/content/another-space-backgrounds-0
 "Beep Tone Sound SFX" by qubodup licensed CC0:  
 https://opengameart.org/content/beep-tone-sound-sfx
 
+"Explosion" by TinyWorlds licensed CC0:  
+https://opengameart.org/content/explosion-0
+
 ## License
 
 Licensed under Apache-2.0:  
