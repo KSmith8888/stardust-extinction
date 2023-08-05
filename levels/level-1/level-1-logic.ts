@@ -71,6 +71,9 @@ export default class Level1Game extends Game {
                 this.bosses.push(
                     new LargeBattleship(this, this.canvas, this.ctx)
                 );
+                this.bosses.push(
+                    new LargeBattleship(this, this.canvas, this.ctx)
+                );
             }, 800);
         }
     }

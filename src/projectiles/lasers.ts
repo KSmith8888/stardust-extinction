@@ -18,7 +18,7 @@ export class LaserSmall extends Projectile {
         this.y = y;
         this.width = 8;
         this.height = 14;
-        this.speed = 2.25;
+        this.speed = 5.25;
         this.image.src = smallLaserUrl;
         this.game = game;
     }
@@ -46,7 +46,7 @@ export class LaserMediumTwo extends Projectile {
         this.y = y;
         this.width = 9;
         this.height = 20;
-        this.speed = 2.75;
+        this.speed = 4.75;
         this.image.src = medLaserPurpleUrl;
         this.damageMultiplier = 2;
     }

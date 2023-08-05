@@ -56,10 +56,10 @@ export default class Game {
     constructor() {
         this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
         this.ctx = <CanvasRenderingContext2D>this.canvas.getContext("2d");
-        this.ctx.strokeStyle = "gold";
-        this.ctx.lineWidth = 0.5;
         sizeCanvas(this.canvas);
         this.player = new Player(this, this.canvas, this.ctx);
+        this.ctx.strokeStyle = "gold";
+        this.ctx.lineWidth = 0.5;
         this.background = new Background(
             this.canvas,
             this.ctx,

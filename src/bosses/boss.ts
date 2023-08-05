@@ -10,6 +10,7 @@ export default class Boss {
     x: number;
     y: number;
     targetX: number;
+    targetY: number;
     speed: number;
     health: number;
     healthStat: number;
@@ -33,6 +34,7 @@ export default class Boss {
         this.targetX = Math.floor(
             Math.random() * (this.canvas.width - this.width)
         );
+        this.targetY = Math.floor(Math.random() * 200);
         this.speed = 5;
         this.health = 200;
         this.healthStat = 200;

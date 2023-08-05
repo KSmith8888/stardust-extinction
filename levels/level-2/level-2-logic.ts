@@ -10,7 +10,8 @@
 
 //Modules
 import Game from "../game-logic";
-import { RedMine, BlueMine } from "../../src/enemies/mines";
+import { BlueMine } from "../../src/enemies/mines";
+import { SmallTyphoon } from "../../src/enemies/typhoons";
 import { SmallFighter } from "../../src/enemies/fighters";
 import { LargeBattleship } from "../../src/bosses/large-battleship";
 //Assets
@@ -29,7 +30,9 @@ export default class Level2Game extends Game {
     initializeEnemies() {
         for (let i = 0; i < this.enemyPoolSize; i++) {
             if (i < 8) {
-                this.enemies.push(new RedMine(this, this.canvas, this.ctx));
+                this.enemies.push(
+                    new SmallTyphoon(this, this.canvas, this.ctx)
+                );
             } else if (i >= 5 && i < 16) {
                 this.enemies.push(new BlueMine(this, this.canvas, this.ctx));
             } else {
@@ -47,7 +50,7 @@ export default class Level2Game extends Game {
         }
         if (this.frameCount === 5) {
             const freeRedMine = this.enemies.find((enemy) => {
-                return enemy instanceof RedMine && enemy.isFree;
+                return enemy instanceof SmallTyphoon && enemy.isFree;
             });
             if (freeRedMine) {
                 freeRedMine.isFree = false;

@@ -28,7 +28,7 @@ export class LargeBattleship extends Boss {
         if (this.health <= 0) {
             this.destroyedByPlayer();
         }
-        if (this.y < this.height * 2) {
+        if (this.y < this.targetY) {
             this.y += 1;
         }
         this.followTargetX();

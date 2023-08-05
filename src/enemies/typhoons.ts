@@ -1,15 +1,14 @@
 import Enemy from "./enemy";
 import Game from "../../levels/game-logic";
 import { EnemyLaserSmall } from "../projectiles/enemy-lasers";
-import smallFighterUrl from "../../assets/images/enemies/small-fighter.png";
-import { SmallExplosion } from "../explosions/small-explosion";
+import smallTyphoonUrl from "../../assets/images/enemies/small-typhoon.png";
+import { LargeExplosion } from "../explosions/large-explosion";
 
-export class SmallFighter extends Enemy {
+export class SmallTyphoon extends Enemy {
     projectiles: Array<EnemyLaserSmall>;
     speed: number;
     image: HTMLImageElement;
     laserOffsetX: number;
-    laserOffsetY: number;
     projectileInterval: number;
     constructor(
         game: Game,
@@ -19,14 +18,14 @@ export class SmallFighter extends Enemy {
         super(game, canvas, ctx);
         this.firesProjectiles = true;
         this.projectiles = [];
-        this.width = 24;
-        this.height = 24;
-        this.speed = Math.floor(Math.random() * 2) + 1;
+        this.width = 22;
+        this.height = 30;
+        this.speed = Math.floor(Math.random() * 3) + 3;
         this.image = new Image();
-        this.image.src = smallFighterUrl;
-        this.laserOffsetX = this.width * 0.2;
-        this.laserOffsetY = this.height * 0.35;
-        this.projectileInterval = 50;
+        this.image.src = smallTyphoonUrl;
+        this.laserOffsetX = this.width * 0.45;
+        this.projectileInterval = 15;
+        this.targetX = this.game.player.x;
     }
     render() {
         if (this.health <= 0) {
@@ -38,6 +37,7 @@ export class SmallFighter extends Enemy {
             this.reset();
         }
         this.followTargetX();
+        this.targetX = this.game.player.x;
         this.ctx.drawImage(this.image, this.x, this.y);
         this.handleProjectiles();
     }
@@ -48,23 +48,10 @@ export class SmallFighter extends Enemy {
                     this.game,
                     this.canvas,
                     this.ctx,
-                    this.x,
-                    this.y + this.laserOffsetY,
+                    this.x + this.laserOffsetX,
+                    this.y + (this.height + 5),
                     this.damageStat
                 )
-            );
-            this.game.enemyProjectiles.push(
-                new EnemyLaserSmall(
-                    this.game,
-                    this.canvas,
-                    this.ctx,
-                    this.x + (this.width - this.laserOffsetX),
-                    this.y + this.laserOffsetY,
-                    this.damageStat
-                )
-            );
-            this.targetX = Math.floor(
-                Math.random() * (this.canvas.width - this.width)
             );
             this.frameCount = 0;
         } else {
@@ -72,7 +59,9 @@ export class SmallFighter extends Enemy {
         }
     }
     collidedWithPlayer() {
-        this.game.explosions.push(new SmallExplosion(this.ctx, this.x, this.y));
-        this.game.player.health -= 10;
+        this.game.explosions.push(
+            new LargeExplosion(this.game, this.ctx, this.x, this.y)
+        );
+        this.game.player.health -= 20;
     }
 }
