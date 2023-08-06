@@ -65,6 +65,7 @@ export default class Level1Game extends Game {
     }
     checkForBossEvent() {
         if (!this.hasReachedBoss && this.destroyedEnemies >= 20) {
+            this.events.audioEvents.alarmSound.play();
             this.hasReachedBoss = true;
             this.bosses.push(new LargeBattleship(this, this.canvas, this.ctx));
             setTimeout(() => {

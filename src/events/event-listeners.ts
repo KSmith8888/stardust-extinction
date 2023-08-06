@@ -2,7 +2,7 @@ import Game from "../../levels/game-logic";
 import Player from "../player/player";
 import MenuEvents from "./menu-events";
 import { sizeCanvas } from "../utils/sizeCanvas";
-import explosionSoundUrl from "../../assets/audio/explosion.wav";
+import AudioEvents from "./audio-events";
 
 export default class EventListeners {
     game: Game;
@@ -18,6 +18,7 @@ export default class EventListeners {
     touchmove: void;
     keyEvent: void;
     menuEvents: MenuEvents;
+    audioEvents: AudioEvents;
     gameOverModal: HTMLDialogElement;
     gameOverCloseBtn: HTMLButtonElement;
     levelCompleteModal: HTMLDialogElement;
@@ -26,7 +27,6 @@ export default class EventListeners {
     nextLevelButton: HTMLButtonElement;
     statsTextEnemies: HTMLParagraphElement;
     statsTextHealth: HTMLParagraphElement;
-    explosionSound: HTMLAudioElement;
     constructor(game: Game, canvas: HTMLCanvasElement) {
         this.game = game;
         this.player = this.game.player;
@@ -166,7 +166,7 @@ export default class EventListeners {
                     break;
                 }
                 case "KeyM": {
-                    this.menuEvents.beepAudio.play();
+                    this.audioEvents.beepAudio.play();
                     if (!this.menuEvents.isMenuOpen) {
                         this.menuEvents.mainMenu.showModal();
                         this.menuEvents.closeButton.focus();
@@ -184,6 +184,7 @@ export default class EventListeners {
                 }
             }
         });
+        this.audioEvents = new AudioEvents();
         this.menuEvents = new MenuEvents(this.game);
         this.gameOverModal = <HTMLDialogElement>(
             document.getElementById("game-over-modal")
@@ -215,11 +216,5 @@ export default class EventListeners {
                 location.assign(this.game.nextLevelUrl);
             }
         );
-        this.explosionSound = new Audio(explosionSoundUrl);
-        this.explosionSound.volume = 0.1;
-    }
-    playExplosionSound() {
-        this.explosionSound.currentTime = 0;
-        this.explosionSound.play();
     }
 }

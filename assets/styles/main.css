@@ -50,7 +50,8 @@ body {
 
 #main-menu[open],
 #game-over-modal[open],
-#level-complete-modal[open] {
+#level-complete-modal[open],
+#audio-menu[open] {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -63,7 +64,8 @@ body {
     padding: 1em 1em 1.5em 1em;
 }
 
-.main-menu-text {
+.main-menu-text,
+.audio-menu-text {
     margin: 0.5em 0;
     text-align: center;
     font-size: 1.6rem;

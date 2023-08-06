@@ -24,7 +24,7 @@ export class LargeExplosion extends Explosion {
         this.image = new Image();
         this.image.src = largeExplosionUrl;
         this.damagedPlayer = false;
-        this.game.events.playExplosionSound();
+        this.game.events.audioEvents.playExplosionSound();
     }
     checkForCollision() {
         if (

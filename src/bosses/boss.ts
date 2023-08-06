@@ -35,7 +35,7 @@ export default class Boss {
             Math.random() * (this.canvas.width - this.width)
         );
         this.targetY = Math.floor(Math.random() * 200);
-        this.speed = 5;
+        this.speed = 6;
         this.health = 200;
         this.healthStat = 200;
         this.damageStat = 20;
@@ -50,7 +50,7 @@ export default class Boss {
         } else if (this.x <= this.targetX - 5) {
             this.x += this.speed;
         }
-        if (this.frameCount < 60) {
+        if (this.frameCount < 40) {
             this.frameCount += 1;
         } else {
             this.isFiring = true;
