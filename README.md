@@ -47,6 +47,9 @@ https://opengameart.org/content/beep-tone-sound-sfx
 "Explosion" by TinyWorlds licensed CC0:  
 https://opengameart.org/content/explosion-0
 
+"Alarm" by Frenchboy licensed CC0:  
+https://opengameart.org/content/alarm-2
+
 ## License
 
 Licensed under Apache-2.0:  
