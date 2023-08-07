@@ -1,7 +1,6 @@
 import Game from "../../levels/game-logic";
 import Boss from "./boss";
 import largeBattleshipUrl from "../../assets/images/bosses/large-battleship.png";
-import { EnemyLaserLarge } from "../projectiles/enemy-lasers";
 
 export class LargeBattleship extends Boss {
     image: HTMLImageElement;
@@ -39,26 +38,22 @@ export class LargeBattleship extends Boss {
     }
 
     handleProjectiles() {
-        this.game.bossProjectiles.push(
-            new EnemyLaserLarge(
-                this.game,
-                this.canvas,
-                this.ctx,
-                this.x,
-                this.y + this.laserOffsetY,
-                this.damageStat
-            )
+        const firstLaser = this.game.bossProjectiles.find(
+            (laser) => laser.isFree
         );
-        this.game.bossProjectiles.push(
-            new EnemyLaserLarge(
-                this.game,
-                this.canvas,
-                this.ctx,
-                this.x + (this.width - this.laserOffsetX),
-                this.y + this.laserOffsetY,
-                this.damageStat
-            )
+        if (firstLaser) {
+            firstLaser.isFree = false;
+            firstLaser.x = this.x;
+            firstLaser.y = this.y + this.laserOffsetY;
+        }
+        const secondLaser = this.game.bossProjectiles.find(
+            (laser) => laser.isFree
         );
+        if (secondLaser) {
+            secondLaser.isFree = false;
+            secondLaser.x = this.x + (this.width - this.laserOffsetX);
+            secondLaser.y = this.y + this.laserOffsetY;
+        }
         this.isFiring = false;
     }
 }

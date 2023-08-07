@@ -1,5 +1,4 @@
 import Game from "../../levels/game-logic";
-import { areObjectsColliding } from "../utils/collision";
 
 export default class EnemyProjectile {
     game: Game;
@@ -12,41 +11,34 @@ export default class EnemyProjectile {
     height: number;
     speed: number;
     image: HTMLImageElement;
-    hasHitTarget: boolean;
-    isOffScreen: boolean;
+    isFree: boolean;
     constructor(
         game: Game,
         canvas: HTMLCanvasElement,
-        ctx: CanvasRenderingContext2D,
-        x: number,
-        y: number,
-        damage: number
+        ctx: CanvasRenderingContext2D
     ) {
         this.game = game;
         this.canvas = canvas;
         this.ctx = ctx;
-        this.x = x;
-        this.y = y;
-        this.damage = damage;
+        this.damage = 10;
         this.width = 0;
         this.height = 0;
+        this.x = 0;
+        this.y = 0 - this.height;
         this.speed = 1;
         this.image = new Image();
-        this.hasHitTarget = false;
-        this.isOffScreen = false;
+        this.isFree = true;
     }
-    handleCollision() {
-        if (!this.hasHitTarget && areObjectsColliding(this, this.game.player)) {
-            this.game.player.health -= this.damage;
-            this.hasHitTarget = true;
-        }
+    reset() {
+        this.x = 0;
+        this.y = 0 - this.height;
+        this.isFree = true;
     }
     render() {
-        this.handleCollision();
         if (this.y < this.canvas.height) {
             this.y += this.speed;
         } else {
-            this.isOffScreen = true;
+            this.reset();
         }
         this.ctx.drawImage(this.image, this.x, this.y);
     }

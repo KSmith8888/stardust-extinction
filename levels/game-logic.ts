@@ -1,13 +1,3 @@
-/**
- *
- * Stardust Extinction
- * Copyright 2023 Kevyn Smith
- *
- * Licensed under the Apache License, Version 2.0
- * SPDX-License-Identifier: Apache-2.0
- *
- */
-
 //Modules
 import Player from "../src/player/player";
 import EventListeners from "../src/events/event-listeners";
@@ -39,11 +29,13 @@ export default class Game {
     enemies: Array<RedMine | BlueMine | SmallFighter | SmallRacer>;
     enemyPoolSize: number;
     enemyProjectiles: Array<EnemyLaserSmall>;
+    enemyLaserPoolSize: number;
     destroyedEnemies: number;
     hasReachedBoss: boolean;
     explosions: Array<SmallExplosion | LargeEmp>;
     bosses: Array<LargeBattleship>;
     bossProjectiles: Array<EnemyLaserLarge>;
+    bossLaserPoolSize: number;
     isGamePaused: boolean;
     frameCount: number;
     lastTime: number;
@@ -69,11 +61,13 @@ export default class Game {
         this.enemies = [];
         this.enemyPoolSize = 15;
         this.enemyProjectiles = [];
+        this.enemyLaserPoolSize = 30;
         this.destroyedEnemies = 0;
         this.hasReachedBoss = false;
         this.explosions = [];
         this.bosses = [];
         this.bossProjectiles = [];
+        this.bossLaserPoolSize = 12;
         this.isGamePaused = false;
         this.frameCount = 0;
         this.lastTime = 0;
@@ -83,6 +77,22 @@ export default class Game {
         this.mobileBackground = spaceBackgroundUrl;
         this.desktopBackground = spaceBgDesktopUrl;
         this.nextLevelUrl = "/";
+        this.initializeEnemyLasers();
+        this.initializeBossLasers();
+    }
+    initializeEnemyLasers() {
+        for (let i = 0; i < this.enemyLaserPoolSize; i++) {
+            this.enemyProjectiles.push(
+                new EnemyLaserSmall(this, this.canvas, this.ctx)
+            );
+        }
+    }
+    initializeBossLasers() {
+        for (let i = 0; i < this.bossLaserPoolSize; i++) {
+            this.bossProjectiles.push(
+                new EnemyLaserLarge(this, this.canvas, this.ctx)
+            );
+        }
     }
     rollToCreateRacer() {
         const randomNum = Math.random();
@@ -106,11 +116,16 @@ export default class Game {
         });
     }
     handleEnemyProjectiles() {
-        this.enemyProjectiles = this.enemyProjectiles.filter((laser) => {
-            return !laser.isOffScreen && !laser.hasHitTarget;
+        const activeEnemyLasers = this.enemyProjectiles.filter((laser) => {
+            return !laser.isFree;
         });
-        this.enemyProjectiles.forEach((laser) => {
+        activeEnemyLasers.forEach((laser) => {
             laser.render();
+            const didLaserCollide = areObjectsColliding(laser, this.player);
+            if (didLaserCollide) {
+                this.player.health -= laser.damage;
+                laser.reset();
+            }
         });
     }
     handleExplosions() {
@@ -164,10 +179,10 @@ export default class Game {
         }
     }
     handleBossProjectiles() {
-        this.bossProjectiles = this.bossProjectiles.filter((laser) => {
-            return !laser.isOffScreen && !laser.hasHitTarget;
+        const activeBossProjectiles = this.bossProjectiles.filter((laser) => {
+            return !laser.isFree;
         });
-        this.bossProjectiles.forEach((laser) => {
+        activeBossProjectiles.forEach((laser) => {
             laser.render();
         });
     }

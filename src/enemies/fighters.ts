@@ -1,11 +1,9 @@
 import Enemy from "./enemy";
 import Game from "../../levels/game-logic";
-import { EnemyLaserSmall } from "../projectiles/enemy-lasers";
 import smallFighterUrl from "../../assets/images/enemies/small-fighter.png";
 import { SmallExplosion } from "../explosions/small-explosion";
 
 export class SmallFighter extends Enemy {
-    projectiles: Array<EnemyLaserSmall>;
     speed: number;
     image: HTMLImageElement;
     laserOffsetX: number;
@@ -18,7 +16,6 @@ export class SmallFighter extends Enemy {
     ) {
         super(game, canvas, ctx);
         this.firesProjectiles = true;
-        this.projectiles = [];
         this.width = 24;
         this.height = 24;
         this.speed = Math.floor(Math.random() * 2) + 1;
@@ -43,26 +40,22 @@ export class SmallFighter extends Enemy {
     }
     handleProjectiles() {
         if (this.frameCount >= this.projectileInterval) {
-            this.game.enemyProjectiles.push(
-                new EnemyLaserSmall(
-                    this.game,
-                    this.canvas,
-                    this.ctx,
-                    this.x,
-                    this.y + this.laserOffsetY,
-                    this.damageStat
-                )
+            const firstLaser = this.game.enemyProjectiles.find(
+                (laser) => laser.isFree
             );
-            this.game.enemyProjectiles.push(
-                new EnemyLaserSmall(
-                    this.game,
-                    this.canvas,
-                    this.ctx,
-                    this.x + (this.width - this.laserOffsetX),
-                    this.y + this.laserOffsetY,
-                    this.damageStat
-                )
+            if (firstLaser) {
+                firstLaser.isFree = false;
+                firstLaser.x = this.x;
+                firstLaser.y = this.y + this.laserOffsetY;
+            }
+            const secondLaser = this.game.enemyProjectiles.find(
+                (laser) => laser.isFree
             );
+            if (secondLaser) {
+                secondLaser.isFree = false;
+                secondLaser.x = this.x + (this.width - this.laserOffsetX);
+                secondLaser.y = this.y + this.laserOffsetY;
+            }
             this.targetX = Math.floor(
                 Math.random() * (this.canvas.width - this.width)
             );
@@ -73,6 +66,6 @@ export class SmallFighter extends Enemy {
     }
     collidedWithPlayer() {
         this.game.explosions.push(new SmallExplosion(this.ctx, this.x, this.y));
-        this.game.player.health -= 10;
+        this.game.player.health -= this.collisionDamage;
     }
 }

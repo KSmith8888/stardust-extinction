@@ -23,6 +23,7 @@ export class SmallTyphoon extends Enemy {
         this.speed = Math.floor(Math.random() * 3) + 3;
         this.image = new Image();
         this.image.src = smallTyphoonUrl;
+        this.collisionDamage = 20;
         this.laserOffsetX = this.width * 0.45;
         this.projectileInterval = 15;
         this.targetX = this.game.player.x;
@@ -43,16 +44,14 @@ export class SmallTyphoon extends Enemy {
     }
     handleProjectiles() {
         if (this.frameCount >= this.projectileInterval) {
-            this.game.enemyProjectiles.push(
-                new EnemyLaserSmall(
-                    this.game,
-                    this.canvas,
-                    this.ctx,
-                    this.x + this.laserOffsetX,
-                    this.y + (this.height + 5),
-                    this.damageStat
-                )
+            const freeLaser = this.game.enemyProjectiles.find(
+                (laser) => laser.isFree
             );
+            if (freeLaser) {
+                freeLaser.isFree = false;
+                freeLaser.x = this.x + this.laserOffsetX;
+                freeLaser.y = this.y + (this.height + 5);
+            }
             this.frameCount = 0;
         } else {
             this.frameCount += 1;
@@ -62,6 +61,6 @@ export class SmallTyphoon extends Enemy {
         this.game.explosions.push(
             new LargeExplosion(this.game, this.ctx, this.x, this.y)
         );
-        this.game.player.health -= 20;
+        this.game.player.health -= this.collisionDamage;
     }
 }

@@ -13,6 +13,7 @@ export default class Enemy {
     health: number;
     healthStat: number;
     damageStat: number;
+    collisionDamage: number;
     isFree: boolean;
     firesProjectiles: boolean;
     frameCount: number;
@@ -35,6 +36,7 @@ export default class Enemy {
         this.health = 40;
         this.healthStat = 40;
         this.damageStat = 10;
+        this.collisionDamage = 10;
         this.isFree = true;
         this.firesProjectiles = false;
         this.frameCount = 0;
