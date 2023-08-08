@@ -14,7 +14,6 @@ export default class Boss {
     speed: number;
     health: number;
     healthStat: number;
-    damageStat: number;
     frameCount: number;
     projectileInterval: number;
     isFiring: boolean;
@@ -34,11 +33,10 @@ export default class Boss {
         this.targetX = Math.floor(
             Math.random() * (this.canvas.width - this.width)
         );
-        this.targetY = Math.floor(Math.random() * 200);
+        this.targetY = Math.floor(Math.random() * (this.canvas.height / 2));
         this.speed = 6;
         this.health = 200;
         this.healthStat = 200;
-        this.damageStat = 20;
         this.frameCount = 0;
         this.projectileInterval = 40;
         this.isFiring = false;

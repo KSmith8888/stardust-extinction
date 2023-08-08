@@ -1,8 +1,8 @@
 import Game from "../../levels/game-logic";
 import Boss from "./boss";
-import largeBattleshipUrl from "../../assets/images/bosses/large-battleship.png";
+import largeBlasterUrl from "../../assets/images/bosses/large-blaster.png";
 
-export class LargeBattleship extends Boss {
+export class LargeBlaster extends Boss {
     image: HTMLImageElement;
     laserOffsetX: number;
     laserOffsetY: number;
@@ -12,15 +12,15 @@ export class LargeBattleship extends Boss {
         ctx: CanvasRenderingContext2D
     ) {
         super(game, canvas, ctx);
-        this.width = 48;
-        this.height = 58;
+        this.width = 50;
+        this.height = 48;
         this.y = 0 - this.height;
         this.speed = Math.floor(Math.random() * 4) + 2;
         this.frameCount = 0;
         this.image = new Image();
-        this.image.src = largeBattleshipUrl;
-        this.laserOffsetX = Math.floor(this.width * 0.2);
-        this.laserOffsetY = Math.floor(this.height * 0.5);
+        this.image.src = largeBlasterUrl;
+        this.laserOffsetX = Math.floor(this.width * 0.25);
+        this.laserOffsetY = Math.floor(this.height * 0.6);
     }
     render() {
         if (this.health <= 0) {
@@ -42,7 +42,7 @@ export class LargeBattleship extends Boss {
         );
         if (firstLaser) {
             firstLaser.isFree = false;
-            firstLaser.x = this.x;
+            firstLaser.x = this.x + this.laserOffsetX;
             firstLaser.y = this.y + this.laserOffsetY;
         }
         const secondLaser = this.game.bossProjectiles.find(

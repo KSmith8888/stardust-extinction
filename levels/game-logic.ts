@@ -13,6 +13,7 @@ import { SmallRacer } from "../src/enemies/small-racer";
 import { SmallExplosion } from "../src/explosions/small-explosion";
 import { LargeEmp } from "../src/explosions/emp";
 import { LargeBattleship } from "../src/bosses/large-battleship";
+import { LargeBlaster } from "../src/bosses/large-blaster";
 //Utils
 import { areObjectsColliding } from "../src/utils/collision";
 import { sizeCanvas } from "../src/utils/sizeCanvas";
@@ -33,7 +34,7 @@ export default class Game {
     destroyedEnemies: number;
     hasReachedBoss: boolean;
     explosions: Array<SmallExplosion | LargeEmp>;
-    bosses: Array<LargeBattleship>;
+    bosses: Array<LargeBattleship | LargeBlaster>;
     bossProjectiles: Array<EnemyLaserLarge>;
     bossLaserPoolSize: number;
     isGamePaused: boolean;

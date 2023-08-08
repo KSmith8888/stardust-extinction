@@ -13,7 +13,7 @@ import Game from "../game-logic";
 import { BlueMine } from "../../src/enemies/mines";
 import { SmallTyphoon } from "../../src/enemies/typhoons";
 import { SmallFighter } from "../../src/enemies/fighters";
-import { LargeBattleship } from "../../src/bosses/large-battleship";
+import { LargeBlaster } from "../../src/bosses/large-blaster";
 //Assets
 import spaceBackgroundUrl from "../../assets/images/backgrounds/space-background.png";
 import spaceBgDesktopUrl from "../../assets/images/backgrounds/space-background-desktop.png";
@@ -77,7 +77,11 @@ export default class Level2Game extends Game {
         if (!this.hasReachedBoss && this.destroyedEnemies >= 20) {
             this.events.audioEvents.alarmSound.play();
             this.hasReachedBoss = true;
-            this.bosses.push(new LargeBattleship(this, this.canvas, this.ctx));
+            this.bosses.push(new LargeBlaster(this, this.canvas, this.ctx));
+            setTimeout(() => {
+                this.bosses.push(new LargeBlaster(this, this.canvas, this.ctx));
+                this.bosses.push(new LargeBlaster(this, this.canvas, this.ctx));
+            }, 800);
         }
     }
     animate(timeStamp: number) {

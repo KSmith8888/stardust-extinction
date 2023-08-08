@@ -39,6 +39,9 @@ https://opengameart.org/content/asteroids-game-sprites-atlas
 "Another Space Backgrounds" by Rawdanitsu licensed CC0:  
 https://opengameart.org/content/another-space-backgrounds-0
 
+"Modular Ships" by surt licensed CC0:  
+https://opengameart.org/content/modular-ships
+
 ### Audio
 
 "Beep Tone Sound SFX" by qubodup licensed CC0:  
