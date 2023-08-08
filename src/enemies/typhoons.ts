@@ -1,11 +1,9 @@
 import Enemy from "./enemy";
 import Game from "../../levels/game-logic";
-import { EnemyLaserSmall } from "../projectiles/enemy-lasers";
 import smallTyphoonUrl from "../../assets/images/enemies/small-typhoon.png";
 import { LargeExplosion } from "../explosions/large-explosion";
 
 export class SmallTyphoon extends Enemy {
-    projectiles: Array<EnemyLaserSmall>;
     speed: number;
     image: HTMLImageElement;
     laserOffsetX: number;
@@ -17,7 +15,6 @@ export class SmallTyphoon extends Enemy {
     ) {
         super(game, canvas, ctx);
         this.firesProjectiles = true;
-        this.projectiles = [];
         this.width = 22;
         this.height = 30;
         this.speed = Math.floor(Math.random() * 3) + 3;

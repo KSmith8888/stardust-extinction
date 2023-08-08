@@ -1,7 +1,6 @@
 import Game from "../../levels/game-logic";
 import { LaserSmall, LaserMediumTwo } from "../projectiles/lasers";
 import { HealthBar } from "./healthbar";
-import { RedMine, BlueMine } from "../enemies/mines";
 import { SmallExplosion } from "../explosions/small-explosion";
 
 export default class Player {
@@ -15,7 +14,6 @@ export default class Player {
     isMoving: boolean;
     idleShipImage: HTMLImageElement;
     activeShipImage: HTMLImageElement;
-    enemies: Array<RedMine | BlueMine>;
     explosions: Array<SmallExplosion>;
     projectiles: Array<LaserSmall>;
     projectileInterval: number;
@@ -48,7 +46,6 @@ export default class Player {
         this.activeShipImage = <HTMLImageElement>(
             document.getElementById("active-ship-image")
         );
-        this.enemies = [];
         this.explosions = [];
         this.projectiles = [];
         this.projectileInterval = 15;

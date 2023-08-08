@@ -12,7 +12,6 @@ export default class Enemy {
     speed: number;
     health: number;
     healthStat: number;
-    damageStat: number;
     collisionDamage: number;
     isFree: boolean;
     firesProjectiles: boolean;
@@ -35,7 +34,6 @@ export default class Enemy {
         this.speed = Math.floor(Math.random() * 3) + 1;
         this.health = 40;
         this.healthStat = 40;
-        this.damageStat = 10;
         this.collisionDamage = 10;
         this.isFree = true;
         this.firesProjectiles = false;
