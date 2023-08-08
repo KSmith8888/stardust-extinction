@@ -15,7 +15,8 @@ export default class Player {
     idleShipImage: HTMLImageElement;
     activeShipImage: HTMLImageElement;
     explosions: Array<SmallExplosion>;
-    projectiles: Array<LaserSmall>;
+    projectiles: Array<LaserSmall | LaserMediumTwo>;
+    projectilePoolSize: number;
     projectileInterval: number;
     projectileStrength: number;
     frameCount: number;
@@ -24,7 +25,6 @@ export default class Player {
     healthBar: HealthBar;
     health: number;
     healthStat: number;
-    damageStat: number;
     isShipDisabled: boolean;
     shipDisabledFrames: number;
     constructor(
@@ -48,6 +48,7 @@ export default class Player {
         );
         this.explosions = [];
         this.projectiles = [];
+        this.projectilePoolSize = 20;
         this.projectileInterval = 15;
         this.projectileStrength = 1;
         this.frameCount = 0;
@@ -61,9 +62,21 @@ export default class Player {
         );
         this.health = 100;
         this.healthStat = 100;
-        this.damageStat = 10;
         this.isShipDisabled = false;
         this.shipDisabledFrames = 0;
+        this.initializeProjectiles();
+    }
+    initializeProjectiles() {
+        for (let i = 0; i < this.projectilePoolSize; i++) {
+            this.projectiles.push(
+                new LaserSmall(this.game, this.canvas, this.ctx)
+            );
+        }
+        for (let j = 0; j < this.projectilePoolSize; j++) {
+            this.projectiles.push(
+                new LaserMediumTwo(this.game, this.canvas, this.ctx)
+            );
+        }
     }
     render() {
         if (this.isShipDisabled) {
@@ -85,84 +98,40 @@ export default class Player {
             this.height
         );
     }
-    addNewProjectiles() {
-        switch (this.projectileStrength) {
-            case 3: {
-                this.projectiles.push(
-                    new LaserSmall(
-                        this.game,
-                        this.canvas,
-                        this.ctx,
-                        this.x,
-                        this.y + this.laserOffsetY
-                    )
-                );
-                this.projectiles.push(
-                    new LaserSmall(
-                        this.game,
-                        this.canvas,
-                        this.ctx,
-                        this.x + (this.width - this.laserOffsetX),
-                        this.y + this.laserOffsetY
-                    )
-                );
-                break;
-            }
-            case 2: {
-                this.projectiles.push(
-                    new LaserMediumTwo(
-                        this.game,
-                        this.canvas,
-                        this.ctx,
-                        this.x,
-                        this.y + this.laserOffsetY
-                    )
-                );
-                this.projectiles.push(
-                    new LaserMediumTwo(
-                        this.game,
-                        this.canvas,
-                        this.ctx,
-                        this.x + (this.width - this.laserOffsetX),
-                        this.y + this.laserOffsetY
-                    )
-                );
-                break;
-            }
-            default: {
-                this.projectiles.push(
-                    new LaserSmall(
-                        this.game,
-                        this.canvas,
-                        this.ctx,
-                        this.x,
-                        this.y + this.laserOffsetY
-                    )
-                );
-                this.projectiles.push(
-                    new LaserSmall(
-                        this.game,
-                        this.canvas,
-                        this.ctx,
-                        this.x + (this.width - this.laserOffsetX),
-                        this.y + this.laserOffsetY
-                    )
-                );
-            }
+    activateProjectiles() {
+        let currentLaser = LaserSmall;
+        if (this.projectileStrength === 2) {
+            currentLaser = LaserMediumTwo;
+        }
+        const firstLaser = this.projectiles.find((laser) => {
+            return laser instanceof currentLaser && laser.isFree;
+        });
+        if (firstLaser) {
+            firstLaser.x = this.x;
+            firstLaser.y = this.y + this.laserOffsetY;
+            firstLaser.isFree = false;
+        }
+        const secondLaser = this.projectiles.find((laser) => {
+            return laser instanceof currentLaser && laser.isFree;
+        });
+        if (secondLaser) {
+            secondLaser.x = this.x + (this.width - this.laserOffsetX);
+            secondLaser.y = this.y + this.laserOffsetY;
+            secondLaser.isFree = false;
         }
     }
     handleProjectiles() {
-        this.projectiles = this.projectiles.filter((laser) => {
-            return !laser.isOffScreen && !laser.hasHitTarget;
-        });
         if (!this.isShipDisabled) {
             if (this.frameCount >= this.projectileInterval) {
-                this.addNewProjectiles();
+                this.activateProjectiles();
                 this.frameCount = 0;
             } else {
                 this.frameCount += 1;
             }
         }
-        this.projectiles.forEach((laser) => laser.render());
+        const activeProjectiles = this.projectiles.filter((laser) => {
+            return !laser.isFree;
+        });
+        activeProjectiles.forEach((laser) => laser.render());
     }
 }

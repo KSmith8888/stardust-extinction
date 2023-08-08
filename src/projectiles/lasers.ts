@@ -7,27 +7,20 @@ export class LaserSmall extends Projectile {
     constructor(
         game: Game,
         canvas: HTMLCanvasElement,
-        ctx: CanvasRenderingContext2D,
-        x: number,
-        y: number
+        ctx: CanvasRenderingContext2D
     ) {
-        super(game, canvas, ctx, x, y);
-        this.canvas = canvas;
-        this.ctx = ctx;
-        this.x = x;
-        this.y = y;
+        super(game, canvas, ctx);
         this.width = 8;
         this.height = 14;
         this.speed = 5.25;
         this.image.src = smallLaserUrl;
-        this.game = game;
     }
     render() {
         this.handleCollision();
         if (this.y > 0) {
             this.y -= this.speed;
         } else {
-            this.isOffScreen = true;
+            this.reset();
         }
         this.ctx.drawImage(this.image, this.x, this.y);
     }
@@ -37,25 +30,21 @@ export class LaserMediumTwo extends Projectile {
     constructor(
         game: Game,
         canvas: HTMLCanvasElement,
-        ctx: CanvasRenderingContext2D,
-        x: number,
-        y: number
+        ctx: CanvasRenderingContext2D
     ) {
-        super(game, canvas, ctx, x, y);
-        this.x = x;
-        this.y = y;
+        super(game, canvas, ctx);
         this.width = 9;
         this.height = 20;
         this.speed = 4.75;
         this.image.src = medLaserPurpleUrl;
-        this.damageMultiplier = 2;
+        this.damage = 20;
     }
     render() {
         this.handleCollision();
         if (this.y > 0) {
             this.y -= this.speed;
         } else {
-            this.isOffScreen = true;
+            this.reset();
         }
         this.ctx.drawImage(this.image, this.x, this.y);
     }

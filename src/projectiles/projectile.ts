@@ -10,55 +10,54 @@ export default class Projectile {
     y: number;
     width: number;
     height: number;
-    isOffScreen: boolean;
-    hasHitTarget: boolean;
+    damage: number;
+    isFree: boolean;
     speed: number;
     image: HTMLImageElement;
-    damageMultiplier: number;
     constructor(
         game: Game,
         canvas: HTMLCanvasElement,
-        ctx: CanvasRenderingContext2D,
-        x: number,
-        y: number
+        ctx: CanvasRenderingContext2D
     ) {
         this.game = game;
         this.canvas = canvas;
         this.ctx = ctx;
-        this.x = x;
-        this.y = y;
         this.width = 0;
         this.height = 0;
-        this.isOffScreen = false;
-        this.hasHitTarget = false;
+        this.x = 0;
+        this.y = this.canvas.height + this.height;
+        this.damage = 10;
+        this.isFree = true;
         this.speed = 1;
         this.image = new Image();
-        this.damageMultiplier = 1;
+    }
+    reset() {
+        this.x = 0;
+        this.y = this.canvas.height + this.height;
+        this.isFree = true;
     }
     handleCollision() {
         this.game.enemies.forEach((enemy) => {
             if (
-                !this.hasHitTarget &&
+                !this.isFree &&
                 !enemy.isFree &&
                 areObjectsColliding(this, enemy)
             ) {
                 this.game.explosions.push(
                     new SmallExplosion(this.ctx, enemy.x, enemy.y)
                 );
-                enemy.health -=
-                    this.game.player.damageStat * this.damageMultiplier;
-                this.hasHitTarget = true;
+                enemy.health -= this.damage;
+                this.reset();
             }
         });
         if (this.game.hasReachedBoss) {
             this.game.bosses.forEach((boss) => {
-                if (!this.hasHitTarget && areObjectsColliding(this, boss)) {
+                if (!this.isFree && areObjectsColliding(this, boss)) {
                     this.game.explosions.push(
                         new SmallExplosion(this.ctx, this.x, this.y)
                     );
-                    boss.health -=
-                        this.game.player.damageStat * this.damageMultiplier;
-                    this.hasHitTarget = true;
+                    boss.health -= this.damage;
+                    this.reset();
                 }
             });
         }
