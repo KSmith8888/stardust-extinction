@@ -17,6 +17,9 @@ export default class MenuEvents {
     changeMuteSetting: void;
     closeAudioButton: HTMLButtonElement;
     closeAudio: void;
+    tutorialModal: HTMLDialogElement;
+    closeTutorialButton: HTMLButtonElement;
+    closeTutorial: void;
     constructor(game: Game) {
         this.game = game;
         this.menuButton = <HTMLButtonElement>(
@@ -79,6 +82,19 @@ export default class MenuEvents {
             "click",
             () => {
                 this.audioMenu.close();
+            }
+        );
+        this.tutorialModal = <HTMLDialogElement>(
+            document.getElementById("tutorial-modal")
+        );
+        this.closeTutorialButton = <HTMLButtonElement>(
+            document.getElementById("close-tutorial-button")
+        );
+        this.closeTutorial = this.closeTutorialButton.addEventListener(
+            "click",
+            () => {
+                this.tutorialModal.close();
+                this.game.isGamePaused = false;
             }
         );
     }

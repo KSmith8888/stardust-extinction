@@ -69,7 +69,7 @@ export default class Game {
         this.bosses = [];
         this.bossProjectiles = [];
         this.bossLaserPoolSize = 12;
-        this.isGamePaused = false;
+        this.isGamePaused = true;
         this.frameCount = 0;
         this.lastTime = 0;
         this.interval = 1000 / 60;
@@ -78,6 +78,7 @@ export default class Game {
         this.mobileBackground = spaceBackgroundUrl;
         this.desktopBackground = spaceBgDesktopUrl;
         this.nextLevelUrl = "/";
+        this.events.menuEvents.tutorialModal.showModal();
         this.initializeEnemyLasers();
         this.initializeBossLasers();
     }

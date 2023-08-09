@@ -111,9 +111,54 @@ body {
     font-size: 1.1rem;
 }
 
+#tutorial-modal[open] {
+    width: 95%;
+    max-width: 850px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(58, 4, 51, 0.6);
+    color: rgb(243, 134, 228);
+    border: 1px solid rgb(226, 49, 203);
+    border-radius: 5px;
+    padding: 1em 1em 1.5em 1em;
+}
+
+#tutorial-modal-heading {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.tutorial-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.tutorial-item-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tutorial-item-title {
+    margin: 1em 0 0.5em 0;
+}
+
+.tutorial-item-description {
+    margin: 0.5em 0;
+}
+
 @media (min-width: 900px) {
     #container {
         width: 900px;
         height: 600px;
+    }
+    .tutorial-row {
+        flex-direction: row;
+    }
+
+    .tutorial-item-container {
+        width: 50%;
     }
 }
