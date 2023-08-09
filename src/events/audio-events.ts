@@ -14,7 +14,7 @@ export default class AudioEvents {
         this.explosionSound = new Audio(explosionSoundUrl);
         this.explosionSound.volume = 0.1;
         this.alarmSound = new Audio(alarmSoundUrl);
-        this.alarmSound.volume = 0.2;
+        this.alarmSound.volume = 0.3;
     }
     playExplosionSound() {
         this.explosionSound.currentTime = 0;

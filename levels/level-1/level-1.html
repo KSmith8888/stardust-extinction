@@ -64,67 +64,75 @@
                 <p id="tutorial-modal-heading">Level 1 Enemies</p>
                 <div class="tutorial-row">
                     <div class="tutorial-item-container">
-                        <img
-                            width="24"
-                            height="20"
-                            class="tutorial-item-image"
-                            src="../../assets/images/enemies/red-mine.png"
-                            alt="A small, grey robotic ship with a red light in the center"
-                        />
-                        <p class="tutorial-item-title">Red Mine</p>
-                        <p class="tutorial-item-description">
-                            Moves quickly towards the player. Causes a large
-                            amount of damage on impact. Can also destroy enemies
-                            that enter the blast radius.
-                        </p>
+                        <div class="tutorial-item-info">
+                            <img
+                                width="24"
+                                height="20"
+                                class="tutorial-item-image"
+                                src="../../assets/images/enemies/red-mine.png"
+                                alt="A small, grey robotic ship with a red light in the center"
+                            />
+                            <p class="tutorial-item-title">Red Mine</p>
+                            <p class="tutorial-item-description">
+                                Moves quickly towards the player. Causes a large
+                                amount of damage on impact. Can also destroy
+                                enemies that enter the blast radius.
+                            </p>
+                        </div>
                     </div>
                     <div class="tutorial-item-container">
-                        <img
-                            width="36"
-                            height="24"
-                            class="tutorial-item-image"
-                            src="../../assets/images/enemies/blue-mine.png"
-                            alt="A small, grey robotic ship with a blue light in the center"
-                        />
-                        <p class="tutorial-item-title">Blue Mine</p>
-                        <p class="tutorial-item-description">
-                            Moves slowly and at random. Disables the players
-                            ship for several moments after impact.
-                        </p>
+                        <div class="tutorial-item-info">
+                            <img
+                                width="36"
+                                height="24"
+                                class="tutorial-item-image"
+                                src="../../assets/images/enemies/blue-mine.png"
+                                alt="A small, grey robotic ship with a blue light in the center"
+                            />
+                            <p class="tutorial-item-title">Blue Mine</p>
+                            <p class="tutorial-item-description">
+                                Moves slowly and at random. Disables the players
+                                ship for several moments after impact.
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="tutorial-row">
                     <div class="tutorial-item-container">
-                        <img
-                            width="24"
-                            height="24"
-                            class="tutorial-item-image"
-                            src="../../assets/images/enemies/small-fighter.png"
-                            alt="A small, grey spaceship with cannons on either side"
-                        />
-                        <p class="tutorial-item-title">Small Fighter</p>
-                        <p class="tutorial-item-description">
-                            Moves at random. Fires lasers at a fast rate.
-                        </p>
+                        <div class="tutorial-item-info">
+                            <img
+                                width="24"
+                                height="24"
+                                class="tutorial-item-image"
+                                src="../../assets/images/enemies/small-fighter.png"
+                                alt="A small, grey spaceship with cannons on either side"
+                            />
+                            <p class="tutorial-item-title">Small Fighter</p>
+                            <p class="tutorial-item-description">
+                                Moves at random. Fires lasers at a fast rate.
+                            </p>
+                        </div>
                     </div>
                     <div class="tutorial-item-container">
-                        <img
-                            width="16"
-                            height="28"
-                            class="tutorial-item-image"
-                            src="../../assets/images/enemies/small-racer.png"
-                            alt="A small, grey triangular spaceship"
-                        />
-                        <p class="tutorial-item-title">Small Racer</p>
-                        <p class="tutorial-item-description">
-                            Enemy scout ship. Moves extremely quickly and
-                            ignores the player. If destroyed, gives the player a
-                            weapon upgrade.
-                        </p>
+                        <div class="tutorial-item-info">
+                            <img
+                                width="16"
+                                height="28"
+                                class="tutorial-item-image"
+                                src="../../assets/images/enemies/small-racer.png"
+                                alt="A small, grey triangular spaceship"
+                            />
+                            <p class="tutorial-item-title">Small Racer</p>
+                            <p class="tutorial-item-description">
+                                Enemy scout ship. Moves extremely quickly and
+                                ignores the player. If destroyed, gives the
+                                player a weapon upgrade.
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <button id="close-tutorial-button" type="button" class="button">
-                    Close
+                    Start Level 1
                 </button>
             </dialog>
             <dialog id="game-over-modal">
@@ -147,12 +155,16 @@
                 </button>
             </dialog>
             <img
+                width="45"
+                height="45"
                 id="idle-ship-image"
                 class="no-display"
                 src="../../assets/images/player/player-ship-idle.png"
                 alt="A small grey spaceship idling"
             />
             <img
+                width="45"
+                height="45"
                 id="active-ship-image"
                 class="no-display"
                 src="../../assets/images/player/player-ship-active.png"
