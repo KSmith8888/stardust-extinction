@@ -1,6 +1,8 @@
 import Game from "../../levels/game-logic";
 import { areObjectsColliding } from "../utils/collision";
 import { SmallExplosion } from "../explosions/small-explosion";
+import { LargeExplosion } from "../explosions/large-explosion";
+import { EnemySeeker } from "./enemy-seeker";
 
 export default class Projectile {
     game: Game;
@@ -60,6 +62,25 @@ export default class Projectile {
                     this.reset();
                 }
             });
+            const activeSeekers = this.game.bossProjectiles.filter(
+                (projectile) =>
+                    projectile instanceof EnemySeeker && !projectile.isFree
+            );
+            if (activeSeekers.length > 0) {
+                activeSeekers.forEach((seeker) => {
+                    if (areObjectsColliding(this, seeker)) {
+                        this.game.explosions.push(
+                            new LargeExplosion(
+                                this.game,
+                                this.ctx,
+                                seeker.x,
+                                seeker.y
+                            )
+                        );
+                        seeker.reset();
+                    }
+                });
+            }
         }
     }
 }

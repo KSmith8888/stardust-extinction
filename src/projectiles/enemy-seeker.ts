@@ -1,8 +1,7 @@
 import Game from "../../levels/game-logic";
 import EnemyProjectile from "./enemy-projectile";
 import { LargeExplosion } from "../explosions/large-explosion";
-import seekerStableUrl from "../../assets/images/projectiles/seeker-stable.png";
-import seekerFlashingUrl from "../../assets/images/projectiles/seeker-flashing.png";
+import seekerSmallUrl from "../../assets/images/projectiles/seeker-small.png";
 
 export class EnemySeeker extends EnemyProjectile {
     targetX: number;
@@ -13,11 +12,11 @@ export class EnemySeeker extends EnemyProjectile {
         ctx: CanvasRenderingContext2D
     ) {
         super(game, canvas, ctx);
-        this.width = 8;
-        this.height = 14;
+        this.width = 11;
+        this.height = 26;
         this.speed = 6.25;
         this.damage = 20;
-        this.image.src = seekerStableUrl;
+        this.image.src = seekerSmallUrl;
         this.targetX = this.game.player.x;
         this.frameCount = 0;
     }
@@ -31,15 +30,6 @@ export class EnemySeeker extends EnemyProjectile {
     }
 
     render() {
-        if (this.frameCount < 10) {
-            this.image.src = seekerStableUrl;
-            this.frameCount += 1;
-        } else if (this.frameCount >= 10 && this.frameCount < 20) {
-            this.image.src = seekerFlashingUrl;
-            this.frameCount += 1;
-        } else {
-            this.frameCount = 0;
-        }
         this.followTargetX();
         if (this.y < this.canvas.height) {
             this.y += this.speed;
