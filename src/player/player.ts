@@ -71,8 +71,6 @@ export default class Player {
             this.projectiles.push(
                 new LaserSmall(this.game, this.canvas, this.ctx)
             );
-        }
-        for (let j = 0; j < this.projectilePoolSize; j++) {
             this.projectiles.push(
                 new LaserMediumTwo(this.game, this.canvas, this.ctx)
             );

@@ -8,6 +8,7 @@ import {
     EnemyLaserSmall,
     EnemyLaserLarge,
 } from "../src/projectiles/enemy-lasers";
+import { EnemySeeker } from "../src/projectiles/enemy-seeker";
 import { SmallFighter } from "../src/enemies/fighters";
 import { SmallRacer } from "../src/enemies/small-racer";
 import { SmallExplosion } from "../src/explosions/small-explosion";
@@ -35,7 +36,7 @@ export default class Game {
     hasReachedBoss: boolean;
     explosions: Array<SmallExplosion | LargeEmp>;
     bosses: Array<LargeBattleship | LargeBlaster>;
-    bossProjectiles: Array<EnemyLaserLarge>;
+    bossProjectiles: Array<EnemyLaserLarge | EnemySeeker>;
     bossLaserPoolSize: number;
     isGamePaused: boolean;
     frameCount: number;
@@ -186,6 +187,11 @@ export default class Game {
         });
         activeBossProjectiles.forEach((laser) => {
             laser.render();
+            const didEnemyCollide = areObjectsColliding(this.player, laser);
+            if (didEnemyCollide) {
+                laser.collidedWithPlayer();
+                laser.reset();
+            }
         });
     }
 }

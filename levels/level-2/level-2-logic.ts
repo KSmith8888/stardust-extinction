@@ -14,6 +14,7 @@ import { BlueMine } from "../../src/enemies/mines";
 import { SmallTyphoon } from "../../src/enemies/typhoons";
 import { SmallFighter } from "../../src/enemies/fighters";
 import { LargeBlaster } from "../../src/bosses/large-blaster";
+import { EnemySeeker } from "../../src/projectiles/enemy-seeker";
 //Assets
 import spaceBackgroundUrl from "../../assets/images/backgrounds/space-background.png";
 import spaceBgDesktopUrl from "../../assets/images/backgrounds/space-background-desktop.png";
@@ -26,6 +27,7 @@ export default class Level2Game extends Game {
         this.mobileBackground = spaceBackgroundUrl;
         this.desktopBackground = spaceBgDesktopUrl;
         this.initializeEnemies();
+        this.initializeSeekers();
     }
     initializeEnemies() {
         for (let i = 0; i < this.enemyPoolSize; i++) {
@@ -40,6 +42,13 @@ export default class Level2Game extends Game {
                     new SmallFighter(this, this.canvas, this.ctx)
                 );
             }
+        }
+    }
+    initializeSeekers() {
+        for (let i = 0; i < this.bossLaserPoolSize; i++) {
+            this.bossProjectiles.push(
+                new EnemySeeker(this, this.canvas, this.ctx)
+            );
         }
     }
     activateNewEnemies() {

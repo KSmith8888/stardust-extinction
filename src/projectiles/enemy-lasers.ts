@@ -1,5 +1,6 @@
 import Game from "../../levels/game-logic";
 import EnemyProjectile from "./enemy-projectile";
+import { SmallExplosion } from "../explosions/small-explosion";
 import enemySmallLaserUrl from "../../assets/images/projectiles/enemy-laser-small.png";
 import enemyLargeLaserUrl from "../../assets/images/projectiles/enemy-laser-large.png";
 
@@ -29,5 +30,9 @@ export class EnemyLaserLarge extends EnemyProjectile {
         this.speed = 5.75;
         this.image.src = enemyLargeLaserUrl;
         this.damage = 30;
+    }
+    collidedWithPlayer() {
+        this.game.explosions.push(new SmallExplosion(this.ctx, this.x, this.y));
+        this.game.player.health -= this.damage;
     }
 }
