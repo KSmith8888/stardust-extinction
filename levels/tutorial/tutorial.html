@@ -6,10 +6,10 @@
         <meta name="author" content="Kevyn Smith" />
         <meta
             name="description"
-            content="The first level of Stardust: Extinction"
+            content="The tutorial level of Stardust: Extinction"
         />
         <link rel="stylesheet" href="../../assets/styles/main.css" />
-        <script type="module" src="level-1-logic.ts"></script>
+        <script type="module" src="tutorial-logic.ts"></script>
         <title>Level 1</title>
     </head>
     <body>
@@ -61,8 +61,19 @@
                 </button>
             </dialog>
             <dialog id="tutorial-modal">
-                <p id="tutorial-modal-heading">Level 1 Enemies</p>
-                <div class="tutorial-row">
+                <p id="tutorial-modal-heading">Tutorial</p>
+                <p id="tutorial-first">
+                    Before getting started, this tutorial level will give you a
+                    quick overview of how the game is played.
+                </p>
+                <p id="tutorial-second">
+                    At the start of each level, a message box like this will be
+                    shown that lists the enemy types that appear in that level,
+                    along with a brief description of their behavior. After
+                    reviewing the enemies, click the start button at the bottom
+                    to begin the level.
+                </p>
+                <div id="tutorial-row-initial" class="tutorial-row">
                     <div class="tutorial-item-container">
                         <div class="tutorial-item-info">
                             <img
@@ -84,24 +95,6 @@
                     <div class="tutorial-item-container">
                         <div class="tutorial-item-info">
                             <img
-                                width="36"
-                                height="24"
-                                class="tutorial-item-image"
-                                src="../../assets/images/enemies/blue-mine.png"
-                                alt="A small, grey robotic ship with a blue light in the center"
-                            />
-                            <p class="tutorial-item-title">Blue Mine</p>
-                            <p class="tutorial-item-description">
-                                Moves slowly and at random. Disables the players
-                                ship for several moments after impact.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tutorial-row">
-                    <div class="tutorial-item-container">
-                        <div class="tutorial-item-info">
-                            <img
                                 width="24"
                                 height="24"
                                 class="tutorial-item-image"
@@ -114,26 +107,9 @@
                             </p>
                         </div>
                     </div>
-                    <div class="tutorial-item-container">
-                        <div class="tutorial-item-info">
-                            <img
-                                width="16"
-                                height="28"
-                                class="tutorial-item-image"
-                                src="../../assets/images/enemies/small-racer.png"
-                                alt="A small, grey triangular spaceship"
-                            />
-                            <p class="tutorial-item-title">Small Racer</p>
-                            <p class="tutorial-item-description">
-                                Enemy scout ship. Moves extremely quickly and
-                                ignores the player. If destroyed, gives the
-                                player a weapon upgrade.
-                            </p>
-                        </div>
-                    </div>
                 </div>
                 <button id="close-tutorial-button" type="button" class="button">
-                    Start Level 1
+                    Start Tutorial
                 </button>
             </dialog>
             <dialog id="game-over-modal">

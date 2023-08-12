@@ -25,7 +25,7 @@ async function startLevel1() {
     try {
         await beepAudio.play();
         setTimeout(() => {
-            location.assign("/levels/level-1/level-1.html");
+            location.assign("/levels/tutorial/tutorial.html");
         }, 800);
     } catch (error) {
         console.error(error);
