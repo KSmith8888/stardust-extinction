@@ -42,6 +42,16 @@ export default class Boss {
         this.isFiring = false;
         this.isDestroyed = false;
     }
+    followTargetY() {
+        if (this.y >= this.targetY + 5) {
+            this.y -= this.speed / 2;
+        } else if (this.y <= this.targetY - 5) {
+            this.y += this.speed / 2;
+        }
+        if (this.frameCount === 20) {
+            this.targetY = Math.floor(Math.random() * (this.canvas.height / 2));
+        }
+    }
     followTargetX() {
         if (this.x >= this.targetX + 5) {
             this.x -= this.speed;

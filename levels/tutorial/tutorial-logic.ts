@@ -15,13 +15,27 @@ import { LargeBattleship } from "../../src/bosses/large-battleship";
 
 export default class TutorialGame extends Game {
     hasSeenMovementTutorial: boolean;
+    hasSeenMenuTutorial: boolean;
     hasSeenBossTutorial: boolean;
     hasBossBeenReleased: boolean;
+    tutorialHeading: HTMLParagraphElement;
+    tutorialFirstPara: HTMLParagraphElement;
+    tutorialSecondPara: HTMLParagraphElement;
     constructor() {
         super();
         this.hasSeenMovementTutorial = false;
+        this.hasSeenMenuTutorial = false;
         this.hasSeenBossTutorial = false;
         this.hasBossBeenReleased = false;
+        this.tutorialHeading = <HTMLParagraphElement>(
+            document.getElementById("tutorial-modal-heading")
+        );
+        this.tutorialFirstPara = <HTMLParagraphElement>(
+            document.getElementById("tutorial-first")
+        );
+        this.tutorialSecondPara = <HTMLParagraphElement>(
+            document.getElementById("tutorial-second")
+        );
         this.nextLevelUrl = "/levels/level-1/level-1.html";
         this.enemyPoolSize = 10;
         this.initializeEnemies();
@@ -43,19 +57,23 @@ export default class TutorialGame extends Game {
         } else if (this.frameCount !== 0) {
             this.frameCount = 0;
         }
-        if (this.frameCount === 40 && !this.hasSeenMovementTutorial) {
+        if (!this.hasSeenMovementTutorial && this.frameCount === 40) {
             this.isGamePaused = true;
             this.hasSeenMovementTutorial = true;
             this.createMovementTutorial();
             this.events.menuEvents.tutorialModal.showModal();
-        }
-        if (this.frameCount === 50) {
+        } else if (this.frameCount === 50) {
             const freeFighter = this.enemies.find((enemy) => {
                 return enemy instanceof SmallFighter && enemy.isFree;
             });
             if (freeFighter) {
                 freeFighter.isFree = false;
             }
+        } else if (!this.hasSeenMenuTutorial && this.frameCount === 140) {
+            this.isGamePaused = true;
+            this.hasSeenMenuTutorial = true;
+            this.createMenuTutorial();
+            this.events.menuEvents.tutorialModal.showModal();
         } else if (this.frameCount === 150) {
             const freeRedMine = this.enemies.find((enemy) => {
                 return enemy instanceof RedMine && enemy.isFree;
@@ -71,39 +89,28 @@ export default class TutorialGame extends Game {
             document.getElementById("tutorial-row-initial")
         );
         tutorialRow.replaceChildren();
-        const tutorialHeading = <HTMLParagraphElement>(
-            document.getElementById("tutorial-modal-heading")
-        );
-        tutorialHeading.textContent = "Movement and Firing";
-        const firstParagraph = <HTMLParagraphElement>(
-            document.getElementById("tutorial-first")
-        );
-        firstParagraph.textContent =
+        this.tutorialHeading.textContent = "Movement and Firing";
+        this.tutorialFirstPara.textContent =
             "Movement controls are very simple. Just click or touch your ship, located at the bottom of the screen, and drag it to the desired location. Your ship will fire lasers automatically.";
-        const secondParagraph = <HTMLParagraphElement>(
-            document.getElementById("tutorial-second")
-        );
-        secondParagraph.textContent =
-            "Watch out for enemies appearing from the top of the screen. They may try to fire projectiles at your ship or collide with it directly.";
+        this.tutorialSecondPara.textContent =
+            "Watch out for new enemies appearing from the top of the screen.";
         const closeTutorialBtn = <HTMLParagraphElement>(
             document.getElementById("close-tutorial-button")
         );
         closeTutorialBtn.textContent = "Close";
     }
+    createMenuTutorial() {
+        this.tutorialHeading.textContent = "The Healthbar and Menu";
+        this.tutorialFirstPara.textContent =
+            "The healthbar located at the bottom left of the screen shows how much armor your ship has remaining.";
+        this.tutorialSecondPara.textContent =
+            "Click the Game Menu button on the top left or press the 'M' key to open the main menu.";
+    }
     createBossTutorial() {
-        const tutorialHeading = <HTMLParagraphElement>(
-            document.getElementById("tutorial-modal-heading")
-        );
-        tutorialHeading.textContent = "Reaching the Boss";
-        const firstParagraph = <HTMLParagraphElement>(
-            document.getElementById("tutorial-first")
-        );
-        firstParagraph.textContent =
+        this.tutorialHeading.textContent = "Reaching the Boss";
+        this.tutorialFirstPara.textContent =
             "After defeating a certain number of enemies, you will hear an alarm. This means that you have reached the boss for that level.";
-        const secondParagraph = <HTMLParagraphElement>(
-            document.getElementById("tutorial-second")
-        );
-        secondParagraph.textContent =
+        this.tutorialSecondPara.textContent =
             "Defeat the boss (or bosses) to complete the level. Good luck!";
     }
     checkForBossEvent() {
