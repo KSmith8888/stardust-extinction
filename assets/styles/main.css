@@ -127,6 +127,7 @@ body {
 }
 
 #tutorial-modal-heading {
+    user-select: none;
     margin: 0.5em 0;
     font-size: 1.4rem;
     font-weight: 600;
@@ -168,6 +169,7 @@ body {
 
 #tutorial-first,
 #tutorial-second {
+    user-select: none;
     background-color: rgba(24, 1, 21);
     border: 1px solid rgb(226, 49, 203);
     border-radius: 5px;

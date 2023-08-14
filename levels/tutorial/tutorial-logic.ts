@@ -60,6 +60,7 @@ export default class TutorialGame extends Game {
         if (!this.hasSeenMovementTutorial && this.frameCount === 40) {
             this.isGamePaused = true;
             this.hasSeenMovementTutorial = true;
+            this.player.isMoving = false;
             this.createMovementTutorial();
             this.events.menuEvents.tutorialModal.showModal();
         } else if (this.frameCount === 50) {
@@ -72,6 +73,7 @@ export default class TutorialGame extends Game {
         } else if (!this.hasSeenMenuTutorial && this.frameCount === 140) {
             this.isGamePaused = true;
             this.hasSeenMenuTutorial = true;
+            this.player.isMoving = false;
             this.createMenuTutorial();
             this.events.menuEvents.tutorialModal.showModal();
         } else if (this.frameCount === 150) {
@@ -123,6 +125,7 @@ export default class TutorialGame extends Game {
         if (!this.hasReachedBoss && this.destroyedEnemies >= 10) {
             this.isGamePaused = true;
             this.hasSeenBossTutorial = true;
+            this.player.isMoving = false;
             this.createBossTutorial();
             this.events.menuEvents.tutorialModal.showModal();
         }

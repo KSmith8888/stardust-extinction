@@ -168,6 +168,7 @@ export default class EventListeners {
                 case "KeyM": {
                     this.audioEvents.beepAudio.play();
                     if (!this.menuEvents.isMenuOpen) {
+                        this.player.isMoving = false;
                         this.menuEvents.mainMenu.showModal();
                         this.menuEvents.closeButton.focus();
                         this.menuEvents.isMenuOpen = true;
