@@ -81,19 +81,11 @@ export default class Game {
         this.nextLevelUrl = "/";
         this.events.menuEvents.tutorialModal.showModal();
         this.initializeEnemyLasers();
-        this.initializeBossLasers();
     }
     initializeEnemyLasers() {
         for (let i = 0; i < this.enemyLaserPoolSize; i++) {
             this.enemyProjectiles.push(
                 new EnemyLaserSmall(this, this.canvas, this.ctx)
-            );
-        }
-    }
-    initializeBossLasers() {
-        for (let i = 0; i < this.bossLaserPoolSize; i++) {
-            this.bossProjectiles.push(
-                new EnemyLaserLarge(this, this.canvas, this.ctx)
             );
         }
     }

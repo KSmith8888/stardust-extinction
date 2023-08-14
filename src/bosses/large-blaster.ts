@@ -1,7 +1,7 @@
 import Game from "../../levels/game-logic";
 import Boss from "./boss";
 import largeBlasterUrl from "../../assets/images/bosses/large-blaster.png";
-import { EnemyLaserLarge } from "../projectiles/enemy-lasers";
+import { EnemyLaserMedium } from "../projectiles/enemy-lasers";
 import { EnemySeeker } from "../projectiles/enemy-seeker";
 
 export class LargeBlaster extends Boss {
@@ -38,7 +38,7 @@ export class LargeBlaster extends Boss {
 
     activateProjectiles() {
         const firstLaser = this.game.bossProjectiles.find(
-            (laser) => laser.isFree && laser instanceof EnemyLaserLarge
+            (laser) => laser.isFree && laser instanceof EnemyLaserMedium
         );
         if (firstLaser) {
             firstLaser.isFree = false;
@@ -46,7 +46,7 @@ export class LargeBlaster extends Boss {
             firstLaser.y = this.y + this.laserOffsetY;
         }
         const secondLaser = this.game.bossProjectiles.find(
-            (laser) => laser.isFree && laser instanceof EnemyLaserLarge
+            (laser) => laser.isFree && laser instanceof EnemyLaserMedium
         );
         if (secondLaser) {
             secondLaser.isFree = false;
@@ -54,7 +54,7 @@ export class LargeBlaster extends Boss {
             secondLaser.y = this.y + this.laserOffsetY;
         }
         const rando = Math.random();
-        if (rando > 0.8) {
+        if (rando > 0.7) {
             const seeker = this.game.bossProjectiles.find(
                 (laser) => laser.isFree && laser instanceof EnemySeeker
             );

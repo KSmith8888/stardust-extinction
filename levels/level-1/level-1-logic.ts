@@ -12,12 +12,14 @@ import Game from "../game-logic";
 import { RedMine, BlueMine } from "../../src/enemies/mines";
 import { SmallFighter } from "../../src/enemies/fighters";
 import { LargeBattleship } from "../../src/bosses/large-battleship";
+import { EnemyLaserLarge } from "../../src/projectiles/enemy-lasers";
 
 export default class Level1Game extends Game {
     constructor() {
         super();
         this.nextLevelUrl = "/levels/level-2/level-2.html";
         this.initializeEnemies();
+        this.initializeBossProjectiles();
     }
     initializeEnemies() {
         for (let i = 0; i < this.enemyPoolSize; i++) {
@@ -30,6 +32,13 @@ export default class Level1Game extends Game {
                     new SmallFighter(this, this.canvas, this.ctx)
                 );
             }
+        }
+    }
+    initializeBossProjectiles() {
+        for (let i = 0; i < this.bossLaserPoolSize; i++) {
+            this.bossProjectiles.push(
+                new EnemyLaserLarge(this, this.canvas, this.ctx)
+            );
         }
     }
     activateNewEnemies() {
