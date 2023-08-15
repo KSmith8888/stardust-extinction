@@ -41,14 +41,16 @@ async function startLevel1() {
 async function continueGame() {
     try {
         await beepAudio.play();
-        if (continueLevel && !isNaN(parseInt(continueLevel))) {
-            const levelNumber = parseInt(continueLevel);
-            location.assign(
-                `/levels/level-${levelNumber}/level-${levelNumber}.html`
-            );
-        } else {
-            alert("No save data found, please start a new game.");
-        }
+        setTimeout(() => {
+            if (continueLevel && !isNaN(parseInt(continueLevel))) {
+                const levelNumber = parseInt(continueLevel);
+                location.assign(
+                    `/levels/level-${levelNumber}/level-${levelNumber}.html`
+                );
+            } else {
+                alert("No save data found, please start a new game.");
+            }
+        }, 800);
     } catch (error) {
         console.error(error);
     }
@@ -57,7 +59,9 @@ async function continueGame() {
 async function gameInfo() {
     try {
         await beepAudio.play();
-        console.log("Game Info");
+        setTimeout(() => {
+            location.assign("/game-info.html");
+        }, 800);
     } catch (error) {
         console.error(error);
     }
