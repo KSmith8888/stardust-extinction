@@ -6,6 +6,7 @@ import { HealthBar } from "../src/player/healthbar";
 import { RedMine, BlueMine } from "../src/enemies/mines";
 import {
     EnemyLaserSmall,
+    EnemyLaserMedium,
     EnemyLaserLarge,
 } from "../src/projectiles/enemy-lasers";
 import { EnemySeeker } from "../src/projectiles/enemy-seeker";
@@ -36,7 +37,7 @@ export default class Game {
     hasReachedBoss: boolean;
     explosions: Array<SmallExplosion | LargeEmp>;
     bosses: Array<LargeBattleship | LargeBlaster>;
-    bossProjectiles: Array<EnemyLaserLarge | EnemySeeker>;
+    bossProjectiles: Array<EnemyLaserMedium | EnemyLaserLarge | EnemySeeker>;
     bossLaserPoolSize: number;
     isGamePaused: boolean;
     frameCount: number;

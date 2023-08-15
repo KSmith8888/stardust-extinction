@@ -15,7 +15,6 @@ export class EnemySeeker extends EnemyProjectile {
         this.width = 11;
         this.height = 26;
         this.speed = 6.25;
-        this.damage = 20;
         this.image.src = seekerSmallUrl;
         this.targetX = this.game.player.x;
         this.frameCount = 0;
@@ -42,6 +41,5 @@ export class EnemySeeker extends EnemyProjectile {
         this.game.explosions.push(
             new LargeExplosion(this.game, this.ctx, this.x, this.y)
         );
-        this.game.player.health -= this.damage;
     }
 }

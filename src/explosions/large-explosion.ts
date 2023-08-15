@@ -7,6 +7,7 @@ export class LargeExplosion extends Explosion {
     game: Game;
     ctx: CanvasRenderingContext2D;
     image: HTMLImageElement;
+    damage: number;
     damagedPlayer: boolean;
     constructor(
         game: Game,
@@ -23,20 +24,21 @@ export class LargeExplosion extends Explosion {
         this.height = 65;
         this.image = new Image();
         this.image.src = largeExplosionUrl;
+        this.damage = 40;
         this.damagedPlayer = false;
         this.game.events.audioEvents.playExplosionSound();
     }
     checkForCollision() {
         if (
-            areObjectsColliding(this, this.game.player) &&
-            !this.damagedPlayer
+            !this.damagedPlayer &&
+            areObjectsColliding(this, this.game.player)
         ) {
-            this.game.player.health -= 20;
+            this.game.player.health -= this.damage;
             this.damagedPlayer = true;
         }
         this.game.enemies.forEach((enemy) => {
             if (!enemy.isFree && areObjectsColliding(this, enemy)) {
-                enemy.health -= 20;
+                enemy.health -= this.damage;
             }
         });
     }

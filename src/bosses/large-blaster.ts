@@ -6,6 +6,7 @@ import { EnemySeeker } from "../projectiles/enemy-seeker";
 
 export class LargeBlaster extends Boss {
     image: HTMLImageElement;
+    seekerChance: number;
     laserOffsetX: number;
     laserOffsetY: number;
     constructor(
@@ -21,6 +22,7 @@ export class LargeBlaster extends Boss {
         this.frameCount = 0;
         this.image = new Image();
         this.image.src = largeBlasterUrl;
+        this.seekerChance = 0.3;
         this.laserOffsetX = Math.floor(this.width * 0.25);
         this.laserOffsetY = Math.floor(this.height * 0.6);
     }
@@ -54,7 +56,7 @@ export class LargeBlaster extends Boss {
             secondLaser.y = this.y + this.laserOffsetY;
         }
         const rando = Math.random();
-        if (rando > 0.7) {
+        if (rando < this.seekerChance) {
             const seeker = this.game.bossProjectiles.find(
                 (laser) => laser.isFree && laser instanceof EnemySeeker
             );
@@ -62,6 +64,9 @@ export class LargeBlaster extends Boss {
                 seeker.isFree = false;
                 seeker.x = this.x + this.width / 2;
                 seeker.y = this.y + this.height;
+            }
+            if (this.seekerChance > 0.1) {
+                this.seekerChance = 0.1;
             }
         }
         this.isFiring = false;
