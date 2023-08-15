@@ -20,12 +20,18 @@ const gameInfoButton = <HTMLButtonElement>(
 );
 const beepAudio = new Audio();
 beepAudio.src = beepAudioUrl;
+const hasCompletedTutorial = localStorage.getItem("tutorial-completed");
+const continueLevel = localStorage.getItem("current-level");
 
 async function startLevel1() {
     try {
         await beepAudio.play();
         setTimeout(() => {
-            location.assign("/levels/tutorial/tutorial.html");
+            if (hasCompletedTutorial) {
+                location.assign("/levels/level-1/level-1.html");
+            } else {
+                location.assign("/levels/tutorial/tutorial.html");
+            }
         }, 800);
     } catch (error) {
         console.error(error);
@@ -35,7 +41,14 @@ async function startLevel1() {
 async function continueGame() {
     try {
         await beepAudio.play();
-        console.log("Continue game");
+        if (continueLevel && !isNaN(parseInt(continueLevel))) {
+            const levelNumber = parseInt(continueLevel);
+            location.assign(
+                `/levels/level-${levelNumber}/level-${levelNumber}.html`
+            );
+        } else {
+            alert("No save data found, please start a new game.");
+        }
     } catch (error) {
         console.error(error);
     }

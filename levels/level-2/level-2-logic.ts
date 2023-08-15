@@ -29,6 +29,7 @@ export default class Level2Game extends Game {
         this.desktopBackground = spaceBgDesktopUrl;
         this.initializeEnemies();
         this.initializeBossProjectiles();
+        localStorage.setItem("current-level", "2");
     }
     initializeEnemies() {
         for (let i = 0; i < this.enemyPoolSize; i++) {
