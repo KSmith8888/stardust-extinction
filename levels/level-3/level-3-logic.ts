@@ -20,17 +20,16 @@ import { EnemyLaserMedium } from "../../src/projectiles/enemy-lasers";
 import spaceBackgroundUrl from "../../assets/images/backgrounds/space-background.png";
 import spaceBgDesktopUrl from "../../assets/images/backgrounds/space-background-desktop.png";
 
-export default class Level2Game extends Game {
+export default class Level3Game extends Game {
     constructor() {
         super();
         this.enemyPoolSize = 24;
         this.racerInterval = 0.9;
         this.mobileBackground = spaceBackgroundUrl;
         this.desktopBackground = spaceBgDesktopUrl;
-        this.nextLevelUrl = "/levels/level-3/level-3.html";
         this.initializeEnemies();
         this.initializeBossProjectiles();
-        localStorage.setItem("current-level", "2");
+        localStorage.setItem("current-level", "3");
     }
     initializeEnemies() {
         for (let i = 0; i < this.enemyPoolSize; i++) {
@@ -130,5 +129,5 @@ export default class Level2Game extends Game {
     }
 }
 
-const game = new Level2Game();
+const game = new Level3Game();
 game.animate(0);

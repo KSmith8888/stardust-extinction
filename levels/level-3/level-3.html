@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Kevyn Smith" />
+        <meta
+            name="description"
+            content="The third level of Stardust: Extinction"
+        />
+        <link rel="stylesheet" href="../../assets/styles/main.css" />
+        <script type="module" src="level-3-logic.ts"></script>
+        <title>Level 3</title>
+    </head>
+    <body>
+        <div id="container">
+            <button id="menu-button" type="button">
+                <span class="menu-button-text">Game</span>
+                <span class="menu-button-text">Menu</span>
+            </button>
+            <dialog id="main-menu">
+                <p class="main-menu-text">Main Menu</p>
+                <div class="button-row">
+                    <button class="button" type="button">Test</button>
+                    <button class="button" type="button">Test</button>
+                </div>
+                <div class="button-row">
+                    <button class="button" type="button">Test</button>
+                    <button class="button" type="button">Test</button>
+                </div>
+                <div class="button-row">
+                    <button
+                        id="open-audio-menu-button"
+                        class="button"
+                        type="button"
+                    >
+                        Audio
+                    </button>
+                    <button class="button" type="button">Test</button>
+                </div>
+                <div class="button-row">
+                    <button id="quit-button" class="button" type="button">
+                        Quit
+                    </button>
+                    <button id="close-button" class="button" type="button">
+                        Close
+                    </button>
+                </div>
+            </dialog>
+            <dialog id="audio-menu">
+                <p class="audio-menu-text">Audio Menu</p>
+                <button id="mute-button" class="button" type="button">
+                    Mute Audio
+                </button>
+                <button
+                    id="close-audio-menu-button"
+                    class="button"
+                    type="button"
+                >
+                    Close
+                </button>
+            </dialog>
+            <dialog id="tutorial-modal">
+                <p id="tutorial-modal-heading">Level 3 Enemies</p>
+                <div class="tutorial-row">
+                    <div class="tutorial-item-container">
+                        <div class="tutorial-item-info">
+                            <img
+                                width="22"
+                                height="30"
+                                class="tutorial-item-image"
+                                src="../../assets/images/enemies/small-typhoon.png"
+                                alt="A small, yellow and orange spaceship which is pointed at the front"
+                            />
+                            <p class="tutorial-item-title">Small Typhoon</p>
+                            <p class="tutorial-item-description">
+                                Moves quickly towards your ship. Fires lasers as
+                                it attempts to collide with you.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="tutorial-item-container">
+                        <div class="tutorial-item-info">
+                            <img
+                                width="36"
+                                height="24"
+                                class="tutorial-item-image"
+                                src="../../assets/images/enemies/blue-mine.png"
+                                alt="A small, grey robotic ship with a blue light in the center"
+                            />
+                            <p class="tutorial-item-title">Blue Mine</p>
+                            <p class="tutorial-item-description">
+                                Moves slowly and at random. Your ship will be
+                                disabled and unable to move or fire for a while
+                                if the mine collides with it.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tutorial-row">
+                    <div class="tutorial-item-container">
+                        <div class="tutorial-item-info">
+                            <img
+                                width="24"
+                                height="24"
+                                class="tutorial-item-image"
+                                src="../../assets/images/enemies/small-fighter.png"
+                                alt="A small, grey spaceship with cannons on either side"
+                            />
+                            <p class="tutorial-item-title">Small Fighter</p>
+                            <p class="tutorial-item-description">
+                                Moves at random. Fires lasers at a fast rate.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="tutorial-item-container">
+                        <div class="tutorial-item-info">
+                            <img
+                                width="16"
+                                height="28"
+                                class="tutorial-item-image"
+                                src="../../assets/images/enemies/small-racer.png"
+                                alt="A small, grey triangular spaceship"
+                            />
+                            <p class="tutorial-item-title">Small Racer</p>
+                            <p class="tutorial-item-description">
+                                Enemy scout ship. Moves extremely quickly and
+                                does not engage. If destroyed, your ship gets a
+                                weapon upgrade for the remainder of the level.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <button id="close-tutorial-button" type="button" class="button">
+                    Start Level 2
+                </button>
+            </dialog>
+            <dialog id="game-over-modal">
+                <p class="game-over-main-text">Game Over</p>
+                <p class="game-over-text">Better luck next time</p>
+                <button
+                    id="game-over-close-button"
+                    type="button"
+                    class="button"
+                >
+                    Close
+                </button>
+            </dialog>
+            <dialog id="level-complete-modal">
+                <p id="level-complete-text">Level Complete</p>
+                <p id="stats-text-enemies"></p>
+                <p id="stats-text-health"></p>
+                <p>
+                    The rest of the game has not been completed yet, please
+                    check back later for more levels!
+                </p>
+                <button id="next-level-button" type="button" class="button">
+                    Return Home
+                </button>
+            </dialog>
+            <img
+                width="45"
+                height="45"
+                id="idle-ship-image"
+                class="no-display"
+                src="../../assets/images/player/player-ship-idle.png"
+                alt="A small grey spaceship idling"
+            />
+            <img
+                width="45"
+                height="45"
+                id="active-ship-image"
+                class="no-display"
+                src="../../assets/images/player/player-ship-active.png"
+                alt="A small grey spaceship with thrusters firing"
+            />
+            <canvas width="900" height="600" id="canvas"
+                >JavaScript is required to use this app, please enable
+                JavaScirpt</canvas
+            >
+        </div>
+    </body>
+</html>
