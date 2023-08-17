@@ -53,7 +53,8 @@ body {
 #main-menu[open],
 #game-over-modal[open],
 #level-complete-modal[open],
-#audio-menu[open] {
+#audio-menu[open],
+#settings-menu[open] {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,7 +68,8 @@ body {
 }
 
 .main-menu-text,
-.audio-menu-text {
+.audio-menu-text,
+.settings-menu-text {
     margin: 0.5em 0;
     text-align: center;
     font-size: 1.6rem;
@@ -77,7 +79,7 @@ body {
 .button-row {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .button {
@@ -178,6 +180,10 @@ body {
     padding: 0.5em;
     margin: 0.5em 0;
     text-align: center;
+}
+
+#game-incomplete-text {
+    max-width: 15em;
 }
 
 @media (min-width: 900px) {

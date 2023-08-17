@@ -26,13 +26,26 @@ const continueLevel = localStorage.getItem("current-level");
 async function startLevel1() {
     try {
         await beepAudio.play();
-        setTimeout(() => {
-            if (hasCompletedTutorial) {
-                location.assign("/levels/level-1/level-1.html");
-            } else {
-                location.assign("/levels/tutorial/tutorial.html");
+        if (continueLevel) {
+            if (
+                window.confirm(
+                    "If you start a new game your previous save data will be deleted. Are you sure you want to start a new game?"
+                )
+            ) {
+                localStorage.removeItem("current-level");
+                setTimeout(() => {
+                    location.assign("/levels/level-1/level-1.html");
+                }, 800);
             }
-        }, 800);
+        } else {
+            setTimeout(() => {
+                if (hasCompletedTutorial) {
+                    location.assign("/levels/level-1/level-1.html");
+                } else {
+                    location.assign("/levels/tutorial/tutorial.html");
+                }
+            }, 800);
+        }
     } catch (error) {
         console.error(error);
     }

@@ -16,6 +16,8 @@ import { SmallFighter } from "../../src/enemies/fighters";
 import { LargeShocker } from "../../src/bosses/large-shocker";
 import { LargeBlaster } from "../../src/bosses/large-blaster";
 import { EnemyBolt } from "../../src/projectiles/enemy-bolt";
+import { EnemySeeker } from "../../src/projectiles/enemy-seeker";
+import { EnemyLaserMedium } from "../../src/projectiles/enemy-lasers";
 //Assets
 import spaceBackgroundUrl from "../../assets/images/backgrounds/space-background.png";
 import spaceBgDesktopUrl from "../../assets/images/backgrounds/space-background-desktop.png";
@@ -51,6 +53,12 @@ export default class Level3Game extends Game {
         for (let i = 0; i < this.bossLaserPoolSize; i++) {
             this.bossProjectiles.push(
                 new EnemyBolt(this, this.canvas, this.ctx)
+            );
+            this.bossProjectiles.push(
+                new EnemySeeker(this, this.canvas, this.ctx)
+            );
+            this.bossProjectiles.push(
+                new EnemyLaserMedium(this, this.canvas, this.ctx)
             );
         }
     }

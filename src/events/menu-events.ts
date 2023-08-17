@@ -10,6 +10,13 @@ export default class MenuEvents {
     openMenu: void;
     closeMenu: void;
     quitGame: void;
+    settingsMenu: HTMLDialogElement;
+    openSettingsButton: HTMLButtonElement;
+    openSettingsMenu: void;
+    deleteSaveButton: HTMLButtonElement;
+    deleteSaveData: void;
+    closeSettingsButton: HTMLButtonElement;
+    closeSettings: void;
     audioMenu: HTMLDialogElement;
     openAudioButton: HTMLButtonElement;
     openAudioMenu: void;
@@ -50,6 +57,36 @@ export default class MenuEvents {
         this.quitGame = this.quitButton.addEventListener("click", () => {
             location.assign("/");
         });
+        this.settingsMenu = <HTMLDialogElement>(
+            document.getElementById("settings-menu")
+        );
+        this.openSettingsButton = <HTMLButtonElement>(
+            document.getElementById("open-settings-button")
+        );
+        this.openSettingsMenu = this.openSettingsButton.addEventListener(
+            "click",
+            () => {
+                this.settingsMenu.showModal();
+            }
+        );
+        this.deleteSaveButton = <HTMLButtonElement>(
+            document.getElementById("delete-save-button")
+        );
+        this.deleteSaveData = this.deleteSaveButton.addEventListener(
+            "click",
+            () => {
+                localStorage.clear();
+            }
+        );
+        this.closeSettingsButton = <HTMLButtonElement>(
+            document.getElementById("close-settings-menu-button")
+        );
+        this.closeSettings = this.closeSettingsButton.addEventListener(
+            "click",
+            () => {
+                this.settingsMenu.close();
+            }
+        );
         this.audioMenu = <HTMLDialogElement>(
             document.getElementById("audio-menu")
         );

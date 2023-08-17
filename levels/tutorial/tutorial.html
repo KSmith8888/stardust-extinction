@@ -25,10 +25,17 @@
                     <button class="button" type="button">Test</button>
                 </div>
                 <div class="button-row">
-                    <button class="button" type="button">Test</button>
+                    <button class="button" type="button">test</button>
                     <button class="button" type="button">Test</button>
                 </div>
                 <div class="button-row">
+                    <button
+                        id="open-settings-button"
+                        class="button"
+                        type="button"
+                    >
+                        Settings
+                    </button>
                     <button
                         id="open-audio-menu-button"
                         class="button"
@@ -36,16 +43,29 @@
                     >
                         Audio
                     </button>
-                    <button class="button" type="button">Test</button>
                 </div>
                 <div class="button-row">
                     <button id="quit-button" class="button" type="button">
-                        Quit
+                        Quit Game
                     </button>
                     <button id="close-button" class="button" type="button">
                         Close
                     </button>
                 </div>
+            </dialog>
+            <dialog id="settings-menu">
+                <p class="settings-menu-text">Settings</p>
+                <button id="delete-save-button" class="button" type="button">
+                    <span class="menu-button-text">Delete</span>
+                    <span class="menu-button-text">Save Data</span>
+                </button>
+                <button
+                    id="close-settings-menu-button"
+                    class="button"
+                    type="button"
+                >
+                    Close
+                </button>
             </dialog>
             <dialog id="audio-menu">
                 <p class="audio-menu-text">Audio Menu</p>

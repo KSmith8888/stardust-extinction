@@ -1,6 +1,7 @@
 import Game from "../../levels/game-logic";
 import Boss from "./boss";
 import largeShockerUrl from "../../assets/images/bosses/large-shocker.png";
+import { EnemyBolt } from "../projectiles/enemy-bolt";
 
 export class LargeShocker extends Boss {
     image: HTMLImageElement;
@@ -41,7 +42,7 @@ export class LargeShocker extends Boss {
     }
     activateProjectiles() {
         const firstLaser = this.game.bossProjectiles.find(
-            (laser) => laser.isFree
+            (laser) => laser.isFree && laser instanceof EnemyBolt
         );
         if (firstLaser) {
             firstLaser.isFree = false;
@@ -49,7 +50,7 @@ export class LargeShocker extends Boss {
             firstLaser.y = this.y + (this.height - this.laserOffsetY);
         }
         const secondLaser = this.game.bossProjectiles.find(
-            (laser) => laser.isFree
+            (laser) => laser.isFree && laser instanceof EnemyBolt
         );
         if (secondLaser) {
             secondLaser.isFree = false;
