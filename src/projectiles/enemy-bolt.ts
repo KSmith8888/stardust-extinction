@@ -13,18 +13,9 @@ export class EnemyBolt extends EnemyProjectile {
         super(game, canvas, ctx);
         this.width = 8;
         this.height = 20;
-        this.speed = 0;
+        this.speed = 7;
         this.image.src = boltUrl;
         this.frameCount = 0;
-    }
-    render() {
-        /* Boolean to tell each bolt when firing is complete, then bolts move towards the bottom. Set speed */
-        if (this.y < this.canvas.height) {
-            this.y += this.speed;
-        } else {
-            this.reset();
-        }
-        this.ctx.drawImage(this.image, this.x, this.y);
     }
     collidedWithPlayer() {
         this.game.explosions.push(new LargeEmp(this.ctx, this.x, this.y));

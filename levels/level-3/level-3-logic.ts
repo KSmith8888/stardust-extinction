@@ -14,6 +14,7 @@ import { BlueMine } from "../../src/enemies/mines";
 import { SmallTyphoon } from "../../src/enemies/typhoons";
 import { SmallFighter } from "../../src/enemies/fighters";
 import { LargeShocker } from "../../src/bosses/large-shocker";
+import { LargeBlaster } from "../../src/bosses/large-blaster";
 import { EnemyBolt } from "../../src/projectiles/enemy-bolt";
 //Assets
 import spaceBackgroundUrl from "../../assets/images/backgrounds/space-background.png";
@@ -23,7 +24,7 @@ export default class Level3Game extends Game {
     constructor() {
         super();
         this.enemyPoolSize = 24;
-        this.bossLaserPoolSize = 70;
+        this.bossLaserPoolSize = 60;
         this.racerInterval = 0.9;
         this.mobileBackground = spaceBackgroundUrl;
         this.desktopBackground = spaceBgDesktopUrl;
@@ -89,6 +90,10 @@ export default class Level3Game extends Game {
             this.events.audioEvents.alarmSound.play();
             this.hasReachedBoss = true;
             this.bosses.push(new LargeShocker(this, this.canvas, this.ctx));
+            setTimeout(() => {
+                this.bosses.push(new LargeBlaster(this, this.canvas, this.ctx));
+                this.bosses.push(new LargeBlaster(this, this.canvas, this.ctx));
+            }, 800);
         }
     }
     animate(timeStamp: number) {

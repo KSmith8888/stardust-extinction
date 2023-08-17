@@ -21,6 +21,7 @@ export class SmallRacer extends Enemy {
         this.projectiles = [];
         this.width = 16;
         this.height = 28;
+        this.health = 30;
         this.speed = Math.floor(Math.random() * 3) + 4;
         this.image = new Image();
         this.image.src = smallRacerUrl;
