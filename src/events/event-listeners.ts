@@ -27,6 +27,7 @@ export default class EventListeners {
     nextLevelButton: HTMLButtonElement;
     statsTextEnemies: HTMLParagraphElement;
     statsTextHealth: HTMLParagraphElement;
+    loadingText: HTMLParagraphElement;
     constructor(game: Game, canvas: HTMLCanvasElement) {
         this.game = game;
         this.player = this.game.player;
@@ -217,5 +218,9 @@ export default class EventListeners {
                 location.assign(this.game.nextLevelUrl);
             }
         );
+        this.loadingText = <HTMLParagraphElement>(
+            document.getElementById("loading-text")
+        );
+        this.loadingText.classList.add("no-display");
     }
 }

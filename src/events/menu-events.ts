@@ -75,7 +75,14 @@ export default class MenuEvents {
         this.deleteSaveData = this.deleteSaveButton.addEventListener(
             "click",
             () => {
-                localStorage.clear();
+                if (
+                    window.confirm(
+                        "This will delete saved game progress and all other data and return you to the title screen. Are you sure?"
+                    )
+                ) {
+                    localStorage.clear();
+                    location.assign("/");
+                }
             }
         );
         this.closeSettingsButton = <HTMLButtonElement>(

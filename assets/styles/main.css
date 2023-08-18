@@ -182,6 +182,14 @@ body {
     text-align: center;
 }
 
+#loading-text {
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+    color: #fff;
+    font-size: 1.3rem;
+}
+
 #game-incomplete-text {
     max-width: 15em;
 }
