@@ -26,7 +26,11 @@ const continueLevel = localStorage.getItem("current-level");
 async function startLevel1() {
     try {
         await beepAudio.play();
-        if (continueLevel) {
+        if (
+            continueLevel &&
+            !isNaN(parseInt(continueLevel)) &&
+            parseInt(continueLevel) > 1
+        ) {
             if (
                 window.confirm(
                     "If you start a new game your previous save data will be deleted. Are you sure you want to start a new game?"

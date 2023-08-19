@@ -46,6 +46,6 @@ export class SmallRacer extends Enemy {
     }
     collidedWithPlayer() {
         this.game.explosions.push(new SmallExplosion(this.ctx, this.x, this.y));
-        this.game.player.health -= 10;
+        this.game.player.health -= this.collisionDamage;
     }
 }

@@ -46,7 +46,7 @@ export class RedMine extends Enemy {
         this.game.explosions.push(
             new LargeExplosion(this.game, this.ctx, this.x, this.y)
         );
-        this.game.player.health -= 10;
+        this.game.player.health -= this.collisionDamage;
     }
 }
 
