@@ -35,7 +35,9 @@ export class SmallFighter extends Enemy {
             this.reset();
         }
         this.followTargetX();
-        this.handleProjectiles();
+        if (this.y > 0) {
+            this.handleProjectiles();
+        }
         this.ctx.drawImage(this.image, this.x, this.y);
     }
     handleProjectiles() {

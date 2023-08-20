@@ -61,7 +61,7 @@ export class BlueMine extends Enemy {
         super(game, canvas, ctx);
         this.width = 36;
         this.height = 24;
-        this.speed = Math.floor(Math.random() * 3) + 1;
+        this.speed = Math.floor(Math.random() * 2) + 2;
         this.image = new Image();
         this.image.src = blueMineUrl;
     }
@@ -82,6 +82,7 @@ export class BlueMine extends Enemy {
             this.reset();
         }
         this.followTargetX();
+        /*
         if (this.frameCount >= 10) {
             this.targetX = Math.floor(
                 Math.random() * (this.canvas.width - this.width)
@@ -90,6 +91,8 @@ export class BlueMine extends Enemy {
         } else {
             this.frameCount += 1;
         }
+         */
+        this.targetX = this.game.player.x;
         this.ctx.drawImage(this.image, this.x, this.y);
     }
     collidedWithPlayer() {
