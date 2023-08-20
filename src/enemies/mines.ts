@@ -82,16 +82,6 @@ export class BlueMine extends Enemy {
             this.reset();
         }
         this.followTargetX();
-        /*
-        if (this.frameCount >= 10) {
-            this.targetX = Math.floor(
-                Math.random() * (this.canvas.width - this.width)
-            );
-            this.frameCount = 0;
-        } else {
-            this.frameCount += 1;
-        }
-         */
         this.targetX = this.game.player.x;
         this.ctx.drawImage(this.image, this.x, this.y);
     }
