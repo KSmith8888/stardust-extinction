@@ -69,6 +69,7 @@ export default class MenuEvents {
             "click",
             () => {
                 this.settingsMenu.showModal();
+                this.closeSettingsButton.focus();
             }
         );
         this.deleteSaveButton = <HTMLButtonElement>(
@@ -106,6 +107,7 @@ export default class MenuEvents {
             "click",
             () => {
                 this.audioMenu.showModal();
+                this.closeAudioButton.focus();
             }
         );
         this.muteButton = <HTMLButtonElement>(
@@ -117,8 +119,10 @@ export default class MenuEvents {
                 this.game.events.audioEvents.changeMuteSetting();
                 if (this.game.events.audioEvents.muteSetting) {
                     this.muteButton.textContent = "Unmute Audio";
+                    this.volumeControl.disabled = true;
                 } else {
                     this.muteButton.textContent = "Mute Audio";
+                    this.volumeControl.disabled = false;
                 }
             }
         );
