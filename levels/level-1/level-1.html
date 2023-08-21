@@ -72,6 +72,25 @@
                 <button id="mute-button" class="button" type="button">
                     Mute Audio
                 </button>
+                <div id="volume-control-container">
+                    <datalist id="volume-options">
+                        <option value="0" label="Low"></option>
+                        <option value="50" label="Medium"></option>
+                        <option value="100" label="High"></option>
+                    </datalist>
+                    <label for="volume-control" id="volume-control-label"
+                        >Volume:</label
+                    >
+                    <input
+                        id="volume-control"
+                        type="range"
+                        value="50"
+                        step="50"
+                        min="0"
+                        max="100"
+                        list="volume-options"
+                    />
+                </div>
                 <button
                     id="close-audio-menu-button"
                     class="button"

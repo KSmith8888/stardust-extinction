@@ -22,6 +22,8 @@ export default class MenuEvents {
     openAudioMenu: void;
     muteButton: HTMLButtonElement;
     changeMuteSetting: void;
+    volumeControl: HTMLInputElement;
+    changeVolume: void;
     closeAudioButton: HTMLButtonElement;
     closeAudio: void;
     tutorialModal: HTMLDialogElement;
@@ -118,6 +120,23 @@ export default class MenuEvents {
                 } else {
                     this.muteButton.textContent = "Mute Audio";
                 }
+            }
+        );
+        this.volumeControl = <HTMLInputElement>(
+            document.getElementById("volume-control")
+        );
+        this.changeVolume = this.volumeControl.addEventListener(
+            "change",
+            () => {
+                const newVolume = this.volumeControl.value;
+                if (parseInt(newVolume) === 0) {
+                    this.game.events.audioEvents.volumeMultiplier = 0.5;
+                } else if (parseInt(newVolume) === 50) {
+                    this.game.events.audioEvents.volumeMultiplier = 1;
+                } else if (parseInt(newVolume) === 100) {
+                    this.game.events.audioEvents.volumeMultiplier = 2;
+                }
+                this.game.events.audioEvents.changeVolumeSetting();
             }
         );
         this.closeAudioButton = <HTMLButtonElement>(
