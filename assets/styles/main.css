@@ -50,21 +50,23 @@ body {
     background-color: rgb(112, 13, 99);
 }
 
-#main-menu[open],
-#game-over-modal[open],
-#level-complete-modal[open],
-#audio-menu[open],
-#settings-menu[open] {
+.modal[open] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgba(58, 4, 51, 0.6);
+    background-color: rgb(58, 4, 51);
     color: rgb(243, 134, 228);
     border: 1px solid rgb(226, 49, 203);
     border-radius: 5px;
+    padding: 1em 1em 1.5em 1em;
+}
+
+#main-menu[open],
+#level-complete-modal[open],
+#game-over-modal[open] {
+    background-color: rgba(58, 4, 51, 0.6);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
-    padding: 1em 1em 1.5em 1em;
 }
 
 .main-menu-text,
@@ -118,13 +120,6 @@ body {
 #tutorial-modal[open] {
     width: 95%;
     max-width: 850px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgba(58, 4, 51, 0.6);
-    color: rgb(243, 134, 228);
-    border: 1px solid rgb(226, 49, 203);
-    border-radius: 5px;
     padding: 0.5em 1em;
 }
 
@@ -214,10 +209,6 @@ body {
     font-size: 1.2rem;
 }
 
-#audio-menu[open] {
-    background-color: rgb(58, 4, 51);
-}
-
 #volume-control-container {
     width: 100%;
     display: flex;
@@ -225,7 +216,7 @@ body {
     align-items: center;
 }
 
-input[type="range"] {
+#volume-control {
     width: 90%;
     accent-color: rgb(226, 49, 203);
     margin: 0.5em 0.5em 0 0.5em;
