@@ -229,6 +229,11 @@ body {
     color: rgb(226, 49, 203);
 }
 
+#volume-control::-moz-range-thumb,
+#volume-control::-webkit-slider-thumb {
+    background-color: rgb(226, 49, 203);
+}
+
 #volume-options {
     display: flex;
     justify-content: space-between;
