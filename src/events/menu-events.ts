@@ -117,11 +117,11 @@ export default class MenuEvents {
             "click",
             () => {
                 if (this.game.events.audioEvents.audioSettings.mute) {
-                    this.muteButton.textContent = "Unmute Audio";
-                    this.volumeControl.disabled = true;
-                } else {
                     this.muteButton.textContent = "Mute Audio";
                     this.volumeControl.disabled = false;
+                } else {
+                    this.muteButton.textContent = "Unmute Audio";
+                    this.volumeControl.disabled = true;
                 }
                 this.game.events.audioEvents.changeMuteSetting();
             }

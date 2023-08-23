@@ -18,8 +18,7 @@ const continueButton = <HTMLButtonElement>(
 const gameInfoButton = <HTMLButtonElement>(
     document.getElementById("game-info-button")
 );
-const beepAudio = new Audio();
-beepAudio.src = beepAudioUrl;
+const beepAudio = new Audio(beepAudioUrl);
 const hasCompletedTutorial = localStorage.getItem("tutorial-completed");
 const continueLevel = localStorage.getItem("current-level");
 
