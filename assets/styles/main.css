@@ -58,7 +58,7 @@ body {
     color: rgb(243, 134, 228);
     border: 1px solid rgb(226, 49, 203);
     border-radius: 5px;
-    padding: 1em 1em 1.5em 1em;
+    padding: 1.5em;
 }
 
 #main-menu[open],
@@ -204,6 +204,10 @@ body {
     text-align: center;
 }
 
+#mute-button {
+    margin: 0.5em 0;
+}
+
 #volume-control-label {
     margin-top: 0.5em;
     font-size: 1.2rem;
@@ -211,6 +215,7 @@ body {
 
 #volume-control-container {
     width: 100%;
+    padding: 0 0.5em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -240,6 +245,10 @@ body {
     #container {
         width: 900px;
         height: 600px;
+    }
+    #tutorial-modal[open] {
+        width: 75%;
+        max-width: 850px;
     }
     .tutorial-row {
         flex-direction: row;

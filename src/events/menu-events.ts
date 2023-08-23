@@ -116,14 +116,14 @@ export default class MenuEvents {
         this.changeMuteSetting = this.muteButton.addEventListener(
             "click",
             () => {
-                this.game.events.audioEvents.changeMuteSetting();
-                if (this.game.events.audioEvents.muteSetting) {
+                if (this.game.events.audioEvents.audioSettings.mute) {
                     this.muteButton.textContent = "Unmute Audio";
                     this.volumeControl.disabled = true;
                 } else {
                     this.muteButton.textContent = "Mute Audio";
                     this.volumeControl.disabled = false;
                 }
+                this.game.events.audioEvents.changeMuteSetting();
             }
         );
         this.volumeControl = <HTMLInputElement>(
@@ -134,14 +134,11 @@ export default class MenuEvents {
             () => {
                 const newVolume = this.volumeControl.value;
                 if (parseInt(newVolume) === 0) {
-                    this.game.events.audioEvents.volumeMultiplier = 0.5;
-                    localStorage.setItem("volume-setting", "0.5");
+                    this.game.events.audioEvents.audioSettings.volume = 0.5;
                 } else if (parseInt(newVolume) === 50) {
-                    this.game.events.audioEvents.volumeMultiplier = 1;
-                    localStorage.setItem("volume-setting", "1");
+                    this.game.events.audioEvents.audioSettings.volume = 1;
                 } else if (parseInt(newVolume) === 100) {
-                    this.game.events.audioEvents.volumeMultiplier = 2;
-                    localStorage.setItem("volume-setting", "2");
+                    this.game.events.audioEvents.audioSettings.volume = 2;
                 }
                 this.game.events.audioEvents.changeVolumeSetting();
             }

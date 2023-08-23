@@ -187,7 +187,7 @@ export default class EventListeners {
             }
         });
         this.menuEvents = new MenuEvents(this.game);
-        this.audioEvents = new AudioEvents(this.menuEvents.volumeControl);
+        this.audioEvents = new AudioEvents(this.menuEvents);
         this.gameOverModal = <HTMLDialogElement>(
             document.getElementById("game-over-modal")
         );
