@@ -17,7 +17,7 @@ export default class AudioEvents {
     allAudio: Array<HTMLAudioElement>;
     constructor(menuEvents: MenuEvents) {
         this.menuEvents = menuEvents;
-        this.audioSettings = this.getAudioSettings();
+        this.audioSettings = this.loadAudioSettings();
         this.beepAudio = new Audio(beepAudioUrl);
         this.beepAudio.volume = 0.4 * this.audioSettings.volume;
         this.explosionSound = new Audio(explosionSoundUrl);
@@ -34,7 +34,7 @@ export default class AudioEvents {
             return null;
         }
     }
-    getAudioSettings() {
+    loadAudioSettings() {
         const audioSettings = localStorage.getItem("audio-settings");
         if (audioSettings) {
             const savedSettings = JSON.parse(audioSettings);

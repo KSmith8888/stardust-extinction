@@ -12,7 +12,7 @@
 import Game from "../game-logic";
 import { BlueMine } from "../../src/enemies/mines";
 import { SmallTyphoon } from "../../src/enemies/typhoons";
-import { SmallFighter } from "../../src/enemies/fighters";
+import { PhaseGlider } from "../../src/enemies/phase-glider";
 import { LargeShocker } from "../../src/bosses/large-shocker";
 import { LargeBlaster } from "../../src/bosses/large-blaster";
 import { EnemyBolt } from "../../src/projectiles/enemy-bolt";
@@ -36,15 +36,13 @@ export default class Level3Game extends Game {
     }
     initializeEnemies() {
         for (let i = 0; i < this.enemyPoolSize; i++) {
-            if (i < 8) {
-                this.enemies.push(
-                    new SmallTyphoon(this, this.canvas, this.ctx)
-                );
+            if (i < 6) {
+                this.enemies.push(new PhaseGlider(this, this.canvas, this.ctx));
             } else if (i >= 5 && i < 16) {
                 this.enemies.push(new BlueMine(this, this.canvas, this.ctx));
             } else {
                 this.enemies.push(
-                    new SmallFighter(this, this.canvas, this.ctx)
+                    new SmallTyphoon(this, this.canvas, this.ctx)
                 );
             }
         }
@@ -84,7 +82,7 @@ export default class Level3Game extends Game {
             }
         } else if (this.frameCount === 150) {
             const freeFighter = this.enemies.find((enemy) => {
-                return enemy instanceof SmallFighter && enemy.isFree;
+                return enemy instanceof PhaseGlider && enemy.isFree;
             });
             if (freeFighter) {
                 freeFighter.isFree = false;
