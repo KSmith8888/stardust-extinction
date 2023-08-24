@@ -14,6 +14,8 @@ import { SmallFighter } from "../src/enemies/fighters";
 import { SmallRacer } from "../src/enemies/small-racer";
 import { SmallExplosion } from "../src/explosions/small-explosion";
 import { LargeEmp } from "../src/explosions/emp";
+import { LargeExplosion } from "../src/explosions/large-explosion";
+import { WarpDust } from "../src/explosions/warp-dust";
 import { LargeBattleship } from "../src/bosses/large-battleship";
 import { LargeBlaster } from "../src/bosses/large-blaster";
 import { LargeShocker } from "../src/bosses/large-shocker";
@@ -36,7 +38,7 @@ export default class Game {
     enemyLaserPoolSize: number;
     destroyedEnemies: number;
     hasReachedBoss: boolean;
-    explosions: Array<SmallExplosion | LargeEmp>;
+    explosions: Array<SmallExplosion | LargeEmp | LargeExplosion | WarpDust>;
     bosses: Array<LargeBattleship | LargeBlaster | LargeShocker>;
     bossProjectiles: Array<EnemyLaserMedium | EnemyLaserLarge | EnemySeeker>;
     bossLaserPoolSize: number;

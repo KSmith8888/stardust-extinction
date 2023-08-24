@@ -2,6 +2,7 @@ import Enemy from "./enemy";
 import Game from "../../levels/game-logic";
 import phaseGliderUrl from "../../assets/images/enemies/phase-glider.png";
 import { SmallExplosion } from "../explosions/small-explosion";
+import { WarpDust } from "../explosions/warp-dust";
 
 export class PhaseGlider extends Enemy {
     speed: number;
@@ -46,6 +47,7 @@ export class PhaseGlider extends Enemy {
     handleProjectiles() {
         if (this.frameCount >= this.warpInterval) {
             this.frameCount = 0;
+            this.game.explosions.push(new WarpDust(this.ctx, this.x, this.y));
             this.warp();
         } else {
             if (
