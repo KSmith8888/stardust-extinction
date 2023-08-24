@@ -231,10 +231,8 @@ body {
 
 #volume-control::-moz-range-thumb,
 #volume-control::-moz-range-track,
-#volume-control::-moz-range-progress,
-#volume-control::-webkit-slider-thumb,
-#volume-control::-webkit-slider-runnable-track {
-    background-color: rgb(226, 49, 203);
+#volume-control::-moz-range-progress {
+    display: none;
 }
 
 #volume-options {

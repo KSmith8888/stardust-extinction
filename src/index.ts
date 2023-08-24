@@ -9,7 +9,7 @@
  */
 
 import "../assets/styles/title-screen.css";
-import beepAudioUrl from "../assets/audio/beep.wav";
+import beepSoundUrl from "../assets/audio/beep.wav";
 
 const startButton = <HTMLButtonElement>document.getElementById("start-button");
 const continueButton = <HTMLButtonElement>(
@@ -18,13 +18,14 @@ const continueButton = <HTMLButtonElement>(
 const gameInfoButton = <HTMLButtonElement>(
     document.getElementById("game-info-button")
 );
-const beepAudio = new Audio(beepAudioUrl);
+const beepSound = new Audio(beepSoundUrl);
+beepSound.volume = 0.4;
 const hasCompletedTutorial = localStorage.getItem("tutorial-completed");
 const continueLevel = localStorage.getItem("current-level");
 
 async function startLevel1() {
     try {
-        await beepAudio.play();
+        await beepSound.play();
         if (
             continueLevel &&
             !isNaN(parseInt(continueLevel)) &&
@@ -56,7 +57,7 @@ async function startLevel1() {
 
 async function continueGame() {
     try {
-        await beepAudio.play();
+        await beepSound.play();
         setTimeout(() => {
             if (continueLevel && !isNaN(parseInt(continueLevel))) {
                 const levelNumber = parseInt(continueLevel);
@@ -74,7 +75,7 @@ async function continueGame() {
 
 async function gameInfo() {
     try {
-        await beepAudio.play();
+        await beepSound.play();
         setTimeout(() => {
             location.assign("/game-info.html");
         }, 800);
