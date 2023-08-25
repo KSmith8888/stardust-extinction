@@ -7,6 +7,8 @@ export class LargeShocker extends Boss {
     image: HTMLImageElement;
     laserOffsetY: number;
     firingFrames: number;
+    firingInterval: number;
+    hasActivatedBolts: boolean;
     constructor(
         game: Game,
         canvas: HTMLCanvasElement,
@@ -22,17 +24,25 @@ export class LargeShocker extends Boss {
         this.image.src = largeShockerUrl;
         this.laserOffsetY = Math.floor(this.height * 0.3);
         this.firingFrames = 0;
+        this.firingInterval = Math.floor(Math.random() * 30) + 10;
+        this.hasActivatedBolts = false;
     }
     render() {
         if (this.health <= 0) {
             this.destroyedByPlayer();
         }
         if (this.isFiring) {
-            if (this.firingFrames < 12) {
+            if (!this.hasActivatedBolts) {
+                this.activateProjectiles();
+                this.hasActivatedBolts = true;
+            }
+            if (this.firingFrames < this.firingInterval) {
                 this.firingFrames += 1;
             } else {
-                this.activateProjectiles();
+                this.firingInterval = Math.floor(Math.random() * 30) + 10;
                 this.firingFrames = 0;
+                this.isFiring = false;
+                this.hasActivatedBolts = false;
             }
         } else {
             this.followTargetX();
@@ -48,6 +58,7 @@ export class LargeShocker extends Boss {
             firstLaser.isFree = false;
             firstLaser.x = this.x;
             firstLaser.y = this.y + (this.height - this.laserOffsetY);
+            firstLaser.firingInterval = this.firingInterval;
         }
         const secondLaser = this.game.bossProjectiles.find(
             (laser) => laser.isFree && laser instanceof EnemyBolt
@@ -56,10 +67,7 @@ export class LargeShocker extends Boss {
             secondLaser.isFree = false;
             secondLaser.x = this.x + (this.width - secondLaser.width);
             secondLaser.y = this.y + (this.height - this.laserOffsetY);
-        }
-        const rando = Math.random();
-        if (rando > 0.8) {
-            this.isFiring = false;
+            secondLaser.firingInterval = this.firingInterval;
         }
     }
 }

@@ -12,6 +12,7 @@ export default class EnemyProjectile {
     speed: number;
     image: HTMLImageElement;
     isFree: boolean;
+    firingInterval: number;
     constructor(
         game: Game,
         canvas: HTMLCanvasElement,
@@ -28,6 +29,7 @@ export default class EnemyProjectile {
         this.speed = 1;
         this.image = new Image();
         this.isFree = true;
+        this.firingInterval = 0;
     }
     reset() {
         this.x = 0;

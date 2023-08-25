@@ -9,6 +9,7 @@ import {
     EnemyLaserMedium,
     EnemyLaserLarge,
 } from "../src/projectiles/enemy-lasers";
+import { EnemyBolt } from "../src/projectiles/enemy-bolt";
 import { EnemySeeker } from "../src/projectiles/enemy-seeker";
 import { SmallFighter } from "../src/enemies/fighters";
 import { SmallRacer } from "../src/enemies/small-racer";
@@ -47,7 +48,9 @@ export default class Game {
     hasReachedBoss: boolean;
     explosions: Array<SmallExplosion | LargeEmp | LargeExplosion | WarpDust>;
     bosses: Array<LargeBattleship | LargeBlaster | LargeShocker>;
-    bossProjectiles: Array<EnemyLaserMedium | EnemyLaserLarge | EnemySeeker>;
+    bossProjectiles: Array<
+        EnemyLaserMedium | EnemyLaserLarge | EnemySeeker | EnemyBolt
+    >;
     bossLaserPoolSize: number;
     isGamePaused: boolean;
     frameCount: number;

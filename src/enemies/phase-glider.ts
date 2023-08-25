@@ -25,7 +25,7 @@ export class PhaseGlider extends Enemy {
         this.collisionDamage = 20;
         this.laserOffsetX = this.width * 0.45;
         this.projectileInterval = 30;
-        this.warpInterval = 100;
+        this.warpInterval = Math.floor(Math.random() * 150) + 50;
     }
     render() {
         if (this.health <= 0) {
@@ -42,6 +42,7 @@ export class PhaseGlider extends Enemy {
         this.ctx.drawImage(this.image, this.x, this.y);
     }
     warp() {
+        this.warpInterval = Math.floor(Math.random() * 150) + 50;
         this.x = Math.floor(Math.random() * (this.canvas.width - this.width));
     }
     handleProjectiles() {
