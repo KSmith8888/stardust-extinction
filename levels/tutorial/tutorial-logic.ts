@@ -22,6 +22,8 @@ export default class TutorialGame extends Game {
     tutorialHeading: HTMLParagraphElement;
     tutorialFirstPara: HTMLParagraphElement;
     tutorialSecondPara: HTMLParagraphElement;
+    firstTutorialInterval: number;
+    secondTutorialInterval: number;
     constructor() {
         super();
         this.hasSeenMovementTutorial = false;
@@ -39,12 +41,18 @@ export default class TutorialGame extends Game {
         );
         this.nextLevelUrl = "/levels/level-1/level-1.html";
         this.enemyPoolSize = 10;
+        this.firstEnemyCount = 3;
+        this.firstEnemyCount = 50;
+        this.secondEnemyCount = 150;
+        this.bossReleaseCount = 10;
+        this.firstTutorialInterval = 40;
+        this.secondTutorialInterval = 140;
         this.initializeEnemies();
         this.initializeBossProjectiles();
     }
     initializeEnemies() {
         for (let i = 0; i < this.enemyPoolSize; i++) {
-            if (i < 3) {
+            if (i < this.firstEnemyCount) {
                 this.enemies.push(new RedMine(this, this.canvas, this.ctx));
             } else {
                 this.enemies.push(
@@ -66,26 +74,32 @@ export default class TutorialGame extends Game {
         } else if (this.frameCount !== 0) {
             this.frameCount = 0;
         }
-        if (!this.hasSeenMovementTutorial && this.frameCount === 40) {
+        if (
+            !this.hasSeenMovementTutorial &&
+            this.frameCount === this.firstTutorialInterval
+        ) {
             this.isGamePaused = true;
             this.hasSeenMovementTutorial = true;
             this.player.isMoving = false;
             this.createMovementTutorial();
             this.events.menuEvents.tutorialModal.showModal();
-        } else if (this.frameCount === 50) {
+        } else if (this.frameCount === this.firstEnemyCount) {
             const freeFighter = this.enemies.find((enemy) => {
                 return enemy instanceof SmallFighter && enemy.isFree;
             });
             if (freeFighter) {
                 freeFighter.isFree = false;
             }
-        } else if (!this.hasSeenMenuTutorial && this.frameCount === 140) {
+        } else if (
+            !this.hasSeenMenuTutorial &&
+            this.frameCount === this.secondTutorialInterval
+        ) {
             this.isGamePaused = true;
             this.hasSeenMenuTutorial = true;
             this.player.isMoving = false;
             this.createMenuTutorial();
             this.events.menuEvents.tutorialModal.showModal();
-        } else if (this.frameCount === 150) {
+        } else if (this.frameCount === this.secondEnemyCount) {
             const freeRedMine = this.enemies.find((enemy) => {
                 return enemy instanceof RedMine && enemy.isFree;
             });
@@ -131,7 +145,10 @@ export default class TutorialGame extends Game {
             this.hasReachedBoss = true;
             this.bosses.push(new LargeBattleship(this, this.canvas, this.ctx));
         }
-        if (!this.hasReachedBoss && this.destroyedEnemies >= 10) {
+        if (
+            !this.hasReachedBoss &&
+            this.destroyedEnemies >= this.bossReleaseCount
+        ) {
             this.isGamePaused = true;
             this.hasSeenBossTutorial = true;
             this.player.isMoving = false;

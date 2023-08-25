@@ -25,9 +25,9 @@ export default class Level1Game extends Game {
     }
     initializeEnemies() {
         for (let i = 0; i < this.enemyPoolSize; i++) {
-            if (i < 5) {
+            if (i < this.firstEnemyCount) {
                 this.enemies.push(new RedMine(this, this.canvas, this.ctx));
-            } else if (i >= 5 && i < 10) {
+            } else if (i >= this.firstEnemyCount && i < this.secondEnemyCount) {
                 this.enemies.push(new BlueMine(this, this.canvas, this.ctx));
             } else {
                 this.enemies.push(
@@ -49,21 +49,21 @@ export default class Level1Game extends Game {
         } else if (this.frameCount !== 0) {
             this.frameCount = 0;
         }
-        if (this.frameCount === 5) {
+        if (this.frameCount === this.firstEnemyInterval) {
             const freeRedMine = this.enemies.find((enemy) => {
                 return enemy instanceof RedMine && enemy.isFree;
             });
             if (freeRedMine) {
                 freeRedMine.isFree = false;
             }
-        } else if (this.frameCount === 75) {
+        } else if (this.frameCount === this.secondEnemyInterval) {
             const freeBlueMine = this.enemies.find((enemy) => {
                 return enemy instanceof BlueMine && enemy.isFree;
             });
             if (freeBlueMine) {
                 freeBlueMine.isFree = false;
             }
-        } else if (this.frameCount === 150) {
+        } else if (this.frameCount === this.thirdEnemyInterval) {
             const freeFighter = this.enemies.find((enemy) => {
                 return enemy instanceof SmallFighter && enemy.isFree;
             });
@@ -75,7 +75,10 @@ export default class Level1Game extends Game {
         }
     }
     checkForBossEvent() {
-        if (!this.hasReachedBoss && this.destroyedEnemies >= 20) {
+        if (
+            !this.hasReachedBoss &&
+            this.destroyedEnemies >= this.bossReleaseCount
+        ) {
             this.events.audioEvents.alarmSound.play();
             this.hasReachedBoss = true;
             this.bosses.push(new LargeBattleship(this, this.canvas, this.ctx));

@@ -34,6 +34,13 @@ export default class Game {
     player: Player;
     enemies: Array<RedMine | BlueMine | SmallFighter | SmallRacer>;
     enemyPoolSize: number;
+    firstEnemyCount: number;
+    secondEnemyCount: number;
+    thirdEnemyCount: number;
+    firstEnemyInterval: number;
+    secondEnemyInterval: number;
+    thirdEnemyInterval: number;
+    bossReleaseCount: number;
     enemyProjectiles: Array<EnemyLaserSmall>;
     enemyLaserPoolSize: number;
     destroyedEnemies: number;
@@ -66,6 +73,13 @@ export default class Game {
         this.events = new EventListeners(this, this.canvas);
         this.enemies = [];
         this.enemyPoolSize = 15;
+        this.firstEnemyCount = 5;
+        this.secondEnemyCount = 10;
+        this.thirdEnemyCount = 15;
+        this.firstEnemyInterval = 5;
+        this.secondEnemyInterval = 75;
+        this.thirdEnemyInterval = 150;
+        this.bossReleaseCount = 20;
         this.enemyProjectiles = [];
         this.enemyLaserPoolSize = 30;
         this.destroyedEnemies = 0;

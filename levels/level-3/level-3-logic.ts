@@ -28,6 +28,8 @@ export default class Level3Game extends Game {
         this.enemyPoolSize = 24;
         this.bossLaserPoolSize = 60;
         this.racerInterval = 0.9;
+        this.firstEnemyCount = 7;
+        this.secondEnemyCount = 16;
         this.mobileBackground = spaceBackgroundUrl;
         this.desktopBackground = spaceBgDesktopUrl;
         this.initializeEnemies();
@@ -36,9 +38,9 @@ export default class Level3Game extends Game {
     }
     initializeEnemies() {
         for (let i = 0; i < this.enemyPoolSize; i++) {
-            if (i < 6) {
+            if (i < this.firstEnemyCount) {
                 this.enemies.push(new PhaseGlider(this, this.canvas, this.ctx));
-            } else if (i >= 5 && i < 16) {
+            } else if (i >= this.firstEnemyCount && i < this.secondEnemyCount) {
                 this.enemies.push(new BlueMine(this, this.canvas, this.ctx));
             } else {
                 this.enemies.push(
@@ -66,21 +68,21 @@ export default class Level3Game extends Game {
         } else if (this.frameCount !== 0) {
             this.frameCount = 0;
         }
-        if (this.frameCount === 5) {
+        if (this.frameCount === this.firstEnemyInterval) {
             const freeRedMine = this.enemies.find((enemy) => {
                 return enemy instanceof SmallTyphoon && enemy.isFree;
             });
             if (freeRedMine) {
                 freeRedMine.isFree = false;
             }
-        } else if (this.frameCount === 75) {
+        } else if (this.frameCount === this.secondEnemyInterval) {
             const freeBlueMine = this.enemies.find((enemy) => {
                 return enemy instanceof BlueMine && enemy.isFree;
             });
             if (freeBlueMine) {
                 freeBlueMine.isFree = false;
             }
-        } else if (this.frameCount === 150) {
+        } else if (this.frameCount === this.thirdEnemyInterval) {
             const freeFighter = this.enemies.find((enemy) => {
                 return enemy instanceof PhaseGlider && enemy.isFree;
             });
@@ -92,7 +94,10 @@ export default class Level3Game extends Game {
         }
     }
     checkForBossEvent() {
-        if (!this.hasReachedBoss && this.destroyedEnemies >= 20) {
+        if (
+            !this.hasReachedBoss &&
+            this.destroyedEnemies >= this.bossReleaseCount
+        ) {
             this.events.audioEvents.alarmSound.play();
             this.hasReachedBoss = true;
             this.bosses.push(new LargeShocker(this, this.canvas, this.ctx));
