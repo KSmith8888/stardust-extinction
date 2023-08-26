@@ -27,7 +27,7 @@ export default class AudioEvents {
         this.alarmSound = new Audio(alarmSoundUrl);
         this.alarmSound.volume = 0.3 * this.audioSettings.volume;
         this.empSound = new Audio(empSoundUrl);
-        this.empSound.volume = 0.1 * this.audioSettings.volume;
+        this.empSound.volume = 0.3 * this.audioSettings.volume;
         this.allAudio = [
             this.beepAudio,
             this.explosionSound,
@@ -93,7 +93,7 @@ export default class AudioEvents {
         this.beepAudio.volume = 0.4 * this.audioSettings.volume;
         this.explosionSound.volume = 0.1 * this.audioSettings.volume;
         this.alarmSound.volume = 0.3 * this.audioSettings.volume;
-        this.empSound.volume = 0.1 * this.audioSettings.volume;
+        this.empSound.volume = 0.3 * this.audioSettings.volume;
         this.saveAudioSettings();
     }
 }

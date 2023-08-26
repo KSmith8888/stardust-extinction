@@ -36,7 +36,12 @@ export class EnemyBolt extends EnemyProjectile {
     }
     collidedWithPlayer() {
         this.game.explosions.push(
-            new LargeEmp(this.game, this.ctx, this.x, this.y)
+            new LargeEmp(
+                this.game,
+                this.ctx,
+                this.game.player.x,
+                this.game.player.y
+            )
         );
     }
 }
