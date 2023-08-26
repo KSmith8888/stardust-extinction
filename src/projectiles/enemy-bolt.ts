@@ -35,7 +35,8 @@ export class EnemyBolt extends EnemyProjectile {
         }
     }
     collidedWithPlayer() {
-        this.game.explosions.push(new LargeEmp(this.ctx, this.x, this.y));
-        this.game.player.isShipDisabled = true;
+        this.game.explosions.push(
+            new LargeEmp(this.game, this.ctx, this.x, this.y)
+        );
     }
 }

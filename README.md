@@ -57,6 +57,9 @@ https://opengameart.org/content/explosion-0
 "Alarm" by Frenchboy licensed CC0:  
 https://opengameart.org/content/alarm-2
 
+"Electricity Game Sound Pack" by faxcorp licensed CC0:  
+https://opengameart.org/content/electricity-game-sound-pack
+
 ## License
 
 Licensed under Apache-2.0:  

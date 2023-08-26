@@ -69,6 +69,7 @@ export class BlueMine extends Enemy {
         if (this.health <= 0) {
             this.game.explosions.push(
                 new LargeEmp(
+                    this.game,
                     this.ctx,
                     this.x - this.width / 2,
                     this.y - this.height / 2
@@ -86,7 +87,8 @@ export class BlueMine extends Enemy {
         this.ctx.drawImage(this.image, this.x, this.y);
     }
     collidedWithPlayer() {
-        this.game.explosions.push(new LargeEmp(this.ctx, this.x, this.y));
-        this.game.player.isShipDisabled = true;
+        this.game.explosions.push(
+            new LargeEmp(this.game, this.ctx, this.x, this.y)
+        );
     }
 }

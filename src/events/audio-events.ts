@@ -2,6 +2,7 @@ import MenuEvents from "./menu-events";
 import beepAudioUrl from "../../assets/audio/beep.wav";
 import explosionSoundUrl from "../../assets/audio/explosion.wav";
 import alarmSoundUrl from "../../assets/audio/alarm.wav";
+import empSoundUrl from "../../assets/audio/emp-explosion.wav";
 
 interface savedAudio {
     volume: number;
@@ -14,6 +15,7 @@ export default class AudioEvents {
     beepAudio: HTMLAudioElement;
     explosionSound: HTMLAudioElement;
     alarmSound: HTMLAudioElement;
+    empSound: HTMLAudioElement;
     allAudio: Array<HTMLAudioElement>;
     constructor(menuEvents: MenuEvents) {
         this.menuEvents = menuEvents;
@@ -24,15 +26,14 @@ export default class AudioEvents {
         this.explosionSound.volume = 0.1 * this.audioSettings.volume;
         this.alarmSound = new Audio(alarmSoundUrl);
         this.alarmSound.volume = 0.3 * this.audioSettings.volume;
-        this.allAudio = [this.beepAudio, this.explosionSound, this.alarmSound];
-    }
-    getSavedVolume() {
-        const volumeLevel = localStorage.getItem("volume-setting");
-        if (volumeLevel && !isNaN(parseInt(volumeLevel))) {
-            return parseInt(volumeLevel);
-        } else {
-            return null;
-        }
+        this.empSound = new Audio(empSoundUrl);
+        this.empSound.volume = 0.1 * this.audioSettings.volume;
+        this.allAudio = [
+            this.beepAudio,
+            this.explosionSound,
+            this.alarmSound,
+            this.empSound,
+        ];
     }
     loadAudioSettings() {
         const audioSettings = localStorage.getItem("audio-settings");
@@ -70,6 +71,10 @@ export default class AudioEvents {
         this.explosionSound.currentTime = 0;
         this.explosionSound.play();
     }
+    playEmpSound() {
+        this.empSound.currentTime = 0;
+        this.empSound.play();
+    }
     changeMuteSetting() {
         if (!this.audioSettings.mute) {
             this.allAudio.forEach((sound) => {
@@ -88,6 +93,7 @@ export default class AudioEvents {
         this.beepAudio.volume = 0.4 * this.audioSettings.volume;
         this.explosionSound.volume = 0.1 * this.audioSettings.volume;
         this.alarmSound.volume = 0.3 * this.audioSettings.volume;
+        this.empSound.volume = 0.1 * this.audioSettings.volume;
         this.saveAudioSettings();
     }
 }
