@@ -4,18 +4,24 @@
 
 body {
     margin: 0;
-    background-color: rgb(58, 4, 51);
+    background-color: rgb(24, 1, 21);
     font-family: "Courier New", Courier, monospace;
 }
 
 #header {
-    padding: 1em 2em 2em 2em;
-    margin: 1em 2em 2em 2em;
+    padding: 1.5em;
+    display: flex;
+    justify-content: center;
+}
+
+#header-text-container {
+    width: 100%;
+    padding: 1em;
+    text-align: center;
     border: 1px solid rgb(226, 49, 203);
     border-radius: 5px;
-    text-align: center;
-    background-color: rgba(24, 1, 21);
     color: rgb(243, 134, 228);
+    background: radial-gradient(rgb(24, 1, 21), rgb(58, 4, 51));
 }
 
 #return-text {
@@ -27,32 +33,51 @@ body {
 }
 
 .section {
-    margin: 2em;
-    padding: 0.5em;
+    margin: 0;
+    padding: 0 1.5em 1.5em 1.5em;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: rgb(243, 134, 228);
-    border: 1px solid rgb(226, 49, 203);
-    border-radius: 5px;
-    background-color: rgba(24, 1, 21);
 }
 
 .section-heading {
-    margin: 1em 0 0 0;
+    color: rgb(243, 134, 228);
+    margin: 0;
 }
 
 .section-sub-heading {
+    text-align: center;
     margin: 0 0 1em 0;
 }
 
 #credits-container {
-    display: flex;
-    flex-wrap: wrap;
+    width: 100%;
 }
 
 .credits-sub-section {
+    width: 100%;
+    margin: 0.5em 0 1em 0;
     padding: 1em;
+    text-align: center;
+    color: rgb(243, 134, 228);
+    background: radial-gradient(rgb(24, 1, 21), rgb(58, 4, 51));
+    border: 1px solid rgb(226, 49, 203);
+    border-radius: 5px;
+}
+
+.attribution-link {
+    display: block;
+}
+
+#license-container {
+    width: 100%;
+    text-align: center;
+    padding: 1em;
+    margin: 0.5em 0;
+    color: rgb(243, 134, 228);
+    border: 1px solid rgb(226, 49, 203);
+    border-radius: 5px;
+    background: radial-gradient(rgb(24, 1, 21), rgb(58, 4, 51));
 }
 
 .license-text {
@@ -60,6 +85,6 @@ body {
 }
 
 .license-link {
-    text-align: center;
+    margin: 0.5em 0;
     display: block;
 }
