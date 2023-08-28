@@ -30,8 +30,12 @@ export class LargeBlaster extends Boss {
         if (this.health <= 0) {
             this.destroyedByPlayer();
         }
-        this.followTargetY();
-        this.followTargetX();
+        const newTargetY = Math.floor(Math.random() * (this.canvas.height / 2));
+        this.followTargetY(newTargetY);
+        const newTargetX = Math.floor(
+            Math.random() * (this.canvas.width - this.width)
+        );
+        this.followTargetX(newTargetX);
         this.ctx.drawImage(this.image, this.x, this.y);
         if (this.isFiring) {
             this.activateProjectiles();

@@ -26,6 +26,7 @@ export default class Player {
     health: number;
     healthStat: number;
     isShipDisabled: boolean;
+    disabledDuration: number;
     shipDisabledFrames: number;
     constructor(
         game: Game,
@@ -63,6 +64,7 @@ export default class Player {
         this.health = 100;
         this.healthStat = 100;
         this.isShipDisabled = false;
+        this.disabledDuration = 60;
         this.shipDisabledFrames = 0;
         this.initializeProjectiles();
     }
@@ -78,7 +80,7 @@ export default class Player {
     }
     render() {
         if (this.isShipDisabled) {
-            if (this.shipDisabledFrames < 100) {
+            if (this.shipDisabledFrames < this.disabledDuration) {
                 this.shipDisabledFrames += 1;
             } else {
                 this.shipDisabledFrames = 0;

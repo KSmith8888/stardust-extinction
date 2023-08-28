@@ -18,6 +18,7 @@ export default class Boss {
     projectileInterval: number;
     isFiring: boolean;
     isDestroyed: boolean;
+    firingInterval: number;
     constructor(
         game: Game,
         canvas: HTMLCanvasElement,
@@ -41,30 +42,29 @@ export default class Boss {
         this.projectileInterval = 40;
         this.isFiring = false;
         this.isDestroyed = false;
+        this.firingInterval = 40;
     }
-    followTargetY() {
+    followTargetY(newTargetY: number) {
         if (this.y >= this.targetY + 5) {
             this.y -= this.speed / 2;
         } else if (this.y <= this.targetY - 5) {
             this.y += this.speed / 2;
         }
         if (this.frameCount === 20) {
-            this.targetY = Math.floor(Math.random() * (this.canvas.height / 2));
+            this.targetY = newTargetY;
         }
     }
-    followTargetX() {
+    followTargetX(newTargetX: number) {
         if (this.x >= this.targetX + 5) {
             this.x -= this.speed;
         } else if (this.x <= this.targetX - 5) {
             this.x += this.speed;
         }
-        if (this.frameCount < 40) {
+        if (this.frameCount < this.firingInterval) {
             this.frameCount += 1;
         } else {
             this.isFiring = true;
-            this.targetX = Math.floor(
-                Math.random() * (this.canvas.width - this.width)
-            );
+            this.targetX = newTargetX;
             this.frameCount = 0;
         }
     }
