@@ -162,6 +162,7 @@ export default class MenuEvents {
             "click",
             () => {
                 this.tutorialModal.close();
+                this.menuButton.classList.remove("no-display");
                 this.game.isGamePaused = false;
             }
         );

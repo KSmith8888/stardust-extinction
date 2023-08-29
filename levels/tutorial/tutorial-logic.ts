@@ -24,6 +24,7 @@ export default class TutorialGame extends Game {
     tutorialSecondPara: HTMLParagraphElement;
     firstTutorialInterval: number;
     secondTutorialInterval: number;
+    skipTutorialButton: HTMLButtonElement;
     constructor() {
         super();
         this.hasSeenMovementTutorial = false;
@@ -47,8 +48,19 @@ export default class TutorialGame extends Game {
         this.bossReleaseCount = 10;
         this.firstTutorialInterval = 40;
         this.secondTutorialInterval = 140;
+        this.skipTutorialButton = document.createElement("button");
+        this.createSkipButton();
         this.initializeEnemies();
         this.initializeBossProjectiles();
+    }
+    createSkipButton() {
+        this.skipTutorialButton.classList.add("button");
+        this.skipTutorialButton.type = "button";
+        this.skipTutorialButton.textContent = "Skip Tutorial";
+        this.skipTutorialButton.addEventListener("click", () => {
+            location.assign("/levels/level-1/level-1.html");
+        });
+        this.events.menuEvents.tutorialModal.append(this.skipTutorialButton);
     }
     initializeEnemies() {
         for (let i = 0; i < this.enemyPoolSize; i++) {
@@ -110,6 +122,9 @@ export default class TutorialGame extends Game {
         }
     }
     createMovementTutorial() {
+        this.events.menuEvents.tutorialModal.removeChild(
+            this.skipTutorialButton
+        );
         const tutorialRow = <HTMLParagraphElement>(
             document.getElementById("tutorial-row-initial")
         );
