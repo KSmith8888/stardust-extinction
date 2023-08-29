@@ -36,8 +36,8 @@ export default class Player {
         this.game = game;
         this.canvas = canvas;
         this.ctx = ctx;
-        this.width = 45;
-        this.height = 45;
+        this.width = 44;
+        this.height = 50;
         this.x = canvas.width / 2;
         this.y = canvas.height - (this.height + 35);
         this.isMoving = false;
@@ -53,8 +53,8 @@ export default class Player {
         this.projectileInterval = 15;
         this.projectileStrength = 1;
         this.frameCount = 0;
-        this.laserOffsetX = this.width * 0.2;
-        this.laserOffsetY = this.height * 0.35;
+        this.laserOffsetX = this.width * 0.3;
+        this.laserOffsetY = this.height * 0.1;
         this.healthBar = new HealthBar(
             this,
             this.ctx,
@@ -107,7 +107,7 @@ export default class Player {
             return laser instanceof currentLaser && laser.isFree;
         });
         if (firstLaser) {
-            firstLaser.x = this.x;
+            firstLaser.x = this.x + (this.laserOffsetX - firstLaser.width);
             firstLaser.y = this.y + this.laserOffsetY;
             firstLaser.isFree = false;
         }
