@@ -43,8 +43,8 @@ export default class TutorialGame extends Game {
         this.nextLevelUrl = "/levels/level-1/level-1.html";
         this.enemyPoolSize = 10;
         this.firstEnemyCount = 3;
-        this.firstEnemyCount = 50;
-        this.secondEnemyCount = 150;
+        this.firstEnemyInterval = 50;
+        this.secondEnemyInterval = 150;
         this.bossReleaseCount = 10;
         this.firstTutorialInterval = 40;
         this.secondTutorialInterval = 140;
@@ -95,7 +95,7 @@ export default class TutorialGame extends Game {
             this.player.isMoving = false;
             this.createMovementTutorial();
             this.events.menuEvents.tutorialModal.showModal();
-        } else if (this.frameCount === this.firstEnemyCount) {
+        } else if (this.frameCount === this.firstEnemyInterval) {
             const freeFighter = this.enemies.find((enemy) => {
                 return enemy instanceof SmallFighter && enemy.isFree;
             });
@@ -111,7 +111,7 @@ export default class TutorialGame extends Game {
             this.player.isMoving = false;
             this.createMenuTutorial();
             this.events.menuEvents.tutorialModal.showModal();
-        } else if (this.frameCount === this.secondEnemyCount) {
+        } else if (this.frameCount === this.secondEnemyInterval) {
             const freeRedMine = this.enemies.find((enemy) => {
                 return enemy instanceof RedMine && enemy.isFree;
             });
