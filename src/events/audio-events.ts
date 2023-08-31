@@ -34,25 +34,12 @@ export default class AudioEvents {
             this.alarmSound,
             this.empSound,
         ];
+        this.applyAudioSettings();
     }
     loadAudioSettings() {
         const audioSettings = localStorage.getItem("audio-settings");
         if (audioSettings) {
             const savedSettings = JSON.parse(audioSettings);
-            if (savedSettings.volume === 0.5) {
-                this.menuEvents.volumeControl.value = "0";
-            } else if (savedSettings.volume === 1) {
-                this.menuEvents.volumeControl.value = "50";
-            } else if (savedSettings.volume === 2) {
-                this.menuEvents.volumeControl.value = "100";
-            }
-            if (savedSettings.mute) {
-                this.menuEvents.muteButton.textContent = "Unmute Audio";
-                this.menuEvents.volumeControl.disabled = true;
-            } else {
-                this.menuEvents.muteButton.textContent = "Mute Audio";
-                this.menuEvents.volumeControl.disabled = false;
-            }
             return savedSettings;
         } else {
             return {
@@ -67,6 +54,24 @@ export default class AudioEvents {
             JSON.stringify(this.audioSettings)
         );
     }
+    applyAudioSettings() {
+        if (this.audioSettings.volume === 0.5) {
+            this.menuEvents.volumeControl.value = "0";
+        } else if (this.audioSettings.volume === 1) {
+            this.menuEvents.volumeControl.value = "50";
+        } else if (this.audioSettings.volume === 2) {
+            this.menuEvents.volumeControl.value = "100";
+        }
+        if (this.audioSettings.mute) {
+            this.muteAudio();
+            this.menuEvents.muteButton.textContent = "Unmute Audio";
+            this.menuEvents.volumeControl.disabled = true;
+        } else {
+            this.unmuteAudio();
+            this.menuEvents.muteButton.textContent = "Mute Audio";
+            this.menuEvents.volumeControl.disabled = false;
+        }
+    }
     playExplosionSound() {
         this.explosionSound.currentTime = 0;
         this.explosionSound.play();
@@ -75,16 +80,22 @@ export default class AudioEvents {
         this.empSound.currentTime = 0;
         this.empSound.play();
     }
+    muteAudio() {
+        this.allAudio.forEach((sound) => {
+            sound.muted = true;
+        });
+    }
+    unmuteAudio() {
+        this.allAudio.forEach((sound) => {
+            sound.muted = false;
+        });
+    }
     changeMuteSetting() {
         if (!this.audioSettings.mute) {
-            this.allAudio.forEach((sound) => {
-                sound.muted = true;
-            });
+            this.muteAudio();
             this.audioSettings.mute = true;
         } else {
-            this.allAudio.forEach((sound) => {
-                sound.muted = false;
-            });
+            this.unmuteAudio();
             this.audioSettings.mute = false;
         }
         this.saveAudioSettings();
