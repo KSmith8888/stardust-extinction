@@ -7,8 +7,8 @@ export default class Player {
     game: Game;
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
-    readonly width: number;
-    readonly height: number;
+    width: number;
+    height: number;
     x: number;
     y: number;
     isMoving: boolean;
@@ -25,6 +25,7 @@ export default class Player {
     healthBar: HealthBar;
     health: number;
     healthStat: number;
+    speed: number;
     isShipDisabled: boolean;
     disabledDuration: number;
     shipDisabledFrames: number;
@@ -63,6 +64,7 @@ export default class Player {
         );
         this.health = 100;
         this.healthStat = 100;
+        this.speed = 10;
         this.isShipDisabled = false;
         this.disabledDuration = 60;
         this.shipDisabledFrames = 0;

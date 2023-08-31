@@ -123,9 +123,12 @@ export default class EventListeners {
         this.keyEvent = document.addEventListener("keydown", (event) => {
             switch (event.code) {
                 case "ArrowLeft": {
-                    if (this.player.x >= 5 && !this.player.isShipDisabled) {
+                    if (
+                        this.player.x >= this.player.speed &&
+                        !this.player.isShipDisabled
+                    ) {
                         this.player.isMoving = true;
-                        this.player.x -= 5;
+                        this.player.x -= this.player.speed;
                     } else {
                         this.player.isMoving = false;
                     }
@@ -134,20 +137,24 @@ export default class EventListeners {
                 case "ArrowRight": {
                     if (
                         this.player.x <=
-                            canvas.width - (this.player.width + 5) &&
+                            canvas.width -
+                                (this.player.width + this.player.speed) &&
                         !this.player.isShipDisabled
                     ) {
                         this.player.isMoving = true;
-                        this.player.x += 5;
+                        this.player.x += this.player.speed;
                     } else {
                         this.player.isMoving = false;
                     }
                     break;
                 }
                 case "ArrowUp": {
-                    if (this.player.y >= 5 && !this.player.isShipDisabled) {
+                    if (
+                        this.player.y >= this.player.speed &&
+                        !this.player.isShipDisabled
+                    ) {
                         this.player.isMoving = true;
-                        this.player.y -= 5;
+                        this.player.y -= this.player.speed;
                     } else {
                         this.player.isMoving = false;
                     }
@@ -160,7 +167,7 @@ export default class EventListeners {
                         !this.player.isShipDisabled
                     ) {
                         this.player.isMoving = true;
-                        this.player.y += 5;
+                        this.player.y += this.player.speed;
                     } else {
                         this.player.isMoving = false;
                     }

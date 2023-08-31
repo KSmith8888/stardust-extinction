@@ -102,6 +102,11 @@ body {
     background-color: rgb(160, 25, 142);
 }
 
+.button:disabled {
+    color: rgb(119, 100, 118);
+    background: radial-gradient(rgba(58, 4, 51, 0.5), rgba(117, 13, 103, 0.3));
+}
+
 .no-display {
     display: none;
 }
