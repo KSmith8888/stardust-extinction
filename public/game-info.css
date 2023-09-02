@@ -9,27 +9,40 @@ body {
 }
 
 #header {
-    padding: 1.5em;
-    display: flex;
-    justify-content: center;
-}
-
-#header-text-container {
     width: 100%;
-    padding: 1em;
-    text-align: center;
-    border: 1px solid rgb(226, 49, 203);
-    border-radius: 5px;
+    padding-top: 0.5em;
     color: rgb(243, 134, 228);
-    background: radial-gradient(rgb(24, 1, 21), rgb(58, 4, 51));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#main-heading {
+    margin-bottom: 0;
 }
 
-#return-text {
-    font-size: 1.2rem;
+#nav {
+    margin-bottom: 1em;
 }
 
-#return-link {
-    display: block;
+#nav-list {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    list-style: none;
+}
+
+.nav-list-item {
+    margin: 0.5em 0;
+    text-align: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: rgb(150, 150, 221);
 }
 
 .section {
@@ -47,17 +60,19 @@ body {
 
 .section-sub-heading {
     text-align: center;
-    margin: 0 0 1em 0;
+    margin: 0.5em 0 1em 0;
 }
 
 #credits-container {
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .credits-sub-section {
     width: 100%;
-    margin: 0.5em 0 1em 0;
-    padding: 1em;
+    margin: 0.5em 0.5em 1em 0.5em;
+    padding: 0.5em;
     text-align: center;
     color: rgb(243, 134, 228);
     background: radial-gradient(rgb(24, 1, 21), rgb(58, 4, 51));
@@ -65,8 +80,13 @@ body {
     border-radius: 5px;
 }
 
-.attribution-link {
+.attribution-second-line {
+    margin-top: 0.5em;
     display: block;
+}
+
+.attribution-link {
+    color: rgb(150, 150, 221);
 }
 
 #license-container {
@@ -85,6 +105,31 @@ body {
 }
 
 .license-link {
+    color: rgb(150, 150, 221);
     margin: 0.5em 0;
     display: block;
+}
+
+.attribution-link:hover,
+.attribution-link:focus,
+.license-link:hover,
+.license-link:focus,
+.nav-link:hover,
+.nav-link:focus {
+    color: red;
+}
+
+@media (min-width: 950px) {
+    #main-heading {
+        margin-bottom: 0.5em;
+    }
+    #nav-list {
+        flex-direction: row;
+    }
+    .nav-list-item {
+        margin: 0 1em;
+    }
+    #credits-container {
+        flex-direction: row;
+    }
 }

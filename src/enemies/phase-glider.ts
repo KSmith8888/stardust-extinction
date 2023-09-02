@@ -19,6 +19,7 @@ export class PhaseGlider extends Enemy {
         this.firesProjectiles = true;
         this.width = 20;
         this.height = 28;
+        this.x = this.game.player.x;
         this.speed = Math.floor(Math.random() * 2) + 2;
         this.image = new Image();
         this.image.src = phaseGliderUrl;
@@ -43,9 +44,8 @@ export class PhaseGlider extends Enemy {
     }
     warp() {
         this.warpInterval = Math.floor(Math.random() * 150) + 50;
-        this.y = Math.floor(Math.random() * (this.canvas.height / 2));
+        this.y = Math.floor(Math.random() * (this.canvas.height * 0.4));
         this.x = this.game.player.x;
-        //this.x = Math.floor(Math.random() * (this.canvas.width - this.width));
     }
     handleProjectiles() {
         if (this.frameCount >= this.warpInterval) {
