@@ -13,6 +13,12 @@ export default class MenuEvents {
     settingsMenu: HTMLDialogElement;
     openSettingsButton: HTMLButtonElement;
     openSettingsMenu: void;
+    easyButton: HTMLButtonElement;
+    easyDifficulty: void;
+    normalButton: HTMLButtonElement;
+    normalDifficulty: void;
+    hardButton: HTMLButtonElement;
+    hardDifficulty: void;
     deleteSaveButton: HTMLButtonElement;
     deleteSaveData: void;
     closeSettingsButton: HTMLButtonElement;
@@ -72,6 +78,27 @@ export default class MenuEvents {
                 this.closeSettingsButton.focus();
             }
         );
+        this.easyButton = <HTMLButtonElement>(
+            document.getElementById("easy-button")
+        );
+        this.easyDifficulty = this.easyButton.addEventListener("click", () => {
+            this.changeDifficulty("Easy");
+        });
+        this.normalButton = <HTMLButtonElement>(
+            document.getElementById("normal-button")
+        );
+        this.normalDifficulty = this.normalButton.addEventListener(
+            "click",
+            () => {
+                this.changeDifficulty("Normal");
+            }
+        );
+        this.hardButton = <HTMLButtonElement>(
+            document.getElementById("hard-button")
+        );
+        this.hardDifficulty = this.hardButton.addEventListener("click", () => {
+            this.changeDifficulty("Hard");
+        });
         this.deleteSaveButton = <HTMLButtonElement>(
             document.getElementById("delete-save-button")
         );
@@ -166,5 +193,21 @@ export default class MenuEvents {
                 this.game.isGamePaused = false;
             }
         );
+    }
+    changeDifficulty(newDifficulty: string) {
+        if (
+            window.confirm(
+                "Changing the difficulty will restart the current level, are you sure that you want to change it?"
+            )
+        ) {
+            if (newDifficulty === "Easy") {
+                localStorage.setItem("difficulty-setting", "Easy");
+            } else if (newDifficulty === "Normal") {
+                localStorage.setItem("difficulty-setting", "Normal");
+            } else if (newDifficulty === "Hard") {
+                localStorage.setItem("difficulty-setting", "Hard");
+            }
+            location.reload();
+        }
     }
 }

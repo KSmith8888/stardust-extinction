@@ -69,9 +69,7 @@ body {
     -webkit-backdrop-filter: blur(5px);
 }
 
-.main-menu-text,
-.audio-menu-text,
-.settings-menu-text {
+.menu-main-heading {
     margin: 0.5em 0;
     text-align: center;
     font-size: 1.6rem;
@@ -105,6 +103,27 @@ body {
 .button:disabled {
     color: rgb(119, 100, 118);
     background: radial-gradient(rgba(58, 4, 51, 0.5), rgba(117, 13, 103, 0.3));
+}
+
+#difficulty-container {
+    padding: 0.5em;
+    text-align: center;
+    border: 1px solid rgb(226, 49, 203);
+    margin-bottom: 0.5em;
+}
+
+#difficulty-heading {
+    margin-bottom: 0.5em;
+}
+
+#tutorial-difficulty-text {
+    margin: 0.5em 0;
+}
+
+#easy-button,
+#normal-button,
+#hard-button {
+    margin: 0 0.25em 0.5em 0.25em;
 }
 
 .no-display {
@@ -213,6 +232,7 @@ body {
     margin: 0.5em 0;
 }
 
+.menu-sub-heading,
 #volume-control-label {
     margin-top: 0.5em;
     font-size: 1.2rem;

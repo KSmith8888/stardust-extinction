@@ -38,7 +38,7 @@
             </button>
             <p id="loading-text">Loading...</p>
             <dialog id="main-menu" class="modal">
-                <p class="main-menu-text">Main Menu</p>
+                <h2 class="menu-main-heading">Main Menu</h2>
                 <div class="button-row">
                     <button class="button" type="button">Test</button>
                     <button class="button" type="button">Test</button>
@@ -73,7 +73,23 @@
                 </div>
             </dialog>
             <dialog id="settings-menu" class="modal">
-                <p class="settings-menu-text">Settings</p>
+                <h2 class="menu-main-heading">Settings</h2>
+                <div id="difficulty-container">
+                    <h3 id="difficulty-heading" class="menu-sub-heading">
+                        Difficulty:
+                    </h3>
+                    <div class="button-row">
+                        <button id="easy-button" class="button" type="button">
+                            Easy
+                        </button>
+                        <button id="normal-button" class="button" type="button">
+                            Normal
+                        </button>
+                        <button id="hard-button" class="button" type="button">
+                            Hard
+                        </button>
+                    </div>
+                </div>
                 <button id="delete-save-button" class="button" type="button">
                     Delete Data
                 </button>
@@ -86,7 +102,7 @@
                 </button>
             </dialog>
             <dialog id="audio-menu" class="modal">
-                <p class="audio-menu-text">Audio Menu</p>
+                <h2 class="menu-main-heading">Audio Menu</h2>
                 <button id="mute-button" class="button" type="button">
                     Mute Audio
                 </button>

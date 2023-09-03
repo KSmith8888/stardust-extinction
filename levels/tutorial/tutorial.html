@@ -28,7 +28,7 @@
         />
         <link rel="stylesheet" href="../../assets/styles/main.css" />
         <script type="module" src="tutorial-logic.ts"></script>
-        <title>Level 1</title>
+        <title>Tutorial</title>
     </head>
     <body>
         <div id="container">
@@ -73,7 +73,26 @@
                 </div>
             </dialog>
             <dialog id="settings-menu" class="modal">
-                <p class="settings-menu-text">Settings</p>
+                <h2 class="menu-main-heading">Settings</h2>
+                <div id="difficulty-container">
+                    <h3 id="difficulty-heading" class="menu-sub-heading">
+                        Difficulty:
+                    </h3>
+                    <p id="tutorial-difficulty-text">
+                        ( Available starting in level 1 )
+                    </p>
+                    <div class="button-row">
+                        <button id="easy-button" class="button" type="button">
+                            Easy
+                        </button>
+                        <button id="normal-button" class="button" type="button">
+                            Normal
+                        </button>
+                        <button id="hard-button" class="button" type="button">
+                            Hard
+                        </button>
+                    </div>
+                </div>
                 <button id="delete-save-button" class="button" type="button">
                     Delete Data
                 </button>
@@ -86,7 +105,7 @@
                 </button>
             </dialog>
             <dialog id="audio-menu" class="modal">
-                <p class="audio-menu-text">Audio Menu</p>
+                <h2 class="menu-main-heading">Audio Menu</h2>
                 <button id="mute-button" class="button" type="button">
                     Mute Audio
                 </button>

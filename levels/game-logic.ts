@@ -61,6 +61,7 @@ export default class Game {
     mobileBackground: string;
     desktopBackground: string;
     nextLevelUrl: string;
+    difficultySetting: string;
     constructor() {
         this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
         this.ctx = <CanvasRenderingContext2D>this.canvas.getContext("2d");
@@ -100,8 +101,39 @@ export default class Game {
         this.mobileBackground = spaceBackgroundUrl;
         this.desktopBackground = spaceBgDesktopUrl;
         this.nextLevelUrl = "/";
+        this.difficultySetting = "Normal";
         this.events.menuEvents.tutorialModal.showModal();
         this.initializeEnemyLasers();
+    }
+    loadDifficultySetting() {
+        const savedDifficulty = localStorage.getItem("difficulty-setting");
+        if (savedDifficulty) {
+            if (savedDifficulty === "Easy") {
+                this.difficultySetting = "Easy";
+                this.events.menuEvents.easyButton.disabled = true;
+                this.enemyPoolSize = Math.floor(this.enemyPoolSize / 2);
+                this.firstEnemyCount = Math.floor(this.enemyPoolSize / 3);
+                this.secondEnemyCount = this.firstEnemyCount * 2;
+                this.secondEnemyInterval = 90;
+                this.thirdEnemyInterval = 190;
+                this.bossReleaseCount = Math.floor(this.bossReleaseCount * 0.7);
+            } else if (savedDifficulty === "Hard") {
+                this.difficultySetting = "Hard";
+                this.events.menuEvents.hardButton.disabled = true;
+                this.enemyPoolSize = Math.floor(this.enemyPoolSize * 1.5);
+                this.firstEnemyCount = Math.floor(this.enemyPoolSize / 3);
+                this.secondEnemyCount = this.firstEnemyCount * 2;
+                this.secondEnemyInterval = 60;
+                this.thirdEnemyInterval = 110;
+                this.bossReleaseCount = Math.floor(this.bossReleaseCount * 1.3);
+            } else if (savedDifficulty === "Normal") {
+                this.events.menuEvents.normalButton.disabled = true;
+            }
+        } else {
+            localStorage.setItem("difficulty-setting", "Normal");
+            this.difficultySetting = "Normal";
+            this.events.menuEvents.normalButton.disabled = true;
+        }
     }
     initializeEnemyLasers() {
         for (let i = 0; i < this.enemyLaserPoolSize; i++) {

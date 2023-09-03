@@ -49,6 +49,9 @@ export default class TutorialGame extends Game {
         this.firstTutorialInterval = 40;
         this.secondTutorialInterval = 140;
         this.skipTutorialButton = document.createElement("button");
+        this.events.menuEvents.easyButton.disabled = true;
+        this.events.menuEvents.normalButton.disabled = true;
+        this.events.menuEvents.hardButton.disabled = true;
         this.createSkipButton();
         this.initializeEnemies();
         this.initializeBossProjectiles();
