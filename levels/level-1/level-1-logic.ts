@@ -13,6 +13,8 @@ import { RedMine, BlueMine } from "../../src/enemies/mines";
 import { SmallFighter } from "../../src/enemies/fighters";
 import { LargeBattleship } from "../../src/bosses/large-battleship";
 import { EnemyLaserLarge } from "../../src/projectiles/enemy-lasers";
+import { LargeShocker } from "../../src/bosses/large-shocker";
+import { EnemyBolt } from "../../src/projectiles/enemy-bolt";
 
 export default class Level1Game extends Game {
     constructor() {
@@ -41,6 +43,9 @@ export default class Level1Game extends Game {
         for (let i = 0; i < this.bossLaserPoolSize; i++) {
             this.bossProjectiles.push(
                 new EnemyLaserLarge(this, this.canvas, this.ctx)
+            );
+            this.bossProjectiles.push(
+                new EnemyBolt(this, this.canvas, this.ctx)
             );
         }
     }
@@ -84,12 +89,20 @@ export default class Level1Game extends Game {
             this.hasReachedBoss = true;
             this.bosses.push(new LargeBattleship(this, this.canvas, this.ctx));
             setTimeout(() => {
-                this.bosses.push(
-                    new LargeBattleship(this, this.canvas, this.ctx)
-                );
-                this.bosses.push(
-                    new LargeBattleship(this, this.canvas, this.ctx)
-                );
+                this.bosses.push(new LargeShocker(this, this.canvas, this.ctx));
+                if (
+                    this.difficultySetting === "Normal" ||
+                    this.difficultySetting === "Hard"
+                ) {
+                    this.bosses.push(
+                        new LargeBattleship(this, this.canvas, this.ctx)
+                    );
+                }
+                if (this.difficultySetting === "Hard") {
+                    this.bosses.push(
+                        new LargeBattleship(this, this.canvas, this.ctx)
+                    );
+                }
             }, 800);
         }
     }

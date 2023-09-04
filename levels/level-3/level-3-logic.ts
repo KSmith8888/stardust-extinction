@@ -104,7 +104,19 @@ export default class Level3Game extends Game {
             this.bosses.push(new LargeShocker(this, this.canvas, this.ctx));
             setTimeout(() => {
                 this.bosses.push(new LargeBlaster(this, this.canvas, this.ctx));
-                this.bosses.push(new LargeBlaster(this, this.canvas, this.ctx));
+                if (
+                    this.difficultySetting === "Normal" ||
+                    this.difficultySetting === "Hard"
+                ) {
+                    this.bosses.push(
+                        new LargeBlaster(this, this.canvas, this.ctx)
+                    );
+                }
+                if (this.difficultySetting === "Hard") {
+                    this.bosses.push(
+                        new LargeBlaster(this, this.canvas, this.ctx)
+                    );
+                }
             }, 800);
         }
     }

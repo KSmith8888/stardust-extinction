@@ -17,7 +17,7 @@ export class LargeShocker extends Boss {
         super(game, canvas, ctx);
         this.width = 36;
         this.height = 60;
-        this.y = 50;
+        this.y = 0 - this.height;
         this.speed = Math.floor(Math.random() * 3) + 4;
         this.frameCount = 0;
         this.image = new Image();

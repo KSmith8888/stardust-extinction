@@ -30,7 +30,7 @@ export default class Boss {
         this.width = 0;
         this.height = 0;
         this.x = Math.floor(Math.random() * (this.canvas.width - this.width));
-        this.y = 0 - this.height;
+        this.y = 0;
         this.targetX = Math.floor(
             Math.random() * (this.canvas.width - this.width)
         );
