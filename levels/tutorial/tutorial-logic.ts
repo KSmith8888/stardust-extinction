@@ -134,9 +134,9 @@ export default class TutorialGame extends Game {
         tutorialRow.replaceChildren();
         this.tutorialHeading.textContent = "Movement and Firing";
         this.tutorialFirstPara.textContent =
-            "Movement controls are very simple. Just click or touch your ship, located at the bottom of the screen, and drag it to the desired location. Your ship will fire lasers automatically.";
+            "Movement controls are very simple. Just click your ship, located at the bottom of the screen, and drag it to the desired location. On desktop, you can also move using the arrow keys.";
         this.tutorialSecondPara.textContent =
-            "Watch out for new enemies appearing from the top of the screen.";
+            "Your ship will fire lasers automatically. Watch out for new enemies appearing from the top of the screen.";
         const closeTutorialBtn = <HTMLParagraphElement>(
             document.getElementById("close-tutorial-button")
         );

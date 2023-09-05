@@ -48,7 +48,7 @@ async function startLevel1() {
                 } else {
                     location.assign("/levels/tutorial/tutorial.html");
                 }
-            }, 800);
+            }, 600);
         }
     } catch (error) {
         console.error(error);
@@ -67,7 +67,7 @@ async function continueGame() {
             } else {
                 alert("No save data found, please start a new game.");
             }
-        }, 800);
+        }, 600);
     } catch (error) {
         console.error(error);
     }
@@ -78,7 +78,7 @@ async function gameInfo() {
         await beepSound.play();
         setTimeout(() => {
             location.assign("/game-info.html");
-        }, 800);
+        }, 600);
     } catch (error) {
         console.error(error);
     }
