@@ -5,6 +5,7 @@ export default class MenuEvents {
     menuButton: HTMLButtonElement;
     mainMenu: HTMLDialogElement;
     isMenuOpen: boolean;
+    isSubMenuOpen: boolean;
     closeButton: HTMLButtonElement;
     quitButton: HTMLButtonElement;
     openMenu: void;
@@ -32,6 +33,28 @@ export default class MenuEvents {
     changeVolume: void;
     closeAudioButton: HTMLButtonElement;
     closeAudio: void;
+    controlsMenu: HTMLDialogElement;
+    openControlsButton: HTMLButtonElement;
+    currentRebindKey: string | null;
+    controlsKeyEvent: void;
+    openControlsMenu: void;
+    menuKeyText: HTMLParagraphElement;
+    changeMenuKeyButton: HTMLButtonElement;
+    changeMenuKey: void;
+    upKeyText: HTMLParagraphElement;
+    changeUpKeyButton: HTMLButtonElement;
+    changeUpKey: void;
+    leftKeyText: HTMLParagraphElement;
+    changeLeftKeyButton: HTMLButtonElement;
+    changeLeftKey: void;
+    downKeyText: HTMLParagraphElement;
+    changeDownKeyButton: HTMLButtonElement;
+    changeDownKey: void;
+    rightKeyText: HTMLParagraphElement;
+    changeRightKeyButton: HTMLButtonElement;
+    changeRightKey: void;
+    closeControlsButton: HTMLButtonElement;
+    closeControls: void;
     tutorialModal: HTMLDialogElement;
     closeTutorialButton: HTMLButtonElement;
     closeTutorial: void;
@@ -48,6 +71,7 @@ export default class MenuEvents {
         );
         this.mainMenu = <HTMLDialogElement>document.getElementById("main-menu");
         this.isMenuOpen = false;
+        this.isSubMenuOpen = false;
         this.openMenu = this.menuButton.addEventListener("click", () => {
             this.game.events.audioEvents.beepAudio.play();
             this.game.player.isMoving = false;
@@ -74,6 +98,7 @@ export default class MenuEvents {
         this.openSettingsMenu = this.openSettingsButton.addEventListener(
             "click",
             () => {
+                this.isSubMenuOpen = true;
                 this.settingsMenu.showModal();
                 this.closeSettingsButton.focus();
             }
@@ -121,6 +146,7 @@ export default class MenuEvents {
         this.closeSettings = this.closeSettingsButton.addEventListener(
             "click",
             () => {
+                this.isSubMenuOpen = false;
                 this.settingsMenu.close();
             }
         );
@@ -133,6 +159,7 @@ export default class MenuEvents {
         this.openAudioMenu = this.openAudioButton.addEventListener(
             "click",
             () => {
+                this.isSubMenuOpen = true;
                 this.audioMenu.showModal();
                 this.closeAudioButton.focus();
             }
@@ -176,7 +203,113 @@ export default class MenuEvents {
         this.closeAudio = this.closeAudioButton.addEventListener(
             "click",
             () => {
+                this.isSubMenuOpen = false;
                 this.audioMenu.close();
+            }
+        );
+        this.controlsMenu = <HTMLDialogElement>(
+            document.getElementById("controls-menu")
+        );
+        this.openControlsButton = <HTMLButtonElement>(
+            document.getElementById("open-controls-button")
+        );
+        this.openControlsMenu = this.openControlsButton.addEventListener(
+            "click",
+            () => {
+                this.isSubMenuOpen = true;
+                this.controlsMenu.showModal();
+            }
+        );
+        this.currentRebindKey = null;
+        this.controlsKeyEvent = document.addEventListener("keydown", (e) => {
+            if (this.currentRebindKey) {
+                if (this.currentRebindKey === "Menu") {
+                    this.game.events.menuKey = e.code;
+                    this.menuKeyText.textContent = `MENU: ${e.code}`;
+                } else if (this.currentRebindKey === "Up") {
+                    this.game.events.upKey = e.code;
+                    this.upKeyText.textContent = `UP: ${e.code}`;
+                } else if (this.currentRebindKey === "Left") {
+                    this.game.events.leftKey = e.code;
+                    this.leftKeyText.textContent = `LEFT: ${e.code}`;
+                } else if (this.currentRebindKey === "Down") {
+                    this.game.events.downKey = e.code;
+                    this.downKeyText.textContent = `DOWN: ${e.code}`;
+                } else if (this.currentRebindKey === "Right") {
+                    this.game.events.rightKey = e.code;
+                    this.rightKeyText.textContent = `RIGHT: ${e.code}`;
+                }
+                this.currentRebindKey = null;
+            }
+        });
+        this.menuKeyText = <HTMLParagraphElement>(
+            document.getElementById("menu-key-text")
+        );
+        this.changeMenuKeyButton = <HTMLButtonElement>(
+            document.getElementById("change-menu-key-button")
+        );
+        this.changeMenuKey = this.changeMenuKeyButton.addEventListener(
+            "click",
+            () => {
+                this.currentRebindKey = "Menu";
+            }
+        );
+        this.upKeyText = <HTMLParagraphElement>(
+            document.getElementById("up-key-text")
+        );
+        this.changeUpKeyButton = <HTMLButtonElement>(
+            document.getElementById("change-up-key-button")
+        );
+        this.changeUpKey = this.changeUpKeyButton.addEventListener(
+            "click",
+            () => {
+                this.currentRebindKey = "Up";
+            }
+        );
+        this.leftKeyText = <HTMLParagraphElement>(
+            document.getElementById("left-key-text")
+        );
+        this.changeLeftKeyButton = <HTMLButtonElement>(
+            document.getElementById("change-left-key-button")
+        );
+        this.changeLeftKey = this.changeLeftKeyButton.addEventListener(
+            "click",
+            () => {
+                this.currentRebindKey = "Left";
+            }
+        );
+        this.downKeyText = <HTMLParagraphElement>(
+            document.getElementById("down-key-text")
+        );
+        this.changeDownKeyButton = <HTMLButtonElement>(
+            document.getElementById("change-down-key-button")
+        );
+        this.changeDownKey = this.changeDownKeyButton.addEventListener(
+            "click",
+            () => {
+                this.currentRebindKey = "Down";
+            }
+        );
+        this.rightKeyText = <HTMLParagraphElement>(
+            document.getElementById("right-key-text")
+        );
+        this.changeRightKeyButton = <HTMLButtonElement>(
+            document.getElementById("change-right-key-button")
+        );
+        this.changeRightKey = this.changeRightKeyButton.addEventListener(
+            "click",
+            () => {
+                this.currentRebindKey = "Right";
+            }
+        );
+        this.closeControlsButton = <HTMLButtonElement>(
+            document.getElementById("close-controls-menu-button")
+        );
+        this.closeControls = this.closeControlsButton.addEventListener(
+            "click",
+            () => {
+                this.isSubMenuOpen = false;
+                this.controlsMenu.close();
             }
         );
         this.tutorialModal = <HTMLDialogElement>(

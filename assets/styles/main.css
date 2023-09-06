@@ -269,6 +269,21 @@ body {
     -webkit-user-select: none;
 }
 
+.change-control-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#controls-menu-main-text {
+    margin: 0.5em;
+    max-width: 15em;
+}
+
+.control-key-text {
+    margin: 0;
+}
+
 @media (min-width: 900px) {
     body {
         height: 100vh;

@@ -18,6 +18,7 @@ const continueButton = <HTMLButtonElement>(
 const gameInfoButton = <HTMLButtonElement>(
     document.getElementById("game-info-button")
 );
+startButton.focus();
 const beepSound = new Audio(beepSoundUrl);
 beepSound.volume = 0.4;
 const hasCompletedTutorial = localStorage.getItem("tutorial-completed");

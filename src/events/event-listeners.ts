@@ -16,6 +16,11 @@ export default class EventListeners {
     touchstart: void;
     touchend: void;
     touchmove: void;
+    leftKey: string;
+    rightKey: string;
+    upKey: string;
+    downKey: string;
+    menuKey: string;
     keyEvent: void;
     menuEvents: MenuEvents;
     audioEvents: AudioEvents;
@@ -120,9 +125,14 @@ export default class EventListeners {
                 }
             }
         });
+        this.leftKey = "KeyA";
+        this.rightKey = "KeyD";
+        this.upKey = "KeyW";
+        this.downKey = "KeyS";
+        this.menuKey = "KeyM";
         this.keyEvent = document.addEventListener("keydown", (event) => {
             switch (event.code) {
-                case "ArrowLeft": {
+                case this.leftKey: {
                     if (
                         this.player.x >= this.player.speed &&
                         !this.player.isShipDisabled
@@ -134,7 +144,7 @@ export default class EventListeners {
                     }
                     break;
                 }
-                case "ArrowRight": {
+                case this.rightKey: {
                     if (
                         this.player.x <=
                             canvas.width -
@@ -148,7 +158,7 @@ export default class EventListeners {
                     }
                     break;
                 }
-                case "ArrowUp": {
+                case this.upKey: {
                     if (
                         this.player.y >= this.player.speed &&
                         !this.player.isShipDisabled
@@ -160,7 +170,7 @@ export default class EventListeners {
                     }
                     break;
                 }
-                case "ArrowDown": {
+                case this.downKey: {
                     if (
                         this.player.y <
                             canvas.height - (40 + this.player.height) &&
@@ -173,18 +183,24 @@ export default class EventListeners {
                     }
                     break;
                 }
-                case "KeyM": {
-                    this.audioEvents.beepAudio.play();
-                    if (!this.menuEvents.isMenuOpen) {
+                case this.menuKey: {
+                    if (
+                        !this.menuEvents.isMenuOpen &&
+                        !this.menuEvents.isSubMenuOpen
+                    ) {
+                        this.audioEvents.beepAudio.play();
                         this.player.isMoving = false;
                         this.menuEvents.mainMenu.showModal();
                         this.menuEvents.closeButton.focus();
                         this.menuEvents.isMenuOpen = true;
                         this.game.isGamePaused = true;
                     } else {
-                        this.menuEvents.mainMenu.close();
-                        this.menuEvents.isMenuOpen = false;
-                        this.game.isGamePaused = false;
+                        if (!this.menuEvents.isSubMenuOpen) {
+                            this.audioEvents.beepAudio.play();
+                            this.menuEvents.mainMenu.close();
+                            this.menuEvents.isMenuOpen = false;
+                            this.game.isGamePaused = false;
+                        }
                     }
                     break;
                 }
