@@ -58,7 +58,7 @@ body {
     color: rgb(243, 134, 228);
     border: 1px solid rgb(226, 49, 203);
     border-radius: 5px;
-    padding: 1.5em;
+    padding: 1em;
 }
 
 #main-menu[open],
@@ -78,8 +78,9 @@ body {
 
 .button-row {
     width: 100%;
+    margin: 0.125em 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .button {
@@ -93,6 +94,10 @@ body {
     margin: 0.5em 1em;
     padding: 0.2em 0.5em;
     border-radius: 5px;
+}
+
+.button-row .button {
+    width: 50%;
 }
 
 .button:hover,
@@ -109,6 +114,7 @@ body {
     padding: 0.5em;
     text-align: center;
     border: 1px solid rgb(226, 49, 203);
+    background-color: rgb(44, 2, 39);
     margin-bottom: 0.5em;
 }
 
@@ -271,17 +277,35 @@ body {
 
 .change-control-row {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+}
+
+.change-control-key {
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
+    min-width: 13em;
 }
 
 #controls-menu-main-text {
-    margin: 0.5em;
-    max-width: 15em;
+    background-color: rgb(44, 2, 39);
+    border: 1px solid rgb(226, 49, 203);
+    padding: 0.5em;
+    text-align: center;
+    max-width: 24em;
+    margin: 0 0 1em 0;
 }
 
 .control-key-text {
     margin: 0;
+}
+
+#movement-controls-container {
+    background-color: rgb(44, 2, 39);
+    border: 1px solid rgb(226, 49, 203);
+    padding: 0.5em;
+    display: flex;
+    justify-content: center;
 }
 
 @media (min-width: 900px) {
@@ -306,5 +330,9 @@ body {
     #tutorial-first,
     #tutorial-second {
         max-width: 60%;
+    }
+    .change-control-row {
+        flex-direction: row;
+        justify-content: center;
     }
 }
