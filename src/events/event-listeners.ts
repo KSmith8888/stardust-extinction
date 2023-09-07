@@ -10,6 +10,7 @@ export default class EventListeners {
     canvas: HTMLCanvasElement;
     hasBeenResized: boolean;
     sizeCanvas: void;
+    controlsSetting: string;
     mousedown: void;
     mouseup: void;
     mousemove: void;
@@ -44,8 +45,10 @@ export default class EventListeners {
             this.player.y = canvas.height - (this.player.height + 35);
             this.hasBeenResized = true;
         });
+        this.controlsSetting = "Mouse";
         this.mousedown = canvas.addEventListener("mousedown", (e): void => {
             if (
+                this.controlsSetting === "Mouse" &&
                 e.offsetX >= this.player.x &&
                 e.offsetX <= this.player.x + this.player.width &&
                 e.offsetY >= this.player.y &&
@@ -57,12 +60,16 @@ export default class EventListeners {
             }
         });
         this.mouseup = canvas.addEventListener("mouseup", (): void => {
-            if (this.player.isMoving) {
+            if (this.controlsSetting === "Mouse" && this.player.isMoving) {
                 this.player.isMoving = false;
             }
         });
         this.mousemove = canvas.addEventListener("mousemove", (e): void => {
-            if (this.player.isMoving && !this.player.isShipDisabled) {
+            if (
+                this.controlsSetting === "Mouse" &&
+                this.player.isMoving &&
+                !this.player.isShipDisabled
+            ) {
                 if (e.offsetX + this.player.width / 2 > canvas.width) {
                     this.player.x = canvas.width - this.player.width;
                 } else if (e.offsetX - this.player.width / 2 < 0) {
@@ -84,6 +91,7 @@ export default class EventListeners {
         });
         this.touchstart = canvas.addEventListener("touchstart", (e): void => {
             if (
+                this.controlsSetting === "Mouse" &&
                 e.touches[0].clientX >= this.player.x &&
                 e.touches[0].clientX <= this.player.x + this.player.width &&
                 e.touches[0].clientY >= this.player.y &&
@@ -95,12 +103,16 @@ export default class EventListeners {
             }
         });
         this.touchend = canvas.addEventListener("touchend", (): void => {
-            if (this.player.isMoving) {
+            if (this.controlsSetting === "Mouse" && this.player.isMoving) {
                 this.player.isMoving = false;
             }
         });
         this.touchmove = canvas.addEventListener("touchmove", (e): void => {
-            if (this.player.isMoving && !this.player.isShipDisabled) {
+            if (
+                this.controlsSetting === "Mouse" &&
+                this.player.isMoving &&
+                !this.player.isShipDisabled
+            ) {
                 if (
                     e.touches[0].clientX + this.player.width / 2 >
                     canvas.width
@@ -133,53 +145,61 @@ export default class EventListeners {
         this.keyEvent = document.addEventListener("keydown", (event) => {
             switch (event.code) {
                 case this.leftKey: {
-                    if (
-                        this.player.x >= this.player.speed &&
-                        !this.player.isShipDisabled
-                    ) {
-                        this.player.isMoving = true;
-                        this.player.x -= this.player.speed;
-                    } else {
-                        this.player.isMoving = false;
+                    if (this.controlsSetting === "Keyboard") {
+                        if (
+                            this.player.x >= this.player.speed &&
+                            !this.player.isShipDisabled
+                        ) {
+                            this.player.isMoving = true;
+                            this.player.x -= this.player.speed;
+                        } else {
+                            this.player.isMoving = false;
+                        }
                     }
                     break;
                 }
                 case this.rightKey: {
-                    if (
-                        this.player.x <=
-                            canvas.width -
-                                (this.player.width + this.player.speed) &&
-                        !this.player.isShipDisabled
-                    ) {
-                        this.player.isMoving = true;
-                        this.player.x += this.player.speed;
-                    } else {
-                        this.player.isMoving = false;
+                    if (this.controlsSetting === "Keyboard") {
+                        if (
+                            this.player.x <=
+                                canvas.width -
+                                    (this.player.width + this.player.speed) &&
+                            !this.player.isShipDisabled
+                        ) {
+                            this.player.isMoving = true;
+                            this.player.x += this.player.speed;
+                        } else {
+                            this.player.isMoving = false;
+                        }
                     }
                     break;
                 }
                 case this.upKey: {
-                    if (
-                        this.player.y >= this.player.speed &&
-                        !this.player.isShipDisabled
-                    ) {
-                        this.player.isMoving = true;
-                        this.player.y -= this.player.speed;
-                    } else {
-                        this.player.isMoving = false;
+                    if (this.controlsSetting === "Keyboard") {
+                        if (
+                            this.player.y >= this.player.speed &&
+                            !this.player.isShipDisabled
+                        ) {
+                            this.player.isMoving = true;
+                            this.player.y -= this.player.speed;
+                        } else {
+                            this.player.isMoving = false;
+                        }
                     }
                     break;
                 }
                 case this.downKey: {
-                    if (
-                        this.player.y <
-                            canvas.height - (40 + this.player.height) &&
-                        !this.player.isShipDisabled
-                    ) {
-                        this.player.isMoving = true;
-                        this.player.y += this.player.speed;
-                    } else {
-                        this.player.isMoving = false;
+                    if (this.controlsSetting === "Keyboard") {
+                        if (
+                            this.player.y <
+                                canvas.height - (40 + this.player.height) &&
+                            !this.player.isShipDisabled
+                        ) {
+                            this.player.isMoving = true;
+                            this.player.y += this.player.speed;
+                        } else {
+                            this.player.isMoving = false;
+                        }
                     }
                     break;
                 }

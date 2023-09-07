@@ -35,6 +35,10 @@ export default class MenuEvents {
     closeAudio: void;
     controlsMenu: HTMLDialogElement;
     openControlsButton: HTMLButtonElement;
+    keyboardControlsButton: HTMLButtonElement;
+    useKeyboardControls: void;
+    mouseControlsButton: HTMLButtonElement;
+    useMouseControls: void;
     currentRebindKey: string | null;
     controlsKeyEvent: void;
     openControlsMenu: void;
@@ -218,8 +222,34 @@ export default class MenuEvents {
             () => {
                 this.isSubMenuOpen = true;
                 this.controlsMenu.showModal();
+                this.closeControlsButton.focus();
             }
         );
+        this.keyboardControlsButton = <HTMLButtonElement>(
+            document.getElementById("keyboard-controls-button")
+        );
+        this.useKeyboardControls = this.keyboardControlsButton.addEventListener(
+            "click",
+            () => {
+                localStorage.setItem("controls-setting", "Keyboard");
+                this.game.events.controlsSetting = "Keyboard";
+                this.keyboardControlsButton.disabled = true;
+                this.mouseControlsButton.disabled = false;
+            }
+        );
+        this.mouseControlsButton = <HTMLButtonElement>(
+            document.getElementById("mouse-controls-button")
+        );
+        this.useMouseControls = this.mouseControlsButton.addEventListener(
+            "click",
+            () => {
+                localStorage.setItem("controls-setting", "Mouse");
+                this.game.events.controlsSetting = "Mouse";
+                this.mouseControlsButton.disabled = true;
+                this.keyboardControlsButton.disabled = false;
+            }
+        );
+        this.loadControlsSetting();
         this.currentRebindKey = null;
         this.controlsKeyEvent = document.addEventListener("keydown", (e) => {
             if (this.currentRebindKey) {
@@ -341,6 +371,22 @@ export default class MenuEvents {
                 localStorage.setItem("difficulty-setting", "Hard");
             }
             location.reload();
+        }
+    }
+    loadControlsSetting() {
+        const controlsSetting = localStorage.getItem("controls-setting");
+        if (controlsSetting) {
+            if (controlsSetting === "Keyboard") {
+                this.keyboardControlsButton.disabled = true;
+                this.mouseControlsButton.disabled = false;
+            } else if (controlsSetting === "Mouse") {
+                this.mouseControlsButton.disabled = true;
+                this.keyboardControlsButton.disabled = false;
+            }
+        } else {
+            localStorage.setItem("controls-setting", "Mouse");
+            this.mouseControlsButton.disabled = true;
+            this.keyboardControlsButton.disabled = false;
         }
     }
 }

@@ -38,15 +38,7 @@
             </button>
             <p id="loading-text">Loading...</p>
             <dialog id="main-menu" class="modal">
-                <p class="main-menu-text">Main Menu</p>
-                <div class="button-row">
-                    <button class="button" type="button">Test</button>
-                    <button class="button" type="button">Test</button>
-                </div>
-                <div class="button-row">
-                    <button class="button" type="button">test</button>
-                    <button class="button" type="button">Test</button>
-                </div>
+                <h2 class="menu-main-heading">Main Menu</h2>
                 <div class="button-row">
                     <button
                         id="open-settings-button"
@@ -54,6 +46,18 @@
                         type="button"
                     >
                         Settings
+                    </button>
+                    <button
+                        id="open-controls-button"
+                        class="button"
+                        type="button"
+                    >
+                        Controls
+                    </button>
+                </div>
+                <div class="button-row">
+                    <button id="quit-button" class="button" type="button">
+                        Quit
                     </button>
                     <button
                         id="open-audio-menu-button"
@@ -64,9 +68,6 @@
                     </button>
                 </div>
                 <div class="button-row">
-                    <button id="quit-button" class="button" type="button">
-                        Quit Game
-                    </button>
                     <button id="close-button" class="button" type="button">
                         Close
                     </button>
@@ -95,6 +96,13 @@
                 </div>
                 <button id="delete-save-button" class="button" type="button">
                     Delete Data
+                </button>
+                <button
+                    id="replay-tutorial-button"
+                    class="button"
+                    type="button"
+                >
+                    Replay Tutorial
                 </button>
                 <button
                     id="close-settings-menu-button"
@@ -142,6 +150,106 @@
                 </div>
                 <button
                     id="close-audio-menu-button"
+                    class="button"
+                    type="button"
+                >
+                    Close
+                </button>
+            </dialog>
+            <dialog id="controls-menu" class="modal">
+                <h2 class="menu-main-heading">Controls</h2>
+                <h3 class="menu-sub-heading">Movement Controls:</h3>
+                <div id="movement-controls-container">
+                    <button
+                        id="keyboard-controls-button"
+                        class="button"
+                        type="button"
+                    >
+                        Keyboard
+                    </button>
+                    <button
+                        id="mouse-controls-button"
+                        class="button"
+                        type="button"
+                    >
+                        Mouse/Touch
+                    </button>
+                </div>
+                <h3 class="menu-sub-heading">Key Binding:</h3>
+                <p id="controls-menu-main-text">
+                    Press the "Change" button next to the control you want to
+                    update, then press the key that you want to use instead.
+                </p>
+                <div id="controls-container">
+                    <div class="change-control-row">
+                        <div class="change-control-key">
+                            <p id="menu-key-text" class="control-key-text">
+                                MENU: KeyM
+                            </p>
+                            <button
+                                id="change-menu-key-button"
+                                class="button"
+                                type="button"
+                            >
+                                Change
+                            </button>
+                        </div>
+                    </div>
+                    <div class="change-control-row">
+                        <div class="change-control-key">
+                            <p id="up-key-text" class="control-key-text">
+                                UP: KeyW
+                            </p>
+                            <button
+                                id="change-up-key-button"
+                                class="button"
+                                type="button"
+                            >
+                                Change
+                            </button>
+                        </div>
+                        <div class="change-control-key">
+                            <p id="down-key-text" class="control-key-text">
+                                DOWN: KeyS
+                            </p>
+                            <button
+                                id="change-down-key-button"
+                                class="button"
+                                type="button"
+                            >
+                                Change
+                            </button>
+                        </div>
+                    </div>
+                    <div class="change-control-row">
+                        <div class="change-control-key">
+                            <p id="left-key-text" class="control-key-text">
+                                LEFT: KeyA
+                            </p>
+                            <button
+                                id="change-left-key-button"
+                                class="button"
+                                type="button"
+                            >
+                                Change
+                            </button>
+                        </div>
+                        <div class="change-control-key">
+                            <p id="right-key-text" class="control-key-text">
+                                RIGHT: KeyD
+                            </p>
+                            <button
+                                id="change-right-key-button"
+                                class="button"
+                                type="button"
+                            >
+                                Change
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <button
+                    id="close-controls-menu-button"
                     class="button"
                     type="button"
                 >

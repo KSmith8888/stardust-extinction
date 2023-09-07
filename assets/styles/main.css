@@ -305,7 +305,7 @@ body {
     border: 1px solid rgb(226, 49, 203);
     padding: 0.5em;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
 }
 
 @media (min-width: 900px) {
@@ -332,6 +332,10 @@ body {
         max-width: 60%;
     }
     .change-control-row {
+        flex-direction: row;
+        justify-content: center;
+    }
+    #movement-controls-container {
         flex-direction: row;
         justify-content: center;
     }
