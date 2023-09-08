@@ -35,7 +35,7 @@ export class HealthBar {
         this.ctx.closePath();
         this.ctx.fill();
         this.ctx.stroke();
-        this.ctx.fillStyle = "rgb(129, 21, 6)";
+        this.ctx.fillStyle = "rgb(3, 1, 121)";
         this.ctx.fillRect(this.x + 2, this.y + 2, this.fill, this.height - 4);
     }
 }

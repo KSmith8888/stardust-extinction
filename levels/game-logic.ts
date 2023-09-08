@@ -67,7 +67,7 @@ export default class Game {
         this.ctx = <CanvasRenderingContext2D>this.canvas.getContext("2d");
         sizeCanvas(this.canvas);
         this.player = new Player(this, this.canvas, this.ctx);
-        this.ctx.strokeStyle = "gold";
+        this.ctx.strokeStyle = "white";
         this.ctx.lineWidth = 0.5;
         this.background = new Background(
             this.canvas,
