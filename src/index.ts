@@ -62,9 +62,15 @@ async function continueGame() {
         setTimeout(() => {
             if (continueLevel && !isNaN(parseInt(continueLevel))) {
                 const levelNumber = parseInt(continueLevel);
-                location.assign(
-                    `/levels/level-${levelNumber}/level-${levelNumber}.html`
-                );
+                if (levelNumber > 0 && levelNumber < 4) {
+                    location.assign(
+                        `/levels/level-${levelNumber}/level-${levelNumber}.html`
+                    );
+                } else {
+                    alert(
+                        "You have reached the end of the playable levels. Start a new game or check back later when the game is completed"
+                    );
+                }
             } else {
                 alert("No save data found, please start a new game.");
             }

@@ -20,11 +20,11 @@ export default class Level1Game extends Game {
     constructor() {
         super();
         this.nextLevelUrl = "/levels/level-2/level-2.html";
+        this.currentLevelNumber = 1;
         this.loadDifficultySetting();
         this.initializeEnemies();
         this.initializeBossProjectiles();
         localStorage.setItem("tutorial-completed", "true");
-        localStorage.setItem("current-level", "1");
     }
     initializeEnemies() {
         for (let i = 0; i < this.enemyPoolSize; i++) {

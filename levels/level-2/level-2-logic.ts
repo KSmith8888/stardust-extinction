@@ -29,10 +29,10 @@ export default class Level2Game extends Game {
         this.mobileBackground = spaceBackgroundUrl;
         this.desktopBackground = spaceBgDesktopUrl;
         this.nextLevelUrl = "/levels/level-3/level-3.html";
+        this.currentLevelNumber = 2;
         this.loadDifficultySetting();
         this.initializeEnemies();
         this.initializeBossProjectiles();
-        localStorage.setItem("current-level", "2");
     }
     initializeEnemies() {
         for (let i = 0; i < this.enemyPoolSize; i++) {

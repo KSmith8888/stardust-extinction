@@ -61,6 +61,7 @@ export default class Game {
     mobileBackground: string;
     desktopBackground: string;
     nextLevelUrl: string;
+    currentLevelNumber: number;
     difficultySetting: string;
     constructor() {
         this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
@@ -101,6 +102,7 @@ export default class Game {
         this.mobileBackground = spaceBackgroundUrl;
         this.desktopBackground = spaceBgDesktopUrl;
         this.nextLevelUrl = "/";
+        this.currentLevelNumber = 0;
         this.difficultySetting = "Normal";
         this.events.menuEvents.tutorialModal.showModal();
         this.initializeEnemyLasers();
@@ -221,6 +223,10 @@ export default class Game {
                     const healthRemaining =
                         (this.player.health / this.player.healthStat) * 100;
                     this.events.statsTextHealth.textContent = `Health Remaining: ${healthRemaining}%`;
+                    localStorage.setItem(
+                        "current-level",
+                        (this.currentLevelNumber + 1).toString()
+                    );
                     this.events.levelCompleteModal.showModal();
                 }, 1000);
             }

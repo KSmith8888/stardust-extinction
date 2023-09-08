@@ -22,6 +22,8 @@ export default class MenuEvents {
     hardDifficulty: void;
     deleteSaveButton: HTMLButtonElement;
     deleteSaveData: void;
+    replayTutorialButton: HTMLButtonElement;
+    replayTutorial: void;
     closeSettingsButton: HTMLButtonElement;
     closeSettings: void;
     audioMenu: HTMLDialogElement;
@@ -142,6 +144,15 @@ export default class MenuEvents {
                     localStorage.clear();
                     location.assign("/");
                 }
+            }
+        );
+        this.replayTutorialButton = <HTMLButtonElement>(
+            document.getElementById("replay-tutorial-button")
+        );
+        this.replayTutorial = this.replayTutorialButton.addEventListener(
+            "click",
+            () => {
+                location.assign("/levels/tutorial/tutorial.html");
             }
         );
         this.closeSettingsButton = <HTMLButtonElement>(
