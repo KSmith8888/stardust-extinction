@@ -104,6 +104,10 @@ export default class Player {
         let currentLaser = LaserSmall;
         if (this.projectileStrength === 2) {
             currentLaser = LaserMediumTwo;
+            this.game.racerInterval = 0.95;
+        } else if (this.projectileStrength === 3) {
+            currentLaser = LaserMediumTwo;
+            this.game.racerInterval = 1;
         }
         const firstLaser = this.projectiles.find((laser) => {
             return laser instanceof currentLaser && laser.isFree;

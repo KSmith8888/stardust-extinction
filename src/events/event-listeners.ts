@@ -31,6 +31,8 @@ export default class EventListeners {
     exitOnGameOver: void;
     startNextLevel: void;
     nextLevelButton: HTMLButtonElement;
+    exitGameButton: HTMLButtonElement;
+    backToTitleScreen: void;
     statsTextEnemies: HTMLParagraphElement;
     statsTextHealth: HTMLParagraphElement;
     loadingText: HTMLParagraphElement;
@@ -248,6 +250,15 @@ export default class EventListeners {
         );
         this.nextLevelButton = <HTMLButtonElement>(
             document.getElementById("next-level-button")
+        );
+        this.exitGameButton = <HTMLButtonElement>(
+            document.getElementById("exit-game-button")
+        );
+        this.backToTitleScreen = this.exitGameButton.addEventListener(
+            "click",
+            () => {
+                location.assign("/");
+            }
         );
         this.statsTextEnemies = <HTMLParagraphElement>(
             document.getElementById("stats-text-enemies")

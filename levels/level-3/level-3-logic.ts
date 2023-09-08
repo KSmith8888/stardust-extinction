@@ -33,6 +33,7 @@ export default class Level3Game extends Game {
         this.mobileBackground = spaceBackgroundUrl;
         this.desktopBackground = spaceBgDesktopUrl;
         this.currentLevelNumber = 3;
+        this.events.nextLevelButton.classList.add("no-display");
         this.loadDifficultySetting();
         this.initializeEnemies();
         this.initializeBossProjectiles();
