@@ -83,4 +83,13 @@ export default class Projectile {
             }
         }
     }
+    render() {
+        this.handleCollision();
+        if (this.y > 0) {
+            this.y -= this.speed;
+        } else {
+            this.reset();
+        }
+        this.ctx.drawImage(this.image, this.x, this.y);
+    }
 }

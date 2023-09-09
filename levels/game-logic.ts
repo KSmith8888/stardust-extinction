@@ -223,10 +223,12 @@ export default class Game {
                     const healthRemaining =
                         (this.player.health / this.player.healthStat) * 100;
                     this.events.statsTextHealth.textContent = `Health Remaining: ${healthRemaining}%`;
-                    localStorage.setItem(
-                        "current-level",
-                        (this.currentLevelNumber + 1).toString()
-                    );
+                    if (this.currentLevelNumber > 0) {
+                        localStorage.setItem(
+                            "current-level",
+                            (this.currentLevelNumber + 1).toString()
+                        );
+                    }
                     this.events.levelCompleteModal.showModal();
                 }, 1000);
             }

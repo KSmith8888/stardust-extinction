@@ -1,5 +1,9 @@
 import Game from "../../levels/game-logic";
-import { LaserSmall, LaserMediumTwo } from "../projectiles/lasers";
+import {
+    LaserSmall,
+    LaserMediumTwo,
+    LaserMediumThree,
+} from "../projectiles/lasers";
 import { HealthBar } from "./healthbar";
 import { SmallExplosion } from "../explosions/small-explosion";
 
@@ -78,6 +82,9 @@ export default class Player {
             this.projectiles.push(
                 new LaserMediumTwo(this.game, this.canvas, this.ctx)
             );
+            this.projectiles.push(
+                new LaserMediumThree(this.game, this.canvas, this.ctx)
+            );
         }
     }
     render() {
@@ -106,7 +113,7 @@ export default class Player {
             currentLaser = LaserMediumTwo;
             this.game.racerInterval = 0.95;
         } else if (this.projectileStrength === 3) {
-            currentLaser = LaserMediumTwo;
+            currentLaser = LaserMediumThree;
             this.game.racerInterval = 1;
         }
         const firstLaser = this.projectiles.find((laser) => {

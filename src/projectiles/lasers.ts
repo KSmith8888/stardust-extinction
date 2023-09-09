@@ -2,6 +2,7 @@ import Projectile from "./projectile";
 import Game from "../../levels/game-logic";
 import smallLaserUrl from "../../assets/images/projectiles/laser-small.png";
 import medLaserPurpleUrl from "../../assets/images/projectiles/laser-medium-purple.png";
+import medLaserCyanUrl from "../../assets/images/projectiles/laser-medium-cyan.png";
 
 export class LaserSmall extends Projectile {
     constructor(
@@ -15,15 +16,6 @@ export class LaserSmall extends Projectile {
         this.speed = 5.25;
         this.image.src = smallLaserUrl;
     }
-    render() {
-        this.handleCollision();
-        if (this.y > 0) {
-            this.y -= this.speed;
-        } else {
-            this.reset();
-        }
-        this.ctx.drawImage(this.image, this.x, this.y);
-    }
 }
 
 export class LaserMediumTwo extends Projectile {
@@ -33,19 +25,25 @@ export class LaserMediumTwo extends Projectile {
         ctx: CanvasRenderingContext2D
     ) {
         super(game, canvas, ctx);
-        this.width = 9;
-        this.height = 20;
+        this.width = 7;
+        this.height = 18;
         this.speed = 4.75;
         this.image.src = medLaserPurpleUrl;
-        this.damage = 20;
+        this.damage = 15;
     }
-    render() {
-        this.handleCollision();
-        if (this.y > 0) {
-            this.y -= this.speed;
-        } else {
-            this.reset();
-        }
-        this.ctx.drawImage(this.image, this.x, this.y);
+}
+
+export class LaserMediumThree extends Projectile {
+    constructor(
+        game: Game,
+        canvas: HTMLCanvasElement,
+        ctx: CanvasRenderingContext2D
+    ) {
+        super(game, canvas, ctx);
+        this.width = 7;
+        this.height = 18;
+        this.speed = 4.75;
+        this.image.src = medLaserCyanUrl;
+        this.damage = 25;
     }
 }
