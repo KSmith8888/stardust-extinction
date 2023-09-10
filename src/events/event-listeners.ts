@@ -47,7 +47,8 @@ export default class EventListeners {
             this.player.y = canvas.height - (this.player.height + 35);
             this.hasBeenResized = true;
         });
-        this.controlsSetting = "Mouse";
+        this.controlsSetting =
+            localStorage.getItem("controls-setting") || "Mouse";
         this.mousedown = canvas.addEventListener("mousedown", (e): void => {
             if (
                 this.controlsSetting === "Mouse" &&
@@ -213,7 +214,7 @@ export default class EventListeners {
                         this.audioEvents.beepAudio.play();
                         this.player.isMoving = false;
                         this.menuEvents.mainMenu.showModal();
-                        this.menuEvents.closeButton.focus();
+                        this.menuEvents.openSettingsButton.focus();
                         this.menuEvents.isMenuOpen = true;
                         this.game.isGamePaused = true;
                     } else {

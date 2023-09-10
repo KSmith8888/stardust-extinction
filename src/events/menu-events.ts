@@ -82,7 +82,7 @@ export default class MenuEvents {
             this.game.events.audioEvents.beepAudio.play();
             this.game.player.isMoving = false;
             this.mainMenu.showModal();
-            this.closeButton.focus();
+            this.openSettingsButton.focus();
             this.isMenuOpen = true;
             this.game.isGamePaused = true;
         });
@@ -106,7 +106,7 @@ export default class MenuEvents {
             () => {
                 this.isSubMenuOpen = true;
                 this.settingsMenu.showModal();
-                this.closeSettingsButton.focus();
+                this.easyButton.focus();
             }
         );
         this.easyButton = <HTMLButtonElement>(
@@ -176,7 +176,7 @@ export default class MenuEvents {
             () => {
                 this.isSubMenuOpen = true;
                 this.audioMenu.showModal();
-                this.closeAudioButton.focus();
+                this.muteButton.focus();
             }
         );
         this.muteButton = <HTMLButtonElement>(
@@ -233,7 +233,7 @@ export default class MenuEvents {
             () => {
                 this.isSubMenuOpen = true;
                 this.controlsMenu.showModal();
-                this.closeControlsButton.focus();
+                this.keyboardControlsButton.focus();
             }
         );
         this.keyboardControlsButton = <HTMLButtonElement>(
@@ -281,6 +281,11 @@ export default class MenuEvents {
                     this.rightKeyText.textContent = `RIGHT: ${e.code}`;
                 }
                 this.currentRebindKey = null;
+                this.menuKeyText.classList.remove("light-text");
+                this.upKeyText.classList.remove("light-text");
+                this.leftKeyText.classList.remove("light-text");
+                this.downKeyText.classList.remove("light-text");
+                this.rightKeyText.classList.remove("light-text");
             }
         });
         this.menuKeyText = <HTMLParagraphElement>(
@@ -293,6 +298,7 @@ export default class MenuEvents {
             "click",
             () => {
                 this.currentRebindKey = "Menu";
+                this.menuKeyText.classList.add("light-text");
             }
         );
         this.upKeyText = <HTMLParagraphElement>(
@@ -305,6 +311,7 @@ export default class MenuEvents {
             "click",
             () => {
                 this.currentRebindKey = "Up";
+                this.upKeyText.classList.add("light-text");
             }
         );
         this.leftKeyText = <HTMLParagraphElement>(
@@ -317,6 +324,7 @@ export default class MenuEvents {
             "click",
             () => {
                 this.currentRebindKey = "Left";
+                this.leftKeyText.classList.add("light-text");
             }
         );
         this.downKeyText = <HTMLParagraphElement>(
@@ -329,6 +337,7 @@ export default class MenuEvents {
             "click",
             () => {
                 this.currentRebindKey = "Down";
+                this.downKeyText.classList.add("light-text");
             }
         );
         this.rightKeyText = <HTMLParagraphElement>(
@@ -341,6 +350,7 @@ export default class MenuEvents {
             "click",
             () => {
                 this.currentRebindKey = "Right";
+                this.rightKeyText.classList.add("light-text");
             }
         );
         this.closeControlsButton = <HTMLButtonElement>(

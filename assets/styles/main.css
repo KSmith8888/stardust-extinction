@@ -298,6 +298,7 @@ body {
 
 .control-key-text {
     margin: 0;
+    padding: 0.25em;
 }
 
 #movement-controls-container {
@@ -306,6 +307,10 @@ body {
     padding: 0.5em;
     display: flex;
     flex-direction: column;
+}
+
+.light-text {
+    color: #fff;
 }
 
 @media (min-width: 900px) {
