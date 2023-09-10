@@ -13,7 +13,7 @@ export class LaserSmall extends Projectile {
         super(game, canvas, ctx);
         this.width = 8;
         this.height = 14;
-        this.speed = 5.25;
+        this.speed = 6.25;
         this.image.src = smallLaserUrl;
     }
 }
@@ -27,7 +27,7 @@ export class LaserMediumTwo extends Projectile {
         super(game, canvas, ctx);
         this.width = 7;
         this.height = 18;
-        this.speed = 4.75;
+        this.speed = 5.75;
         this.image.src = medLaserPurpleUrl;
         this.damage = 15;
     }
@@ -42,7 +42,7 @@ export class LaserMediumThree extends Projectile {
         super(game, canvas, ctx);
         this.width = 7;
         this.height = 18;
-        this.speed = 4.75;
+        this.speed = 5.25;
         this.image.src = medLaserCyanUrl;
         this.damage = 25;
     }

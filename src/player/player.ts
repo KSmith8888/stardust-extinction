@@ -60,15 +60,15 @@ export default class Player {
         this.frameCount = 0;
         this.laserOffsetX = this.width * 0.3;
         this.laserOffsetY = this.height * 0.1;
+        this.health = 100;
+        this.healthStat = 100;
+        this.speed = 10;
         this.healthBar = new HealthBar(
             this,
             this.ctx,
             10,
             this.canvas.height - 25
         );
-        this.health = 100;
-        this.healthStat = 100;
-        this.speed = 10;
         this.isShipDisabled = false;
         this.disabledDuration = 60;
         this.shipDisabledFrames = 0;

@@ -14,7 +14,7 @@ export class EnemyLaserSmall extends EnemyProjectile {
         super(game, canvas, ctx);
         this.width = 5;
         this.height = 12;
-        this.speed = 6.25;
+        this.speed = 7.75;
         this.image.src = enemySmallLaserUrl;
     }
 }
@@ -28,7 +28,7 @@ export class EnemyLaserMedium extends EnemyProjectile {
         super(game, canvas, ctx);
         this.width = 7;
         this.height = 18;
-        this.speed = 6.75;
+        this.speed = 7.25;
         this.image.src = enemyMediumLaserUrl;
         this.damage = 20;
     }
@@ -47,7 +47,7 @@ export class EnemyLaserLarge extends EnemyProjectile {
         super(game, canvas, ctx);
         this.width = 13;
         this.height = 26;
-        this.speed = 5.75;
+        this.speed = 6.75;
         this.image.src = enemyLargeLaserUrl;
         this.damage = 30;
     }

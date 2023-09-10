@@ -128,6 +128,7 @@ export default class Game {
                 this.secondEnemyInterval = 60;
                 this.thirdEnemyInterval = 110;
                 this.bossReleaseCount = Math.floor(this.bossReleaseCount * 1.3);
+                this.player.healthBar.displayHealthbar = false;
             } else if (savedDifficulty === "Normal") {
                 this.events.menuEvents.normalButton.disabled = true;
             }

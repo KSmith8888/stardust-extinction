@@ -8,6 +8,7 @@ export class HealthBar {
     height: number;
     width: number;
     fill: number;
+    displayHealthbar: boolean;
     constructor(
         user: Player,
         ctx: CanvasRenderingContext2D,
@@ -21,21 +22,27 @@ export class HealthBar {
         this.height = 15;
         this.width = this.user.healthStat * 1.8 - 5;
         this.fill = this.user.health * 1.8 - 5;
+        this.displayHealthbar = true;
     }
     render() {
-        this.width = this.user.healthStat * 1.8 - 5;
-        this.fill = this.user.health * 1.8 - 5;
-        this.ctx.fillStyle = "black";
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.x, this.y);
-        this.ctx.lineTo(this.x + this.width + 3, this.y);
-        this.ctx.lineTo(this.x + this.width + 3, this.y + this.height);
-        this.ctx.lineTo(this.x, this.y + this.height);
-        this.ctx.lineTo(this.x, this.y);
-        this.ctx.closePath();
-        this.ctx.fill();
-        this.ctx.stroke();
-        this.ctx.fillStyle = "rgb(3, 1, 121)";
-        this.ctx.fillRect(this.x + 2, this.y + 2, this.fill, this.height - 4);
+        if (this.displayHealthbar) {
+            this.ctx.fillStyle = "black";
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.x, this.y);
+            this.ctx.lineTo(this.x + this.width + 3, this.y);
+            this.ctx.lineTo(this.x + this.width + 3, this.y + this.height);
+            this.ctx.lineTo(this.x, this.y + this.height);
+            this.ctx.lineTo(this.x, this.y);
+            this.ctx.closePath();
+            this.ctx.fill();
+            this.ctx.stroke();
+            this.ctx.fillStyle = "rgb(3, 1, 121)";
+            this.ctx.fillRect(
+                this.x + 2,
+                this.y + 2,
+                this.fill,
+                this.height - 4
+            );
+        }
     }
 }
