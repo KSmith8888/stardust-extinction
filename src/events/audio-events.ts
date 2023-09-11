@@ -1,4 +1,4 @@
-import MenuEvents from "./menu-events";
+import MainMenu from "../menu/main-menu";
 import beepAudioUrl from "../../assets/audio/beep.wav";
 import explosionSoundUrl from "../../assets/audio/explosion.wav";
 import alarmSoundUrl from "../../assets/audio/alarm.wav";
@@ -10,15 +10,15 @@ interface savedAudio {
 }
 
 export default class AudioEvents {
-    menuEvents: MenuEvents;
+    mainMenu: MainMenu;
     audioSettings: savedAudio;
     beepAudio: HTMLAudioElement;
     explosionSound: HTMLAudioElement;
     alarmSound: HTMLAudioElement;
     empSound: HTMLAudioElement;
     allAudio: Array<HTMLAudioElement>;
-    constructor(menuEvents: MenuEvents) {
-        this.menuEvents = menuEvents;
+    constructor(mainMenu: MainMenu) {
+        this.mainMenu = mainMenu;
         this.audioSettings = this.loadAudioSettings();
         this.beepAudio = new Audio(beepAudioUrl);
         this.beepAudio.volume = 0.4 * this.audioSettings.volume;
@@ -56,20 +56,20 @@ export default class AudioEvents {
     }
     applyAudioSettings() {
         if (this.audioSettings.volume === 0.5) {
-            this.menuEvents.volumeControl.value = "0";
+            this.mainMenu.audio.volumeControl.value = "0";
         } else if (this.audioSettings.volume === 1) {
-            this.menuEvents.volumeControl.value = "50";
+            this.mainMenu.audio.volumeControl.value = "50";
         } else if (this.audioSettings.volume === 2) {
-            this.menuEvents.volumeControl.value = "100";
+            this.mainMenu.audio.volumeControl.value = "100";
         }
         if (this.audioSettings.mute) {
             this.muteAudio();
-            this.menuEvents.muteButton.textContent = "Unmute Audio";
-            this.menuEvents.volumeControl.disabled = true;
+            this.mainMenu.audio.muteButton.textContent = "Unmute Audio";
+            this.mainMenu.audio.volumeControl.disabled = true;
         } else {
             this.unmuteAudio();
-            this.menuEvents.muteButton.textContent = "Mute Audio";
-            this.menuEvents.volumeControl.disabled = false;
+            this.mainMenu.audio.muteButton.textContent = "Mute Audio";
+            this.mainMenu.audio.volumeControl.disabled = false;
         }
     }
     playExplosionSound() {

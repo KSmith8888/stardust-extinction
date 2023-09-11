@@ -104,7 +104,7 @@ export default class Game {
         this.nextLevelUrl = "/";
         this.currentLevelNumber = 0;
         this.difficultySetting = "Normal";
-        this.events.menuEvents.tutorialModal.showModal();
+        this.events.mainMenu.tutorialModal.showModal();
         this.initializeEnemyLasers();
     }
     loadDifficultySetting() {
@@ -112,7 +112,7 @@ export default class Game {
         if (savedDifficulty) {
             if (savedDifficulty === "Easy") {
                 this.difficultySetting = "Easy";
-                this.events.menuEvents.easyButton.disabled = true;
+                this.events.mainMenu.settings.easyButton.disabled = true;
                 this.enemyPoolSize = Math.floor(this.enemyPoolSize / 2);
                 this.firstEnemyCount = Math.floor(this.enemyPoolSize / 3);
                 this.secondEnemyCount = this.firstEnemyCount * 2;
@@ -121,7 +121,7 @@ export default class Game {
                 this.bossReleaseCount = Math.floor(this.bossReleaseCount * 0.7);
             } else if (savedDifficulty === "Hard") {
                 this.difficultySetting = "Hard";
-                this.events.menuEvents.hardButton.disabled = true;
+                this.events.mainMenu.settings.hardButton.disabled = true;
                 this.enemyPoolSize = Math.floor(this.enemyPoolSize * 1.5);
                 this.firstEnemyCount = Math.floor(this.enemyPoolSize / 3);
                 this.secondEnemyCount = this.firstEnemyCount * 2;
@@ -130,12 +130,12 @@ export default class Game {
                 this.bossReleaseCount = Math.floor(this.bossReleaseCount * 1.3);
                 this.player.healthBar.displayHealthbar = false;
             } else if (savedDifficulty === "Normal") {
-                this.events.menuEvents.normalButton.disabled = true;
+                this.events.mainMenu.settings.normalButton.disabled = true;
             }
         } else {
             localStorage.setItem("difficulty-setting", "Normal");
             this.difficultySetting = "Normal";
-            this.events.menuEvents.normalButton.disabled = true;
+            this.events.mainMenu.settings.normalButton.disabled = true;
         }
     }
     initializeEnemyLasers() {

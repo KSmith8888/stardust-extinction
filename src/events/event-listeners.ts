@@ -1,6 +1,6 @@
 import Game from "../../levels/game-logic";
 import Player from "../player/player";
-import MenuEvents from "./menu-events";
+import MainMenu from "../menu/main-menu";
 import { sizeCanvas } from "../utils/sizeCanvas";
 import AudioEvents from "./audio-events";
 
@@ -23,7 +23,7 @@ export default class EventListeners {
     downKey: string;
     menuKey: string;
     keyEvent: void;
-    menuEvents: MenuEvents;
+    mainMenu: MainMenu;
     audioEvents: AudioEvents;
     gameOverModal: HTMLDialogElement;
     gameOverCloseBtn: HTMLButtonElement;
@@ -208,20 +208,20 @@ export default class EventListeners {
                 }
                 case this.menuKey: {
                     if (
-                        !this.menuEvents.isMenuOpen &&
-                        !this.menuEvents.isSubMenuOpen
+                        !this.mainMenu.isMenuOpen &&
+                        !this.mainMenu.isSubMenuOpen
                     ) {
                         this.audioEvents.beepAudio.play();
                         this.player.isMoving = false;
-                        this.menuEvents.mainMenu.showModal();
-                        this.menuEvents.openSettingsButton.focus();
-                        this.menuEvents.isMenuOpen = true;
+                        this.mainMenu.mainMenu.showModal();
+                        this.mainMenu.openSettingsButton.focus();
+                        this.mainMenu.isMenuOpen = true;
                         this.game.isGamePaused = true;
                     } else {
-                        if (!this.menuEvents.isSubMenuOpen) {
+                        if (!this.mainMenu.isSubMenuOpen) {
                             this.audioEvents.beepAudio.play();
-                            this.menuEvents.mainMenu.close();
-                            this.menuEvents.isMenuOpen = false;
+                            this.mainMenu.mainMenu.close();
+                            this.mainMenu.isMenuOpen = false;
                             this.game.isGamePaused = false;
                         }
                     }
@@ -232,8 +232,8 @@ export default class EventListeners {
                 }
             }
         });
-        this.menuEvents = new MenuEvents(this.game);
-        this.audioEvents = new AudioEvents(this.menuEvents);
+        this.mainMenu = new MainMenu(this.game);
+        this.audioEvents = new AudioEvents(this.mainMenu);
         this.gameOverModal = <HTMLDialogElement>(
             document.getElementById("game-over-modal")
         );

@@ -26,6 +26,8 @@ export class HealthBar {
     }
     render() {
         if (this.displayHealthbar) {
+            this.width = this.user.healthStat * 1.8 - 5;
+            this.fill = this.user.health * 1.8 - 5;
             this.ctx.fillStyle = "black";
             this.ctx.beginPath();
             this.ctx.moveTo(this.x, this.y);
