@@ -5,6 +5,7 @@ import ControlsMenu from "./controls-menu";
 
 export default class MainMenu {
     game: Game;
+    container: HTMLDivElement;
     menuButton: HTMLButtonElement;
     mainMenu: HTMLDialogElement;
     isMenuOpen: boolean;
@@ -28,6 +29,7 @@ export default class MainMenu {
     closeTutorial: void;
     constructor(game: Game) {
         this.game = game;
+        this.container = <HTMLDivElement>document.getElementById("container");
         this.menuButton = <HTMLButtonElement>(
             document.getElementById("menu-button")
         );

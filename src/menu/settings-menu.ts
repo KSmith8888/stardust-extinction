@@ -2,7 +2,6 @@ import MainMenu from "./main-menu";
 
 export default class SettingsMenu {
     mainMenu: MainMenu;
-    container: HTMLDivElement;
     settingsMenu: HTMLDialogElement;
     easyButton: HTMLButtonElement;
     easyDifficulty: void;
@@ -18,7 +17,6 @@ export default class SettingsMenu {
     closeSettings: void;
     constructor(mainMenu: MainMenu) {
         this.mainMenu = mainMenu;
-        this.container = <HTMLDivElement>document.getElementById("container");
         this.settingsMenu = document.createElement("dialog");
         this.easyButton = document.createElement("button");
         this.easyDifficulty = this.easyButton.addEventListener("click", () => {
@@ -64,12 +62,12 @@ export default class SettingsMenu {
                 this.settingsMenu.close();
             }
         );
-        this.generateControlsHTML();
+        this.generateSettingsHTML();
     }
-    generateControlsHTML() {
+    generateSettingsHTML() {
         this.settingsMenu.id = "settings-menu";
         this.settingsMenu.classList.add("modal");
-        this.container.append(this.settingsMenu);
+        this.mainMenu.container.append(this.settingsMenu);
         const mainHeading = document.createElement("h2");
         mainHeading.classList.add("menu-main-heading");
         mainHeading.textContent = "Settings";

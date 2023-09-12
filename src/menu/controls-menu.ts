@@ -31,12 +31,8 @@ export default class ControlsMenu {
     constructor(game: Game, mainMenu: MainMenu) {
         this.game = game;
         this.mainMenu = mainMenu;
-        this.controlsMenu = <HTMLDialogElement>(
-            document.getElementById("controls-menu")
-        );
-        this.keyboardControlsButton = <HTMLButtonElement>(
-            document.getElementById("keyboard-controls-button")
-        );
+        this.controlsMenu = document.createElement("dialog");
+        this.keyboardControlsButton = document.createElement("button");
         this.useKeyboardControls = this.keyboardControlsButton.addEventListener(
             "click",
             () => {
@@ -46,9 +42,7 @@ export default class ControlsMenu {
                 this.mouseControlsButton.disabled = false;
             }
         );
-        this.mouseControlsButton = <HTMLButtonElement>(
-            document.getElementById("mouse-controls-button")
-        );
+        this.mouseControlsButton = document.createElement("button");
         this.useMouseControls = this.mouseControlsButton.addEventListener(
             "click",
             () => {
@@ -86,12 +80,8 @@ export default class ControlsMenu {
                 this.rightKeyText.classList.remove("light-text");
             }
         });
-        this.menuKeyText = <HTMLParagraphElement>(
-            document.getElementById("menu-key-text")
-        );
-        this.changeMenuKeyButton = <HTMLButtonElement>(
-            document.getElementById("change-menu-key-button")
-        );
+        this.menuKeyText = document.createElement("p");
+        this.changeMenuKeyButton = document.createElement("button");
         this.changeMenuKey = this.changeMenuKeyButton.addEventListener(
             "click",
             () => {
@@ -99,12 +89,8 @@ export default class ControlsMenu {
                 this.menuKeyText.classList.add("light-text");
             }
         );
-        this.upKeyText = <HTMLParagraphElement>(
-            document.getElementById("up-key-text")
-        );
-        this.changeUpKeyButton = <HTMLButtonElement>(
-            document.getElementById("change-up-key-button")
-        );
+        this.upKeyText = document.createElement("p");
+        this.changeUpKeyButton = document.createElement("button");
         this.changeUpKey = this.changeUpKeyButton.addEventListener(
             "click",
             () => {
@@ -112,12 +98,8 @@ export default class ControlsMenu {
                 this.upKeyText.classList.add("light-text");
             }
         );
-        this.leftKeyText = <HTMLParagraphElement>(
-            document.getElementById("left-key-text")
-        );
-        this.changeLeftKeyButton = <HTMLButtonElement>(
-            document.getElementById("change-left-key-button")
-        );
+        this.leftKeyText = document.createElement("p");
+        this.changeLeftKeyButton = document.createElement("button");
         this.changeLeftKey = this.changeLeftKeyButton.addEventListener(
             "click",
             () => {
@@ -125,12 +107,8 @@ export default class ControlsMenu {
                 this.leftKeyText.classList.add("light-text");
             }
         );
-        this.downKeyText = <HTMLParagraphElement>(
-            document.getElementById("down-key-text")
-        );
-        this.changeDownKeyButton = <HTMLButtonElement>(
-            document.getElementById("change-down-key-button")
-        );
+        this.downKeyText = document.createElement("p");
+        this.changeDownKeyButton = document.createElement("button");
         this.changeDownKey = this.changeDownKeyButton.addEventListener(
             "click",
             () => {
@@ -138,12 +116,8 @@ export default class ControlsMenu {
                 this.downKeyText.classList.add("light-text");
             }
         );
-        this.rightKeyText = <HTMLParagraphElement>(
-            document.getElementById("right-key-text")
-        );
-        this.changeRightKeyButton = <HTMLButtonElement>(
-            document.getElementById("change-right-key-button")
-        );
+        this.rightKeyText = document.createElement("p");
+        this.changeRightKeyButton = document.createElement("button");
         this.changeRightKey = this.changeRightKeyButton.addEventListener(
             "click",
             () => {
@@ -151,9 +125,7 @@ export default class ControlsMenu {
                 this.rightKeyText.classList.add("light-text");
             }
         );
-        this.closeControlsButton = <HTMLButtonElement>(
-            document.getElementById("close-controls-menu-button")
-        );
+        this.closeControlsButton = document.createElement("button");
         this.closeControls = this.closeControlsButton.addEventListener(
             "click",
             () => {
@@ -161,6 +133,103 @@ export default class ControlsMenu {
                 this.controlsMenu.close();
             }
         );
+        this.generateControlsHTML();
+    }
+    generateControlsHTML() {
+        this.controlsMenu.classList.add("modal");
+        this.mainMenu.container.append(this.controlsMenu);
+        const controlsHeading = document.createElement("h2");
+        controlsHeading.classList.add("menu-main-heading");
+        controlsHeading.textContent = "Controls";
+        this.controlsMenu.append(controlsHeading);
+        const movementSubHeading = document.createElement("h3");
+        movementSubHeading.classList.add("controls-sub-heading");
+        movementSubHeading.textContent = "Movement Controls:";
+        this.controlsMenu.append(movementSubHeading);
+        const movementControls = document.createElement("div");
+        movementControls.id = "movement-controls-container";
+        this.controlsMenu.append(movementControls);
+        this.keyboardControlsButton.type = "button";
+        this.keyboardControlsButton.classList.add("button");
+        this.keyboardControlsButton.textContent = "Keyboard";
+        movementControls.append(this.keyboardControlsButton);
+        this.mouseControlsButton.type = "button";
+        this.mouseControlsButton.classList.add("button");
+        this.mouseControlsButton.textContent = "Mouse/Touch";
+        movementControls.append(this.mouseControlsButton);
+        const rebindSubHeading = document.createElement("h3");
+        rebindSubHeading.classList.add("controls-sub-heading");
+        rebindSubHeading.textContent = "Key Rebinding:";
+        this.controlsMenu.append(rebindSubHeading);
+        const controlsMainText = document.createElement("p");
+        controlsMainText.id = "controls-menu-main-text";
+        controlsMainText.textContent = `Press the "Change" button next to the control you want to update, then press the key that you want to use instead.`;
+        this.controlsMenu.append(controlsMainText);
+        const rebindControls = document.createElement("div");
+        this.controlsMenu.append(rebindControls);
+        const controlsRowOne = document.createElement("div");
+        controlsRowOne.classList.add("change-control-row");
+        rebindControls.append(controlsRowOne);
+        const changeKeyMenu = document.createElement("div");
+        changeKeyMenu.classList.add("change-control-key");
+        controlsRowOne.append(changeKeyMenu);
+        this.menuKeyText.classList.add("control-key-text");
+        this.menuKeyText.textContent = "MENU: KeyM";
+        changeKeyMenu.append(this.menuKeyText);
+        this.changeMenuKeyButton.type = "button";
+        this.changeMenuKeyButton.classList.add("button");
+        this.changeMenuKeyButton.textContent = "Change";
+        changeKeyMenu.append(this.changeMenuKeyButton);
+        const controlsRowTwo = document.createElement("div");
+        controlsRowTwo.classList.add("change-control-row");
+        rebindControls.append(controlsRowTwo);
+        const changeKeyUp = document.createElement("div");
+        changeKeyUp.classList.add("change-control-key");
+        controlsRowTwo.append(changeKeyUp);
+        this.upKeyText.classList.add("control-key-text");
+        this.upKeyText.textContent = "UP: KeyW";
+        changeKeyUp.append(this.upKeyText);
+        this.changeUpKeyButton.type = "button";
+        this.changeUpKeyButton.classList.add("button");
+        this.changeUpKeyButton.textContent = "Change";
+        changeKeyUp.append(this.changeUpKeyButton);
+        const changeKeyDown = document.createElement("div");
+        changeKeyDown.classList.add("change-control-key");
+        controlsRowTwo.append(changeKeyDown);
+        this.downKeyText.classList.add("control-key-text");
+        this.downKeyText.textContent = "DOWN: KeyS";
+        changeKeyDown.append(this.downKeyText);
+        this.changeDownKeyButton.type = "button";
+        this.changeDownKeyButton.classList.add("button");
+        this.changeDownKeyButton.textContent = "Change";
+        changeKeyDown.append(this.changeDownKeyButton);
+        const controlsRowThree = document.createElement("div");
+        controlsRowThree.classList.add("change-control-row");
+        rebindControls.append(controlsRowThree);
+        const changeKeyLeft = document.createElement("div");
+        changeKeyLeft.classList.add("change-control-key");
+        controlsRowThree.append(changeKeyLeft);
+        this.leftKeyText.classList.add("control-key-text");
+        this.leftKeyText.textContent = "LEFT: KeyA";
+        changeKeyLeft.append(this.leftKeyText);
+        this.changeLeftKeyButton.type = "button";
+        this.changeLeftKeyButton.classList.add("button");
+        this.changeLeftKeyButton.textContent = "Change";
+        changeKeyLeft.append(this.changeLeftKeyButton);
+        const changeKeyRight = document.createElement("div");
+        changeKeyRight.classList.add("change-control-key");
+        controlsRowThree.append(changeKeyRight);
+        this.rightKeyText.classList.add("control-key-text");
+        this.rightKeyText.textContent = "RIGHT: KeyD";
+        changeKeyRight.append(this.rightKeyText);
+        this.changeRightKeyButton.type = "button";
+        this.changeRightKeyButton.classList.add("button");
+        this.changeRightKeyButton.textContent = "Change";
+        changeKeyRight.append(this.changeRightKeyButton);
+        this.closeControlsButton.type = "button";
+        this.closeControlsButton.classList.add("button");
+        this.closeControlsButton.textContent = "Close";
+        this.controlsMenu.append(this.closeControlsButton);
     }
     loadControlsSetting() {
         const controlsSetting = localStorage.getItem("controls-setting");
