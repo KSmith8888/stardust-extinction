@@ -1,5 +1,6 @@
 //Modules
 import Player from "../src/player/player";
+import MainMenu from "../src/menu/main-menu";
 import EventListeners from "../src/events/event-listeners";
 import { Background } from "../src/backgrounds/space-background";
 import { HealthBar } from "../src/player/healthbar";
@@ -30,6 +31,7 @@ import spaceBgDesktopUrl from "../assets/images/backgrounds/space-background-des
 export default class Game {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
+    mainMenu: MainMenu;
     events: EventListeners;
     background: Background;
     player: Player;
@@ -75,6 +77,7 @@ export default class Game {
             this.ctx,
             spaceBackgroundUrl
         );
+        this.mainMenu = new MainMenu(this);
         this.events = new EventListeners(this, this.canvas);
         this.enemies = [];
         this.enemyPoolSize = 15;
@@ -104,7 +107,7 @@ export default class Game {
         this.nextLevelUrl = "/";
         this.currentLevelNumber = 0;
         this.difficultySetting = "Normal";
-        this.events.mainMenu.tutorialModal.showModal();
+        this.mainMenu.tutorialModal.showModal();
         this.initializeEnemyLasers();
     }
     loadDifficultySetting() {
@@ -112,7 +115,7 @@ export default class Game {
         if (savedDifficulty) {
             if (savedDifficulty === "Easy") {
                 this.difficultySetting = "Easy";
-                this.events.mainMenu.settings.easyButton.disabled = true;
+                this.mainMenu.settings.easyButton.disabled = true;
                 this.enemyPoolSize = Math.floor(this.enemyPoolSize / 2);
                 this.firstEnemyCount = Math.floor(this.enemyPoolSize / 3);
                 this.secondEnemyCount = this.firstEnemyCount * 2;
@@ -121,7 +124,7 @@ export default class Game {
                 this.bossReleaseCount = Math.floor(this.bossReleaseCount * 0.7);
             } else if (savedDifficulty === "Hard") {
                 this.difficultySetting = "Hard";
-                this.events.mainMenu.settings.hardButton.disabled = true;
+                this.mainMenu.settings.hardButton.disabled = true;
                 this.enemyPoolSize = Math.floor(this.enemyPoolSize * 1.5);
                 this.firstEnemyCount = Math.floor(this.enemyPoolSize / 3);
                 this.secondEnemyCount = this.firstEnemyCount * 2;
@@ -130,12 +133,12 @@ export default class Game {
                 this.bossReleaseCount = Math.floor(this.bossReleaseCount * 1.3);
                 this.player.healthBar.displayHealthbar = false;
             } else if (savedDifficulty === "Normal") {
-                this.events.mainMenu.settings.normalButton.disabled = true;
+                this.mainMenu.settings.normalButton.disabled = true;
             }
         } else {
             localStorage.setItem("difficulty-setting", "Normal");
             this.difficultySetting = "Normal";
-            this.events.mainMenu.settings.normalButton.disabled = true;
+            this.mainMenu.settings.normalButton.disabled = true;
         }
     }
     initializeEnemyLasers() {

@@ -2,6 +2,7 @@ import MainMenu from "./main-menu";
 
 export default class SettingsMenu {
     mainMenu: MainMenu;
+    container: HTMLDivElement;
     settingsMenu: HTMLDialogElement;
     easyButton: HTMLButtonElement;
     easyDifficulty: void;
@@ -17,33 +18,24 @@ export default class SettingsMenu {
     closeSettings: void;
     constructor(mainMenu: MainMenu) {
         this.mainMenu = mainMenu;
-        this.settingsMenu = <HTMLDialogElement>(
-            document.getElementById("settings-menu")
-        );
-        this.easyButton = <HTMLButtonElement>(
-            document.getElementById("easy-button")
-        );
+        this.container = <HTMLDivElement>document.getElementById("container");
+        this.settingsMenu = document.createElement("dialog");
+        this.easyButton = document.createElement("button");
         this.easyDifficulty = this.easyButton.addEventListener("click", () => {
             this.changeDifficulty("Easy");
         });
-        this.normalButton = <HTMLButtonElement>(
-            document.getElementById("normal-button")
-        );
+        this.normalButton = document.createElement("button");
         this.normalDifficulty = this.normalButton.addEventListener(
             "click",
             () => {
                 this.changeDifficulty("Normal");
             }
         );
-        this.hardButton = <HTMLButtonElement>(
-            document.getElementById("hard-button")
-        );
+        this.hardButton = document.createElement("button");
         this.hardDifficulty = this.hardButton.addEventListener("click", () => {
             this.changeDifficulty("Hard");
         });
-        this.deleteSaveButton = <HTMLButtonElement>(
-            document.getElementById("delete-save-button")
-        );
+        this.deleteSaveButton = document.createElement("button");
         this.deleteSaveData = this.deleteSaveButton.addEventListener(
             "click",
             () => {
@@ -57,18 +49,14 @@ export default class SettingsMenu {
                 }
             }
         );
-        this.replayTutorialButton = <HTMLButtonElement>(
-            document.getElementById("replay-tutorial-button")
-        );
+        this.replayTutorialButton = document.createElement("button");
         this.replayTutorial = this.replayTutorialButton.addEventListener(
             "click",
             () => {
                 location.assign("/levels/tutorial/tutorial.html");
             }
         );
-        this.closeSettingsButton = <HTMLButtonElement>(
-            document.getElementById("close-settings-menu-button")
-        );
+        this.closeSettingsButton = document.createElement("button");
         this.closeSettings = this.closeSettingsButton.addEventListener(
             "click",
             () => {
@@ -76,6 +64,54 @@ export default class SettingsMenu {
                 this.settingsMenu.close();
             }
         );
+        this.generateControlsHTML();
+    }
+    generateControlsHTML() {
+        this.settingsMenu.id = "settings-menu";
+        this.settingsMenu.classList.add("modal");
+        this.container.append(this.settingsMenu);
+        const mainHeading = document.createElement("h2");
+        mainHeading.classList.add("menu-main-heading");
+        mainHeading.textContent = "Settings";
+        this.settingsMenu.append(mainHeading);
+        const difficultyCon = document.createElement("div");
+        difficultyCon.id = "difficulty-container";
+        this.settingsMenu.append(difficultyCon);
+        const subHeading = document.createElement("div");
+        subHeading.id = "difficulty-heading";
+        subHeading.classList.add("menu-sub-heading");
+        subHeading.textContent = "Difficulty:";
+        difficultyCon.append(subHeading);
+        const buttonRow = document.createElement("div");
+        buttonRow.classList.add("button-row");
+        difficultyCon.append(buttonRow);
+        this.easyButton.id = "easy-button";
+        this.easyButton.classList.add("button");
+        this.easyButton.type = "button";
+        this.easyButton.textContent = "Easy";
+        buttonRow.append(this.easyButton);
+        this.normalButton.id = "normal-button";
+        this.normalButton.classList.add("button");
+        this.normalButton.type = "button";
+        this.normalButton.textContent = "Normal";
+        buttonRow.append(this.normalButton);
+        this.hardButton.id = "hard-button";
+        this.hardButton.classList.add("button");
+        this.hardButton.type = "button";
+        this.hardButton.textContent = "Hard";
+        buttonRow.append(this.hardButton);
+        this.deleteSaveButton.classList.add("button");
+        this.deleteSaveButton.type = "button";
+        this.deleteSaveButton.textContent = "Delete Data";
+        this.settingsMenu.append(this.deleteSaveButton);
+        this.replayTutorialButton.classList.add("button");
+        this.replayTutorialButton.type = "button";
+        this.replayTutorialButton.textContent = "Replay Tutorial";
+        this.settingsMenu.append(this.replayTutorialButton);
+        this.closeSettingsButton.classList.add("button");
+        this.closeSettingsButton.type = "button";
+        this.closeSettingsButton.textContent = "Close";
+        this.settingsMenu.append(this.closeSettingsButton);
     }
     changeDifficulty(newDifficulty: string) {
         if (

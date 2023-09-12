@@ -49,9 +49,10 @@ export default class TutorialGame extends Game {
         this.firstTutorialInterval = 40;
         this.secondTutorialInterval = 140;
         this.skipTutorialButton = document.createElement("button");
-        this.events.menuEvents.easyButton.disabled = true;
-        this.events.menuEvents.normalButton.disabled = true;
-        this.events.menuEvents.hardButton.disabled = true;
+        this.mainMenu.settings.easyButton.disabled = true;
+        this.mainMenu.settings.normalButton.disabled = true;
+        this.mainMenu.settings.hardButton.disabled = true;
+        this.mainMenu.settings.replayTutorialButton.disabled = true;
         this.createSkipButton();
         this.initializeEnemies();
         this.initializeBossProjectiles();
@@ -63,7 +64,7 @@ export default class TutorialGame extends Game {
         this.skipTutorialButton.addEventListener("click", () => {
             location.assign("/levels/level-1/level-1.html");
         });
-        this.events.menuEvents.tutorialModal.append(this.skipTutorialButton);
+        this.mainMenu.tutorialModal.append(this.skipTutorialButton);
     }
     initializeEnemies() {
         for (let i = 0; i < this.enemyPoolSize; i++) {
@@ -97,7 +98,7 @@ export default class TutorialGame extends Game {
             this.hasSeenMovementTutorial = true;
             this.player.isMoving = false;
             this.createMovementTutorial();
-            this.events.menuEvents.tutorialModal.showModal();
+            this.mainMenu.tutorialModal.showModal();
         } else if (this.frameCount === this.firstEnemyInterval) {
             const freeFighter = this.enemies.find((enemy) => {
                 return enemy instanceof SmallFighter && enemy.isFree;
@@ -113,7 +114,7 @@ export default class TutorialGame extends Game {
             this.hasSeenMenuTutorial = true;
             this.player.isMoving = false;
             this.createMenuTutorial();
-            this.events.menuEvents.tutorialModal.showModal();
+            this.mainMenu.tutorialModal.showModal();
         } else if (this.frameCount === this.secondEnemyInterval) {
             const freeRedMine = this.enemies.find((enemy) => {
                 return enemy instanceof RedMine && enemy.isFree;
@@ -125,9 +126,7 @@ export default class TutorialGame extends Game {
         }
     }
     createMovementTutorial() {
-        this.events.menuEvents.tutorialModal.removeChild(
-            this.skipTutorialButton
-        );
+        this.mainMenu.tutorialModal.removeChild(this.skipTutorialButton);
         const tutorialRow = <HTMLParagraphElement>(
             document.getElementById("tutorial-row-initial")
         );
@@ -171,7 +170,7 @@ export default class TutorialGame extends Game {
             this.hasSeenBossTutorial = true;
             this.player.isMoving = false;
             this.createBossTutorial();
-            this.events.menuEvents.tutorialModal.showModal();
+            this.mainMenu.tutorialModal.showModal();
         }
     }
     animate(timeStamp: number) {
