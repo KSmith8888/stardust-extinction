@@ -14,12 +14,8 @@ export default class AudioMenu {
     constructor(game: Game, mainMenu: MainMenu) {
         this.game = game;
         this.mainMenu = mainMenu;
-        this.audioMenu = <HTMLDialogElement>(
-            document.getElementById("audio-menu")
-        );
-        this.muteButton = <HTMLButtonElement>(
-            document.getElementById("mute-button")
-        );
+        this.audioMenu = document.createElement("dialog");
+        this.muteButton = document.createElement("button");
         this.changeMuteSetting = this.muteButton.addEventListener(
             "click",
             () => {
@@ -33,9 +29,7 @@ export default class AudioMenu {
                 this.game.events.audioEvents.changeMuteSetting();
             }
         );
-        this.volumeControl = <HTMLInputElement>(
-            document.getElementById("volume-control")
-        );
+        this.volumeControl = document.createElement("input");
         this.changeVolume = this.volumeControl.addEventListener(
             "change",
             () => {
@@ -50,9 +44,7 @@ export default class AudioMenu {
                 this.game.events.audioEvents.changeVolumeSetting();
             }
         );
-        this.closeAudioButton = <HTMLButtonElement>(
-            document.getElementById("close-audio-menu-button")
-        );
+        this.closeAudioButton = document.createElement("button");
         this.closeAudio = this.closeAudioButton.addEventListener(
             "click",
             () => {
@@ -60,5 +52,57 @@ export default class AudioMenu {
                 this.audioMenu.close();
             }
         );
+        this.generateAudioHTML();
+    }
+    generateAudioHTML() {
+        this.audioMenu.classList.add("modal");
+        this.mainMenu.container.append(this.audioMenu);
+        const mainHeading = document.createElement("h2");
+        mainHeading.classList.add("menu-main-heading");
+        mainHeading.textContent = "Audio Menu";
+        this.audioMenu.append(mainHeading);
+        this.muteButton.id = "mute-button";
+        this.muteButton.classList.add("button");
+        this.muteButton.type = "button";
+        this.muteButton.textContent = "Mute Audio";
+        this.audioMenu.append(this.muteButton);
+        const controlContainer = document.createElement("div");
+        controlContainer.id = "volume-control-container";
+        this.audioMenu.append(controlContainer);
+        const controlLabel = document.createElement("label");
+        controlLabel.id = "volume-control-label";
+        controlLabel.htmlFor = "volume-control";
+        controlLabel.textContent = "Volume:";
+        controlContainer.append(controlLabel);
+        this.volumeControl.id = "volume-control";
+        this.volumeControl.type = "range";
+        this.volumeControl.value = "50";
+        this.volumeControl.step = "50";
+        this.volumeControl.min = "0";
+        this.volumeControl.max = "100";
+        this.volumeControl.setAttribute("list", "volume-options");
+        controlContainer.append(this.volumeControl);
+        const volumeOptions = document.createElement("datalist");
+        volumeOptions.id = "volume-options";
+        controlContainer.append(volumeOptions);
+        const lowOption = document.createElement("option");
+        lowOption.classList.add("volume-option");
+        lowOption.value = "0";
+        lowOption.label = "Low";
+        volumeOptions.append(lowOption);
+        const medOption = document.createElement("option");
+        medOption.classList.add("volume-option");
+        medOption.value = "50";
+        medOption.label = "Med.";
+        volumeOptions.append(medOption);
+        const highOption = document.createElement("option");
+        highOption.classList.add("volume-option");
+        highOption.value = "100";
+        highOption.label = "High";
+        volumeOptions.append(highOption);
+        this.closeAudioButton.classList.add("button");
+        this.closeAudioButton.type = "button";
+        this.closeAudioButton.textContent = "Close";
+        this.audioMenu.append(this.closeAudioButton);
     }
 }
