@@ -94,6 +94,7 @@ export default class MainMenu {
             this.mainMenu.close();
             this.isMenuOpen = false;
             this.game.isGamePaused = false;
+            this.game.canvas.focus();
         });
         this.tutorialModal = <HTMLDialogElement>(
             document.getElementById("tutorial-modal")

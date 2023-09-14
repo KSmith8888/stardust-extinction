@@ -47,7 +47,8 @@ async function startLevel1() {
                 if (hasCompletedTutorial) {
                     location.assign("/levels/level-1/level-1.html");
                 } else {
-                    location.assign("/levels/tutorial/tutorial.html");
+                    //location.assign("/levels/tutorial/tutorial.html");
+                    location.assign("/levels/intro/intro.html");
                 }
             }, 600);
         }
