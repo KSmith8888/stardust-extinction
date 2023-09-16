@@ -17,22 +17,23 @@ body {
     background: url("../images/backgrounds/space-background.png");
     background-size: cover;
     background-repeat: no-repeat;
+    background-color: black;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
-.dialog-box {
-    background-color: black;
-    color: #fff;
+#dialog-box {
+    background: radial-gradient(black, #080808);
+    color: #e7e7e7;
     width: 95%;
-    min-height: 40vh;
+    min-height: 60%;
     margin: 0;
     padding: 0.25em;
-    border: 7px ridge #fff;
+    border: 7px ridge #e7e7e7;
 }
 
 .dialog-text-container {
@@ -40,7 +41,7 @@ body {
     flex-direction: column;
     align-items: stretch;
     justify-content: stretch;
-    border: 1px solid #fff;
+    border: 1px solid #e7e7e7;
     width: 100%;
     height: 100%;
     padding: 2em;
@@ -53,7 +54,7 @@ body {
     cursor: pointer;
     border: 1px solid rgb(226, 49, 203);
     color: rgb(243, 134, 228);
-    background: radial-gradient(rgb(44, 2, 39), rgba(58, 4, 51));
+    background: radial-gradient(rgb(44, 2, 39), rgb(58, 4, 51));
     margin: 0.5em 1em;
     padding: 0.2em 0.5em;
     border-radius: 5px;
@@ -71,18 +72,16 @@ body {
     justify-content: center;
 }
 
-.fadeOutElement {
-    color: black;
-    border: none;
+.fade-out-element {
     animation: fadeOut 2s forwards;
 }
 
 @keyframes fadeOut {
     from {
-        background-color: rgba(0, 0, 0, 0);
+        background: rgba(0, 0, 0, 0);
     }
     to {
-        background-color: rgba(0, 0, 0, 1);
+        background: rgba(0, 0, 0, 1);
     }
 }
 
@@ -90,8 +89,10 @@ body {
     #main-container {
         background: url("../images/backgrounds/space-background-desktop.png");
         width: 900px;
+        justify-content: flex-end;
     }
-    .dialog-box {
+    #dialog-box {
+        min-height: 50%;
         width: 60%;
     }
 }
