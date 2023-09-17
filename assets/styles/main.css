@@ -8,7 +8,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    background-color: rgb(75, 72, 74);
+    background-color: black;
 }
 
 #container {
@@ -316,6 +316,7 @@ body {
 @media (min-width: 900px) {
     body {
         height: 100vh;
+        background-color: rgb(75, 72, 74);
     }
     #container {
         width: 900px;

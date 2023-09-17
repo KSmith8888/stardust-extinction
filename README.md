@@ -46,6 +46,9 @@ https://opengameart.org/content/another-space-backgrounds-0
 "Modular Ships" by surt licensed CC0:  
 https://opengameart.org/content/modular-ships
 
+"Background space with planet in chalky style" by tebruno99 licensed CC0:  
+https://opengameart.org/content/background-space-with-planet-in-chalky-style
+
 ### Audio
 
 "Beep Tone Sound SFX" by qubodup licensed CC0:  

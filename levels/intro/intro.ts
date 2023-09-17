@@ -33,17 +33,17 @@ class Intro {
                     this.secondParagraph,
                     "One of these colonies, XR4-793, lies at the edge of the Milky Way Galaxy."
                 );
-            }, 750);
+            }, 1250);
         } else if (this.currentPhase === 2) {
             setTimeout(() => {
                 this.currentPhase = 3;
                 this.firstParagraph.textContent = "";
                 this.secondParagraph.textContent = "";
-                intro.generateText(
-                    intro.firstParagraph,
+                this.generateText(
+                    this.firstParagraph,
                     "While speculation continued that alien life may be out there, none had yet been encountered."
                 );
-            }, 1000);
+            }, 1500);
         } else if (this.currentPhase === 3) {
             setTimeout(() => {
                 this.currentPhase = 4;
@@ -51,11 +51,11 @@ class Intro {
                     this.secondParagraph,
                     "So, when the long-range communication system for XR4-793 went down, it was assumed to just be a technical issue. Neither the colonists or the command back on Earth could have imagined what was starting..."
                 );
-            }, 750);
+            }, 1000);
         } else if (this.currentPhase === 4) {
             setTimeout(() => {
                 this.mainContainer.classList.add("fade-out-element");
-            }, 500);
+            }, 1500);
         }
     }
     generateText(paragraphEl: HTMLParagraphElement, text: string) {
