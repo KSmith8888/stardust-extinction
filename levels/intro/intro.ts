@@ -4,6 +4,8 @@ class Intro {
     firstParagraph: HTMLParagraphElement;
     secondParagraph: HTMLParagraphElement;
     currentPhase: number;
+    firstLineDelay: number;
+    secondLineDelay: number;
     skipIntroButton: HTMLButtonElement;
     skipIntro: void;
     constructor() {
@@ -18,6 +20,8 @@ class Intro {
             document.getElementById("dialog-second-line")
         );
         this.currentPhase = 1;
+        this.firstLineDelay = 1250;
+        this.secondLineDelay = 1000;
         this.skipIntroButton = <HTMLButtonElement>(
             document.getElementById("skip-intro-button")
         );
@@ -33,7 +37,7 @@ class Intro {
                     this.secondParagraph,
                     "One of these colonies, XR4-793, lies at the edge of the Milky Way Galaxy."
                 );
-            }, 1250);
+            }, this.secondLineDelay);
         } else if (this.currentPhase === 2) {
             setTimeout(() => {
                 this.currentPhase = 3;
@@ -43,7 +47,7 @@ class Intro {
                     this.firstParagraph,
                     "While speculation continued that alien life may be out there, none had yet been encountered."
                 );
-            }, 1500);
+            }, this.firstLineDelay);
         } else if (this.currentPhase === 3) {
             setTimeout(() => {
                 this.currentPhase = 4;
@@ -51,16 +55,31 @@ class Intro {
                     this.secondParagraph,
                     "So, when the long-range communication system for XR4-793 went down, it was assumed to just be a technical issue. Neither the colonists or the command back on Earth could have imagined what was starting..."
                 );
-            }, 1000);
+            }, this.secondLineDelay);
         } else if (this.currentPhase === 4) {
             setTimeout(() => {
-                this.mainContainer.classList.add("fade-out-element");
-            }, 1500);
+                this.currentPhase = 5;
+                this.firstParagraph.textContent = "";
+                this.secondParagraph.textContent = "";
+                this.generateText(
+                    this.firstParagraph,
+                    "The invasion struck with overwhelming force. As the invading aliens had technology that prevented their detection by radar systems, the colonists were caught completely off-guard."
+                );
+                //this.mainContainer.classList.add("fade-out-element");
+            }, this.firstLineDelay);
+        } else if (this.currentPhase === 5) {
+            setTimeout(() => {
+                this.currentPhase = 6;
+                this.generateText(
+                    this.secondParagraph,
+                    "With no hope of victory, the priority became warning Earth of the threat. After taking the colony, the aliens would surely learn of Earth..."
+                );
+            }, this.secondLineDelay);
         }
     }
     generateText(paragraphEl: HTMLParagraphElement, text: string) {
         const textArray = text.split("");
-        const delay = 150;
+        const delay = 100;
         textArray.forEach((char, index) => {
             setTimeout(() => {
                 paragraphEl.textContent += char;
