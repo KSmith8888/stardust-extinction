@@ -6,14 +6,14 @@ body {
     margin: 0;
     height: 100vh;
     font-family: "Courier New", Courier, monospace;
-    background-color: black;
+    background-color: rgb(14, 13, 13);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
-#main-container {
+.container {
     background: url("../images/backgrounds/intro-background.png");
     background-size: cover;
     background-repeat: no-repeat;
@@ -27,7 +27,7 @@ body {
     justify-content: center;
 }
 
-#dialog-box {
+#message-box {
     background: radial-gradient(black, #080808);
     color: #e7e7e7;
     width: 95%;
@@ -77,26 +77,37 @@ body {
     animation: fadeOut 2s forwards;
 }
 
+.city-phase {
+    background: url("../images/backgrounds/intro-city-background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
 @keyframes fadeOut {
     from {
-        background: rgba(0, 0, 0, 0);
+        opacity: 1;
     }
     to {
-        background: rgba(0, 0, 0, 1);
+        opacity: 0;
     }
 }
 
 @media (min-width: 900px) {
-    body {
-        background-color: rgb(75, 72, 74);
-    }
-    #main-container {
+    .container {
         background: url("../images/backgrounds/intro-background-desktop.png");
         width: 900px;
+        height: 600px;
         justify-content: flex-end;
     }
-    #dialog-box {
+    #message-box {
         min-height: 45%;
         width: 60%;
+    }
+    .city-phase {
+        background: url("../images/backgrounds/intro-city-background-desktop.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: top center;
     }
 }

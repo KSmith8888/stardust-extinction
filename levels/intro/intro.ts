@@ -1,6 +1,6 @@
 class Intro {
     mainContainer: HTMLElement;
-    dialogBox: HTMLDivElement;
+    messageBox: HTMLDivElement;
     firstParagraph: HTMLParagraphElement;
     secondParagraph: HTMLParagraphElement;
     currentPhase: number;
@@ -12,7 +12,9 @@ class Intro {
         this.mainContainer = <HTMLElement>(
             document.getElementById("main-container")
         );
-        this.dialogBox = <HTMLDivElement>document.getElementById("dialog-box");
+        this.messageBox = <HTMLDivElement>(
+            document.getElementById("message-box")
+        );
         this.firstParagraph = <HTMLParagraphElement>(
             document.getElementById("dialog-first-line")
         );
@@ -41,6 +43,7 @@ class Intro {
         } else if (this.currentPhase === 2) {
             setTimeout(() => {
                 this.currentPhase = 3;
+                this.skipIntroButton.classList.add("fade-out-element");
                 this.firstParagraph.textContent = "";
                 this.secondParagraph.textContent = "";
                 this.generateText(
@@ -57,19 +60,26 @@ class Intro {
                 );
             }, this.secondLineDelay);
         } else if (this.currentPhase === 4) {
+            this.messageBox.classList.add("fade-out-element");
             setTimeout(() => {
                 this.currentPhase = 5;
+                this.mainContainer.classList.add("city-phase");
+                this.nextPhase();
+            }, 2500);
+        } else if (this.currentPhase === 5) {
+            setTimeout(() => {
+                this.currentPhase = 6;
+                this.messageBox.classList.remove("fade-out-element");
                 this.firstParagraph.textContent = "";
                 this.secondParagraph.textContent = "";
                 this.generateText(
                     this.firstParagraph,
                     "The invasion struck with overwhelming force. As the invading aliens had technology that prevented their detection by radar systems, the colonists were caught completely off-guard."
                 );
-                //this.mainContainer.classList.add("fade-out-element");
-            }, this.firstLineDelay);
-        } else if (this.currentPhase === 5) {
+            }, this.firstLineDelay * 2);
+        } else if (this.currentPhase === 6) {
             setTimeout(() => {
-                this.currentPhase = 6;
+                this.currentPhase = 7;
                 this.generateText(
                     this.secondParagraph,
                     "With no hope of victory, the priority became warning Earth of the threat. After taking the colony, the aliens would surely learn of Earth..."

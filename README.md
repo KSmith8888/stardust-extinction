@@ -49,6 +49,12 @@ https://opengameart.org/content/modular-ships
 "Background space with planet in chalky style" by tebruno99 licensed CC0:  
 https://opengameart.org/content/background-space-with-planet-in-chalky-style
 
+"Warped Ocean View" by ansimuz licensed CC0:  
+https://opengameart.org/content/warped-ocean-view
+
+"Simple City Silhouette/Skyline with Clouds" by Gariot  
+https://opengameart.org/content/simple-city-silhouetteskyline-with-clouds
+
 ### Audio
 
 "Beep Tone Sound SFX" by qubodup licensed CC0:  
