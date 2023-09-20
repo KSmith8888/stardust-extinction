@@ -8,6 +8,8 @@ class Intro {
     secondLineDelay: number;
     skipIntroButton: HTMLButtonElement;
     skipIntro: void;
+    mouseMove: void;
+    touchStart: void;
     constructor() {
         this.mainContainer = <HTMLElement>(
             document.getElementById("main-container")
@@ -30,6 +32,20 @@ class Intro {
         this.skipIntro = this.skipIntroButton.addEventListener("click", () => {
             location.assign("/levels/tutorial/tutorial.html");
         });
+        this.mouseMove = document.addEventListener("mousemove", () => {
+            this.skipIntroButton.classList.remove("fade-out-element");
+        });
+        this.touchStart = document.addEventListener("touchstart", () => {
+            this.skipIntroButton.classList.remove("fade-out-element");
+        });
+    }
+    firstPhase() {
+        intro.messageBox.classList.remove("no-display");
+        intro.skipIntroButton.classList.remove("no-display");
+        intro.generateText(
+            intro.firstParagraph,
+            "In the year 2157, Earth has spread colonies far out across known space."
+        );
     }
     nextPhase() {
         if (this.currentPhase === 1) {
@@ -76,7 +92,7 @@ class Intro {
                     this.firstParagraph,
                     "The invasion struck with overwhelming force. As the invading aliens had technology that prevented their detection by radar systems, the colonists were caught completely off-guard."
                 );
-            }, this.firstLineDelay * 2);
+            }, 3000);
         } else if (this.currentPhase === 6) {
             setTimeout(() => {
                 this.currentPhase = 7;
@@ -102,7 +118,6 @@ class Intro {
 }
 
 const intro = new Intro();
-intro.generateText(
-    intro.firstParagraph,
-    "In the year 2157, Earth has spread colonies far out across known space."
-);
+setTimeout(() => {
+    intro.firstPhase();
+}, 1000);

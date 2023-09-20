@@ -90,7 +90,7 @@ body {
     cursor: pointer;
     border: 1px solid rgb(226, 49, 203);
     color: rgb(243, 134, 228);
-    background: radial-gradient(rgba(58, 4, 51, 0.8), rgba(117, 13, 103, 0.5));
+    background: radial-gradient(rgb(58, 4, 51), rgb(117, 13, 103));
     margin: 0.5em 1em;
     padding: 0.2em 0.5em;
     border-radius: 5px;
@@ -324,7 +324,6 @@ body {
     }
     #tutorial-modal[open] {
         width: 75%;
-        max-width: 850px;
     }
     .tutorial-row {
         flex-direction: row;
