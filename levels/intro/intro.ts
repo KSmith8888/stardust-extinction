@@ -42,10 +42,12 @@ class Intro {
     firstPhase() {
         intro.messageBox.classList.remove("no-display");
         intro.skipIntroButton.classList.remove("no-display");
-        intro.generateText(
-            intro.firstParagraph,
-            "In the year 2157, Earth has spread colonies far out across known space."
-        );
+        setTimeout(() => {
+            intro.generateText(
+                intro.firstParagraph,
+                "In the year 2457, humans have spread colonies far out across known space."
+            );
+        }, this.firstLineDelay);
     }
     nextPhase() {
         if (this.currentPhase === 1) {
@@ -53,18 +55,17 @@ class Intro {
                 this.currentPhase = 2;
                 this.generateText(
                     this.secondParagraph,
-                    "One of these colonies, XR4-793, lies at the edge of the Milky Way Galaxy."
+                    "They have been aided in this effort by the discovery of several wormholes that allowed for near instantaneous travel to parts of the universe with potentially habitable planets."
                 );
             }, this.secondLineDelay);
         } else if (this.currentPhase === 2) {
             setTimeout(() => {
                 this.currentPhase = 3;
-                this.skipIntroButton.classList.add("fade-out-element");
                 this.firstParagraph.textContent = "";
                 this.secondParagraph.textContent = "";
                 this.generateText(
                     this.firstParagraph,
-                    "While speculation continued that alien life may be out there, none had yet been encountered."
+                    "One of these planets, XR4-793, lies at the edge of the Centaurus-A Galaxy."
                 );
             }, this.firstLineDelay);
         } else if (this.currentPhase === 3) {
@@ -72,35 +73,112 @@ class Intro {
                 this.currentPhase = 4;
                 this.generateText(
                     this.secondParagraph,
-                    "So, when the long-range communication system for XR4-793 went down, it was assumed to just be a technical issue. Neither the colonists or the command back on Earth could have imagined what was starting..."
+                    "It quickly became the site of a major human outpost as it contained a livable atmosphere."
                 );
             }, this.secondLineDelay);
         } else if (this.currentPhase === 4) {
-            this.messageBox.classList.add("fade-out-element");
             setTimeout(() => {
                 this.currentPhase = 5;
-                this.mainContainer.classList.add("city-phase");
-                this.nextPhase();
-            }, 2500);
+                this.firstParagraph.textContent = "";
+                this.secondParagraph.textContent = "";
+                this.generateText(
+                    this.firstParagraph,
+                    "While speculation continued during this exploration that alien life may be out there, none had yet been encountered."
+                );
+            }, this.firstLineDelay);
         } else if (this.currentPhase === 5) {
             setTimeout(() => {
                 this.currentPhase = 6;
+                this.generateText(
+                    this.secondParagraph,
+                    "So, when the long-range communication system for the XR4-793 outpost went down, neither the colonists or the command back on Earth could have imagined what was starting..."
+                );
+            }, this.secondLineDelay);
+        } else if (this.currentPhase === 6) {
+            this.skipIntroButton.classList.add("fade-out-element");
+            this.messageBox.classList.add("fade-out-element");
+            setTimeout(() => {
+                this.currentPhase = 7;
+                this.mainContainer.classList.add("city-phase");
+                this.nextPhase();
+            }, 2500);
+        } else if (this.currentPhase === 7) {
+            setTimeout(() => {
+                this.currentPhase = 8;
                 this.messageBox.classList.remove("fade-out-element");
                 this.firstParagraph.textContent = "";
                 this.secondParagraph.textContent = "";
                 this.generateText(
                     this.firstParagraph,
-                    "The invasion struck with overwhelming force. As the invading aliens had technology that prevented their detection by radar systems, the colonists were caught completely off-guard."
+                    "In the early hours of October 12th, the colonists were awakened by an armada of alien ships bombarding the outpost."
                 );
             }, 3000);
-        } else if (this.currentPhase === 6) {
+        } else if (this.currentPhase === 8) {
             setTimeout(() => {
-                this.currentPhase = 7;
+                this.currentPhase = 9;
                 this.generateText(
                     this.secondParagraph,
-                    "With no hope of victory, the priority became warning Earth of the threat. After taking the colony, the aliens would surely learn of Earth..."
+                    "As the invading aliens had  had technology that far exceeded our own, the outpost radar systems had failed to detect their arrival and the colonists were caught completely unaware."
                 );
             }, this.secondLineDelay);
+        } else if (this.currentPhase === 9) {
+            setTimeout(() => {
+                this.currentPhase = 10;
+                this.firstParagraph.textContent = "";
+                this.secondParagraph.textContent = "";
+                this.generateText(
+                    this.firstParagraph,
+                    "The invading force had started by knocking out the outposts long-range communication facility, located on the planets moon."
+                );
+            }, this.firstLineDelay);
+        } else if (this.currentPhase === 10) {
+            setTimeout(() => {
+                this.currentPhase = 11;
+                this.generateText(
+                    this.secondParagraph,
+                    "The aliens then struck with overwhelming force and quickly dispatched with the outposts limited defense forces."
+                );
+            }, this.secondLineDelay);
+        } else if (this.currentPhase === 11) {
+            setTimeout(() => {
+                this.currentPhase = 12;
+                this.firstParagraph.textContent = "";
+                this.secondParagraph.textContent = "";
+                this.generateText(
+                    this.firstParagraph,
+                    "With seemingly no hope of victory, the priority became warning Earth of the threat."
+                );
+            }, this.firstLineDelay);
+        } else if (this.currentPhase === 12) {
+            setTimeout(() => {
+                this.currentPhase = 13;
+                this.generateText(
+                    this.secondParagraph,
+                    "Now, having no way to contact command back on Earth from the outpost directly, the only way to warn them would be to retreat back through the wormhole which had brought them to this part of the universe."
+                );
+            }, this.secondLineDelay);
+        } else if (this.currentPhase === 13) {
+            setTimeout(() => {
+                this.currentPhase = 14;
+                this.firstParagraph.textContent = "";
+                this.secondParagraph.textContent = "";
+                this.generateText(
+                    this.firstParagraph,
+                    "In the chaos of the invasion, only one ship was able to escape the outpost intact."
+                );
+            }, this.firstLineDelay);
+        } else if (this.currentPhase === 14) {
+            setTimeout(() => {
+                this.currentPhase = 15;
+                this.generateText(
+                    this.secondParagraph,
+                    "Now that one ship would need to evade or destroy endless waves of hostile aliens and reach the wormhole if Earth were to have any hope. Good luck..."
+                );
+            }, this.secondLineDelay);
+        } else if (this.currentPhase === 15) {
+            setTimeout(() => {
+                location.assign("/levels/tutorial/tutorial.html");
+            }, 1500);
         }
     }
     generateText(paragraphEl: HTMLParagraphElement, text: string) {
