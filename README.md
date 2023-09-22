@@ -52,8 +52,11 @@ https://opengameart.org/content/background-space-with-planet-in-chalky-style
 "Warped Ocean View" by ansimuz licensed CC0:  
 https://opengameart.org/content/warped-ocean-view
 
-"Simple City Silhouette/Skyline with Clouds" by Gariot  
+"Simple City Silhouette/Skyline with Clouds" by Gariot licensed CC0:  
 https://opengameart.org/content/simple-city-silhouetteskyline-with-clouds
+
+"Ships Bases 2D Shooter" by Color Optimist licensed CC0:  
+https://opengameart.org/content/ships-bases-2d-shooter
 
 ### Audio
 
