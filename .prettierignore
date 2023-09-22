@@ -1,0 +1,7 @@
+_headers
+/dist
+dist/
+/node_modules
+node_modules/
+/public/_headers
+public/_headers
