@@ -36,7 +36,7 @@ body {
     color: rgb(208, 236, 252);
     font-weight: 600;
     width: 95%;
-    min-height: 55%;
+    min-height: 50%;
     margin: 0;
     padding: 0.25em;
     border: 7px ridge rgb(208, 236, 252);
@@ -83,7 +83,7 @@ body {
 }
 
 .city-phase {
-    background: url("../images/backgrounds/intro-city-background.png");
+    background: url("../images/backgrounds/intro-armada-background-mobile.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top center;
@@ -110,7 +110,6 @@ body {
         justify-content: flex-end;
     }
     #message-box {
-        min-height: 40%;
         width: 60%;
     }
     .city-phase {

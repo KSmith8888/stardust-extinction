@@ -118,7 +118,7 @@ class Intro {
                 this.currentPhase = 9;
                 this.generateText(
                     this.secondParagraph,
-                    "As the invading aliens had  had technology that far exceeded our own, the outpost radar systems had failed to detect their arrival and the colonists were caught completely unaware."
+                    "As the invading aliens had technology that far exceeded our own, the outpost radar systems had failed to detect their arrival and the colonists were caught completely unaware."
                 );
             }, this.secondLineDelay);
         } else if (this.currentPhase === 9) {
