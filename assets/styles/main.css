@@ -90,7 +90,7 @@ body {
     cursor: pointer;
     border: 1px solid rgb(226, 49, 203);
     color: rgb(243, 134, 228);
-    background: radial-gradient(rgb(58, 4, 51), rgb(117, 13, 103));
+    background: radial-gradient(rgb(44, 2, 39), rgb(58, 4, 51));
     margin: 0.5em 1em;
     padding: 0.2em 0.5em;
     border-radius: 5px;
@@ -102,7 +102,7 @@ body {
 
 .button:hover,
 .button:focus {
-    background-color: rgb(160, 25, 142);
+    background: radial-gradient(rgba(58, 4, 51), rgba(117, 13, 103));
 }
 
 .button:disabled {
