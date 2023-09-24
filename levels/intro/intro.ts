@@ -6,12 +6,11 @@ class Intro {
     firstParagraph: HTMLParagraphElement;
     secondParagraph: HTMLParagraphElement;
     currentPhase: number;
+    newSceneDelay: number;
     firstLineDelay: number;
     secondLineDelay: number;
     skipIntroButton: HTMLButtonElement;
     skipIntro: void;
-    mouseMove: void;
-    touchStart: void;
     constructor() {
         this.mainContainer = <HTMLDivElement>(
             document.getElementById("main-container")
@@ -32,6 +31,7 @@ class Intro {
             document.getElementById("dialog-second-line")
         );
         this.currentPhase = 1;
+        this.newSceneDelay = 2000;
         this.firstLineDelay = 1250;
         this.secondLineDelay = 1000;
         this.skipIntroButton = <HTMLButtonElement>(
@@ -40,22 +40,15 @@ class Intro {
         this.skipIntro = this.skipIntroButton.addEventListener("click", () => {
             location.assign("/levels/tutorial/tutorial.html");
         });
-        this.mouseMove = document.addEventListener("mousemove", () => {
-            this.skipIntroButton.classList.remove("fade-out-element");
-        });
-        this.touchStart = document.addEventListener("touchstart", () => {
-            this.skipIntroButton.classList.remove("fade-out-element");
-        });
     }
     firstPhase() {
-        this.messageBox.showModal();
-        this.skipIntroButton.classList.remove("no-display");
         setTimeout(() => {
+            this.messageBox.showModal();
             this.generateText(
                 this.firstParagraph,
                 "In the year 2457, humans have spread colonies far out across known space."
             );
-        }, this.firstLineDelay);
+        }, this.newSceneDelay);
     }
     nextPhase() {
         if (this.currentPhase === 1) {
@@ -103,7 +96,6 @@ class Intro {
                 );
             }, this.secondLineDelay);
         } else if (this.currentPhase === 6) {
-            this.skipIntroButton.classList.add("fade-out-element");
             this.messageBox.close();
             setTimeout(() => {
                 this.currentPhase = 7;
@@ -121,7 +113,7 @@ class Intro {
                     this.firstParagraph,
                     "In the early hours of October 12th, the colonists were awakened by an armada of alien ships bombarding the outpost."
                 );
-            }, 3000);
+            }, this.newSceneDelay);
         } else if (this.currentPhase === 8) {
             setTimeout(() => {
                 this.currentPhase = 9;
@@ -205,6 +197,4 @@ class Intro {
 }
 
 const intro = new Intro();
-setTimeout(() => {
-    intro.firstPhase();
-}, 1000);
+intro.firstPhase();

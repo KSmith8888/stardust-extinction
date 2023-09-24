@@ -30,12 +30,19 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: bottom right;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+}
+
+#intro-space-image {
+    object-position: top right;
+}
+
+#intro-armada-image {
+    object-position: center;
 }
 
 #message-box[open] {
@@ -63,13 +70,13 @@ body {
 
 #dialog-first-line {
     margin: 0;
-    padding: 2em 2em 0.5em 2em;
+    padding: 2em 2em 0.25em 2em;
     min-height: 10em;
 }
 
 #dialog-second-line {
     margin: 0;
-    padding: 0.5em 2em 1em 2em;
+    padding: 0.25em 2em 1em 2em;
     min-height: 10em;
 }
 
@@ -94,21 +101,8 @@ body {
     background: radial-gradient(rgba(58, 4, 51), rgba(117, 13, 103));
 }
 
-.fade-out-element {
-    animation: fadeOut 2s forwards;
-}
-
 .no-display {
     display: none;
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
 }
 
 @media (min-width: 900px) {
