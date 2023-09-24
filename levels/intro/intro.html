@@ -28,16 +28,64 @@
         <title>Intro</title>
     </head>
     <body>
-        <main id="main-container" class="container">
-            <div id="message-box" class="flex-center-center no-display">
+        <div id="main-container">
+            <picture>
+                <source
+                    srcset="
+                        ../../assets/images/backgrounds/intro-background-desktop.png
+                    "
+                    media="(min-width: 900px)"
+                    type="image/png"
+                />
+                <source
+                    srcset="
+                        ../../assets/images/backgrounds/intro-background.png
+                    "
+                    media="(max-width: 899px)"
+                    type="image/png"
+                />
+                <img
+                    id="intro-space-image"
+                    class="intro-scene-image"
+                    src="../../assets/images/backgrounds/intro-background.png"
+                    alt="Outer space, with a large green and grey planet in the front and a small grey moon in the distance"
+                />
+            </picture>
+            <picture>
+                <source
+                    srcset="
+                        ../../assets/images/backgrounds/intro-armada-background-desktop.png
+                    "
+                    media="(min-width: 900px)"
+                    type="image/png"
+                />
+                <source
+                    srcset="
+                        ../../assets/images/backgrounds/intro-armada-background-mobile.png
+                    "
+                    media="(max-width: 899px)"
+                    type="image/png"
+                />
+                <img
+                    id="intro-armada-image"
+                    class="intro-scene-image no-display"
+                    src="../../assets/images/backgrounds/intro--armada-background-mobile.png"
+                    alt="A red and yellow sunrise over the silhouette of a city with dozens of mechanical alien ships overhead"
+                />
+            </picture>
+            <dialog id="message-box">
                 <div class="dialog-text-container">
                     <p id="dialog-first-line"></p>
                     <p id="dialog-second-line"></p>
+                    <button
+                        id="skip-intro-button"
+                        class="no-display"
+                        type="button"
+                    >
+                        Skip Intro
+                    </button>
                 </div>
-            </div>
-            <button id="skip-intro-button" class="no-display" type="button">
-                Skip Intro
-            </button>
-        </main>
+            </dialog>
+        </div>
     </body>
 </html>

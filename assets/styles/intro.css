@@ -4,56 +4,79 @@
 
 body {
     margin: 0;
+    padding: 0;
     height: 100%;
     font-family: "Courier New", Courier, monospace;
     background-color: rgb(14, 13, 13);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+#main-container {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    background-color: black;
+    width: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
 }
 
-.container {
-    background: url("../images/backgrounds/intro-background.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: bottom right;
-    background-color: black;
+.intro-scene-image {
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    object-fit: cover;
+    object-position: bottom right;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
-#message-box {
-    background: radial-gradient(black, #080808);
+#message-box[open] {
     /*
     old text color #e7e7e7
     old border color #d8d4d4
     */
+    background: radial-gradient(black, #080808);
     color: rgb(208, 236, 252);
     font-weight: 600;
     width: 95%;
-    min-height: 50%;
-    margin: 0;
     padding: 0.25em;
     border: 7px ridge rgb(208, 236, 252);
 }
 
 .dialog-text-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgb(208, 236, 252);
     display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: stretch;
-    border: 1px solid rgb(208, 236, 252);
-    width: 100%;
-    height: 100%;
-    padding: 2em;
+}
+
+#dialog-first-line {
+    margin: 0;
+    padding: 2em 2em 0.5em 2em;
+    min-height: 10em;
+}
+
+#dialog-second-line {
+    margin: 0;
+    padding: 0.5em 2em 1em 2em;
+    min-height: 10em;
 }
 
 #skip-intro-button {
+    align-self: center;
+    max-width: 8em;
+    max-height: 6em;
     font-size: 1.1rem;
     font-family: inherit;
     font-weight: 600;
@@ -71,22 +94,8 @@ body {
     background: radial-gradient(rgba(58, 4, 51), rgba(117, 13, 103));
 }
 
-.flex-center-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
 .fade-out-element {
     animation: fadeOut 2s forwards;
-}
-
-.city-phase {
-    background: url("../images/backgrounds/intro-armada-background-mobile.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top center;
 }
 
 .no-display {
@@ -103,19 +112,20 @@ body {
 }
 
 @media (min-width: 900px) {
-    .container {
-        background: url("../images/backgrounds/intro-background-desktop.png");
+    body {
+        height: 100vh;
+    }
+    #main-container {
         width: 900px;
         height: 600px;
-        justify-content: flex-end;
     }
-    #message-box {
-        width: 60%;
+    #message-box[open] {
+        width: 40%;
     }
-    .city-phase {
-        background: url("../images/backgrounds/intro-armada-background-desktop.png");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: top center;
+    #dialog-first-line {
+        min-height: 7em;
+    }
+    #dialog-second-line {
+        min-height: 7em;
     }
 }

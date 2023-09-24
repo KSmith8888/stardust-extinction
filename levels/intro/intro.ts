@@ -1,6 +1,8 @@
 class Intro {
-    mainContainer: HTMLElement;
-    messageBox: HTMLDivElement;
+    mainContainer: HTMLDivElement;
+    introSpaceImage: HTMLImageElement;
+    introArmadaImage: HTMLImageElement;
+    messageBox: HTMLDialogElement;
     firstParagraph: HTMLParagraphElement;
     secondParagraph: HTMLParagraphElement;
     currentPhase: number;
@@ -11,10 +13,16 @@ class Intro {
     mouseMove: void;
     touchStart: void;
     constructor() {
-        this.mainContainer = <HTMLElement>(
+        this.mainContainer = <HTMLDivElement>(
             document.getElementById("main-container")
         );
-        this.messageBox = <HTMLDivElement>(
+        this.introSpaceImage = <HTMLImageElement>(
+            document.getElementById("intro-space-image")
+        );
+        this.introArmadaImage = <HTMLImageElement>(
+            document.getElementById("intro-armada-image")
+        );
+        this.messageBox = <HTMLDialogElement>(
             document.getElementById("message-box")
         );
         this.firstParagraph = <HTMLParagraphElement>(
@@ -40,11 +48,11 @@ class Intro {
         });
     }
     firstPhase() {
-        intro.messageBox.classList.remove("no-display");
-        intro.skipIntroButton.classList.remove("no-display");
+        this.messageBox.showModal();
+        this.skipIntroButton.classList.remove("no-display");
         setTimeout(() => {
-            intro.generateText(
-                intro.firstParagraph,
+            this.generateText(
+                this.firstParagraph,
                 "In the year 2457, humans have spread colonies far out across known space."
             );
         }, this.firstLineDelay);
@@ -96,16 +104,17 @@ class Intro {
             }, this.secondLineDelay);
         } else if (this.currentPhase === 6) {
             this.skipIntroButton.classList.add("fade-out-element");
-            this.messageBox.classList.add("fade-out-element");
+            this.messageBox.close();
             setTimeout(() => {
                 this.currentPhase = 7;
-                this.mainContainer.classList.add("city-phase");
+                this.introSpaceImage.classList.add("no-display");
+                this.introArmadaImage.classList.remove("no-display");
                 this.nextPhase();
             }, 2500);
         } else if (this.currentPhase === 7) {
             setTimeout(() => {
                 this.currentPhase = 8;
-                this.messageBox.classList.remove("fade-out-element");
+                this.messageBox.showModal();
                 this.firstParagraph.textContent = "";
                 this.secondParagraph.textContent = "";
                 this.generateText(
