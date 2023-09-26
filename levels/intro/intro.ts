@@ -31,7 +31,7 @@ class Intro {
             document.getElementById("dialog-second-line")
         );
         this.currentPhase = 1;
-        this.newSceneDelay = 3000;
+        this.newSceneDelay = 2500;
         this.firstLineDelay = 1250;
         this.secondLineDelay = 1000;
         this.skipIntroButton = <HTMLButtonElement>(
@@ -97,13 +97,13 @@ class Intro {
                 );
             }, this.secondLineDelay);
         } else if (this.currentPhase === 6) {
-            this.messageBox.close();
             setTimeout(() => {
                 this.currentPhase = 7;
+                this.messageBox.close();
                 this.introSpaceImage.classList.add("no-display");
                 this.introArmadaImage.classList.remove("no-display");
                 this.nextPhase();
-            }, 1000);
+            }, 2000);
         } else if (this.currentPhase === 7) {
             setTimeout(() => {
                 this.currentPhase = 8;
