@@ -25,6 +25,10 @@ export default defineConfig({
                     `${__dirname}/levels/level-3/`,
                     "level-3.html"
                 ),
+                levelFour: resolve(
+                    `${__dirname}/levels/level-4/`,
+                    "level-4.html"
+                ),
             },
         },
     },

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Kevyn Smith" />
+        <meta
+            name="description"
+            content="The fourth level of Stardust: Extinction"
+        />
+        <link
+            href="/icons/moon-icon-48.png"
+            rel="icon"
+            type="image/png"
+            sizes="48x48"
+        />
+        <link
+            href="/icons/moon-icon-32.png"
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+        />
+        <link
+            href="/icons/moon-icon-48.png"
+            rel="apple-touch-icon"
+            type="image/png"
+            sizes="48x48"
+        />
+        <link rel="stylesheet" href="../../assets/styles/main.css" />
+        <script type="module" src="level-4-logic.ts"></script>
+        <title>Level 4</title>
+    </head>
+    <body>
+        <div id="container">
+            <button id="menu-button" type="button" class="no-display">
+                <span class="menu-button-text">Game</span>
+                <span class="menu-button-text">Menu</span>
+            </button>
+            <p id="loading-text">Loading...</p>
+            <dialog id="main-menu" class="modal">
+                <h2 class="menu-main-heading">Main Menu</h2>
+                <div class="button-row">
+                    <button
+                        id="open-settings-button"
+                        class="button"
+                        type="button"
+                    >
+                        Settings
+                    </button>
+                    <button
+                        id="open-controls-button"
+                        class="button"
+                        type="button"
+                    >
+                        Controls
+                    </button>
+                </div>
+                <div class="button-row">
+                    <button id="quit-button" class="button" type="button">
+                        Quit
+                    </button>
+                    <button
+                        id="open-audio-menu-button"
+                        class="button"
+                        type="button"
+                    >
+                        Audio
+                    </button>
+                </div>
+                <div class="button-row">
+                    <button id="close-button" class="button" type="button">
+                        Close
+                    </button>
+                </div>
+            </dialog>
+            <dialog id="tutorial-modal" class="modal">
+                <p id="tutorial-modal-heading">Level 4 Enemies</p>
+                <div class="tutorial-row">
+                    <div class="tutorial-item-container">
+                        <div class="tutorial-item-info">
+                            <img
+                                width="22"
+                                height="30"
+                                class="tutorial-item-image"
+                                src="../../assets/images/enemies/small-typhoon.png"
+                                alt="A small, yellow and orange spaceship which is pointed at the front"
+                            />
+                            <p class="tutorial-item-title">Small Typhoon</p>
+                            <p class="tutorial-item-description">
+                                Moves quickly towards your ship. Fires lasers as
+                                it attempts to collide with you.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="tutorial-item-container">
+                        <div class="tutorial-item-info">
+                            <img
+                                width="36"
+                                height="24"
+                                class="tutorial-item-image"
+                                src="../../assets/images/enemies/blue-mine.png"
+                                alt="A small, grey robotic ship with a blue light in the center"
+                            />
+                            <p class="tutorial-item-title">Blue Mine</p>
+                            <p class="tutorial-item-description">
+                                Moves slowly towards your ship and attempts to
+                                collide with it. On impact, your ship will be
+                                disabled and unable to move or fire for a while.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tutorial-row">
+                    <div class="tutorial-item-container">
+                        <div class="tutorial-item-info">
+                            <img
+                                width="20"
+                                height="28"
+                                class="tutorial-item-image"
+                                src="../../assets/images/enemies/phase-glider.png"
+                                alt="A small, green spaceship with thrusters on the back"
+                            />
+                            <p class="tutorial-item-title">Phase Glider</p>
+                            <p class="tutorial-item-description">
+                                Capable of warping to new locations. Fires
+                                lasers at a fast rate.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="tutorial-item-container">
+                        <div class="tutorial-item-info">
+                            <img
+                                width="16"
+                                height="28"
+                                class="tutorial-item-image"
+                                src="../../assets/images/enemies/small-racer.png"
+                                alt="A small, grey triangular spaceship"
+                            />
+                            <p class="tutorial-item-title">Small Racer</p>
+                            <p class="tutorial-item-description">
+                                Enemy scout ship. Moves extremely quickly and
+                                does not engage. If destroyed, your ship gets a
+                                weapon upgrade for the remainder of the level.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <button id="close-tutorial-button" type="button" class="button">
+                    Start Level 4
+                </button>
+            </dialog>
+            <dialog id="game-over-modal" class="modal">
+                <p class="game-over-main-text">Game Over</p>
+                <p class="game-over-text">Better luck next time</p>
+                <button
+                    id="game-over-close-button"
+                    type="button"
+                    class="button"
+                >
+                    Close
+                </button>
+            </dialog>
+            <dialog id="level-complete-modal" class="modal">
+                <p id="level-complete-text">Level Complete</p>
+                <p id="stats-text-enemies"></p>
+                <p id="stats-text-health"></p>
+                <p id="game-incomplete-text">
+                    The rest of the game has not been completed yet, please
+                    check back later for more levels!
+                </p>
+                <button id="next-level-button" type="button" class="button">
+                    Return Home
+                </button>
+                <button id="exit-game-button" type="button" class="button">
+                    Exit Game
+                </button>
+            </dialog>
+            <img
+                width="44"
+                height="50"
+                id="idle-ship-image"
+                class="no-display"
+                src="../../assets/images/player/player-ship-idle.png"
+                alt="A small grey spaceship idling"
+            />
+            <img
+                width="44"
+                height="50"
+                id="active-ship-image"
+                class="no-display"
+                src="../../assets/images/player/player-ship-active.png"
+                alt="A small grey spaceship with thrusters firing"
+            />
+            <img
+                width="65"
+                height="65"
+                class="no-display"
+                src="../../assets/images/explosions/large-explosion.png"
+                alt="A large, circular yellow and orange explosion"
+            />
+            <img
+                width="65"
+                height="65"
+                class="no-display"
+                src="../../assets/images/explosions/large-emp.png"
+                alt="A large, circular blue explosion"
+            />
+            <img
+                width="16"
+                height="18"
+                class="no-display"
+                src="../../assets/images/explosions/small-explosion.png"
+                alt="A small yellow and orange explosion"
+            />
+            <canvas width="900" height="600" id="canvas"
+                >JavaScript is required to use this app, please enable
+                JavaScirpt</canvas
+            >
+        </div>
+    </body>
+</html>
