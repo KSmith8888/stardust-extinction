@@ -31,7 +31,7 @@ class Intro {
             document.getElementById("dialog-second-line")
         );
         this.currentPhase = 1;
-        this.newSceneDelay = 2500;
+        this.newSceneDelay = 3000;
         this.firstLineDelay = 1250;
         this.secondLineDelay = 1000;
         this.skipIntroButton = <HTMLButtonElement>(
