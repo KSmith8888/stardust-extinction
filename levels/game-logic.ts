@@ -4,6 +4,7 @@ import MainMenu from "../src/menu/main-menu";
 import EventListeners from "../src/events/event-listeners";
 import { Background } from "../src/backgrounds/space-background";
 import { HealthBar } from "../src/player/healthbar";
+import { SmallGrabber } from "../src/enemies/small-grabber";
 import { RedMine, BlueMine } from "../src/enemies/mines";
 import {
     EnemyLaserSmall,
@@ -35,7 +36,9 @@ export default class Game {
     events: EventListeners;
     background: Background;
     player: Player;
-    enemies: Array<RedMine | BlueMine | SmallFighter | SmallRacer>;
+    enemies: Array<
+        RedMine | BlueMine | SmallFighter | SmallRacer | SmallGrabber
+    >;
     enemyPoolSize: number;
     firstEnemyCount: number;
     secondEnemyCount: number;
@@ -164,8 +167,12 @@ export default class Game {
             enemy.render();
             const didEnemyCollide = areObjectsColliding(this.player, enemy);
             if (didEnemyCollide) {
-                enemy.collidedWithPlayer();
-                enemy.reset();
+                if (enemy instanceof SmallGrabber) {
+                    enemy.attachedToPlayer();
+                } else {
+                    enemy.collidedWithPlayer();
+                    enemy.reset();
+                }
             }
         });
     }

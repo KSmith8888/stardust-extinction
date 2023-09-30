@@ -10,8 +10,9 @@
 
 //Modules
 import Game from "../game-logic";
+import { SmallGrabber } from "../../src/enemies/small-grabber";
 import { BlueMine } from "../../src/enemies/mines";
-import { SmallTyphoon } from "../../src/enemies/typhoons";
+//import { SmallTyphoon } from "../../src/enemies/typhoons";
 import { PhaseGlider } from "../../src/enemies/phase-glider";
 import { LargeShocker } from "../../src/bosses/large-shocker";
 import { LargeBlaster } from "../../src/bosses/large-blaster";
@@ -41,12 +42,8 @@ export default class Level3Game extends Game {
     initializeEnemies() {
         for (let i = 0; i < this.enemyPoolSize; i++) {
             if (i < this.firstEnemyCount) {
-                this.enemies.push(new PhaseGlider(this, this.canvas, this.ctx));
-            } else if (i >= this.firstEnemyCount && i < this.secondEnemyCount) {
-                this.enemies.push(new BlueMine(this, this.canvas, this.ctx));
-            } else {
                 this.enemies.push(
-                    new SmallTyphoon(this, this.canvas, this.ctx)
+                    new SmallGrabber(this, this.canvas, this.ctx, this.player)
                 );
             }
         }
@@ -71,11 +68,11 @@ export default class Level3Game extends Game {
             this.frameCount = 0;
         }
         if (this.frameCount === this.firstEnemyInterval) {
-            const freeRedMine = this.enemies.find((enemy) => {
-                return enemy instanceof SmallTyphoon && enemy.isFree;
+            const freeGrabber = this.enemies.find((enemy) => {
+                return enemy instanceof SmallGrabber && enemy.isFree;
             });
-            if (freeRedMine) {
-                freeRedMine.isFree = false;
+            if (freeGrabber) {
+                freeGrabber.isFree = false;
             }
         } else if (this.frameCount === this.secondEnemyInterval) {
             const freeBlueMine = this.enemies.find((enemy) => {

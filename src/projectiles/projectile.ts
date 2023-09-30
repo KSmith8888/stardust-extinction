@@ -45,9 +45,11 @@ export default class Projectile {
                 !enemy.isFree &&
                 areObjectsColliding(this, enemy)
             ) {
-                this.game.explosions.push(
-                    new SmallExplosion(this.ctx, enemy.x, enemy.y)
-                );
+                if (enemy.generateExplosionOnHit) {
+                    this.game.explosions.push(
+                        new SmallExplosion(this.ctx, enemy.x, enemy.y)
+                    );
+                }
                 enemy.health -= this.damage;
                 this.reset();
             }

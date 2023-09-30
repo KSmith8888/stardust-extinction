@@ -16,6 +16,7 @@ export default class Enemy {
     isFree: boolean;
     firesProjectiles: boolean;
     frameCount: number;
+    generateExplosionOnHit: boolean;
     constructor(
         game: Game,
         canvas: HTMLCanvasElement,
@@ -38,6 +39,7 @@ export default class Enemy {
         this.isFree = true;
         this.firesProjectiles = false;
         this.frameCount = 0;
+        this.generateExplosionOnHit = true;
     }
     followTargetX() {
         if (this.x >= this.targetX + 5) {
