@@ -11,8 +11,8 @@
 //Modules
 import Game from "../game-logic";
 import { SmallGrabber } from "../../src/enemies/small-grabber";
-import { BlueMine } from "../../src/enemies/mines";
-//import { SmallTyphoon } from "../../src/enemies/typhoons";
+import { SmallFighter } from "../../src/enemies/fighters";
+import { RedMine } from "../../src/enemies/mines";
 import { PhaseGlider } from "../../src/enemies/phase-glider";
 import { LargeShocker } from "../../src/bosses/large-shocker";
 import { LargeBlaster } from "../../src/bosses/large-blaster";
@@ -24,6 +24,7 @@ import spaceBackgroundUrl from "../../assets/images/backgrounds/space-background
 import spaceBgDesktopUrl from "../../assets/images/backgrounds/space-background-desktop.png";
 
 export default class Level3Game extends Game {
+    fourthEnemyInterval: number;
     constructor() {
         super();
         this.enemyPoolSize = 24;
@@ -31,9 +32,14 @@ export default class Level3Game extends Game {
         this.racerInterval = 0.9;
         this.firstEnemyCount = 7;
         this.secondEnemyCount = 16;
+        this.thirdEnemyCount = 20;
+        this.firstEnemyInterval = 5;
+        this.secondEnemyInterval = 60;
+        this.thirdEnemyInterval = 110;
+        this.fourthEnemyInterval = 150;
         this.mobileBackground = spaceBackgroundUrl;
         this.desktopBackground = spaceBgDesktopUrl;
-        this.currentLevelNumber = 3;
+        this.currentLevelNumber = 4;
         this.events.nextLevelButton.classList.add("no-display");
         this.loadDifficultySetting();
         this.initializeEnemies();
@@ -45,6 +51,14 @@ export default class Level3Game extends Game {
                 this.enemies.push(
                     new SmallGrabber(this, this.canvas, this.ctx, this.player)
                 );
+            } else if (i >= this.firstEnemyCount && i < this.secondEnemyCount) {
+                this.enemies.push(
+                    new SmallFighter(this, this.canvas, this.ctx)
+                );
+            } else if (i >= this.secondEnemyCount && i < this.thirdEnemyCount) {
+                this.enemies.push(new RedMine(this, this.canvas, this.ctx));
+            } else {
+                this.enemies.push(new PhaseGlider(this, this.canvas, this.ctx));
             }
         }
     }
@@ -75,18 +89,25 @@ export default class Level3Game extends Game {
                 freeGrabber.isFree = false;
             }
         } else if (this.frameCount === this.secondEnemyInterval) {
-            const freeBlueMine = this.enemies.find((enemy) => {
-                return enemy instanceof BlueMine && enemy.isFree;
-            });
-            if (freeBlueMine) {
-                freeBlueMine.isFree = false;
-            }
-        } else if (this.frameCount === this.thirdEnemyInterval) {
             const freeFighter = this.enemies.find((enemy) => {
-                return enemy instanceof PhaseGlider && enemy.isFree;
+                return enemy instanceof SmallFighter && enemy.isFree;
             });
             if (freeFighter) {
                 freeFighter.isFree = false;
+            }
+        } else if (this.frameCount === this.thirdEnemyInterval) {
+            const freeGlider = this.enemies.find((enemy) => {
+                return enemy instanceof PhaseGlider && enemy.isFree;
+            });
+            if (freeGlider) {
+                freeGlider.isFree = false;
+            }
+        } else if (this.frameCount === this.fourthEnemyInterval) {
+            const freeTyphoon = this.enemies.find((enemy) => {
+                return enemy instanceof RedMine && enemy.isFree;
+            });
+            if (freeTyphoon) {
+                freeTyphoon.isFree = false;
             }
             this.rollToCreateRacer();
             this.frameCount = 0;
