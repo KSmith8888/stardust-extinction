@@ -14,8 +14,10 @@ import { SmallGrabber } from "../../src/enemies/small-grabber";
 import { SmallFighter } from "../../src/enemies/fighters";
 import { RedMine } from "../../src/enemies/mines";
 import { PhaseGlider } from "../../src/enemies/phase-glider";
+import { LargeBattleship } from "../../src/bosses/large-battleship";
 import { LargeShocker } from "../../src/bosses/large-shocker";
 import { LargeBlaster } from "../../src/bosses/large-blaster";
+import { EnemyLaserLarge } from "../../src/projectiles/enemy-lasers";
 import { EnemyBolt } from "../../src/projectiles/enemy-bolt";
 import { EnemySeeker } from "../../src/projectiles/enemy-seeker";
 import { EnemyLaserMedium } from "../../src/projectiles/enemy-lasers";
@@ -23,7 +25,7 @@ import { EnemyLaserMedium } from "../../src/projectiles/enemy-lasers";
 import spaceBackgroundUrl from "../../assets/images/backgrounds/space-background.png";
 import spaceBgDesktopUrl from "../../assets/images/backgrounds/space-background-desktop.png";
 
-export default class Level3Game extends Game {
+export default class Level4Game extends Game {
     fourthEnemyInterval: number;
     constructor() {
         super();
@@ -72,6 +74,9 @@ export default class Level3Game extends Game {
             );
             this.bossProjectiles.push(
                 new EnemyLaserMedium(this, this.canvas, this.ctx)
+            );
+            this.bossProjectiles.push(
+                new EnemyLaserLarge(this, this.canvas, this.ctx)
             );
         }
     }
@@ -123,17 +128,18 @@ export default class Level3Game extends Game {
             this.bosses.push(new LargeShocker(this, this.canvas, this.ctx));
             setTimeout(() => {
                 this.bosses.push(new LargeBlaster(this, this.canvas, this.ctx));
+                this.bosses.push(new LargeBlaster(this, this.canvas, this.ctx));
                 if (
                     this.difficultySetting === "Normal" ||
                     this.difficultySetting === "Hard"
                 ) {
                     this.bosses.push(
-                        new LargeBlaster(this, this.canvas, this.ctx)
+                        new LargeBattleship(this, this.canvas, this.ctx)
                     );
                 }
                 if (this.difficultySetting === "Hard") {
                     this.bosses.push(
-                        new LargeBlaster(this, this.canvas, this.ctx)
+                        new LargeShocker(this, this.canvas, this.ctx)
                     );
                 }
             }, 800);
@@ -170,5 +176,5 @@ export default class Level3Game extends Game {
     }
 }
 
-const game = new Level3Game();
+const game = new Level4Game();
 game.animate(0);

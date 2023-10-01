@@ -47,7 +47,6 @@ async function startLevel1() {
                 if (hasCompletedTutorial) {
                     location.assign("/levels/level-1/level-1.html");
                 } else {
-                    //location.assign("/levels/tutorial/tutorial.html");
                     location.assign("/levels/intro/intro.html");
                 }
             }, 600);
@@ -63,7 +62,7 @@ async function continueGame() {
         setTimeout(() => {
             if (continueLevel && !isNaN(parseInt(continueLevel))) {
                 const levelNumber = parseInt(continueLevel);
-                if (levelNumber > 0 && levelNumber < 4) {
+                if (levelNumber > 0 && levelNumber < 5) {
                     location.assign(
                         `/levels/level-${levelNumber}/level-${levelNumber}.html`
                     );
