@@ -13,6 +13,12 @@ body {
     justify-content: center;
 }
 
+@supports (height: 100dvh) {
+    body {
+        height: 100dvh;
+    }
+}
+
 #main-container {
     margin: 0;
     padding: 0;
@@ -102,9 +108,12 @@ body {
 }
 
 @media (min-width: 900px) {
+    body {
+        height: 100vh;
+    }
     #main-container {
-        width: 900px;
-        height: 600px;
+        max-width: 900px;
+        max-height: 600px;
     }
     #message-box[open] {
         width: 40%;
