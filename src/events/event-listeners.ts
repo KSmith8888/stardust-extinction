@@ -2,6 +2,7 @@ import Game from "../../levels/game-logic";
 import Player from "../player/player";
 import { sizeCanvas } from "../utils/sizeCanvas";
 import AudioEvents from "./audio-events";
+import { Overcharge } from "../explosions/overcharge";
 
 export default class EventListeners {
     game: Game;
@@ -21,6 +22,7 @@ export default class EventListeners {
     upKey: string;
     downKey: string;
     menuKey: string;
+    specialKey: string;
     keyEvent: void;
     audioEvents: AudioEvents;
     gameOverModal: HTMLDialogElement;
@@ -143,6 +145,7 @@ export default class EventListeners {
         this.upKey = "KeyW";
         this.downKey = "KeyS";
         this.menuKey = "KeyM";
+        this.specialKey = "KeyO";
         this.keyEvent = document.addEventListener("keydown", (event) => {
             switch (event.code) {
                 case this.leftKey: {
@@ -223,6 +226,17 @@ export default class EventListeners {
                             this.game.isGamePaused = false;
                         }
                     }
+                    break;
+                }
+                case this.specialKey: {
+                    this.game.explosions.push(
+                        new Overcharge(
+                            this.game,
+                            this.game.ctx,
+                            this.player.x,
+                            this.player.y
+                        )
+                    );
                     break;
                 }
                 default: {
