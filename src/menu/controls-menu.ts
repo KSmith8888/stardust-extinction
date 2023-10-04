@@ -36,40 +36,53 @@ export default class ControlsMenu {
         this.useKeyboardControls = this.keyboardControlsButton.addEventListener(
             "click",
             () => {
-                localStorage.setItem("controls-setting", "Keyboard");
-                this.game.events.controlsSetting = "Keyboard";
-                this.keyboardControlsButton.disabled = true;
-                this.mouseControlsButton.disabled = false;
+                if (
+                    this.game.screenMode === "Desktop" &&
+                    window.confirm(
+                        "Changing the controls setting will restart the current level, are you sure that you want to change it?"
+                    )
+                ) {
+                    localStorage.setItem("controls-setting", "Keyboard");
+                    location.reload();
+                }
             }
         );
         this.mouseControlsButton = document.createElement("button");
         this.useMouseControls = this.mouseControlsButton.addEventListener(
             "click",
             () => {
-                localStorage.setItem("controls-setting", "Mouse");
-                this.game.events.controlsSetting = "Mouse";
-                this.mouseControlsButton.disabled = true;
-                this.keyboardControlsButton.disabled = false;
+                if (
+                    window.confirm(
+                        "Changing the controls setting will restart the current level, are you sure that you want to change it?"
+                    )
+                ) {
+                    if (this.game.screenMode === "Desktop") {
+                        localStorage.setItem("controls-setting", "Mouse");
+                    } else {
+                        localStorage.setItem("controls-setting", "Touch");
+                    }
+                    location.reload();
+                }
             }
         );
         this.loadControlsSetting();
         this.currentRebindKey = null;
         this.controlsKeyEvent = document.addEventListener("keydown", (e) => {
-            if (this.currentRebindKey) {
+            if (this.currentRebindKey && this.game.events.keyEvents) {
                 if (this.currentRebindKey === "Menu") {
-                    this.game.events.menuKey = e.code;
+                    this.game.events.keyEvents.menuKey = e.code;
                     this.menuKeyText.textContent = `MENU: ${e.code}`;
                 } else if (this.currentRebindKey === "Up") {
-                    this.game.events.upKey = e.code;
+                    this.game.events.keyEvents.upKey = e.code;
                     this.upKeyText.textContent = `UP: ${e.code}`;
                 } else if (this.currentRebindKey === "Left") {
-                    this.game.events.leftKey = e.code;
+                    this.game.events.keyEvents.leftKey = e.code;
                     this.leftKeyText.textContent = `LEFT: ${e.code}`;
                 } else if (this.currentRebindKey === "Down") {
-                    this.game.events.downKey = e.code;
+                    this.game.events.keyEvents.downKey = e.code;
                     this.downKeyText.textContent = `DOWN: ${e.code}`;
                 } else if (this.currentRebindKey === "Right") {
-                    this.game.events.rightKey = e.code;
+                    this.game.events.keyEvents.rightKey = e.code;
                     this.rightKeyText.textContent = `RIGHT: ${e.code}`;
                 }
                 this.currentRebindKey = null;
@@ -240,11 +253,20 @@ export default class ControlsMenu {
             } else if (controlsSetting === "Mouse") {
                 this.mouseControlsButton.disabled = true;
                 this.keyboardControlsButton.disabled = false;
+            } else if (controlsSetting === "Touch") {
+                this.mouseControlsButton.disabled = true;
+                this.keyboardControlsButton.disabled = true;
             }
         } else {
-            localStorage.setItem("controls-setting", "Mouse");
-            this.mouseControlsButton.disabled = true;
-            this.keyboardControlsButton.disabled = false;
+            if (this.game.screenMode === "Desktop") {
+                localStorage.setItem("controls-setting", "Mouse");
+                this.mouseControlsButton.disabled = true;
+                this.keyboardControlsButton.disabled = false;
+            } else {
+                localStorage.setItem("controls-setting", "Touch");
+                this.mouseControlsButton.disabled = true;
+                this.keyboardControlsButton.disabled = true;
+            }
         }
     }
 }

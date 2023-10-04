@@ -14,6 +14,7 @@ export default class Enemy {
     healthStat: number;
     collisionDamage: number;
     isFree: boolean;
+    isReversed: boolean;
     firesProjectiles: boolean;
     frameCount: number;
     generateExplosionOnHit: boolean;
@@ -37,6 +38,7 @@ export default class Enemy {
         this.healthStat = 40;
         this.collisionDamage = 10;
         this.isFree = true;
+        this.isReversed = false;
         this.firesProjectiles = false;
         this.frameCount = 0;
         this.generateExplosionOnHit = true;
@@ -57,5 +59,23 @@ export default class Enemy {
         this.health = this.healthStat;
         this.x = Math.floor(Math.random() * (this.canvas.width - this.width));
         this.y = 0 - this.height;
+    }
+    reverse() {
+        if (!this.isReversed) {
+            this.isReversed = true;
+            if (this.y < this.game.player.y) {
+                this.speed = this.speed * -2;
+            } else {
+                this.speed = this.speed * 2;
+            }
+            setTimeout(() => {
+                this.isReversed = false;
+                if (this.speed < 0) {
+                    this.speed = this.speed * -0.5;
+                } else {
+                    this.speed = this.speed * 0.5;
+                }
+            }, 1500);
+        }
     }
 }

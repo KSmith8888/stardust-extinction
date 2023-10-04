@@ -6,6 +6,7 @@ import {
 } from "../projectiles/lasers";
 import { HealthBar } from "./healthbar";
 import { SmallExplosion } from "../explosions/small-explosion";
+import { Overcharge } from "../explosions/overcharge";
 
 export default class Player {
     game: Game;
@@ -23,6 +24,7 @@ export default class Player {
     projectilePoolSize: number;
     projectileInterval: number;
     projectileStrength: number;
+    specialUses: number;
     frameCount: number;
     laserOffsetX: number;
     laserOffsetY: number;
@@ -57,6 +59,7 @@ export default class Player {
         this.projectilePoolSize = 20;
         this.projectileInterval = 15;
         this.projectileStrength = 1;
+        this.specialUses = 3;
         this.frameCount = 0;
         this.laserOffsetX = this.width * 0.3;
         this.laserOffsetY = this.height * 0.1;
@@ -146,5 +149,13 @@ export default class Player {
             return !laser.isFree;
         });
         activeProjectiles.forEach((laser) => laser.render());
+    }
+    useSpecialAttack() {
+        if (this.specialUses >= 1) {
+            this.specialUses -= 1;
+            this.game.explosions.push(
+                new Overcharge(this.game, this.game.ctx, this.x, this.y)
+            );
+        }
     }
 }

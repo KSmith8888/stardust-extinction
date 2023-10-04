@@ -28,14 +28,9 @@ export class Overcharge extends Explosion {
         const reversedEnemies = this.game.enemies.filter(
             (enemy) => !enemy.isFree && areObjectsColliding(this, enemy)
         );
-        reversedEnemies.forEach((enem) => {
-            enem.speed = enem.speed * -2;
+        reversedEnemies.forEach((revEnemy) => {
+            revEnemy.reverse();
         });
-        setTimeout(() => {
-            reversedEnemies.forEach((enem) => {
-                enem.speed = enem.speed * -0.5;
-            });
-        }, 1500);
     }
     render() {
         this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);

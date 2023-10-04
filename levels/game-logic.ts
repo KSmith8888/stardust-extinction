@@ -33,6 +33,7 @@ import spaceBgDesktopUrl from "../assets/images/backgrounds/space-background-des
 export default class Game {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
+    screenMode: string;
     mainMenu: MainMenu;
     events: EventListeners;
     background: Background;
@@ -75,6 +76,7 @@ export default class Game {
         this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
         this.ctx = <CanvasRenderingContext2D>this.canvas.getContext("2d");
         sizeCanvas(this.canvas);
+        this.screenMode = this.canvas.width === 900 ? "Desktop" : "Mobile";
         this.player = new Player(this, this.canvas, this.ctx);
         this.ctx.strokeStyle = "white";
         this.ctx.lineWidth = 0.5;
