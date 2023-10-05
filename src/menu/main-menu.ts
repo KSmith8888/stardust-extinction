@@ -22,8 +22,8 @@ export default class MainMenu {
     audio: AudioMenu;
     openAudioMenu: void;
     openControlsButton: HTMLButtonElement;
-    controls: ControlsMenu;
-    openControlsMenu: void;
+    controls: ControlsMenu | null;
+    openControlsMenu: void | null;
     tutorialModal: HTMLDialogElement;
     closeTutorialButton: HTMLButtonElement;
     closeTutorial: void;
@@ -71,15 +71,20 @@ export default class MainMenu {
         this.openControlsButton = <HTMLButtonElement>(
             document.getElementById("open-controls-button")
         );
-        this.controls = new ControlsMenu(this.game, this);
-        this.openControlsMenu = this.openControlsButton.addEventListener(
-            "click",
-            () => {
-                this.isSubMenuOpen = true;
-                this.controls.controlsMenu.showModal();
-                this.controls.keyboardControlsButton.focus();
-            }
-        );
+        this.openControlsButton.disabled = true;
+        this.controls = null;
+        this.openControlsMenu = null;
+        if (this.game.screenMode === "Desktop") {
+            this.controls = new ControlsMenu(this.game, this);
+            this.openControlsButton.disabled = false;
+            this.openControlsButton.addEventListener("click", () => {
+                if (this.controls) {
+                    this.isSubMenuOpen = true;
+                    this.controls.controlsMenu.showModal();
+                    this.controls.keyboardControlsButton.focus();
+                }
+            });
+        }
         this.quitButton = <HTMLButtonElement>(
             document.getElementById("quit-button")
         );

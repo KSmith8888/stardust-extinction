@@ -3,26 +3,34 @@ import Player from "../player/player";
 export default class MouseEvents {
     player: Player;
     canvas: HTMLCanvasElement;
+    contextMenu: void;
     mousedown: void;
     mouseup: void;
     mousemove: void;
     constructor(player: Player, canvas: HTMLCanvasElement) {
         this.player = player;
         this.canvas = canvas;
+        this.contextMenu = this.canvas.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
+        });
         this.mousedown = canvas.addEventListener("mousedown", (e): void => {
-            if (
-                e.offsetX >= this.player.x &&
-                e.offsetX <= this.player.x + this.player.width &&
-                e.offsetY >= this.player.y &&
-                e.offsetY <= this.player.y + this.player.height &&
-                e.offsetY < this.canvas.height - 35 &&
-                !this.player.isShipDisabled
-            ) {
-                this.player.isMoving = true;
+            if (e.button !== 2 && !this.player.isMoving) {
+                if (
+                    e.offsetX >= this.player.x &&
+                    e.offsetX <= this.player.x + this.player.width &&
+                    e.offsetY >= this.player.y &&
+                    e.offsetY <= this.player.y + this.player.height &&
+                    e.offsetY < this.canvas.height - 35 &&
+                    !this.player.isShipDisabled
+                ) {
+                    this.player.isMoving = true;
+                }
+            } else {
+                this.player.useSpecialAttack();
             }
         });
-        this.mouseup = canvas.addEventListener("mouseup", (): void => {
-            if (this.player.isMoving) {
+        this.mouseup = canvas.addEventListener("mouseup", (e): void => {
+            if (e.button !== 2 && this.player.isMoving) {
                 this.player.isMoving = false;
             }
         });

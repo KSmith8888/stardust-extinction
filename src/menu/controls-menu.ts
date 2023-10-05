@@ -37,7 +37,6 @@ export default class ControlsMenu {
             "click",
             () => {
                 if (
-                    this.game.screenMode === "Desktop" &&
                     window.confirm(
                         "Changing the controls setting will restart the current level, are you sure that you want to change it?"
                     )
@@ -56,11 +55,7 @@ export default class ControlsMenu {
                         "Changing the controls setting will restart the current level, are you sure that you want to change it?"
                     )
                 ) {
-                    if (this.game.screenMode === "Desktop") {
-                        localStorage.setItem("controls-setting", "Mouse");
-                    } else {
-                        localStorage.setItem("controls-setting", "Touch");
-                    }
+                    localStorage.setItem("controls-setting", "Mouse");
                     location.reload();
                 }
             }

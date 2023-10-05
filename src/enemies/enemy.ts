@@ -66,6 +66,8 @@ export default class Enemy {
             if (this.y < this.game.player.y) {
                 this.speed = this.speed * -2;
             } else {
+                this.targetX =
+                    this.x > this.game.player.x ? this.x + 50 : this.x - 50;
                 this.speed = this.speed * 2;
             }
             setTimeout(() => {
