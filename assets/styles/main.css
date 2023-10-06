@@ -275,16 +275,25 @@ body {
     -webkit-user-select: none;
 }
 
-.change-control-row {
+.rebind-area {
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+
+.change-control-row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .change-control-key {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    min-width: 13em;
+    width: 80%;
 }
 
 #controls-menu-main-text {
@@ -299,6 +308,7 @@ body {
 .control-key-text {
     margin: 0;
     padding: 0.25em;
+    white-space: nowrap;
 }
 
 #movement-controls-container {
@@ -338,7 +348,10 @@ body {
     }
     .change-control-row {
         flex-direction: row;
-        justify-content: center;
+        justify-content: flex-end;
+    }
+    .change-control-key {
+        width: 50%;
     }
     #movement-controls-container {
         flex-direction: row;

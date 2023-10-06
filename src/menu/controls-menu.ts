@@ -14,6 +14,9 @@ export default class ControlsMenu {
     menuKeyText: HTMLParagraphElement;
     changeMenuKeyButton: HTMLButtonElement;
     changeMenuKey: void;
+    specialKeyText: HTMLParagraphElement;
+    changeSpecialKeyButton: HTMLButtonElement;
+    changeSpecialKey: void;
     upKeyText: HTMLParagraphElement;
     changeUpKeyButton: HTMLButtonElement;
     changeUpKey: void;
@@ -67,6 +70,9 @@ export default class ControlsMenu {
                 if (this.currentRebindKey === "Menu") {
                     this.game.events.keyEvents.menuKey = e.code;
                     this.menuKeyText.textContent = `MENU: ${e.code}`;
+                } else if (this.currentRebindKey === "Special") {
+                    this.game.events.keyEvents.specialKey = e.code;
+                    this.specialKeyText.textContent = `SPEC: ${e.code}`;
                 } else if (this.currentRebindKey === "Up") {
                     this.game.events.keyEvents.upKey = e.code;
                     this.upKeyText.textContent = `UP: ${e.code}`;
@@ -82,6 +88,7 @@ export default class ControlsMenu {
                 }
                 this.currentRebindKey = null;
                 this.menuKeyText.classList.remove("light-text");
+                this.specialKeyText.classList.remove("light-text");
                 this.upKeyText.classList.remove("light-text");
                 this.leftKeyText.classList.remove("light-text");
                 this.downKeyText.classList.remove("light-text");
@@ -95,6 +102,15 @@ export default class ControlsMenu {
             () => {
                 this.currentRebindKey = "Menu";
                 this.menuKeyText.classList.add("light-text");
+            }
+        );
+        this.specialKeyText = document.createElement("p");
+        this.changeSpecialKeyButton = document.createElement("button");
+        this.changeSpecialKey = this.changeSpecialKeyButton.addEventListener(
+            "click",
+            () => {
+                this.currentRebindKey = "Special";
+                this.specialKeyText.classList.add("light-text");
             }
         );
         this.upKeyText = document.createElement("p");
@@ -163,7 +179,7 @@ export default class ControlsMenu {
         movementControls.append(this.keyboardControlsButton);
         this.mouseControlsButton.type = "button";
         this.mouseControlsButton.classList.add("button");
-        this.mouseControlsButton.textContent = "Mouse/Touch";
+        this.mouseControlsButton.textContent = "Mouse";
         movementControls.append(this.mouseControlsButton);
         const rebindSubHeading = document.createElement("h3");
         rebindSubHeading.classList.add("controls-sub-heading");
@@ -174,6 +190,7 @@ export default class ControlsMenu {
         controlsMainText.textContent = `Press the "Change" button next to the control you want to update, then press the key that you want to use instead.`;
         this.controlsMenu.append(controlsMainText);
         const rebindControls = document.createElement("div");
+        rebindControls.classList.add("rebind-area");
         this.controlsMenu.append(rebindControls);
         const controlsRowOne = document.createElement("div");
         controlsRowOne.classList.add("change-control-row");
@@ -188,6 +205,18 @@ export default class ControlsMenu {
         this.changeMenuKeyButton.classList.add("button");
         this.changeMenuKeyButton.textContent = "Change";
         changeKeyMenu.append(this.changeMenuKeyButton);
+        //start
+        const changeKeySpecial = document.createElement("div");
+        changeKeySpecial.classList.add("change-control-key");
+        controlsRowOne.append(changeKeySpecial);
+        this.specialKeyText.classList.add("control-key-text");
+        this.specialKeyText.textContent = "SPECIAL: KeyO";
+        changeKeySpecial.append(this.specialKeyText);
+        this.changeSpecialKeyButton.type = "button";
+        this.changeSpecialKeyButton.classList.add("button");
+        this.changeSpecialKeyButton.textContent = "Change";
+        changeKeySpecial.append(this.changeSpecialKeyButton);
+        //end
         const controlsRowTwo = document.createElement("div");
         controlsRowTwo.classList.add("change-control-row");
         rebindControls.append(controlsRowTwo);
@@ -245,23 +274,14 @@ export default class ControlsMenu {
             if (controlsSetting === "Keyboard") {
                 this.keyboardControlsButton.disabled = true;
                 this.mouseControlsButton.disabled = false;
-            } else if (controlsSetting === "Mouse") {
+            } else {
                 this.mouseControlsButton.disabled = true;
                 this.keyboardControlsButton.disabled = false;
-            } else if (controlsSetting === "Touch") {
-                this.mouseControlsButton.disabled = true;
-                this.keyboardControlsButton.disabled = true;
             }
         } else {
-            if (this.game.screenMode === "Desktop") {
-                localStorage.setItem("controls-setting", "Mouse");
-                this.mouseControlsButton.disabled = true;
-                this.keyboardControlsButton.disabled = false;
-            } else {
-                localStorage.setItem("controls-setting", "Touch");
-                this.mouseControlsButton.disabled = true;
-                this.keyboardControlsButton.disabled = true;
-            }
+            localStorage.setItem("controls-setting", "Mouse");
+            this.mouseControlsButton.disabled = true;
+            this.keyboardControlsButton.disabled = false;
         }
     }
 }

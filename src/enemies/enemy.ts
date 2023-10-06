@@ -66,12 +66,14 @@ export default class Enemy {
         if (!this.isReversed) {
             this.isReversed = true;
             this.originalSpeed = this.speed;
-            this.targetX =
-                this.x > this.game.player.x ? this.x + 75 : this.x - 75;
             if (this.y < this.game.player.y) {
                 this.speed = -4;
+                this.targetX =
+                    this.x <= this.game.player.x ? this.x + 75 : this.x - 75;
             } else {
                 this.speed = 4;
+                this.targetX =
+                    this.x >= this.game.player.x ? this.x + 75 : this.x - 75;
             }
             setTimeout(() => {
                 this.isReversed = false;

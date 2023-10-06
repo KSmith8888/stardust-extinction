@@ -71,12 +71,10 @@ export default class MainMenu {
         this.openControlsButton = <HTMLButtonElement>(
             document.getElementById("open-controls-button")
         );
-        this.openControlsButton.disabled = true;
         this.controls = null;
         this.openControlsMenu = null;
         if (this.game.screenMode === "Desktop") {
             this.controls = new ControlsMenu(this.game, this);
-            this.openControlsButton.disabled = false;
             this.openControlsButton.addEventListener("click", () => {
                 if (this.controls) {
                     this.isSubMenuOpen = true;
@@ -84,6 +82,8 @@ export default class MainMenu {
                     this.controls.keyboardControlsButton.focus();
                 }
             });
+        } else {
+            this.openControlsButton.disabled = true;
         }
         this.quitButton = <HTMLButtonElement>(
             document.getElementById("quit-button")
