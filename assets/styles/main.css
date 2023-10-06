@@ -5,10 +5,18 @@
 body {
     margin: 0;
     padding: 0;
+    width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     background-color: black;
+}
+
+@supports (height: 100dvh) {
+    body {
+        height: 100dvh;
+    }
 }
 
 #container {
@@ -16,7 +24,9 @@ body {
     height: 100%;
     margin: 0;
     display: flex;
-    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 #canvas {
@@ -27,7 +37,6 @@ body {
 
 #menu-button {
     z-index: 2;
-    position: fixed;
     font-size: 0.9rem;
     font-family: "Courier New", Courier, monospace;
     font-weight: 600;
@@ -275,13 +284,7 @@ body {
     -webkit-user-select: none;
 }
 
-.rebind-area {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
+.rebind-area,
 .change-control-row {
     width: 100%;
     display: flex;
@@ -323,9 +326,37 @@ body {
     color: #fff;
 }
 
+.special-button-container {
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+}
+
+.special-button-text {
+    margin: 0.5em;
+    color: #fff;
+}
+
+.special-button {
+    font-size: 0.9rem;
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 600;
+    border: 1px solid rgb(226, 49, 203);
+    color: #f3c4e3;
+    background-color: rgb(85, 8, 75);
+    margin: 0.25em;
+    padding: 0.25em 0.5em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.special-button:hover,
+.special-button:focus {
+    background-color: rgb(44, 2, 39);
+}
+
 @media (min-width: 900px) {
     body {
-        height: 100vh;
         background-color: rgb(75, 72, 74);
     }
     #container {

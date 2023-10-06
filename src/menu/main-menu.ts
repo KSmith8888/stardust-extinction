@@ -15,6 +15,10 @@ export default class MainMenu {
     openMenu: void;
     closeMenu: void;
     quitGame: void;
+    specialButton: HTMLButtonElement;
+    specialButtonContainer: HTMLDivElement;
+    specialButtonText: HTMLParagraphElement;
+    useSpecialAttack: void;
     settings: SettingsMenu;
     openSettingsButton: HTMLButtonElement;
     openSettingsMenu: void;
@@ -44,6 +48,17 @@ export default class MainMenu {
             this.isMenuOpen = true;
             this.game.isGamePaused = true;
         });
+        this.specialButton = document.createElement("button");
+        this.specialButtonContainer = document.createElement("div");
+        this.specialButtonText = document.createElement("p");
+        this.specialButtonHTML();
+        this.useSpecialAttack = this.specialButton.addEventListener(
+            "click",
+            () => {
+                this.game.player.useSpecialAttack();
+                this.specialButtonText.textContent = `Uses: ${this.game.player.specialUses}`;
+            }
+        );
         this.openSettingsButton = <HTMLButtonElement>(
             document.getElementById("open-settings-button")
         );
@@ -112,8 +127,22 @@ export default class MainMenu {
             () => {
                 this.tutorialModal.close();
                 this.menuButton.classList.remove("no-display");
+                this.specialButtonContainer.classList.add(
+                    "special-button-container"
+                );
+                this.specialButtonContainer.classList.remove("no-display");
                 this.game.isGamePaused = false;
             }
         );
+    }
+    specialButtonHTML() {
+        this.specialButtonContainer.classList.add("no-display");
+        this.container.append(this.specialButtonContainer);
+        this.specialButtonText.classList.add("special-button-text");
+        this.specialButtonText.textContent = `Uses: ${this.game.player.specialUses}`;
+        this.specialButtonContainer.append(this.specialButtonText);
+        this.specialButton.classList.add("special-button");
+        this.specialButton.textContent = "Special";
+        this.specialButtonContainer.append(this.specialButton);
     }
 }

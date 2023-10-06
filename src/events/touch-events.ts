@@ -16,9 +16,7 @@ export default class TouchEvents {
         this.halfHeight = this.player.height / 2;
         this.healthbarArea = canvas.height - 35;
         this.touchstart = canvas.addEventListener("touchstart", (e): void => {
-            if (e.touches[0] && e.touches[1]) {
-                this.player.useSpecialAttack();
-            } else if (
+            if (
                 e.touches[0].clientX >= this.player.x &&
                 e.touches[0].clientX <= this.player.x + this.player.width &&
                 e.touches[0].clientY >= this.player.y &&

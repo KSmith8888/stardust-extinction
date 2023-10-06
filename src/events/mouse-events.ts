@@ -20,19 +20,17 @@ export default class MouseEvents {
             e.preventDefault();
         });
         this.mousedown = canvas.addEventListener("mousedown", (e): void => {
-            if (e.button !== 2 && !this.player.isMoving) {
-                if (
-                    e.offsetX >= this.player.x &&
-                    e.offsetX <= this.player.x + this.player.width &&
-                    e.offsetY >= this.player.y &&
-                    e.offsetY <= this.player.y + this.player.height &&
-                    e.offsetY < this.healthbarArea &&
-                    !this.player.isShipDisabled
-                ) {
-                    this.player.isMoving = true;
-                }
-            } else {
+            if (e.button === 2) {
                 this.player.useSpecialAttack();
+            } else if (
+                e.offsetX >= this.player.x &&
+                e.offsetX <= this.player.x + this.player.width &&
+                e.offsetY >= this.player.y &&
+                e.offsetY <= this.player.y + this.player.height &&
+                e.offsetY < this.healthbarArea &&
+                !this.player.isShipDisabled
+            ) {
+                this.player.isMoving = true;
             }
         });
         this.mouseup = canvas.addEventListener("mouseup", (e): void => {

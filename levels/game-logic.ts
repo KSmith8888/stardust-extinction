@@ -213,9 +213,8 @@ export default class Game {
         this.ctx.lineWidth = 0.5;
         this.player.healthBar = new HealthBar(
             this.player,
-            this.ctx,
-            10,
-            this.canvas.height - 25
+            this.canvas,
+            this.ctx
         );
         this.events.hasBeenResized = false;
     }

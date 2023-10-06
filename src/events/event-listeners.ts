@@ -41,6 +41,9 @@ export default class EventListeners {
         });
         this.controlsSetting =
             localStorage.getItem("controls-setting") || "Touch";
+        if (this.game.screenMode === "Mobile") {
+            this.controlsSetting = "Touch";
+        }
         this.mouseEvents =
             this.controlsSetting === "Mouse"
                 ? new MouseEvents(this.player, this.canvas)

@@ -2,6 +2,7 @@ import Player from "./player";
 
 export class HealthBar {
     user: Player;
+    canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
     x: number;
     y: number;
@@ -11,23 +12,23 @@ export class HealthBar {
     displayHealthbar: boolean;
     constructor(
         user: Player,
-        ctx: CanvasRenderingContext2D,
-        x: number,
-        y: number
+        canvas: HTMLCanvasElement,
+        ctx: CanvasRenderingContext2D
     ) {
         this.user = user;
+        this.canvas = canvas;
         this.ctx = ctx;
-        this.x = x;
-        this.y = y;
+        this.width = this.user.healthStat * 1.6 - 5;
         this.height = 15;
-        this.width = this.user.healthStat * 1.8 - 5;
-        this.fill = this.user.health * 1.8 - 5;
+        this.x = this.canvas.width - (this.width + 10);
+        this.y = this.canvas.height - 25;
+        this.fill = this.user.health * 1.6 - 5;
         this.displayHealthbar = true;
     }
     render() {
         if (this.displayHealthbar) {
-            this.width = this.user.healthStat * 1.8 - 5;
-            this.fill = this.user.health * 1.8 - 5;
+            this.width = this.user.healthStat * 1.6 - 5;
+            this.fill = this.user.health * 1.6 - 5;
             this.ctx.fillStyle = "black";
             this.ctx.beginPath();
             this.ctx.moveTo(this.x, this.y);

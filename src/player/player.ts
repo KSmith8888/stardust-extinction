@@ -66,12 +66,7 @@ export default class Player {
         this.health = 100;
         this.healthStat = 100;
         this.speed = 10;
-        this.healthBar = new HealthBar(
-            this,
-            this.ctx,
-            10,
-            this.canvas.height - 25
-        );
+        this.healthBar = new HealthBar(this, this.canvas, this.ctx);
         this.isShipDisabled = false;
         this.disabledDuration = 60;
         this.shipDisabledFrames = 0;
