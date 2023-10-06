@@ -76,7 +76,7 @@ export default class Game {
         this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
         this.ctx = <CanvasRenderingContext2D>this.canvas.getContext("2d");
         sizeCanvas(this.canvas);
-        this.screenMode = this.canvas.width === 900 ? "Desktop" : "Mobile";
+        this.screenMode = navigator.maxTouchPoints > 0 ? "Mobile" : "Desktop";
         this.player = new Player(this, this.canvas, this.ctx);
         this.ctx.strokeStyle = "white";
         this.ctx.lineWidth = 0.5;

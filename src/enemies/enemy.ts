@@ -10,6 +10,7 @@ export default class Enemy {
     y: number;
     targetX: number;
     speed: number;
+    originalSpeed: number;
     health: number;
     healthStat: number;
     collisionDamage: number;
@@ -34,6 +35,7 @@ export default class Enemy {
             Math.random() * (this.canvas.width - this.width)
         );
         this.speed = Math.floor(Math.random() * 3) + 1;
+        this.originalSpeed = 0;
         this.health = 40;
         this.healthStat = 40;
         this.collisionDamage = 10;
@@ -63,21 +65,18 @@ export default class Enemy {
     reverse() {
         if (!this.isReversed) {
             this.isReversed = true;
+            this.originalSpeed = this.speed;
+            this.targetX =
+                this.x > this.game.player.x ? this.x + 75 : this.x - 75;
             if (this.y < this.game.player.y) {
-                this.speed = this.speed * -2;
+                this.speed = -4;
             } else {
-                this.targetX =
-                    this.x > this.game.player.x ? this.x + 50 : this.x - 50;
-                this.speed = this.speed * 2;
+                this.speed = 4;
             }
             setTimeout(() => {
                 this.isReversed = false;
-                if (this.speed < 0) {
-                    this.speed = this.speed * -0.5;
-                } else {
-                    this.speed = this.speed * 0.5;
-                }
-            }, 1500);
+                this.speed = this.originalSpeed;
+            }, 1250);
         }
     }
 }
