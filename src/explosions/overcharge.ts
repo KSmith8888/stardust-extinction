@@ -18,8 +18,8 @@ export class Overcharge extends Explosion {
         super();
         this.game = game;
         this.ctx = ctx;
-        this.width = 250;
-        this.height = 250;
+        this.width = 300;
+        this.height = 300;
         this.circleWidth = 120;
         this.circleX = playerX;
         this.circleY = playerY;
@@ -36,7 +36,7 @@ export class Overcharge extends Explosion {
         });
     }
     render() {
-        this.circleWidth = Math.floor(this.circleWidth * 1.2);
+        this.circleWidth = Math.floor(this.circleWidth * 1.3);
         this.ctx.save();
         this.ctx.strokeStyle = "rgb(143, 143, 221)";
         this.ctx.lineWidth = 0.8;
@@ -49,6 +49,7 @@ export class Overcharge extends Explosion {
             this.arcNum
         );
         this.ctx.stroke();
+        this.ctx.strokeRect(this.x, this.y, this.width, this.height);
         this.ctx.restore();
         this.reverseEnemies();
     }

@@ -67,11 +67,11 @@ export default class Enemy {
             this.isReversed = true;
             this.originalSpeed = this.speed;
             if (this.y < this.game.player.y) {
-                this.speed = -4;
+                this.speed = -5;
                 this.targetX =
                     this.x <= this.game.player.x ? this.x + 75 : this.x - 75;
             } else {
-                this.speed = 4;
+                this.speed = 5;
                 this.targetX =
                     this.x >= this.game.player.x ? this.x + 75 : this.x - 75;
             }

@@ -205,7 +205,6 @@ export default class ControlsMenu {
         this.changeMenuKeyButton.classList.add("button");
         this.changeMenuKeyButton.textContent = "Change";
         changeKeyMenu.append(this.changeMenuKeyButton);
-        //start
         const changeKeySpecial = document.createElement("div");
         changeKeySpecial.classList.add("change-control-key");
         controlsRowOne.append(changeKeySpecial);
@@ -216,7 +215,6 @@ export default class ControlsMenu {
         this.changeSpecialKeyButton.classList.add("button");
         this.changeSpecialKeyButton.textContent = "Change";
         changeKeySpecial.append(this.changeSpecialKeyButton);
-        //end
         const controlsRowTwo = document.createElement("div");
         controlsRowTwo.classList.add("change-control-row");
         rebindControls.append(controlsRowTwo);

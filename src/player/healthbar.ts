@@ -20,7 +20,7 @@ export class HealthBar {
         this.ctx = ctx;
         this.width = this.user.healthStat * 1.6 - 5;
         this.height = 15;
-        this.x = this.canvas.width - (this.width + 10);
+        this.x = 10;
         this.y = this.canvas.height - 25;
         this.fill = this.user.health * 1.6 - 5;
         this.displayHealthbar = true;

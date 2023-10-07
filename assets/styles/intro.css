@@ -73,13 +73,13 @@ body {
 #dialog-first-line {
     margin: 0;
     padding: 2em 2em 0.25em 2em;
-    min-height: 10em;
+    min-height: 9em;
 }
 
 #dialog-second-line {
     margin: 0;
     padding: 0.25em 2em 1em 2em;
-    min-height: 10em;
+    min-height: 12em;
 }
 
 #skip-intro-button {
