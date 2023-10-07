@@ -56,7 +56,6 @@ export default class MainMenu {
             "click",
             () => {
                 this.game.player.useSpecialAttack();
-                this.specialButtonText.textContent = `Uses: ${this.game.player.specialUses}`;
             }
         );
         this.openSettingsButton = <HTMLButtonElement>(

@@ -14,7 +14,7 @@ export default class TouchEvents {
         this.canvas = canvas;
         this.halfWidth = this.player.width / 2;
         this.halfHeight = this.player.height / 2;
-        this.healthbarArea = canvas.height - 35;
+        this.healthbarArea = canvas.height - 45;
         this.touchstart = canvas.addEventListener("touchstart", (e): void => {
             if (
                 e.touches[0].clientX >= this.player.x &&
@@ -43,9 +43,9 @@ export default class TouchEvents {
                 }
                 if (
                     e.touches[0].clientY + this.halfHeight >
-                    canvas.height - 30
+                    this.healthbarArea
                 ) {
-                    this.player.y = canvas.height - (this.player.height + 30);
+                    this.player.y = this.healthbarArea - this.player.height;
                 } else if (e.touches[0].clientY - this.halfHeight < 40) {
                     this.player.y = 40;
                 } else {

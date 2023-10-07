@@ -46,7 +46,7 @@ export default class Player {
         this.width = 44;
         this.height = 50;
         this.x = canvas.width / 2;
-        this.y = canvas.height - (this.height + 35);
+        this.y = canvas.height - (this.height + 45);
         this.isMoving = false;
         this.idleShipImage = <HTMLImageElement>(
             document.getElementById("idle-ship-image")
@@ -151,6 +151,7 @@ export default class Player {
             this.game.explosions.push(
                 new Overcharge(this.game, this.game.ctx, this.x, this.y)
             );
+            this.game.mainMenu.specialButtonText.textContent = `Uses: ${this.game.player.specialUses}`;
         }
     }
 }

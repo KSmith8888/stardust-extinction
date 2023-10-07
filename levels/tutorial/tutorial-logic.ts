@@ -131,11 +131,14 @@ export default class TutorialGame extends Game {
             document.getElementById("tutorial-row-initial")
         );
         tutorialRow.replaceChildren();
+        const isOnDesktop = this.screenMode === "Desktop";
+        const keyboardText = isOnDesktop
+            ? "You can use keyboard controls instead by selecting keyboard in the controls menu."
+            : "";
         this.tutorialHeading.textContent = "Movement and Firing";
-        this.tutorialFirstPara.textContent =
-            "Movement controls are very simple. Just click your ship, located at the bottom of the screen, and drag it to the desired location. You can use keyboard controls instead by selecting keyboard in the controls menu.";
-        this.tutorialSecondPara.textContent =
-            "Your ship will fire lasers automatically. Watch out for new enemies appearing from the top of the screen.";
+        this.tutorialFirstPara.textContent = `Movement controls are very simple. Just click your ship, located at the bottom of the screen, and drag it to the desired location. ${keyboardText}`;
+        const mouseText = isOnDesktop ? "right click or" : "";
+        this.tutorialSecondPara.textContent = `Your ship will fire lasers automatically. It also has a special attack, Overcharge. Overcharge sends out a pulse wave in the area around your ship that will push all enemy ships away for a while. Just ${mouseText} click the button on the bottom right to use it.`;
         const closeTutorialBtn = <HTMLParagraphElement>(
             document.getElementById("close-tutorial-button")
         );
@@ -144,7 +147,7 @@ export default class TutorialGame extends Game {
     createMenuTutorial() {
         this.tutorialHeading.textContent = "The Healthbar and Menu";
         this.tutorialFirstPara.textContent =
-            "The healthbar located at the bottom left of the screen shows how much armor your ship has remaining.";
+            "The healthbar located at the bottom right of the screen shows how much armor your ship has remaining.";
         this.tutorialSecondPara.textContent =
             "Click the Game Menu button on the top left or press the 'M' key to open the main menu.";
     }
