@@ -61,10 +61,10 @@ body {
 }
 
 .modal[open] {
+    min-width: 15em;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 70%;
     background-color: rgb(58, 4, 51);
     color: rgb(243, 134, 228);
     border: 1px solid rgb(226, 49, 203);
@@ -366,9 +366,6 @@ body {
     #container {
         width: 900px;
         height: 600px;
-    }
-    .modal[open] {
-        min-width: 35%;
     }
     #tutorial-modal[open] {
         width: 75%;

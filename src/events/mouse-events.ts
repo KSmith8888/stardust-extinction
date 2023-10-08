@@ -15,7 +15,7 @@ export default class MouseEvents {
         this.canvas = canvas;
         this.halfWidth = this.player.width / 2;
         this.halfHeight = this.player.height / 2;
-        this.healthbarArea = canvas.height - 35;
+        this.healthbarArea = canvas.height - 45;
         this.contextMenu = this.canvas.addEventListener("contextmenu", (e) => {
             e.preventDefault();
         });

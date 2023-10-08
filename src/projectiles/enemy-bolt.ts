@@ -4,6 +4,8 @@ import { LargeEmp } from "../explosions/emp";
 
 export class EnemyBolt extends EnemyProjectile {
     frameCount: number;
+    innerWidth: number;
+    innerX: number;
     constructor(
         game: Game,
         canvas: HTMLCanvasElement,
@@ -14,6 +16,8 @@ export class EnemyBolt extends EnemyProjectile {
         this.height = this.game.canvas.height - this.y;
         this.speed = 0;
         this.frameCount = 0;
+        this.innerWidth = this.width * 0.4;
+        this.innerX = this.width * 0.3;
     }
     render() {
         if (this.frameCount < this.firingInterval) {
@@ -22,9 +26,9 @@ export class EnemyBolt extends EnemyProjectile {
             this.ctx.fillRect(this.x, this.y, this.width, this.height);
             this.ctx.fillStyle = "white";
             this.ctx.fillRect(
-                this.x + this.width * 0.3,
+                this.x + this.innerX,
                 this.y,
-                this.width * 0.4,
+                this.innerWidth,
                 this.height
             );
             this.ctx.restore();

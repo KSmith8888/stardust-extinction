@@ -30,7 +30,7 @@ async function startLevel1() {
         if (
             continueLevel &&
             !isNaN(parseInt(continueLevel)) &&
-            parseInt(continueLevel) > 1
+            parseInt(continueLevel, 10) > 1
         ) {
             if (
                 window.confirm(
@@ -60,8 +60,8 @@ async function continueGame() {
     try {
         await beepSound.play();
         setTimeout(() => {
-            if (continueLevel && !isNaN(parseInt(continueLevel))) {
-                const levelNumber = parseInt(continueLevel);
+            if (continueLevel && !isNaN(parseInt(continueLevel, 10))) {
+                const levelNumber = parseInt(continueLevel, 10);
                 if (levelNumber > 0 && levelNumber < 5) {
                     location.assign(
                         `/levels/level-${levelNumber}/level-${levelNumber}.html`

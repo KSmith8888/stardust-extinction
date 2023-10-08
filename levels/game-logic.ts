@@ -139,7 +139,6 @@ export default class Game {
                 this.secondEnemyInterval = 60;
                 this.thirdEnemyInterval = 110;
                 this.bossReleaseCount = Math.floor(this.bossReleaseCount * 1.3);
-                this.player.healthBar.displayHealthbar = false;
             } else if (savedDifficulty === "Normal") {
                 this.mainMenu.settings.normalButton.disabled = true;
             }
@@ -209,7 +208,7 @@ export default class Game {
                 ? this.mobileBackground
                 : this.desktopBackground;
         this.background = new Background(this.canvas, this.ctx, newBgImage);
-        this.ctx.strokeStyle = "gold";
+        this.ctx.strokeStyle = "white";
         this.ctx.lineWidth = 0.5;
         this.player.healthBar = new HealthBar(
             this.player,
