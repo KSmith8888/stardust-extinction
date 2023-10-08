@@ -138,7 +138,7 @@ export default class TutorialGame extends Game {
         this.tutorialHeading.textContent = "Movement and Firing";
         this.tutorialFirstPara.textContent = `Movement controls are very simple. Just click your ship, located at the bottom of the screen, and drag it to the desired location. ${keyboardText}`;
         const mouseText = isOnDesktop ? "right click or" : "";
-        this.tutorialSecondPara.textContent = `Your ship will fire lasers automatically. It also has a special attack, Overcharge. Overcharge sends out a pulse wave in the area around your ship that will push all enemy ships away for a while. Just ${mouseText} click the button on the bottom right to use it.`;
+        this.tutorialSecondPara.textContent = `Your ship will fire lasers automatically. It also has a special attack, Overcharge. Overcharge sends out a pulse wave in the area around your ship that will push all enemy ships away for a while. Just ${mouseText} click the button on the bottom left to use it.`;
         const closeTutorialBtn = <HTMLParagraphElement>(
             document.getElementById("close-tutorial-button")
         );

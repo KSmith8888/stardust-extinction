@@ -49,7 +49,6 @@ export class Overcharge extends Explosion {
             this.arcNum
         );
         this.ctx.stroke();
-        this.ctx.strokeRect(this.x, this.y, this.width, this.height);
         this.ctx.restore();
         this.reverseEnemies();
     }
