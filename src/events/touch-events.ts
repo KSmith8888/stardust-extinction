@@ -15,7 +15,7 @@ export default class TouchEvents {
         this.canvas = canvas;
         this.halfWidth = this.player.width / 2;
         this.halfHeight = this.player.height / 2;
-        this.healthbarArea = canvas.height - 45;
+        this.healthbarArea = canvas.height - 60;
         this.touchstart = canvas.addEventListener(
             "touchstart",
             (e): void => {

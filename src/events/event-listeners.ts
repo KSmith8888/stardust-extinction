@@ -36,7 +36,7 @@ export default class EventListeners {
         this.sizeCanvas = window.addEventListener("resize", () => {
             sizeCanvas(canvas);
             this.player.x = canvas.width / 2;
-            this.player.y = canvas.height - (this.player.height + 45);
+            this.player.y = canvas.height - (this.player.height + 60);
             this.hasBeenResized = true;
         });
         this.controlsSetting =

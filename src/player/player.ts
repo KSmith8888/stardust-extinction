@@ -20,7 +20,10 @@ export default class Player {
     idleShipImage: HTMLImageElement;
     activeShipImage: HTMLImageElement;
     explosions: Array<SmallExplosion>;
-    projectiles: Array<LaserSmall | LaserMediumTwo>;
+    levelOneLasers: Array<LaserSmall>;
+    levelTwoLasers: Array<LaserMediumTwo>;
+    levelThreeLasers: Array<LaserMediumThree>;
+    currentProjectiles: Array<LaserSmall | LaserMediumTwo | LaserMediumThree>;
     projectilePoolSize: number;
     projectileInterval: number;
     projectileStrength: number;
@@ -46,7 +49,7 @@ export default class Player {
         this.width = 44;
         this.height = 50;
         this.x = canvas.width / 2;
-        this.y = canvas.height - (this.height + 45);
+        this.y = canvas.height - (this.height + 60);
         this.isMoving = false;
         this.idleShipImage = <HTMLImageElement>(
             document.getElementById("idle-ship-image")
@@ -55,7 +58,10 @@ export default class Player {
             document.getElementById("active-ship-image")
         );
         this.explosions = [];
-        this.projectiles = [];
+        this.levelOneLasers = [];
+        this.levelTwoLasers = [];
+        this.levelThreeLasers = [];
+        this.currentProjectiles = this.levelOneLasers;
         this.projectilePoolSize = 20;
         this.projectileInterval = 15;
         this.projectileStrength = 1;
@@ -74,13 +80,13 @@ export default class Player {
     }
     initializeProjectiles() {
         for (let i = 0; i < this.projectilePoolSize; i++) {
-            this.projectiles.push(
+            this.levelOneLasers.push(
                 new LaserSmall(this.game, this.canvas, this.ctx)
             );
-            this.projectiles.push(
+            this.levelTwoLasers.push(
                 new LaserMediumTwo(this.game, this.canvas, this.ctx)
             );
-            this.projectiles.push(
+            this.levelThreeLasers.push(
                 new LaserMediumThree(this.game, this.canvas, this.ctx)
             );
         }
@@ -106,24 +112,16 @@ export default class Player {
         );
     }
     activateProjectiles() {
-        let currentLaser = LaserSmall;
-        if (this.projectileStrength === 2) {
-            currentLaser = LaserMediumTwo;
-            this.game.racerInterval = 0.95;
-        } else if (this.projectileStrength === 3) {
-            currentLaser = LaserMediumThree;
-            this.game.racerInterval = 1;
-        }
-        const firstLaser = this.projectiles.find((laser) => {
-            return laser instanceof currentLaser && laser.isFree;
+        const firstLaser = this.currentProjectiles.find((laser) => {
+            return laser.isFree;
         });
         if (firstLaser) {
             firstLaser.x = this.x + (this.laserOffsetX - firstLaser.width);
             firstLaser.y = this.y + this.laserOffsetY;
             firstLaser.isFree = false;
         }
-        const secondLaser = this.projectiles.find((laser) => {
-            return laser instanceof currentLaser && laser.isFree;
+        const secondLaser = this.currentProjectiles.find((laser) => {
+            return laser.isFree;
         });
         if (secondLaser) {
             secondLaser.x = this.x + (this.width - this.laserOffsetX);
@@ -140,7 +138,7 @@ export default class Player {
                 this.frameCount += 1;
             }
         }
-        const activeProjectiles = this.projectiles.filter((laser) => {
+        const activeProjectiles = this.currentProjectiles.filter((laser) => {
             return !laser.isFree;
         });
         activeProjectiles.forEach((laser) => laser.render());
@@ -152,6 +150,17 @@ export default class Player {
                 new Overcharge(this.game, this.game.ctx, this.x, this.y)
             );
             this.game.mainMenu.specialButtonText.textContent = `Uses: ${this.game.player.specialUses}`;
+        }
+    }
+    increaseProjectileStrength() {
+        if (this.projectileStrength === 1) {
+            this.projectileStrength = 2;
+            this.game.racerInterval = 0.95;
+            this.currentProjectiles = this.levelTwoLasers;
+        } else if (this.projectileStrength === 2) {
+            this.projectileStrength = 3;
+            this.game.racerInterval = 1;
+            this.currentProjectiles = this.levelThreeLasers;
         }
     }
 }

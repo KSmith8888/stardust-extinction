@@ -32,9 +32,7 @@ export class SmallRacer extends Enemy {
     render() {
         if (this.health <= 0) {
             this.destroyedByPlayer();
-            if (this.game.player.projectileStrength < 3) {
-                this.game.player.projectileStrength += 1;
-            }
+            this.game.player.increaseProjectileStrength();
         }
         if (this.y < this.canvas.height) {
             this.y += this.speed;
