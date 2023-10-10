@@ -9,6 +9,7 @@ export class HealthBar {
     height: number;
     width: number;
     fill: number;
+    rightSideX: number;
     constructor(
         user: Player,
         canvas: HTMLCanvasElement,
@@ -22,14 +23,15 @@ export class HealthBar {
         this.x = 15;
         this.y = this.canvas.height - 35;
         this.fill = this.user.health * 1.6 - 5;
+        this.rightSideX = this.width + 3;
     }
     render() {
         this.fill = this.user.health * 1.6 - 5;
         this.ctx.fillStyle = "black";
         this.ctx.beginPath();
         this.ctx.moveTo(this.x, this.y);
-        this.ctx.lineTo(this.x + this.width + 3, this.y);
-        this.ctx.lineTo(this.x + this.width + 3, this.y + this.height);
+        this.ctx.lineTo(this.x + this.rightSideX, this.y);
+        this.ctx.lineTo(this.x + this.rightSideX, this.y + this.height);
         this.ctx.lineTo(this.x, this.y + this.height);
         this.ctx.lineTo(this.x, this.y);
         this.ctx.closePath();

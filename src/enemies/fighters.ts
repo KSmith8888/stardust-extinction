@@ -23,7 +23,7 @@ export class SmallFighter extends Enemy {
         this.image.src = smallFighterUrl;
         this.laserOffsetX = this.width * 0.2;
         this.laserOffsetY = this.height * 0.35;
-        this.projectileInterval = 50;
+        this.projectileInterval = 40;
     }
     render() {
         if (this.health <= 0) {

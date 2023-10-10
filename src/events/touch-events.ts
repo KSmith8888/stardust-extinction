@@ -34,11 +34,16 @@ export default class TouchEvents {
             },
             { passive: false }
         );
-        this.touchend = canvas.addEventListener("touchend", (): void => {
-            if (this.player.isMoving) {
-                this.player.isMoving = false;
-            }
-        });
+        this.touchend = canvas.addEventListener(
+            "touchend",
+            (e): void => {
+                e.preventDefault();
+                if (this.player.isMoving) {
+                    this.player.isMoving = false;
+                }
+            },
+            { passive: false }
+        );
         this.touchmove = canvas.addEventListener(
             "touchmove",
             (e): void => {

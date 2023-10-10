@@ -6,6 +6,7 @@ export class EnemyBolt extends EnemyProjectile {
     frameCount: number;
     innerWidth: number;
     innerX: number;
+    frameDistance: number;
     constructor(
         game: Game,
         canvas: HTMLCanvasElement,
@@ -18,9 +19,13 @@ export class EnemyBolt extends EnemyProjectile {
         this.frameCount = 0;
         this.innerWidth = this.width * 0.4;
         this.innerX = this.width * 0.3;
+        this.frameDistance = Math.floor(this.canvas.height / 20);
     }
     render() {
         if (this.frameCount < this.firingInterval) {
+            if (this.firingInterval - this.frameCount < 20) {
+                this.y += this.frameDistance;
+            }
             this.ctx.save();
             this.ctx.fillStyle = "blue";
             this.ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -39,6 +44,7 @@ export class EnemyBolt extends EnemyProjectile {
         }
     }
     collidedWithPlayer() {
+        this.game.player.isShipDisabled = true;
         this.game.explosions.push(
             new LargeEmp(
                 this.game,

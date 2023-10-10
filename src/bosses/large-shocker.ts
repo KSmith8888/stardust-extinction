@@ -24,7 +24,7 @@ export class LargeShocker extends Boss {
         this.image.src = largeShockerUrl;
         this.laserOffsetY = 17;
         this.firingFrames = 0;
-        this.firingDuration = Math.floor(Math.random() * 30) + 10;
+        this.firingDuration = Math.floor(Math.random() * 30) + 30;
         this.hasActivatedBolts = false;
         this.targetX = this.game.player.x;
         this.firingInterval = 70;
@@ -41,7 +41,7 @@ export class LargeShocker extends Boss {
             if (this.firingFrames < this.firingDuration) {
                 this.firingFrames += 1;
             } else {
-                this.firingDuration = Math.floor(Math.random() * 30) + 10;
+                this.firingDuration = Math.floor(Math.random() * 30) + 30;
                 this.firingFrames = 0;
                 this.isFiring = false;
                 this.hasActivatedBolts = false;
