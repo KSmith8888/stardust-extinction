@@ -3,6 +3,7 @@ import beepAudioUrl from "../../assets/audio/beep.wav";
 import explosionSoundUrl from "../../assets/audio/explosion.wav";
 import alarmSoundUrl from "../../assets/audio/alarm.wav";
 import empSoundUrl from "../../assets/audio/emp-explosion.wav";
+import overchargeUrl from "../../assets/audio/overcharge.wav";
 
 interface savedAudio {
     volume: number;
@@ -16,6 +17,7 @@ export default class AudioEvents {
     explosionSound: HTMLAudioElement;
     alarmSound: HTMLAudioElement;
     empSound: HTMLAudioElement;
+    overchargeAudio: HTMLAudioElement;
     allAudio: Array<HTMLAudioElement>;
     constructor(mainMenu: MainMenu) {
         this.mainMenu = mainMenu;
@@ -28,11 +30,14 @@ export default class AudioEvents {
         this.alarmSound.volume = 0.3 * this.audioSettings.volume;
         this.empSound = new Audio(empSoundUrl);
         this.empSound.volume = 0.3 * this.audioSettings.volume;
+        this.overchargeAudio = new Audio(overchargeUrl);
+        this.overchargeAudio.volume = 0.2 * this.audioSettings.volume;
         this.allAudio = [
             this.beepAudio,
             this.explosionSound,
             this.alarmSound,
             this.empSound,
+            this.overchargeAudio,
         ];
         this.applyAudioSettings();
     }
@@ -80,6 +85,10 @@ export default class AudioEvents {
         this.empSound.currentTime = 0;
         this.empSound.play();
     }
+    playOverchargeSound() {
+        this.overchargeAudio.currentTime = 0;
+        this.overchargeAudio.play();
+    }
     muteAudio() {
         this.allAudio.forEach((sound) => {
             sound.muted = true;
@@ -105,6 +114,7 @@ export default class AudioEvents {
         this.explosionSound.volume = 0.1 * this.audioSettings.volume;
         this.alarmSound.volume = 0.3 * this.audioSettings.volume;
         this.empSound.volume = 0.3 * this.audioSettings.volume;
+        this.overchargeAudio.volume = 0.2 * this.audioSettings.volume;
         this.saveAudioSettings();
     }
 }

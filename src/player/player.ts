@@ -145,11 +145,12 @@ export default class Player {
     }
     useSpecialAttack() {
         if (this.specialUses >= 1) {
+            this.game.events.audioEvents.playOverchargeSound();
             this.specialUses -= 1;
             this.game.explosions.push(
                 new Overcharge(this.game, this.game.ctx, this.x, this.y)
             );
-            this.game.mainMenu.specialButtonText.textContent = `Uses: ${this.game.player.specialUses}`;
+            this.game.mainMenu.specialButtonText.textContent = `Uses: ${this.specialUses}`;
         }
     }
     increaseProjectileStrength() {
