@@ -24,12 +24,12 @@ export default class KeyboardEvents {
         this.events = events;
         this.player = player;
         this.canvas = canvas;
-        this.leftKey = "KeyA";
-        this.rightKey = "KeyD";
-        this.upKey = "KeyW";
-        this.downKey = "KeyS";
-        this.menuKey = "KeyM";
-        this.specialKey = "KeyO";
+        this.leftKey = localStorage.getItem("left-key") || "KeyA";
+        this.rightKey = localStorage.getItem("right-key") || "KeyD";
+        this.upKey = localStorage.getItem("up-key") || "KeyW";
+        this.downKey = localStorage.getItem("down-key") || "KeyS";
+        this.menuKey = localStorage.getItem("menu-key") || "KeyM";
+        this.specialKey = localStorage.getItem("special-key") || "KeyO";
         this.keyEvent = document.addEventListener("keydown", (event) => {
             switch (event.code) {
                 case this.leftKey: {

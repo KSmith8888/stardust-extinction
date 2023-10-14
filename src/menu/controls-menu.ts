@@ -31,6 +31,12 @@ export default class ControlsMenu {
     changeRightKey: void;
     closeControlsButton: HTMLButtonElement;
     closeControls: void;
+    initMenuKey: string;
+    initSpecialKey: string;
+    initUpKey: string;
+    initDownKey: string;
+    initLeftKey: string;
+    initRightKey: string;
     constructor(game: Game, mainMenu: MainMenu) {
         this.game = game;
         this.mainMenu = mainMenu;
@@ -69,21 +75,27 @@ export default class ControlsMenu {
             if (this.currentRebindKey && this.game.events.keyEvents) {
                 if (this.currentRebindKey === "Menu") {
                     this.game.events.keyEvents.menuKey = e.code;
+                    localStorage.setItem("menu-key", e.code);
                     this.menuKeyText.textContent = `MENU: ${e.code}`;
                 } else if (this.currentRebindKey === "Special") {
                     this.game.events.keyEvents.specialKey = e.code;
+                    localStorage.setItem("special-key", e.code);
                     this.specialKeyText.textContent = `SPEC: ${e.code}`;
                 } else if (this.currentRebindKey === "Up") {
                     this.game.events.keyEvents.upKey = e.code;
+                    localStorage.setItem("up-key", e.code);
                     this.upKeyText.textContent = `UP: ${e.code}`;
                 } else if (this.currentRebindKey === "Left") {
                     this.game.events.keyEvents.leftKey = e.code;
+                    localStorage.setItem("left-key", e.code);
                     this.leftKeyText.textContent = `LEFT: ${e.code}`;
                 } else if (this.currentRebindKey === "Down") {
                     this.game.events.keyEvents.downKey = e.code;
+                    localStorage.setItem("down-key", e.code);
                     this.downKeyText.textContent = `DOWN: ${e.code}`;
                 } else if (this.currentRebindKey === "Right") {
                     this.game.events.keyEvents.rightKey = e.code;
+                    localStorage.setItem("right-key", e.code);
                     this.rightKeyText.textContent = `RIGHT: ${e.code}`;
                 }
                 this.currentRebindKey = null;
@@ -157,6 +169,12 @@ export default class ControlsMenu {
                 this.controlsMenu.close();
             }
         );
+        this.initMenuKey = localStorage.getItem("menu-key") || "KeyM";
+        this.initSpecialKey = localStorage.getItem("special-key") || "KeyO";
+        this.initUpKey = localStorage.getItem("up-key") || "KeyW";
+        this.initDownKey = localStorage.getItem("down-key") || "KeyS";
+        this.initLeftKey = localStorage.getItem("left-key") || "KeyA";
+        this.initRightKey = localStorage.getItem("right-key") || "KeyD";
         this.generateControlsHTML();
     }
     generateControlsHTML() {
@@ -199,7 +217,7 @@ export default class ControlsMenu {
         changeKeyMenu.classList.add("change-control-key");
         controlsRowOne.append(changeKeyMenu);
         this.menuKeyText.classList.add("control-key-text");
-        this.menuKeyText.textContent = "MENU: KeyM";
+        this.menuKeyText.textContent = `MENU: ${this.initMenuKey}`;
         changeKeyMenu.append(this.menuKeyText);
         this.changeMenuKeyButton.type = "button";
         this.changeMenuKeyButton.classList.add("button");
@@ -209,7 +227,7 @@ export default class ControlsMenu {
         changeKeySpecial.classList.add("change-control-key");
         controlsRowOne.append(changeKeySpecial);
         this.specialKeyText.classList.add("control-key-text");
-        this.specialKeyText.textContent = "SPECIAL: KeyO";
+        this.specialKeyText.textContent = `SPECIAL: ${this.initSpecialKey}`;
         changeKeySpecial.append(this.specialKeyText);
         this.changeSpecialKeyButton.type = "button";
         this.changeSpecialKeyButton.classList.add("button");
@@ -222,7 +240,7 @@ export default class ControlsMenu {
         changeKeyUp.classList.add("change-control-key");
         controlsRowTwo.append(changeKeyUp);
         this.upKeyText.classList.add("control-key-text");
-        this.upKeyText.textContent = "UP: KeyW";
+        this.upKeyText.textContent = `UP: ${this.initUpKey}`;
         changeKeyUp.append(this.upKeyText);
         this.changeUpKeyButton.type = "button";
         this.changeUpKeyButton.classList.add("button");
@@ -232,7 +250,7 @@ export default class ControlsMenu {
         changeKeyDown.classList.add("change-control-key");
         controlsRowTwo.append(changeKeyDown);
         this.downKeyText.classList.add("control-key-text");
-        this.downKeyText.textContent = "DOWN: KeyS";
+        this.downKeyText.textContent = `DOWN: ${this.initDownKey}`;
         changeKeyDown.append(this.downKeyText);
         this.changeDownKeyButton.type = "button";
         this.changeDownKeyButton.classList.add("button");
@@ -245,7 +263,7 @@ export default class ControlsMenu {
         changeKeyLeft.classList.add("change-control-key");
         controlsRowThree.append(changeKeyLeft);
         this.leftKeyText.classList.add("control-key-text");
-        this.leftKeyText.textContent = "LEFT: KeyA";
+        this.leftKeyText.textContent = `LEFT: ${this.initLeftKey}`;
         changeKeyLeft.append(this.leftKeyText);
         this.changeLeftKeyButton.type = "button";
         this.changeLeftKeyButton.classList.add("button");
@@ -255,7 +273,7 @@ export default class ControlsMenu {
         changeKeyRight.classList.add("change-control-key");
         controlsRowThree.append(changeKeyRight);
         this.rightKeyText.classList.add("control-key-text");
-        this.rightKeyText.textContent = "RIGHT: KeyD";
+        this.rightKeyText.textContent = `RIGHT: ${this.initRightKey}`;
         changeKeyRight.append(this.rightKeyText);
         this.changeRightKeyButton.type = "button";
         this.changeRightKeyButton.classList.add("button");
