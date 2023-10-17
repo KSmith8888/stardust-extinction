@@ -19,7 +19,6 @@ export default class TouchEvents {
         this.touchstart = canvas.addEventListener(
             "touchstart",
             (e): void => {
-                e.preventDefault();
                 if (
                     e.touches[0].clientX >= this.player.x &&
                     e.touches[0].clientX <= this.player.x + this.player.width &&
@@ -32,22 +31,20 @@ export default class TouchEvents {
                     this.player.isMoving = true;
                 }
             },
-            { passive: false }
+            { passive: true }
         );
         this.touchend = canvas.addEventListener(
             "touchend",
-            (e): void => {
-                e.preventDefault();
+            (): void => {
                 if (this.player.isMoving) {
                     this.player.isMoving = false;
                 }
             },
-            { passive: false }
+            { passive: true }
         );
         this.touchmove = canvas.addEventListener(
             "touchmove",
             (e): void => {
-                e.preventDefault();
                 if (this.player.isMoving && !this.player.isShipDisabled) {
                     if (e.touches[0].clientX + this.halfWidth > canvas.width) {
                         this.player.x = canvas.width - this.player.width;
@@ -68,12 +65,16 @@ export default class TouchEvents {
                     }
                 }
             },
-            { passive: false }
+            { passive: true }
         );
-        this.touchcancel = canvas.addEventListener("touchcancel", () => {
-            if (this.player.isMoving) {
-                this.player.isMoving = false;
-            }
-        });
+        this.touchcancel = canvas.addEventListener(
+            "touchcancel",
+            () => {
+                if (this.player.isMoving) {
+                    this.player.isMoving = false;
+                }
+            },
+            { passive: true }
+        );
     }
 }
