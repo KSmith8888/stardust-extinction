@@ -6,7 +6,6 @@ export default class MouseEvents {
     halfWidth: number;
     halfHeight: number;
     healthbarArea: number;
-    contextMenu: void;
     mousedown: void;
     mouseup: void;
     mousemove: void;
@@ -16,9 +15,6 @@ export default class MouseEvents {
         this.halfWidth = this.player.width / 2;
         this.halfHeight = this.player.height / 2;
         this.healthbarArea = canvas.height - 60;
-        this.contextMenu = this.canvas.addEventListener("contextmenu", (e) => {
-            e.preventDefault();
-        });
         this.mousedown = canvas.addEventListener("mousedown", (e): void => {
             if (e.button === 2) {
                 this.player.useSpecialAttack();

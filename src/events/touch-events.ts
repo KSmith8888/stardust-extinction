@@ -6,6 +6,9 @@ export default class TouchEvents {
     halfWidth: number;
     halfHeight: number;
     healthbarArea: number;
+    currentTap: number;
+    lastTap: number;
+    dblTapInterval: number;
     touchstart: void;
     touchend: void;
     touchmove: void;
@@ -16,11 +19,18 @@ export default class TouchEvents {
         this.halfWidth = this.player.width / 2;
         this.halfHeight = this.player.height / 2;
         this.healthbarArea = canvas.height - 60;
+        this.currentTap = 0;
+        this.lastTap = 0;
+        this.dblTapInterval = 500;
         this.touchstart = canvas.addEventListener(
             "touchstart",
             (e): void => {
                 e.preventDefault();
-                if (
+                this.lastTap = this.currentTap;
+                this.currentTap = new Date().getTime();
+                if (this.currentTap - this.lastTap < this.dblTapInterval) {
+                    this.player.useSpecialAttack();
+                } else if (
                     e.touches[0].clientX >= this.player.x &&
                     e.touches[0].clientX <= this.player.x + this.player.width &&
                     e.touches[0].clientY >= this.player.y &&

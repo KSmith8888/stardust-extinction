@@ -12,6 +12,7 @@ export default class EventListeners {
     canvas: HTMLCanvasElement;
     hasBeenResized: boolean;
     sizeCanvas: void;
+    contextMenu: void;
     controlsSetting: string;
     mouseEvents: MouseEvents | null;
     touchEvents: TouchEvents | null;
@@ -38,6 +39,9 @@ export default class EventListeners {
             this.player.x = canvas.width / 2;
             this.player.y = canvas.height - (this.player.height + 60);
             this.hasBeenResized = true;
+        });
+        this.contextMenu = this.canvas.addEventListener("contextmenu", (e) => {
+            e.preventDefault();
         });
         this.controlsSetting =
             localStorage.getItem("controls-setting") || "Touch";
