@@ -329,7 +329,6 @@ body {
 }
 
 .special-button-container {
-    z-index: 2;
     display: flex;
     align-items: flex-end;
     margin-bottom: 45px;
@@ -337,11 +336,15 @@ body {
 }
 
 .special-button-text {
+    z-index: 2;
+    user-select: none;
+    -webkit-user-select: none;
     margin: 0 0.25em 0.25em 0.25em;
     color: #d4cccc;
 }
 
 .special-button {
+    z-index: 2;
     font-size: 0.9rem;
     font-family: "Courier New", Courier, monospace;
     font-weight: 600;
