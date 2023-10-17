@@ -30,7 +30,8 @@ export default class TouchEvents {
                 this.currentTap = new Date().getTime();
                 if (this.currentTap - this.lastTap < this.dblTapInterval) {
                     this.player.useSpecialAttack();
-                } else if (
+                }
+                if (
                     e.touches[0].clientX >= this.player.x &&
                     e.touches[0].clientX <= this.player.x + this.player.width &&
                     e.touches[0].clientY >= this.player.y &&
