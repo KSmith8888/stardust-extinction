@@ -139,7 +139,7 @@ export default class TutorialGame extends Game {
         this.tutorialFirstPara.textContent = `Movement controls are very simple. Just click your ship, located at the bottom of the screen, and drag it to the desired location. ${keyboardText}`;
         const mouseText = isOnDesktop
             ? "right click or"
-            : "double tap your ship or";
+            : "double tap the screen or";
         this.tutorialSecondPara.textContent = `Your ship will fire lasers automatically. It also has a special attack, Overcharge. Overcharge sends out a pulse wave in the area around your ship that will push all enemy ships away for a while. Just ${mouseText} click the button on the bottom left to use it.`;
         const closeTutorialBtn = <HTMLParagraphElement>(
             document.getElementById("close-tutorial-button")
@@ -150,8 +150,9 @@ export default class TutorialGame extends Game {
         this.tutorialHeading.textContent = "The Healthbar and Menu";
         this.tutorialFirstPara.textContent =
             "The healthbar located at the bottom right of the screen shows how much armor your ship has remaining.";
-        this.tutorialSecondPara.textContent =
-            "Click the Game Menu button on the top left or press the 'M' key to open the main menu.";
+        const mouseText =
+            this.screenMode === "Desktop" ? "or press the 'M' key" : "";
+        this.tutorialSecondPara.textContent = `Click the Game Menu button on the top left ${mouseText} to open the menu.`;
     }
     createBossTutorial() {
         this.tutorialHeading.textContent = "Reaching the Boss";

@@ -12,6 +12,7 @@ body {
     align-items: flex-end;
     justify-content: center;
     overscroll-behavior: none;
+    touch-action: none;
 }
 
 @supports (height: 100dvh) {
