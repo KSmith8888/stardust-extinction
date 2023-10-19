@@ -13,6 +13,9 @@ export default class KeyboardEvents {
     downKey: string;
     menuKey: string;
     specialKey: string;
+    lowerBound: number;
+    upperBound: number;
+    rightBound: number;
     keyEvent: void;
     constructor(
         game: Game,
@@ -30,6 +33,10 @@ export default class KeyboardEvents {
         this.downKey = localStorage.getItem("down-key") || "KeyS";
         this.menuKey = localStorage.getItem("menu-key") || "KeyM";
         this.specialKey = localStorage.getItem("special-key") || "KeyO";
+        this.lowerBound = canvas.height - 60 - this.player.height;
+        this.upperBound = 60 + this.player.speed;
+        this.rightBound =
+            canvas.width - (this.player.width + this.player.speed);
         this.keyEvent = document.addEventListener("keydown", (event) => {
             switch (event.code) {
                 case this.leftKey: {
@@ -49,9 +56,7 @@ export default class KeyboardEvents {
                 case this.rightKey: {
                     if (events.controlsSetting === "Keyboard") {
                         if (
-                            this.player.x <=
-                                canvas.width -
-                                    (this.player.width + this.player.speed) &&
+                            this.player.x <= this.rightBound &&
                             !this.player.isShipDisabled
                         ) {
                             this.player.isMoving = true;
@@ -65,7 +70,7 @@ export default class KeyboardEvents {
                 case this.upKey: {
                     if (events.controlsSetting === "Keyboard") {
                         if (
-                            this.player.y >= this.player.speed &&
+                            this.player.y >= this.upperBound &&
                             !this.player.isShipDisabled
                         ) {
                             this.player.isMoving = true;
@@ -79,8 +84,7 @@ export default class KeyboardEvents {
                 case this.downKey: {
                     if (events.controlsSetting === "Keyboard") {
                         if (
-                            this.player.y <
-                                canvas.height - (40 + this.player.height) &&
+                            this.player.y < this.lowerBound &&
                             !this.player.isShipDisabled
                         ) {
                             this.player.isMoving = true;
@@ -115,9 +119,6 @@ export default class KeyboardEvents {
                 case this.specialKey: {
                     this.player.useSpecialAttack();
                     break;
-                }
-                default: {
-                    console.log("No action for that key");
                 }
             }
         });

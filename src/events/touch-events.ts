@@ -5,7 +5,8 @@ export default class TouchEvents {
     canvas: HTMLCanvasElement;
     halfWidth: number;
     halfHeight: number;
-    healthbarArea: number;
+    lowerBound: number;
+    upperBound: number;
     currentTap: number;
     lastTap: number;
     dblTapInterval: number;
@@ -18,7 +19,8 @@ export default class TouchEvents {
         this.canvas = canvas;
         this.halfWidth = this.player.width / 2;
         this.halfHeight = this.player.height / 2;
-        this.healthbarArea = canvas.height - 60;
+        this.lowerBound = canvas.height - 60;
+        this.upperBound = 60;
         this.currentTap = 0;
         this.lastTap = 0;
         this.dblTapInterval = 500;
@@ -37,7 +39,7 @@ export default class TouchEvents {
                     e.touches[0].clientY >= this.player.y &&
                     e.touches[0].clientY <=
                         this.player.y + this.player.height &&
-                    e.touches[0].clientY < this.healthbarArea &&
+                    e.touches[0].clientY < this.lowerBound &&
                     !this.player.isShipDisabled
                 ) {
                     this.player.isMoving = true;
@@ -69,11 +71,14 @@ export default class TouchEvents {
                     }
                     if (
                         e.touches[0].clientY + this.halfHeight >
-                        this.healthbarArea
+                        this.lowerBound
                     ) {
-                        this.player.y = this.healthbarArea - this.player.height;
-                    } else if (e.touches[0].clientY - this.halfHeight < 40) {
-                        this.player.y = 40;
+                        this.player.y = this.lowerBound - this.player.height;
+                    } else if (
+                        e.touches[0].clientY - this.halfHeight <
+                        this.upperBound
+                    ) {
+                        this.player.y = this.upperBound;
                     } else {
                         this.player.y = e.touches[0].clientY - this.halfHeight;
                     }
@@ -83,13 +88,12 @@ export default class TouchEvents {
         );
         this.touchcancel = canvas.addEventListener(
             "touchcancel",
-            (e) => {
-                e.preventDefault();
+            () => {
                 if (this.player.isMoving) {
                     this.player.isMoving = false;
                 }
             },
-            { passive: false }
+            { passive: true }
         );
     }
 }

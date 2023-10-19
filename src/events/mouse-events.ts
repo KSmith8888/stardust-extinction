@@ -5,7 +5,8 @@ export default class MouseEvents {
     canvas: HTMLCanvasElement;
     halfWidth: number;
     halfHeight: number;
-    healthbarArea: number;
+    lowerBound: number;
+    upperBound: number;
     mousedown: void;
     mouseup: void;
     mousemove: void;
@@ -14,7 +15,8 @@ export default class MouseEvents {
         this.canvas = canvas;
         this.halfWidth = this.player.width / 2;
         this.halfHeight = this.player.height / 2;
-        this.healthbarArea = canvas.height - 60;
+        this.lowerBound = canvas.height - 60 - this.player.height;
+        this.upperBound = 60;
         this.mousedown = canvas.addEventListener("mousedown", (e): void => {
             if (e.button === 2) {
                 this.player.useSpecialAttack();
@@ -23,7 +25,7 @@ export default class MouseEvents {
                 e.offsetX <= this.player.x + this.player.width &&
                 e.offsetY >= this.player.y &&
                 e.offsetY <= this.player.y + this.player.height &&
-                e.offsetY < this.healthbarArea &&
+                e.offsetY < this.lowerBound + this.player.height &&
                 !this.player.isShipDisabled
             ) {
                 this.player.isMoving = true;
@@ -43,13 +45,10 @@ export default class MouseEvents {
                 } else {
                     this.player.x = e.offsetX - this.halfWidth;
                 }
-                if (
-                    e.offsetY - this.halfHeight >
-                    canvas.height - (this.player.height + 30)
-                ) {
-                    this.player.y = canvas.height - (this.player.height + 30);
-                } else if (e.offsetY - this.halfHeight < 40) {
-                    this.player.y = 40;
+                if (e.offsetY - this.halfHeight > this.lowerBound) {
+                    this.player.y = this.lowerBound;
+                } else if (e.offsetY - this.halfHeight < this.upperBound) {
+                    this.player.y = this.upperBound;
                 } else {
                     this.player.y = e.offsetY - this.halfHeight;
                 }
