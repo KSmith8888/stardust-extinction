@@ -13,7 +13,7 @@ export class LaserSmall extends Projectile {
         super(game, canvas, ctx);
         this.width = 8;
         this.height = 14;
-        this.speed = 6.25;
+        this.speed = 7.25;
         this.image.src = smallLaserUrl;
     }
 }

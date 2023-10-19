@@ -23,7 +23,7 @@ export default class Player {
     levelOneLasers: Array<LaserSmall>;
     levelTwoLasers: Array<LaserMediumTwo>;
     levelThreeLasers: Array<LaserMediumThree>;
-    currentProjectiles: Array<LaserSmall | LaserMediumTwo | LaserMediumThree>;
+    projectiles: Array<LaserSmall | LaserMediumTwo | LaserMediumThree>;
     projectilePoolSize: number;
     projectileInterval: number;
     projectileStrength: number;
@@ -61,7 +61,7 @@ export default class Player {
         this.levelOneLasers = [];
         this.levelTwoLasers = [];
         this.levelThreeLasers = [];
-        this.currentProjectiles = this.levelOneLasers;
+        this.projectiles = this.levelOneLasers;
         this.projectilePoolSize = 20;
         this.projectileInterval = 15;
         this.projectileStrength = 1;
@@ -112,7 +112,7 @@ export default class Player {
         );
     }
     activateProjectiles() {
-        const firstLaser = this.currentProjectiles.find((laser) => {
+        const firstLaser = this.projectiles.find((laser) => {
             return laser.isFree;
         });
         if (firstLaser) {
@@ -120,7 +120,7 @@ export default class Player {
             firstLaser.y = this.y + this.laserOffsetY;
             firstLaser.isFree = false;
         }
-        const secondLaser = this.currentProjectiles.find((laser) => {
+        const secondLaser = this.projectiles.find((laser) => {
             return laser.isFree;
         });
         if (secondLaser) {
@@ -130,7 +130,7 @@ export default class Player {
         }
     }
     handleProjectiles() {
-        if (!this.isShipDisabled) {
+        if (this.isMoving && !this.isShipDisabled) {
             if (this.frameCount >= this.projectileInterval) {
                 this.activateProjectiles();
                 this.frameCount = 0;
@@ -138,7 +138,7 @@ export default class Player {
                 this.frameCount += 1;
             }
         }
-        const activeProjectiles = this.currentProjectiles.filter((laser) => {
+        const activeProjectiles = this.projectiles.filter((laser) => {
             return !laser.isFree;
         });
         activeProjectiles.forEach((laser) => laser.render());
@@ -157,11 +157,11 @@ export default class Player {
         if (this.projectileStrength === 1) {
             this.projectileStrength = 2;
             this.game.racerInterval = 0.95;
-            this.currentProjectiles = this.levelTwoLasers;
+            this.projectiles = this.levelTwoLasers;
         } else if (this.projectileStrength === 2) {
             this.projectileStrength = 3;
             this.game.racerInterval = 1;
-            this.currentProjectiles = this.levelThreeLasers;
+            this.projectiles = this.levelThreeLasers;
         }
     }
 }
