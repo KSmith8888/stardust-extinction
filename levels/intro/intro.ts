@@ -11,6 +11,7 @@ class Intro {
     secondLineDelay: number;
     skipIntroButton: HTMLButtonElement;
     skipIntro: void;
+    charDelay: number;
     constructor() {
         this.mainContainer = <HTMLDivElement>(
             document.getElementById("main-container")
@@ -40,6 +41,7 @@ class Intro {
         this.skipIntro = this.skipIntroButton.addEventListener("click", () => {
             location.assign("/levels/tutorial/tutorial.html");
         });
+        this.charDelay = 100;
     }
     firstPhase() {
         this.introSpaceImage.classList.remove("no-display");
@@ -185,14 +187,14 @@ class Intro {
     }
     generateText(paragraphEl: HTMLParagraphElement, text: string) {
         const textArray = text.split("");
-        const delay = 100;
+        const lastChar = textArray.length - 1;
         textArray.forEach((char, index) => {
             setTimeout(() => {
                 paragraphEl.textContent += char;
-                if (index === textArray.length - 1) {
+                if (index === lastChar) {
                     this.nextPhase();
                 }
-            }, delay * index);
+            }, this.charDelay * index);
         });
     }
 }

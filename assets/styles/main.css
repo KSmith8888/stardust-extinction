@@ -7,7 +7,6 @@ body {
     padding: 0;
     width: 100%;
     height: 100vh;
-    font-family: "Courier New", Courier, monospace;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -42,7 +41,7 @@ body {
 #menu-button {
     z-index: 2;
     font-size: 0.9rem;
-    font-family: inherit;
+    font-family: "Courier New", Courier, monospace;
     font-weight: 600;
     border: 1px solid rgb(226, 49, 203);
     color: #f3c4e3;
@@ -349,7 +348,7 @@ body {
 .special-button {
     z-index: 2;
     font-size: 0.9rem;
-    font-family: inherit;
+    font-family: "Courier New", Courier, monospace;
     font-weight: 600;
     border: 1px solid rgb(226, 49, 203);
     color: #f3c4e3;

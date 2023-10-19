@@ -21,7 +21,7 @@ body {
 }
 
 #nav {
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
 }
 
 #nav-list {
@@ -55,7 +55,7 @@ body {
 
 .section-heading {
     color: rgb(243, 134, 228);
-    margin: 0;
+    margin: 0 0 0.5em 0;
 }
 
 .section-sub-heading {
@@ -67,6 +67,7 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .credits-sub-section {
@@ -74,6 +75,7 @@ body {
     margin: 0.5em 0.5em 1em 0.5em;
     padding: 0.5em;
     text-align: center;
+    font-size: 1.1rem;
     color: rgb(243, 134, 228);
     background: radial-gradient(rgb(24, 1, 21), rgb(58, 4, 51));
     border: 1px solid rgb(226, 49, 203);
@@ -131,5 +133,15 @@ body {
     }
     #credits-container {
         flex-direction: row;
+        justify-content: space-around;
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+    .credits-sub-section {
+        width: 30%;
+        max-width: 25em;
+    }
+    #license-container {
+        width: 50%;
     }
 }
