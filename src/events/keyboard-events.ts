@@ -96,19 +96,33 @@ export default class KeyboardEvents {
                     break;
                 }
                 case this.menuKey: {
-                    if (
-                        !this.game.mainMenu.isMenuOpen &&
-                        !this.game.mainMenu.isSubMenuOpen
-                    ) {
-                        events.audioEvents.beepAudio.play();
-                        this.player.isMoving = false;
-                        this.game.mainMenu.mainMenu.showModal();
-                        this.game.mainMenu.openSettingsButton.focus();
-                        this.game.mainMenu.isMenuOpen = true;
-                        this.game.isGamePaused = true;
+                    if (this.game.mainMenu.isSubMenuOpen) {
+                        if (
+                            this.game.mainMenu.settings &&
+                            this.game.mainMenu.settings.settingsMenu.open
+                        ) {
+                            this.game.mainMenu.settings.settingsMenu.close();
+                        } else if (
+                            this.game.mainMenu.audio &&
+                            this.game.mainMenu.audio.audioMenu.open
+                        ) {
+                            this.game.mainMenu.audio.audioMenu.close();
+                        } else if (
+                            this.game.mainMenu.controls &&
+                            this.game.mainMenu.controls.controlsMenu.open
+                        ) {
+                            this.game.mainMenu.controls.controlsMenu.close();
+                        }
+                        this.game.mainMenu.isSubMenuOpen = false;
                     } else {
-                        if (!this.game.mainMenu.isSubMenuOpen) {
-                            events.audioEvents.beepAudio.play();
+                        events.audioEvents.beepAudio.play();
+                        if (!this.game.mainMenu.isMenuOpen) {
+                            this.player.isMoving = false;
+                            this.game.mainMenu.mainMenu.showModal();
+                            this.game.mainMenu.openSettingsButton.focus();
+                            this.game.mainMenu.isMenuOpen = true;
+                            this.game.isGamePaused = true;
+                        } else {
                             this.game.mainMenu.mainMenu.close();
                             this.game.mainMenu.isMenuOpen = false;
                             this.game.isGamePaused = false;
