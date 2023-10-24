@@ -38,7 +38,11 @@ export class PhaseGlider extends Enemy {
             this.reset();
         }
         if (this.y > 0) {
-            this.handleProjectiles();
+            if (!this.isReversed) {
+                this.handleProjectiles();
+            } else {
+                this.followTargetX();
+            }
         }
         this.ctx.drawImage(this.image, this.x, this.y);
     }

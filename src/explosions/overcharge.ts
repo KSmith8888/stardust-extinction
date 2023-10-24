@@ -34,6 +34,10 @@ export class Overcharge extends Explosion {
         reversedEnemies.forEach((revEnemy) => {
             revEnemy.reverse();
         });
+        const reversedLasers = this.game.enemyProjectiles.filter(
+            (laser) => !laser.isFree && areObjectsColliding(this, laser)
+        );
+        reversedLasers.forEach((revLaser) => revLaser.reset());
     }
     render() {
         this.circleWidth = Math.floor(this.circleWidth * 1.3);

@@ -140,7 +140,7 @@ export default class TutorialGame extends Game {
         const mouseText = isOnDesktop
             ? "right click or"
             : "double tap the screen or";
-        this.tutorialSecondPara.textContent = `Your ship also has a special attack, Overcharge. Overcharge sends out a pulse wave in the area around your ship that will push back all enemy ships. Just ${mouseText} click the button on the bottom left to use it.`;
+        this.tutorialSecondPara.textContent = `Your ship also has a special attack, Overcharge. Overcharge sends out a pulse wave in the area around your ship that will push back enemy ships and dissipate enemy projectiles. Just ${mouseText} click the button on the bottom left to use it.`;
         const closeTutorialBtn = <HTMLParagraphElement>(
             document.getElementById("close-tutorial-button")
         );

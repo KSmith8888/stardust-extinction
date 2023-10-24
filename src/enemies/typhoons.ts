@@ -35,7 +35,9 @@ export class SmallTyphoon extends Enemy {
             this.reset();
         }
         this.followTargetX();
-        this.targetX = this.game.player.x;
+        if (!this.isReversed) {
+            this.targetX = this.game.player.x;
+        }
         if (this.y > 0) {
             this.handleProjectiles();
         }

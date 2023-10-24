@@ -52,7 +52,9 @@ export class SmallGrabber extends Enemy {
                 this.reset();
             }
             this.followTargetX();
-            this.targetX = this.player.x;
+            if (!this.isReversed) {
+                this.targetX = this.player.x;
+            }
         }
         this.ctx.drawImage(this.image, this.x, this.y);
     }
