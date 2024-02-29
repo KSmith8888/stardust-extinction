@@ -39,15 +39,15 @@ async function startLevel1() {
             ) {
                 localStorage.removeItem("current-level");
                 setTimeout(() => {
-                    location.assign("/levels/level-1/level-1.html");
+                    location.assign("/stardust-extinction/levels/level-1/level-1.html");
                 }, 800);
             }
         } else {
             setTimeout(() => {
                 if (hasCompletedTutorial) {
-                    location.assign("/levels/level-1/level-1.html");
+                    location.assign("/stardust-extinction/levels/level-1/level-1.html");
                 } else {
-                    location.assign("/levels/intro/intro.html");
+                    location.assign("/stardust-extinction/levels/intro/intro.html");
                 }
             }, 600);
         }
@@ -64,7 +64,7 @@ async function continueGame() {
                 const levelNumber = parseInt(continueLevel, 10);
                 if (levelNumber > 0 && levelNumber < 5) {
                     location.assign(
-                        `/levels/level-${levelNumber}/level-${levelNumber}.html`
+                        `/stardust-extinction/levels/level-${levelNumber}/level-${levelNumber}.html`
                     );
                 } else {
                     alert(
@@ -84,7 +84,7 @@ async function gameInfo() {
     try {
         await beepSound.play();
         setTimeout(() => {
-            location.assign("/game-info.html");
+            location.assign("/stardust-extinction/game-info.html");
         }, 600);
     } catch (error) {
         console.error(error);
