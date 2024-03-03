@@ -40,9 +40,7 @@ async function startLevel1() {
                 localStorage.removeItem("current-level");
                 setTimeout(() => {
                     location.assign(
-                        `${
-                            import.meta.env.BASE_URL
-                        }/levels/level-1/level-1.html`
+                        `${import.meta.env.BASE_URL}levels/level-1/level-1.html`
                     );
                 }, 800);
             }
@@ -50,13 +48,11 @@ async function startLevel1() {
             setTimeout(() => {
                 if (hasCompletedTutorial) {
                     location.assign(
-                        `${
-                            import.meta.env.BASE_URL
-                        }/levels/level-1/level-1.html`
+                        `${import.meta.env.BASE_URL}levels/level-1/level-1.html`
                     );
                 } else {
                     location.assign(
-                        `${import.meta.env.BASE_URL}/levels/intro/intro.html`
+                        `${import.meta.env.BASE_URL}levels/intro/intro.html`
                     );
                 }
             }, 600);
@@ -76,7 +72,7 @@ async function continueGame() {
                     location.assign(
                         `${
                             import.meta.env.BASE_URL
-                        }/levels/level-${levelNumber}/level-${levelNumber}.html`
+                        }levels/level-${levelNumber}/level-${levelNumber}.html`
                     );
                 } else {
                     alert(
@@ -96,7 +92,7 @@ async function gameInfo() {
     try {
         await beepSound.play();
         setTimeout(() => {
-            location.assign(`${import.meta.env.BASE_URL}/game-info.html`);
+            location.assign(`${import.meta.env.BASE_URL}game-info.html`);
         }, 600);
     } catch (error) {
         console.error(error);

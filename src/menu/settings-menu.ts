@@ -43,7 +43,7 @@ export default class SettingsMenu {
                     )
                 ) {
                     localStorage.clear();
-                    location.assign("/");
+                    location.assign(`${import.meta.env.BASE_URL}/index.html`);
                 }
             }
         );
@@ -51,7 +51,9 @@ export default class SettingsMenu {
         this.replayTutorial = this.replayTutorialButton.addEventListener(
             "click",
             () => {
-                location.assign("/levels/tutorial/tutorial.html");
+                location.assign(
+                    `${import.meta.env.BASE_URL}levels/tutorial/tutorial.html`
+                );
             }
         );
         this.closeSettingsButton = document.createElement("button");
