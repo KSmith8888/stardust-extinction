@@ -112,7 +112,7 @@ export default class Game {
         this.racerInterval = 0.7;
         this.mobileBackground = spaceBackgroundUrl;
         this.desktopBackground = spaceBgDesktopUrl;
-        this.nextLevelUrl = "/";
+        this.nextLevelUrl = "index.html";
         this.currentLevelNumber = 0;
         this.difficultySetting = "Normal";
         this.mainMenu.tutorialModal.showModal();

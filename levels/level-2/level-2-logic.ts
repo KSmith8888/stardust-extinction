@@ -28,7 +28,7 @@ export default class Level2Game extends Game {
         this.secondEnemyCount = 14;
         this.mobileBackground = spaceBackgroundUrl;
         this.desktopBackground = spaceBgDesktopUrl;
-        this.nextLevelUrl = "/levels/level-3/level-3.html";
+        this.nextLevelUrl = "levels/level-3/level-3.html";
         this.currentLevelNumber = 2;
         this.loadDifficultySetting();
         this.initializeEnemies();

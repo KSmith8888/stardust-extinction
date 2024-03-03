@@ -40,7 +40,7 @@ class Intro {
         );
         this.skipIntro = this.skipIntroButton.addEventListener("click", () => {
             location.assign(
-                `${import.meta.env.BASE_URL}/levels/tutorial/tutorial.html`
+                `${import.meta.env.BASE_URL}levels/tutorial/tutorial.html`
             );
         });
         this.charDelay = 100;
@@ -184,7 +184,7 @@ class Intro {
         } else if (this.currentPhase === 15) {
             setTimeout(() => {
                 location.assign(
-                    `${import.meta.env.BASE_URL}/levels/tutorial/tutorial.html`
+                    `${import.meta.env.BASE_URL}levels/tutorial/tutorial.html`
                 );
             }, 1500);
         }
