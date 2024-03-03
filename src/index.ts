@@ -84,7 +84,7 @@ async function gameInfo() {
     try {
         await beepSound.play();
         setTimeout(() => {
-            location.assign("./public/game-info.html");
+            location.assign("./game-info.html");
         }, 600);
     } catch (error) {
         console.error(error);

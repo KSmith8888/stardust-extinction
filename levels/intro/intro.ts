@@ -39,7 +39,7 @@ class Intro {
             document.getElementById("skip-intro-button")
         );
         this.skipIntro = this.skipIntroButton.addEventListener("click", () => {
-            location.assign("/levels/tutorial/tutorial.html");
+            location.assign("../levels/tutorial/tutorial.html");
         });
         this.charDelay = 100;
     }
@@ -181,7 +181,7 @@ class Intro {
             }, this.secondLineDelay);
         } else if (this.currentPhase === 15) {
             setTimeout(() => {
-                location.assign("/levels/tutorial/tutorial.html");
+                location.assign("../levels/tutorial/tutorial.html");
             }, 1500);
         }
     }
