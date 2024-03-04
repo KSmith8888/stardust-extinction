@@ -40,7 +40,7 @@ export default class TutorialGame extends Game {
         this.tutorialSecondPara = <HTMLParagraphElement>(
             document.getElementById("tutorial-second")
         );
-        this.nextLevelUrl = "/levels/level-1/level-1.html";
+        this.nextLevelUrl = "levels/level-1/level-1.html";
         this.enemyPoolSize = 10;
         this.firstEnemyCount = 3;
         this.firstEnemyInterval = 50;
@@ -62,7 +62,9 @@ export default class TutorialGame extends Game {
         this.skipTutorialButton.type = "button";
         this.skipTutorialButton.textContent = "Skip Tutorial";
         this.skipTutorialButton.addEventListener("click", () => {
-            location.assign("/levels/level-1/level-1.html");
+            location.assign(
+                `${import.meta.env.BASE_URL}levels/level-1/level-1.html`
+            );
         });
         this.mainMenu.tutorialModal.append(this.skipTutorialButton);
     }

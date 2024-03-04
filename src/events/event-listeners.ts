@@ -73,7 +73,7 @@ export default class EventListeners {
         this.exitOnGameOver = this.gameOverCloseBtn.addEventListener(
             "click",
             () => {
-                location.assign(`${import.meta.env.BASE_URL}/index.html`);
+                location.assign(`${import.meta.env.BASE_URL}index.html`);
             }
         );
         this.nextLevelButton = <HTMLButtonElement>(
@@ -85,7 +85,7 @@ export default class EventListeners {
         this.backToTitleScreen = this.exitGameButton.addEventListener(
             "click",
             () => {
-                location.assign(`/${import.meta.env.BASE_URL}/index.html`);
+                location.assign(`${import.meta.env.BASE_URL}index.html`);
             }
         );
         this.statsTextEnemies = <HTMLParagraphElement>(
