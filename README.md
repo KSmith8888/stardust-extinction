@@ -1,6 +1,6 @@
 # Stardust Extinction
 
-https://stardust-extinction.netlify.app/
+https://ksmith8888.github.io/stardust-extinction/
 
 A mobile/browser game made with TypeScript
 

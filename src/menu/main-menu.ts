@@ -103,7 +103,7 @@ export default class MainMenu {
             document.getElementById("quit-button")
         );
         this.quitGame = this.quitButton.addEventListener("click", () => {
-            location.assign(`${import.meta.env.BASE_URL}/index.html`);
+            location.assign(`${import.meta.env.BASE_URL}index.html`);
         });
         this.closeButton = <HTMLButtonElement>(
             document.getElementById("close-button")

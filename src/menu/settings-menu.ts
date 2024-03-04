@@ -43,7 +43,7 @@ export default class SettingsMenu {
                     )
                 ) {
                     localStorage.clear();
-                    location.assign(`${import.meta.env.BASE_URL}/index.html`);
+                    location.assign(`${import.meta.env.BASE_URL}index.html`);
                 }
             }
         );
