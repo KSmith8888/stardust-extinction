@@ -4,7 +4,15 @@ https://ksmith8888.github.io/stardust-extinction/
 
 A mobile/browser game made with TypeScript
 
-![A screenshot of gameplay with spaceships firing lasers at eachother over a deep space background](/public/screenshots/gameplay-screenshot-desktop.png)
+## Screenshots
+
+![The title screen with gameplay options and a deep space background that shows a supernova occurring between two planets](/public/screenshots/title-screenshot-desktop.png)
+
+![A text box containing plot details over the silhouette of an armada of alien ships approaching a city skyline in the distance](/public/screenshots/intro-screenshot-desktop.png)
+
+![Gameplay with spaceships firing lasers at eachother over a deep space background, along with a healthbar and menu button in two of the corners](/public/screenshots/gameplay-screenshot-desktop.png)
+
+![An open, bright purple and partially transparent menu with the options settings, controls, quit, audio and close](/public/screenshots/menu-screenshot-desktop.png)
 
 ## Attribution
 
