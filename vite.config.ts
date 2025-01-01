@@ -4,7 +4,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
     base: "/stardust-extinction/",
     build: {
-        target: ["es2021", "edge88", "firefox98", "chrome87", "safari15.4"],
+        target: "es2022",
         assetsInlineLimit: 0,
         rollupOptions: {
             input: {

@@ -1,8 +1,8 @@
 # Stardust Extinction
 
-https://ksmith8888.github.io/stardust-extinction/
+A space-themed browser game made with TypeScript. Playable on both desktop and mobile.
 
-A mobile/browser game made with TypeScript
+Play the game at https://ksmith8888.github.io/stardust-extinction/
 
 ## Screenshots
 
@@ -13,6 +13,38 @@ A mobile/browser game made with TypeScript
 ![Gameplay with spaceships firing lasers at eachother over a deep space background, along with a healthbar and menu button in two of the corners](/public/screenshots/gameplay-screenshot-desktop.png)
 
 ![An open, bright purple and partially transparent menu with the options settings, controls, quit, audio and close](/public/screenshots/menu-screenshot-desktop.png)
+
+## Running locally
+
+To run the project locally, you will need Node.js installed. If you don't already have it, download the LTS version at https://nodejs.org/en
+
+First, run the following command in the terminal to clone the repo:
+
+```
+git clone https://github.com/KSmith8888/stardust-extinction.git
+```
+
+(If you don't already have git installed, download it at https://git-scm.com/downloads)
+
+Navigate into the root of the project by running:
+
+```
+cd stardust-extinction
+```
+
+Install the project's dependencies with:
+
+```
+npm install
+```
+
+Run the development server with:
+
+```
+npm run dev
+```
+
+Finally, navigate to http://localhost:5173/ in your browser to view the project. Changes will be reflected automatically whenever you save.
 
 ## Attribution
 

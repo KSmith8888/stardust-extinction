@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
-        "target": "ES2021",
+        "target": "ES2022",
         "useDefineForClassFields": true,
-        "lib": ["ES2021", "DOM", "DOM.Iterable"],
+        "lib": ["ES2022", "DOM", "DOM.Iterable"],
         "allowJs": false,
         "skipLibCheck": true,
         "strict": true,
@@ -20,6 +20,6 @@
         "types": ["vite/client"],
         "allowImportingTsExtensions": true
     },
-    "include": ["src", "levels", "assets", "levels/level-1", "levels/level-2"],
+    "include": ["src", "levels", "assets"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }
