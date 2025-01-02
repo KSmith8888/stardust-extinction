@@ -56,14 +56,17 @@ https://github.com/Microsoft/TypeScript
 vite:  
 https://github.com/vitejs/vite
 
-eslint:  
+eslint and @eslint/js:  
 https://github.com/eslint/eslint
 
-@typescript-eslint/eslint-plugin and @typescript-eslint/parser:  
+typescript-eslint:  
 https://github.com/typescript-eslint/typescript-eslint
 
 @types/node:  
 https://github.com/DefinitelyTyped/DefinitelyTyped
+
+globals:  
+https://github.com/sindresorhus/globals
 
 ### Images
 
