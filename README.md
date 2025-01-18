@@ -1,6 +1,7 @@
 # Stardust Extinction
 
-A space-themed browser game made with TypeScript. Playable on both desktop and mobile.
+A space-themed browser game made with TypeScript, playable on both desktop and mobile. The user controls a spaceship which fires lasers as enemy ships continuously enter the screen. Each level includes varied enemy types with unique behavior and a boss stage. The menu system includes settings for controls, audio, difficulty and other gameplay options. The game is fully playable with either keyboard or mouse and
+controls can be mapped to different keys.
 
 Play the game at https://ksmith8888.github.io/stardust-extinction/
 
