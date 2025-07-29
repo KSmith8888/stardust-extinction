@@ -65,9 +65,6 @@ https://github.com/eslint/eslint
 typescript-eslint:  
 https://github.com/typescript-eslint/typescript-eslint
 
-@types/node:  
-https://github.com/DefinitelyTyped/DefinitelyTyped
-
 globals:  
 https://github.com/sindresorhus/globals
 
